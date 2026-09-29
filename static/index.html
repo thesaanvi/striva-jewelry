@@ -10,20 +10,15 @@
     body { font-family: 'Montserrat', sans-serif; background-color: #FAF7F2; color: #2C2A29; }
     .font-serif { font-family: 'Cormorant Garamond', serif; }
     .hidden-view { display: none !important; }
-    .bg-cream-soft { background-color: #FAF7F2; }
-    .bg-cream-card { background-color: #F3EEE7; }
     .text-rose-bronze { color: #8C6239; }
     .bg-rose-bronze { background-color: #8C6239; }
-    .border-rose-bronze { border-color: #8C6239; }
   </style>
 </head>
-<body class="bg-cream-soft text-stone-800 min-h-screen flex flex-col">
+<body class="bg-[#FAF7F2] text-stone-800 min-h-screen flex flex-col">
 
   <!-- AUTH LANDING PAGE -->
   <div id="view-auth" class="min-h-screen flex flex-col items-center justify-center p-6 bg-[#F5EFE6]">
     <div class="text-center max-w-md w-full">
-      
-      <!-- STRIVA LOGO MARK -->
       <div class="flex justify-center mb-4">
         <svg class="w-16 h-16 text-rose-bronze" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2.5">
           <polygon points="50,10 90,50 50,90 10,50" />
@@ -79,7 +74,7 @@
         <button onclick="quickFilter('men', 'minimal')" class="hover:text-rose-bronze">Men Minimal</button>
         <button onclick="quickFilter('women', 'wedding')" class="hover:text-rose-bronze">Wedding Women</button>
         <button onclick="quickFilter('men', 'wedding')" class="hover:text-rose-bronze">Wedding Men</button>
-        <button onclick="showSection('quiz')" class="text-rose-bronze font-bold">✨ Style Finder</button>
+        <button onclick="showSection('quiz')" class="text-rose-bronze font-bold">✨ Style Quiz</button>
         <button onclick="showSection('orders')" class="hover:text-rose-bronze">Orders</button>
       </nav>
 
@@ -103,7 +98,7 @@
             <p class="text-stone-600 text-xs md:text-sm leading-relaxed mb-6">Designed with solid 18K Gold Vermeil and 925 Sterling Silver. Water-resistant, hypoallergenic, and tarnish-free.</p>
             <div class="flex gap-4">
               <button onclick="showSection('catalog')" class="bg-stone-900 hover:bg-stone-800 text-stone-50 px-6 py-3 rounded-xl text-xs font-medium tracking-wider uppercase">Explore Catalog</button>
-              <button onclick="showSection('quiz')" class="bg-white border border-stone-300 text-stone-900 px-6 py-3 rounded-xl text-xs font-medium tracking-wider uppercase">Take Jewelry Quiz</button>
+              <button onclick="showSection('quiz')" class="bg-white border border-stone-300 text-stone-900 px-6 py-3 rounded-xl text-xs font-medium tracking-wider uppercase">Take 15-Q Style Quiz</button>
             </div>
           </div>
         </div>
@@ -119,13 +114,11 @@
         </div>
       </section>
 
-      <!-- SECTION: CATALOG (DYNAMIC DUAL-STEP CASCADING FILTERS) -->
+      <!-- SECTION: CATALOG -->
       <section id="sec-catalog" class="hidden-view">
         <div class="bg-white p-6 rounded-2xl border border-stone-200/80 mb-8 shadow-sm">
           <h2 class="text-base font-serif font-bold text-stone-900 mb-4">Refine Collection</h2>
           <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-            
-            <!-- STEP 1: GENDER -->
             <div>
               <label class="block text-[10px] font-bold text-stone-500 uppercase tracking-wider mb-1">1. Gender</label>
               <select id="filter-gender" onchange="updateOccasions()" class="w-full bg-stone-50 border border-stone-200 rounded-xl p-2.5 text-xs focus:outline-none">
@@ -134,75 +127,49 @@
                 <option value="men">Men</option>
               </select>
             </div>
-
-            <!-- STEP 2: OCCASION -->
             <div>
               <label class="block text-[10px] font-bold text-stone-500 uppercase tracking-wider mb-1">2. Collection Type</label>
               <select id="filter-occasion" onchange="updateSubCategories()" class="w-full bg-stone-50 border border-stone-200 rounded-xl p-2.5 text-xs focus:outline-none">
                 <option value="all">All Collections</option>
               </select>
             </div>
-
-            <!-- STEP 3: SUB-CATEGORY -->
             <div>
               <label class="block text-[10px] font-bold text-stone-500 uppercase tracking-wider mb-1">3. Category</label>
               <select id="filter-subcategory" onchange="fetchCatalogFromAPI()" class="w-full bg-stone-50 border border-stone-200 rounded-xl p-2.5 text-xs focus:outline-none">
                 <option value="all">All Categories</option>
               </select>
             </div>
-
-            <!-- STEP 4: PRICE -->
             <div>
               <label class="block text-[10px] font-bold text-stone-500 uppercase tracking-wider mb-1">Max Price Limit</label>
               <input type="range" id="filter-price" min="999" max="9000" step="500" value="9000" oninput="fetchCatalogFromAPI()" class="w-full accent-amber-800">
               <span class="text-xs font-bold text-stone-800">₹<span id="price-disp">9,000</span></span>
             </div>
-
           </div>
         </div>
 
         <div id="catalog-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"></div>
       </section>
 
-      <!-- SECTION: ENHANCED INTERACTIVE QUIZ -->
-      <section id="sec-quiz" class="hidden-view max-w-xl mx-auto bg-white p-8 md:p-10 rounded-3xl border border-stone-200 shadow-sm">
-        <span class="text-[10px] uppercase font-bold tracking-widest text-rose-bronze">Personalized Recommendation</span>
-        <h2 class="text-2xl font-serif font-bold text-stone-900 mb-6">Find Your Signature Jewelry Match</h2>
-        
-        <form onsubmit="handleQuizSubmit(event)" class="space-y-6">
+      <!-- SECTION: 15-QUESTION INTERACTIVE STYLE QUIZ -->
+      <section id="sec-quiz" class="hidden-view max-w-2xl mx-auto bg-white p-8 md:p-10 rounded-3xl border border-stone-200 shadow-sm">
+        <div class="flex justify-between items-center mb-6 border-b pb-4">
           <div>
-            <label class="block text-xs font-bold uppercase tracking-wider mb-2">1. Who are you styling for today?</label>
-            <div class="grid grid-cols-2 gap-3">
-              <label class="border p-3 rounded-xl text-xs font-medium cursor-pointer flex items-center gap-2 hover:bg-stone-50">
-                <input type="radio" name="q-gender" value="women" checked class="accent-amber-800"> Women
-              </label>
-              <label class="border p-3 rounded-xl text-xs font-medium cursor-pointer flex items-center gap-2 hover:bg-stone-50">
-                <input type="radio" name="q-gender" value="men" class="accent-amber-800"> Men
-              </label>
-            </div>
+            <span class="text-[10px] uppercase font-bold tracking-widest text-rose-bronze">Signature Style Diagnostic</span>
+            <h2 class="text-2xl font-serif font-bold text-stone-900">Find Your Jewelry Match</h2>
           </div>
+          <span id="quiz-progress-text" class="text-xs font-bold text-rose-bronze">Question 1 of 15</span>
+        </div>
 
-          <div>
-            <label class="block text-xs font-bold uppercase tracking-wider mb-2">2. What occasion are you preparing for?</label>
-            <select id="q-occasion" class="w-full bg-stone-50 border p-3 rounded-xl text-xs">
-              <option value="minimal">Everyday Minimal & Office Wear (₹999 - ₹7,000)</option>
-              <option value="wedding">Wedding, Sangeet & Reception (Up to ₹9,000)</option>
-            </select>
-          </div>
+        <div class="w-full bg-stone-100 h-1.5 rounded-full mb-8 overflow-hidden">
+          <div id="quiz-progress-bar" class="bg-rose-bronze h-full transition-all duration-300 w-[6.66%]"></div>
+        </div>
 
-          <div>
-            <label class="block text-xs font-bold uppercase tracking-wider mb-2">3. Preferred Metal Finish</label>
-            <select id="q-metal" class="w-full bg-stone-50 border p-3 rounded-xl text-xs">
-              <option value="all">Any Finish</option>
-              <option value="18K Gold Vermeil">18K Warm Gold Vermeil</option>
-              <option value="925 Sterling Silver">925 Silver</option>
-            </select>
-          </div>
+        <div id="quiz-question-container"></div>
 
-          <button type="submit" class="w-full bg-stone-900 text-stone-50 py-3 rounded-xl text-xs font-medium tracking-wider uppercase">
-            View Curated Selection
-          </button>
-        </form>
+        <div class="flex justify-between items-center mt-8 pt-4 border-t">
+          <button id="quiz-prev-btn" onclick="prevQuizQuestion()" class="text-xs font-bold uppercase text-stone-400 hover:text-stone-900 disabled:opacity-30" disabled>Previous</button>
+          <button id="quiz-next-btn" onclick="nextQuizQuestion()" class="bg-stone-900 text-stone-50 px-6 py-2.5 rounded-xl text-xs font-medium uppercase tracking-wider">Next</button>
+        </div>
       </section>
 
       <!-- PRODUCT MODAL -->
@@ -250,6 +217,8 @@
   <script>
     let currentUser = null;
     let cart = [];
+    let currentQuizIndex = 0;
+    let quizAnswers = {};
 
     const categoryMap = {
       women: {
@@ -261,6 +230,74 @@
         wedding: ['rings', 'chains', 'bracelets', 'piercings', 'brooch', 'necklace']
       }
     };
+
+    const quizQuestions = [
+      { id: 1, text: "How would you describe your everyday style?", options: ["Casual & Comfortable", "Chic & Polished", "Streetwear / Modern Minimal", "Traditional & Festive"] },
+      { id: 2, text: "Which outfit would you most likely wear on a day out?", options: ["White Tee & Denim", "Tailored Blazer & Trousers", "Linen Shirt & Chinos", "Ethnic Silk Kurta / Dress"] },
+      { id: 3, text: "Which word best describes your aesthetic?", options: ["Subtle", "Elegant", "Edgy", "Opulent"] },
+      { id: 4, text: "What type of jewelry do you wear most often?", options: ["Daily Delicate Rings", "Hoops or Studs", "Layered Chains", "Bold Statement Cuffs"] },
+      { id: 5, text: "Do you prefer delicate, medium, or statement jewelry?", options: ["Delicate", "Medium", "Bold Statement"] },
+      { id: 6, text: "Which metal do you naturally gravitate towards?", options: ["18K Gold Vermeil", "925 Sterling Silver", "Rose Gold", "Mixed Metals"] },
+      { id: 7, text: "Do you prefer wearing one standout piece or layering multiple pieces?", options: ["One Standout Piece", "Layering Multiple Pieces"] },
+      { id: 8, text: "Which jewelry piece are you most drawn to?", options: ["Earrings", "Necklace / Chains", "Rings", "Bracelets / Cuffs"] },
+      { id: 9, text: "Do you prefer classic designs or unique/experimental designs?", options: ["Timeless Classic", "Experimental Architectural"] },
+      { id: 10, text: "Which shapes catch your eye most?", options: ["Organic Fluid", "Clean Geometric", "Classic Circular"] },
+      { id: 11, text: "Do you prefer jewelry with gemstones or clean metal designs?", options: ["Solid High-Polish Metal", "Paved Zirconia / Gems"] },
+      { id: 12, text: "Where do you wear jewelry most?", options: ["Everyday wear", "College / Work", "Date Nights", "Special Occasions & Weddings"] },
+      { id: 13, text: "Pick a vibe that feels most like you:", options: ["Effortless", "Elegant", "Playful", "Bold"] },
+      { id: 14, text: "What do you want your jewelry to say about you?", options: ["Refined & Quiet Luxury", "Trendy & Confident", "Traditional with Modern Twist"] },
+      { id: 15, text: "If you could choose only one piece to wear every day, what would it be?", options: ["Signet / Solitaire Ring", "Daily Hoop Earring", "Fluid Snake Chain", "Solid Wrist Cuff"] }
+    ];
+
+    function renderQuizQuestion() {
+      const q = quizQuestions[currentQuizIndex];
+      document.getElementById('quiz-progress-text').innerText = `Question ${currentQuizIndex + 1} of 15`;
+      document.getElementById('quiz-progress-bar').style.width = `${((currentQuizIndex + 1) / 15) * 100}%`;
+      
+      let html = `
+        <h3 class="text-base font-bold text-stone-900 mb-4">${q.text}</h3>
+        <div class="space-y-3">
+      `;
+
+      q.options.forEach((opt, idx) => {
+        const isSelected = quizAnswers[q.id] === opt;
+        html += `
+          <label onclick="selectQuizOption(${q.id}, '${opt}')" class="block p-3.5 border rounded-2xl text-xs font-medium cursor-pointer transition ${isSelected ? 'border-amber-800 bg-amber-50/50 font-bold' : 'border-stone-200 hover:bg-stone-50'}">
+            <input type="radio" name="q-${q.id}" ${isSelected ? 'checked' : ''} class="hidden"> ${opt}
+          </label>
+        `;
+      });
+      html += `</div>`;
+      document.getElementById('quiz-question-container').innerHTML = html;
+
+      document.getElementById('quiz-prev-btn').disabled = currentQuizIndex === 0;
+      document.getElementById('quiz-next-btn').innerText = currentQuizIndex === 14 ? 'View Curated Selection' : 'Next';
+    }
+
+    function selectQuizOption(qId, val) {
+      quizAnswers[qId] = val;
+      renderQuizQuestion();
+    }
+
+    function nextQuizQuestion() {
+      if(!quizAnswers[quizQuestions[currentQuizIndex].id]) {
+        alert("Please select an option before continuing.");
+        return;
+      }
+      if(currentQuizIndex < 14) {
+        currentQuizIndex++;
+        renderQuizQuestion();
+      } else {
+        quickFilter('women', 'minimal');
+      }
+    }
+
+    function prevQuizQuestion() {
+      if(currentQuizIndex > 0) {
+        currentQuizIndex--;
+        renderQuizQuestion();
+      }
+    }
 
     function switchAuthTab(type) {
       if(type === 'login') {
@@ -308,6 +345,7 @@
       });
       document.getElementById(`sec-${secId}`).classList.remove('hidden-view');
       if(secId === 'catalog') updateOccasions();
+      if(secId === 'quiz') renderQuizQuestion();
       if(secId === 'orders') fetchOrders();
     }
 
@@ -358,7 +396,7 @@
       
       const grid = document.getElementById('catalog-grid');
       grid.innerHTML = '';
-      data.products.forEach(p => grid.innerHTML += renderProductCard(p));
+      if(data.products) data.products.forEach(p => grid.innerHTML += renderProductCard(p));
     }
 
     async function loadHomeCurated(tag) {
@@ -366,7 +404,7 @@
       const data = await res.json();
       const grid = document.getElementById('home-curated-grid');
       grid.innerHTML = '';
-      data.products.forEach(p => grid.innerHTML += renderProductCard(p));
+      if(data.products) data.products.forEach(p => grid.innerHTML += renderProductCard(p));
     }
 
     function renderProductCard(p) {
@@ -469,24 +507,19 @@
       const data = await res.json();
       const list = document.getElementById('orders-list');
       list.innerHTML = '';
-      data.orders.forEach(o => {
-        list.innerHTML += `
-          <div class="bg-white border border-stone-200 p-4 rounded-2xl text-xs">
-            <div class="flex justify-between font-bold mb-1">
-              <span>Order #${o.id}</span>
-              <span class="text-rose-bronze">${o.status}</span>
+      if(data.orders) {
+        data.orders.forEach(o => {
+          list.innerHTML += `
+            <div class="bg-white border border-stone-200 p-4 rounded-2xl text-xs">
+              <div class="flex justify-between font-bold mb-1">
+                <span>Order #${o.id}</span>
+                <span class="text-rose-bronze">${o.status}</span>
+              </div>
+              <div class="text-stone-500">Total: ₹${parseFloat(o.total_amount).toLocaleString('en-IN')}</div>
             </div>
-            <div class="text-stone-500">Total: ₹${parseFloat(o.total_amount).toLocaleString('en-IN')}</div>
-          </div>
-        `;
-      });
-    }
-
-    function handleQuizSubmit(e) {
-      e.preventDefault();
-      const gender = document.querySelector('input[name="q-gender"]:checked').value;
-      const occasion = document.getElementById('q-occasion').value;
-      quickFilter(gender, occasion);
+          `;
+        });
+      }
     }
   </script>
 </body>
