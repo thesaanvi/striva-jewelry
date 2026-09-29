@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>STRIVA | Demi-Fine Jewelry</title>
+  <title>STRIVA | Demi-Fine Luxury Jewelry</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
@@ -12,7 +12,6 @@
     .hidden-view { display: none !important; }
     .text-rose-bronze { color: #8C6239; }
     .bg-rose-bronze { background-color: #8C6239; }
-    .border-rose-bronze { border-color: #8C6239; }
   </style>
 </head>
 <body class="bg-[#FAF7F2] text-stone-800 min-h-screen flex flex-col">
@@ -56,7 +55,7 @@
     </div>
   </div>
 
-  <!-- MAIN SHOPPING APP -->
+  <!-- MAIN APP CONTAINER -->
   <div id="view-main" class="hidden-view flex flex-col min-h-screen">
     
     <!-- NAVBAR -->
@@ -74,6 +73,7 @@
         <button onclick="quickFilter('women', 'minimal')" class="hover:text-rose-bronze">Women Everyday</button>
         <button onclick="quickFilter('men', 'minimal')" class="hover:text-rose-bronze">Men Everyday</button>
         <button onclick="quickFilter('women', 'wedding')" class="hover:text-rose-bronze">Wedding Collection</button>
+        <button onclick="showSection('quiz')" class="text-rose-bronze font-bold">✨ Style Quiz</button>
         <button onclick="showSection('orders')" class="hover:text-rose-bronze">Orders</button>
       </nav>
 
@@ -95,7 +95,10 @@
             <span class="text-[11px] uppercase tracking-[0.25em] text-rose-bronze font-bold">18K Vermeil & Solid 925 Silver</span>
             <h1 class="text-3xl md:text-5xl font-serif mt-2 mb-4 text-stone-900 leading-tight">Everyday Fine Jewelry</h1>
             <p class="text-stone-600 text-xs md:text-sm leading-relaxed mb-6">Designed for lifetime wear. Tarnish-free, waterproof, and completely hypoallergenic.</p>
-            <button onclick="showSection('catalog')" class="bg-stone-900 hover:bg-stone-800 text-stone-50 px-6 py-3 rounded-xl text-xs font-medium tracking-wider uppercase">Explore Full Collection</button>
+            <div class="flex gap-4">
+              <button onclick="showSection('catalog')" class="bg-stone-900 hover:bg-stone-800 text-stone-50 px-6 py-3 rounded-xl text-xs font-medium tracking-wider uppercase">Explore Catalog</button>
+              <button onclick="showSection('quiz')" class="bg-white border border-stone-300 text-stone-900 px-6 py-3 rounded-xl text-xs font-medium tracking-wider uppercase">Take 15-Q Quiz</button>
+            </div>
           </div>
         </div>
 
@@ -104,7 +107,6 @@
             <button id="tag-bestseller" onclick="loadHomeCurated('bestseller')" class="text-rose-bronze border-b-2 border-rose-bronze pb-1 whitespace-nowrap">Bestsellers</button>
             <button id="tag-trending" onclick="loadHomeCurated('trending')" class="text-stone-400 hover:text-stone-900 whitespace-nowrap">Trending Now</button>
             <button id="tag-favourites" onclick="loadHomeCurated('favourites')" class="text-stone-400 hover:text-stone-900 whitespace-nowrap">Editor's Choice</button>
-            <button id="tag-festive" onclick="loadHomeCurated('festive')" class="text-stone-400 hover:text-stone-900 whitespace-nowrap">Festive & Wedding</button>
           </div>
           <div id="home-curated-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-8"></div>
         </div>
@@ -152,6 +154,28 @@
         <div id="catalog-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"></div>
       </section>
 
+      <!-- SECTION: 15-QUESTION STYLE QUIZ -->
+      <section id="sec-quiz" class="hidden-view max-w-2xl mx-auto bg-white p-8 md:p-10 rounded-3xl border border-stone-200 shadow-sm">
+        <div class="flex justify-between items-center mb-6 border-b pb-4">
+          <div>
+            <span class="text-[10px] uppercase font-bold tracking-widest text-rose-bronze">Signature Style Diagnostic</span>
+            <h2 class="text-2xl font-serif font-bold text-stone-900">Find Your Jewelry Match</h2>
+          </div>
+          <span id="quiz-progress-text" class="text-xs font-bold text-rose-bronze">Question 1 of 15</span>
+        </div>
+
+        <div class="w-full bg-stone-100 h-1.5 rounded-full mb-8 overflow-hidden">
+          <div id="quiz-progress-bar" class="bg-rose-bronze h-full transition-all duration-300 w-[6.66%]"></div>
+        </div>
+
+        <div id="quiz-question-container"></div>
+
+        <div class="flex justify-between items-center mt-8 pt-4 border-t">
+          <button id="quiz-prev-btn" onclick="prevQuizQuestion()" class="text-xs font-bold uppercase text-stone-400 hover:text-stone-900 disabled:opacity-30" disabled>Previous</button>
+          <button id="quiz-next-btn" onclick="nextQuizQuestion()" class="bg-stone-900 text-stone-50 px-6 py-2.5 rounded-xl text-xs font-medium uppercase tracking-wider">Next</button>
+        </div>
+      </section>
+
       <!-- SECTION: ORDERS -->
       <section id="sec-orders" class="hidden-view max-w-3xl mx-auto">
         <h2 class="text-2xl font-serif font-bold text-stone-900 mb-6">Saved Account & Orders</h2>
@@ -188,11 +212,34 @@
       </div>
     </div>
 
+    <footer class="bg-[#F3EEE7] text-stone-500 text-xs py-8 px-6 text-center border-t border-stone-200">
+      <p>© 2026 STRIVA Demi-Fine Jewelry. Solid 18K Vermeil & 925 Sterling Silver.</p>
+    </footer>
   </div>
 
   <script>
     let currentUser = null;
     let cart = [];
+    let currentQuizIndex = 0;
+    let quizAnswers = {};
+
+    const quizQuestions = [
+      { id: 1, text: "How would you describe your everyday style?", options: ["Casual & Comfortable", "Chic & Polished", "Streetwear / Modern Minimal", "Traditional & Festive"] },
+      { id: 2, text: "Which outfit would you most likely wear on a day out?", options: ["White Tee & Denim", "Tailored Blazer & Trousers", "Linen Shirt & Chinos", "Ethnic Silk Kurta / Dress"] },
+      { id: 3, text: "Which word best describes your aesthetic?", options: ["Subtle", "Elegant", "Edgy", "Opulent"] },
+      { id: 4, text: "What type of jewelry do you wear most often?", options: ["Daily Delicate Rings", "Hoops or Studs", "Layered Chains", "Bold Statement Cuffs"] },
+      { id: 5, text: "Do you prefer delicate, medium, or statement jewelry?", options: ["Delicate", "Medium", "Bold Statement"] },
+      { id: 6, text: "Which metal do you naturally gravitate towards?", options: ["18K Gold Vermeil", "925 Sterling Silver", "Rose Gold", "Mixed Metals"] },
+      { id: 7, text: "Do you prefer wearing one standout piece or layering multiple pieces?", options: ["One Standout Piece", "Layering Multiple Pieces"] },
+      { id: 8, text: "Which jewelry piece are you most drawn to?", options: ["Earrings", "Necklace / Chains", "Rings", "Bracelets / Cuffs"] },
+      { id: 9, text: "Do you prefer classic designs or unique/experimental designs?", options: ["Timeless Classic", "Experimental Architectural"] },
+      { id: 10, text: "Which shapes catch your eye most?", options: ["Organic Fluid", "Clean Geometric", "Classic Circular"] },
+      { id: 11, text: "Do you prefer jewelry with gemstones or clean metal designs?", options: ["Solid High-Polish Metal", "Paved Zirconia / Gems"] },
+      { id: 12, text: "Where do you wear jewelry most?", options: ["Everyday wear", "College / Work", "Date Nights", "Special Occasions & Weddings"] },
+      { id: 13, text: "Pick a vibe that feels most like you:", options: ["Effortless", "Elegant", "Playful", "Bold"] },
+      { id: 14, text: "What do you want your jewelry to say about you?", options: ["Refined & Quiet Luxury", "Trendy & Confident", "Traditional with Modern Twist"] },
+      { id: 15, text: "If you could choose only one piece to wear every day, what would it be?", options: ["Signet / Solitaire Ring", "Daily Hoop Earring", "Fluid Snake Chain", "Solid Wrist Cuff"] }
+    ];
 
     function switchAuthTab(type) {
       if(type === 'login') {
@@ -235,11 +282,12 @@
     }
 
     function showSection(secId) {
-      ['sec-home', 'sec-catalog', 'sec-orders'].forEach(id => {
+      ['sec-home', 'sec-catalog', 'sec-quiz', 'sec-orders'].forEach(id => {
         document.getElementById(id).classList.add('hidden-view');
       });
       document.getElementById(`sec-${secId}`).classList.remove('hidden-view');
       if(secId === 'catalog') fetchCatalogFromAPI();
+      if(secId === 'quiz') renderQuizQuestion();
       if(secId === 'orders') fetchOrders();
     }
 
@@ -270,7 +318,7 @@
     }
 
     async function loadHomeCurated(tag) {
-      ['bestseller', 'trending', 'favourites', 'festive'].forEach(t => {
+      ['bestseller', 'trending', 'favourites'].forEach(t => {
         const el = document.getElementById(`tag-${t}`);
         if(el) {
           if(t === tag) {
@@ -434,6 +482,56 @@
         });
       } else {
         list.innerHTML = `<div class="text-center py-10 text-stone-400 text-xs">No order history yet.</div>`;
+      }
+    }
+
+    function renderQuizQuestion() {
+      const q = quizQuestions[currentQuizIndex];
+      document.getElementById('quiz-progress-text').innerText = `Question ${currentQuizIndex + 1} of 15`;
+      document.getElementById('quiz-progress-bar').style.width = `${((currentQuizIndex + 1) / 15) * 100}%`;
+      
+      let html = `
+        <h3 class="text-base font-bold text-stone-900 mb-4">${q.text}</h3>
+        <div class="space-y-3">
+      `;
+
+      q.options.forEach((opt) => {
+        const isSelected = quizAnswers[q.id] === opt;
+        html += `
+          <label onclick="selectQuizOption(${q.id}, '${opt}')" class="block p-3.5 border rounded-2xl text-xs font-medium cursor-pointer transition ${isSelected ? 'border-amber-800 bg-amber-50/50 font-bold text-amber-900' : 'border-stone-200 hover:bg-stone-50'}">
+            <input type="radio" name="q-${q.id}" ${isSelected ? 'checked' : ''} class="hidden"> ${opt}
+          </label>
+        `;
+      });
+      html += `</div>`;
+      document.getElementById('quiz-question-container').innerHTML = html;
+
+      document.getElementById('quiz-prev-btn').disabled = currentQuizIndex === 0;
+      document.getElementById('quiz-next-btn').innerText = currentQuizIndex === 14 ? 'View Selection' : 'Next';
+    }
+
+    function selectQuizOption(qId, val) {
+      quizAnswers[qId] = val;
+      renderQuizQuestion();
+    }
+
+    function nextQuizQuestion() {
+      if(!quizAnswers[quizQuestions[currentQuizIndex].id]) {
+        alert("Please select an option before continuing.");
+        return;
+      }
+      if(currentQuizIndex < 14) {
+        currentQuizIndex++;
+        renderQuizQuestion();
+      } else {
+        quickFilter('women', 'minimal');
+      }
+    }
+
+    function prevQuizQuestion() {
+      if(currentQuizIndex > 0) {
+        currentQuizIndex--;
+        renderQuizQuestion();
       }
     }
   </script>
