@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>STRIVA Demi-Fine Jewelry</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-amber-50/20 text-slate-800 font-sans">
+
+  <header class="bg-white border-b border-amber-100 sticky top-0 z-40 px-6 py-4 flex items-center justify-between">
+    <div class="flex items-center space-x-3">
+      <span class="text-2xl font-serif font-bold tracking-widest text-amber-900">STRIVA</span>
+      <span class="text-xs tracking-widest text-amber-600 uppercase border-l border-amber-200 pl-3">Demi-Fine</span>
+    </div>
+
+    <nav class="hidden md:flex space-x-6 text-sm font-medium">
+      <button onclick="setCategory('all')" class="hover:text-amber-700">All Collections</button>
+      <button onclick="setCategory('women')" class="hover:text-amber-700">Women</button>
+      <button onclick="setCategory('men')" class="hover:text-amber-700">Men (STRIVA Homme)</button>
+      <button onclick="setCategory('wedding')" class="hover:text-amber-700">Lightweight Wedding</button>
+    </nav>
+
+    <div class="flex items-center space-x-4">
+      <div id="auth-section"></div>
+      <button onclick="toggleCart()" class="bg-amber-900 text-white px-4 py-2 rounded-lg text-sm font-medium flex items-center gap-2">
+        <span>🛒 Bag</span>
+        <span id="cart-count" class="bg-amber-600 px-2 py-0.5 rounded-full text-xs">0</span>
+      </button>
+    </div>
+  </header>
+
+  <main class="max-w-7xl mx-auto px-6 py-8">
+    <div class="bg-amber-950 text-amber-100 rounded-2xl p-8 mb-8 flex flex-col md:flex-row items-center justify-between">
+      <div>
+        <h1 class="text-3xl md:text-4xl font-serif mb-2">Lightweight Indian Wedding & Everyday Demi-Fine</h1>
+        <p class="text-amber-200 text-sm max-w-xl">Solid 18K Gold Vermeil, 925 Sterling Silver & Tarnish-Proof Wedding Sets.</p>
+      </div>
+      <button onclick="setCategory('wedding')" class="mt-4 md:mt-0 bg-amber-500 hover:bg-amber-400 text-amber-950 px-6 py-3 rounded-xl font-bold text-sm">
+        Explore Wedding Collection
+      </button>
+    </div>
+
+    <div class="bg-white p-6 rounded-xl border border-amber-100 shadow-sm mb-8 flex flex-wrap gap-6 items-center justify-between">
+      <div>
+        <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Price Range (INR)</label>
+        <div class="flex items-center space-x-3">
+          <input type="range" id="price-range" min="1000" max="50000" step="1000" value="50000" oninput="updatePrice(this.value)" class="accent-amber-800">
+          <span class="font-bold text-amber-900 text-sm">Up to ₹<span id="price-val">50,000</span></span>
+        </div>
+      </div>
+
+      <div class="bg-amber-50 border border-amber-200 p-4 rounded-xl flex items-center space-x-4">
+        <div>
+          <div class="text-xs font-bold text-amber-900">Custom Engraving Studio</div>
+          <div class="text-xs text-amber-700">Add personal initials or dates</div>
+        </div>
+        <input type="text" id="custom-text" placeholder="Your Engraving..." class="px-3 py-1.5 border border-amber-300 rounded text-sm w-36">
+      </div>
+    </div>
+
+    <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"></div>
+  </main>
+
+  <div id="auth-modal" class="fixed inset-0 bg-black/50 hidden items-center justify-center z-50">
+    <div class="bg-white p-8 rounded-2xl max-w-md w-full mx-4 relative">
+      <button onclick="closeAuthModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600">✕</button>
+      <h2 class="text-2xl font-serif font-bold text-amber-900 mb-2">Sign In / Register</h2>
+      <p class="text-xs text-slate-500 mb-6">Enter Email or Phone Number and Password (NO OTP needed).</p>
+      
+      <form onsubmit="handleAuth(event)" class="space-y-4">
+        <div>
+          <label class="block text-xs font-bold text-slate-600 uppercase">Email or Phone Number</label>
+          <input type="text" id="auth-identifier" required placeholder="user@example.com or 9876543210" class="w-full mt-1 p-3 border border-slate-200 rounded-lg text-sm">
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-slate-600 uppercase">Password</label>
+          <input type="password" id="auth-password" required placeholder="••••••••" class="w-full mt-1 p-3 border border-slate-200 rounded-lg text-sm">
+        </div>
+        <button type="submit" class="w-full bg-amber-900 hover:bg-amber-800 text-white py-3 rounded-xl font-bold text-sm">
+          Continue
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    let currentCategory = 'all';
+    let currentUser = null;
+    let cart = [];
+
+    async function fetchProductsFromAPI() {
+      const maxPrice = document.getElementById('price-range').value;
+      try {
+        const res = await fetch(`/api/products?category=${currentCategory}&max_price=${maxPrice}`);
+        const data = await res.json();
+        if (data.status === 'success') {
+          renderProducts(data.products);
+        }
+      } catch (err) {
+        console.error('API Error:', err);
+      }
+    }
+
+    function renderProducts(productsList) {
+      const grid = document.getElementById('product-grid');
+      grid.innerHTML = '';
+      productsList.forEach(p => {
+        grid.innerHTML += `
+          <div class="bg-white border border-slate-100 rounded-2xl p-4 shadow-sm flex flex-col justify-between">
+            <div>
+              <img src="${p.image_url}" class="h-48 w-full object-cover rounded-xl mb-4" />
+              <div class="text-xs text-amber-700 font-bold uppercase tracking-wider mb-1">${p.metal}</div>
+              <h3 class="font-serif font-bold text-slate-900 text-base mb-1">${p.name}</h3>
+              <div class="text-lg font-extrabold text-slate-900">₹${parseFloat(p.price_inr).toLocaleString('en-IN')}</div>
+            </div>
+            <button onclick="addToCart('${p.name}')" class="mt-4 w-full bg-amber-900 hover:bg-amber-800 text-white py-2 rounded-lg text-xs font-bold">
+              Add to Bag
+            </button>
+          </div>
+        `;
+      });
+    }
+
+    function renderAuth() {
+      const authDiv = document.getElementById('auth-section');
+      if (currentUser) {
+        authDiv.innerHTML = `
+          <div class="flex items-center space-x-3">
+            <span class="text-xs text-slate-600">Hi, <b>${currentUser.name}</b></span>
+            <button onclick="logout()" class="text-xs text-red-600 font-bold hover:underline">Sign Out</button>
+          </div>
+        `;
+      } else {
+        authDiv.innerHTML = `
+          <button onclick="openAuthModal()" class="text-xs font-bold bg-amber-100 text-amber-900 px-4 py-2 rounded-lg hover:bg-amber-200">
+            Sign In / Register
+          </button>
+        `;
+      }
+    }
+
+    function setCategory(cat) { currentCategory = cat; fetchProductsFromAPI(); }
+    function updatePrice(val) { document.getElementById('price-val').innerText = parseInt(val).toLocaleString('en-IN'); fetchProductsFromAPI(); }
+    function addToCart(name) { cart.push(name); document.getElementById('cart-count').innerText = cart.length; alert(`Added ${name} to bag!`); }
+    function openAuthModal() { document.getElementById('auth-modal').classList.remove('hidden'); document.getElementById('auth-modal').classList.add('flex'); }
+    function closeAuthModal() { document.getElementById('auth-modal').classList.add('hidden'); document.getElementById('auth-modal').classList.remove('flex'); }
+    function handleAuth(e) {
+      e.preventDefault();
+      const identifier = document.getElementById('auth-identifier').value;
+      currentUser = { name: identifier.split('@')[0] };
+      renderAuth();
+      closeAuthModal();
+    }
+    function logout() { currentUser = null; renderAuth(); }
+
+    renderAuth();
+    fetchProductsFromAPI();
+  </script>
+</body>
+</html>
