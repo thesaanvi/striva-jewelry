@@ -21,7 +21,6 @@ def init_db():
         conn = get_db()
         cursor = conn.cursor()
         
-        # Table: Users
         cursor.execute("""
         CREATE TABLE IF NOT EXISTS users (
             id INT AUTO_INCREMENT PRIMARY KEY,
@@ -32,7 +31,6 @@ def init_db():
         );
         """)
 
-        # Table: Products
         cursor.execute("""
         CREATE TABLE IF NOT EXISTS products (
             id INT AUTO_INCREMENT PRIMARY KEY,
@@ -49,7 +47,6 @@ def init_db():
         );
         """)
 
-        # Table: Orders
         cursor.execute("""
         CREATE TABLE IF NOT EXISTS orders (
             id INT AUTO_INCREMENT PRIMARY KEY,
@@ -62,36 +59,38 @@ def init_db():
         );
         """)
 
-        cursor.execute("SELECT COUNT(*) FROM products")
-        if cursor.fetchone()[0] == 0:
-            demo_products = [
-                # Minimal Women (999 - 7000)
-                ('Solitaire Vermeil Ring', 'women', 'minimal', 'rings', 1499.00, '18K Gold Vermeil', 'Elegant 18K Gold Vermeil single stone solitaire band.', 'https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=600', 'bestseller', True),
-                ('Celestial Hoop Earrings', 'women', 'minimal', 'earring', 2299.00, '18K Gold Vermeil', 'Lightweight daily hoops with delicate cubic zirconia accents.', 'https://images.unsplash.com/photo-1630019852942-f89202989a59?w=600', 'trending', True),
-                ('Twisted Snake Chain Necklace', 'women', 'minimal', 'necklaces', 3499.00, '925 Sterling Silver', 'Liquid gold finish anti-tarnish everyday chain.', 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=600', 'favourites', True),
-                ('Delicate Beaded Anklet', 'women', 'minimal', 'anklets', 1299.00, '18K Gold Vermeil', 'Waterproof everyday gold bead anklet.', 'https://images.unsplash.com/photo-1611591475179-62cd34feb0ce?w=600', 'festive', True),
-                ('Minimalist Cuff Bracelet', 'women', 'minimal', 'bracelets', 2799.00, '18K Gold Vermeil', 'Sleek open cuff designed for stacking.', 'https://images.unsplash.com/photo-1611591475179-62cd34feb0ce?w=600', 'bestseller', True),
+        # Refresh catalog with premium demi-fine imagery
+        cursor.execute("TRUNCATE TABLE products")
+        
+        demi_fine_catalog = [
+            # WOMEN - MINIMAL (999 - 7000)
+            ('Solitaire Vermeil Ring', 'women', 'minimal', 'rings', 2499.00, '18K Gold Vermeil', 'Solid 18K gold vermeil band featuring a brilliant diamond-cut bezel gemstone.', 'https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=800&auto=format&fit=crop&q=80', 'bestseller', True),
+            ('Celestial Huggie Hoop Earrings', 'women', 'minimal', 'earring', 1999.00, '18K Rose Gold Vermeil', 'Daily water-safe huggies inlaid with micro paved zirconia.', 'https://images.unsplash.com/photo-1630019852942-f89202989a59?w=800&auto=format&fit=crop&q=80', 'trending', True),
+            ('Sleek Snake Chain Necklace', 'women', 'minimal', 'necklaces', 3899.00, '925 Sterling Silver', 'High-polish anti-tarnish liquid silver fluid chain.', 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=800&auto=format&fit=crop&q=80', 'favourites', True),
+            ('Minimalist Stacking Cuff', 'women', 'minimal', 'bracelets', 2999.00, '18K Gold Vermeil', 'Open-ended sleek gold vermeil wrist cuff.', 'https://images.unsplash.com/photo-1611591475179-62cd34feb0ce?w=800&auto=format&fit=crop&q=80', 'bestseller', True),
+            ('Delicate Gold Bead Anklet', 'women', 'minimal', 'anklets', 1499.00, '18K Gold Vermeil', 'Waterproof everyday gold bead anklet with secure clasp.', 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=800&auto=format&fit=crop&q=80', 'festive', True),
 
-                # Minimal Men (999 - 7000)
-                ('Homme Signet Ring', 'men', 'minimal', 'rings', 2499.00, '925 Sterling Silver', 'Brushed silver classic crest signet ring.', 'https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=600', 'bestseller', True),
-                ('Heavy Curb Chain', 'men', 'minimal', 'chains', 4999.00, '925 Sterling Silver', 'Solid sterling silver 4mm bevelled curb chain.', 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=600', 'trending', False),
-                ('Textured Gold Cuff Bracelet', 'men', 'minimal', 'bracelets', 3899.00, '18K Gold Vermeil', 'Hand-hammered gold vermeil structured cuff.', 'https://images.unsplash.com/photo-1611591475179-62cd34feb0ce?w=600', 'favourites', True),
-                ('Single Huggie Piercing Stud', 'men', 'minimal', 'piercings', 999.00, '925 Sterling Silver', 'Hypoallergenic daily hoop stud for men.', 'https://images.unsplash.com/photo-1630019852942-f89202989a59?w=600', 'festive', False),
+            # MEN - MINIMAL (999 - 7000)
+            ('Homme Brushed Signet Ring', 'men', 'minimal', 'rings', 2899.00, '925 Sterling Silver', 'Hand-finished brushed silver geometric signet ring.', 'https://images.unsplash.com/photo-1603561591411-07134e71a2a9?w=800&auto=format&fit=crop&q=80', 'bestseller', True),
+            ('Classic Beveled Curb Chain', 'men', 'minimal', 'chains', 4999.00, '925 Sterling Silver', '4mm solid sterling silver link chain for everyday wear.', 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=800&auto=format&fit=crop&q=80', 'trending', False),
+            ('Textured Gold Kada Cuff', 'men', 'minimal', 'bracelets', 4200.00, '18K Gold Vermeil', 'Hammered architectural gold cuff designed for modern men.', 'https://images.unsplash.com/photo-1611591475179-62cd34feb0ce?w=800&auto=format&fit=crop&q=80', 'favourites', True),
+            ('Single Huggie Ear Piercing', 'men', 'minimal', 'piercings', 1199.00, '925 Sterling Silver', 'Hypoallergenic lightweight daily hoop earring.', 'https://images.unsplash.com/photo-1630019852942-f89202989a59?w=800&auto=format&fit=crop&q=80', 'festive', False),
 
-                # Wedding Women (Up to 9000)
-                ('Royal Kundan Nose Ring (Nath)', 'women', 'wedding', 'noserings', 3499.00, 'Gold Foil & Kundan', 'Lightweight regal nath set with freshwater pearls.', 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=600', 'festive', False),
-                ('Grand Pearl Maang Tika', 'women', 'wedding', 'mang tika', 2899.00, '18K Gold Vermeil', 'Anti-tarnish statement bridal headpiece.', 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=600', 'trending', False),
-                ('Solitaire Diamond Mangalsutra', 'women', 'wedding', 'mangalsutra', 6899.00, '18K Gold Vermeil', 'Modern lightweight daily wear mangalsutra chain.', 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=600', 'bestseller', True),
-                ('Bridal Choker Necklace', 'women', 'wedding', 'necklaces', 8999.00, 'Gold Vermeil & Kundan', 'Lightweight festive choker designed for comfort.', 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=600', 'favourites', False),
+            # WOMEN - WEDDING (UP TO 9000)
+            ('Royal Heritage Nath (Nose Ring)', 'women', 'wedding', 'noserings', 3499.00, '18K Gold Vermeil & Pearl', 'Lightweight bridal nose ring strung with natural pearls.', 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=800&auto=format&fit=crop&q=80', 'festive', False),
+            ('Kundan Crescent Maang Tika', 'women', 'wedding', 'mang tika', 3199.00, 'Gold Vermeil & Kundan', 'Handcrafted lightweight maang tika for wedding functions.', 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=800&auto=format&fit=crop&q=80', 'trending', False),
+            ('Modern Solitaire Mangalsutra', 'women', 'wedding', 'mangalsutra', 6899.00, '18K Gold Vermeil', 'Minimal dual-bead gold chain with solitaire diamond pendant.', 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=800&auto=format&fit=crop&q=80', 'bestseller', True),
+            ('Bridal Vermeil Choker', 'women', 'wedding', 'necklaces', 8999.00, '18K Gold Vermeil', 'Intricate lightweight festive choker set.', 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=800&auto=format&fit=crop&q=80', 'favourites', False),
 
-                # Wedding Men (Up to 9000)
-                ('Royal Emerald Sherwani Brooch', 'men', 'wedding', 'brooch', 4500.00, 'Brass Gold & Cubic Zirconia', 'Traditional royal coat pin with micro-pave stones.', 'https://images.unsplash.com/photo-1600003014755-ba31aa59c4b6?w=600', 'festive', False),
-                ('Groom Layered Pearl Necklace', 'men', 'wedding', 'necklace', 7999.00, 'Natural Cultured Pearls', 'Multi-strand groomsmen layered statement necklace.', 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=600', 'trending', False)
-            ]
-            cursor.executemany("""
-                INSERT INTO products (name, gender, occasion, sub_category, price_inr, metal, description, image_url, tag, is_customizable) 
-                VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
-            """, demo_products)
+            # MEN - WEDDING (UP TO 9000)
+            ('Royal Emerald Coat Brooch', 'men', 'wedding', 'brooch', 4200.00, 'Brass Gold & Emerald CZ', 'Regal sherwani coat pin crafted with micro-pave stones.', 'https://images.unsplash.com/photo-1600003014755-ba31aa59c4b6?w=800&auto=format&fit=crop&q=80', 'festive', False),
+            ('Groom Pearl Layered Necklace', 'men', 'wedding', 'necklace', 7999.00, 'Cultured Pearls & Vermeil', 'Traditional multi-strand royal groomsmen layered necklace.', 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=800&auto=format&fit=crop&q=80', 'trending', False)
+        ]
+        
+        cursor.executemany("""
+            INSERT INTO products (name, gender, occasion, sub_category, price_inr, metal, description, image_url, tag, is_customizable) 
+            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+        """, demi_fine_catalog)
 
         conn.commit()
         cursor.close()
@@ -120,7 +119,7 @@ def register():
         conn.close()
         return jsonify({'status': 'success', 'user': {'id': user_id, 'name': data['name'], 'email': data['email']}})
     except Exception as e:
-        return jsonify({'status': 'error', 'message': 'Email already registered'}), 400
+        return jsonify({'status': 'error', 'message': 'Email address already registered'}), 400
 
 @app.route('/api/auth/login', methods=['POST'])
 def login():
