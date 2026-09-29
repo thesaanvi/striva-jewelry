@@ -7,7 +7,6 @@ from werkzeug.security import generate_password_hash, check_password_hash
 app = Flask(__name__, static_folder='static')
 CORS(app)
 
-# Fetch database credentials from environment variables
 def get_db():
     return mysql.connector.connect(
         host=os.environ.get('DB_HOST'),
@@ -17,12 +16,70 @@ def get_db():
         database=os.environ.get('DB_NAME')
     )
 
-# Serve Frontend
+def init_db():
+    """Automatically builds tables and inserts default products on startup"""
+    try:
+        conn = get_db()
+        cursor = conn.cursor()
+        
+        # Create users table
+        cursor.execute("""
+        CREATE TABLE IF NOT EXISTS users (
+            id INT AUTO_INCREMENT PRIMARY KEY,
+            full_name VARCHAR(255) NOT NULL,
+            email VARCHAR(255) UNIQUE,
+            phone_number VARCHAR(20) UNIQUE,
+            password_hash VARCHAR(255) NOT NULL,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        );
+        """)
+
+        # Create products table
+        cursor.execute("""
+        CREATE TABLE IF NOT EXISTS products (
+            id INT AUTO_INCREMENT PRIMARY KEY,
+            name VARCHAR(255) NOT NULL,
+            category VARCHAR(50) NOT NULL,
+            price_inr DECIMAL(10,2) NOT NULL,
+            metal VARCHAR(100) NOT NULL,
+            image_url TEXT,
+            is_customizable BOOLEAN DEFAULT FALSE
+        );
+        """)
+
+        # Check if products already exist
+        cursor.execute("SELECT COUNT(*) FROM products")
+        count = cursor.fetchone()[0]
+
+        if count == 0:
+            products = [
+                ('Classic Solitaire Vermeil Ring', 'women', 3499.00, '18K Gold Vermeil', 'https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=500', True),
+                ('Layered Celestial Pendant', 'women', 5999.00, '18K Gold Vermeil', 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=500', True),
+                ('Heritage Kundan Choker', 'wedding', 18500.00, 'Lightweight Brass Gold', 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=500', False),
+                ('Lightweight Rani Haar Necklace', 'wedding', 32000.00, 'Gold Foil & Kundan', 'https://images.unsplash.com/photo-1611591475179-62cd34feb0ce?w=500', False),
+                ('Royal Bridal Haathphool Set', 'wedding', 12400.00, 'Anti-Tarnish Vermeil', 'https://images.unsplash.com/photo-1600003014755-ba31aa59c4b6?w=500', False),
+                ('Men Solid Curb Chain', 'men', 8999.00, '925 Sterling Silver', 'https://images.unsplash.com/photo-1611591475179-62cd34feb0ce?w=500', True),
+                ('Homme Textured Gold Kada', 'men', 14500.00, '18K Gold Vermeil', 'https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=500', True)
+            ]
+            cursor.executemany("""
+                INSERT INTO products (name, category, price_inr, metal, image_url, is_customizable) 
+                VALUES (%s, %s, %s, %s, %s, %s)
+            """, products)
+
+        conn.commit()
+        cursor.close()
+        conn.close()
+        print("Database setup completed automatically!")
+    except Exception as e:
+        print(f"Database initialization note: {e}")
+
+# Run automatic setup when backend starts
+init_db()
+
 @app.route('/')
 def serve_frontend():
     return send_from_directory('static', 'index.html')
 
-# API Endpoints
 @app.route('/api/products', methods=['GET'])
 def get_products():
     category = request.args.get('category')
