@@ -3,40 +3,56 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>STRIVA Demi-Fine Jewelry</title>
+  <title>STRIVA | Luxury Demi-Fine Jewelry</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
+    body { font-family: 'Montserrat', sans-serif; background-color: #FAF7F2; color: #2C2A29; }
+    .font-serif { font-family: 'Cormorant Garamond', serif; }
     .hidden-view { display: none !important; }
+    .bg-cream-soft { background-color: #FAF7F2; }
+    .bg-cream-card { background-color: #F3EEE7; }
+    .text-rose-bronze { color: #8C6239; }
+    .bg-rose-bronze { background-color: #8C6239; }
+    .border-rose-bronze { border-color: #8C6239; }
   </style>
 </head>
-<body class="bg-stone-50 text-stone-800 font-sans min-h-screen">
+<body class="bg-cream-soft text-stone-800 min-h-screen flex flex-col">
 
-  <!-- VIEW 1: AUTH GATE (HOMEPAGE WITH LOGO & SIGN IN / SIGN UP) -->
-  <div id="view-auth" class="min-h-screen flex flex-col items-center justify-center p-6 bg-stone-900 text-stone-100">
+  <!-- AUTH LANDING PAGE -->
+  <div id="view-auth" class="min-h-screen flex flex-col items-center justify-center p-6 bg-[#F5EFE6]">
     <div class="text-center max-w-md w-full">
-      <h1 class="text-6xl font-serif tracking-widest font-bold text-amber-400 mb-2">STRIVA</h1>
-      <p class="text-xs uppercase tracking-widest text-stone-400 mb-8">Demi-Fine Fine Jewelry Collection</p>
+      
+      <!-- STRIVA LOGO MARK -->
+      <div class="flex justify-center mb-4">
+        <svg class="w-16 h-16 text-rose-bronze" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2.5">
+          <polygon points="50,10 90,50 50,90 10,50" />
+          <circle cx="50" cy="50" r="18" />
+        </svg>
+      </div>
+      <h1 class="text-5xl font-serif tracking-[0.25em] font-bold text-stone-900 mb-1">STRIVA</h1>
+      <p class="text-[11px] uppercase tracking-[0.3em] text-rose-bronze mb-8">Demi-Fine Luxury • Solid 18K Vermeil & 925 Silver</p>
 
-      <div class="bg-stone-800 p-8 rounded-2xl shadow-xl border border-stone-700">
-        <div class="flex justify-center space-x-6 mb-6 text-sm font-bold border-b border-stone-700 pb-3">
-          <button id="tab-login-btn" onclick="switchAuthTab('login')" class="text-amber-400 border-b-2 border-amber-400 pb-1">Sign In</button>
-          <button id="tab-signup-btn" onclick="switchAuthTab('signup')" class="text-stone-400 hover:text-amber-400 pb-1">Register</button>
+      <div class="bg-white p-8 rounded-3xl shadow-sm border border-stone-200/60">
+        <div class="flex justify-center space-x-6 mb-6 text-xs font-bold uppercase tracking-wider border-b pb-3">
+          <button id="tab-login-btn" onclick="switchAuthTab('login')" class="text-rose-bronze border-b-2 border-rose-bronze pb-1">Sign In</button>
+          <button id="tab-signup-btn" onclick="switchAuthTab('signup')" class="text-stone-400 hover:text-stone-900 pb-1">Create Account</button>
         </div>
 
-        <form id="auth-form" onsubmit="handleAuthSubmit(event)" class="space-y-4 text-left">
+        <form onsubmit="handleAuthSubmit(event)" class="space-y-4 text-left">
           <div id="field-name" class="hidden">
-            <label class="block text-xs uppercase text-stone-400 font-bold mb-1">Full Name</label>
-            <input type="text" id="auth-name" class="w-full bg-stone-900 border border-stone-700 rounded-lg p-3 text-sm text-stone-100 focus:outline-none focus:border-amber-400">
+            <label class="block text-[10px] uppercase font-bold text-stone-500 mb-1">Full Name</label>
+            <input type="text" id="auth-name" class="w-full bg-stone-50 border border-stone-200 rounded-xl p-3 text-xs focus:outline-none focus:border-rose-bronze">
           </div>
           <div>
-            <label class="block text-xs uppercase text-stone-400 font-bold mb-1">Email Address</label>
-            <input type="email" id="auth-email" required class="w-full bg-stone-900 border border-stone-700 rounded-lg p-3 text-sm text-stone-100 focus:outline-none focus:border-amber-400">
+            <label class="block text-[10px] uppercase font-bold text-stone-500 mb-1">Email Address</label>
+            <input type="email" id="auth-email" required class="w-full bg-stone-50 border border-stone-200 rounded-xl p-3 text-xs focus:outline-none focus:border-rose-bronze">
           </div>
           <div>
-            <label class="block text-xs uppercase text-stone-400 font-bold mb-1">Password</label>
-            <input type="password" id="auth-password" required class="w-full bg-stone-900 border border-stone-700 rounded-lg p-3 text-sm text-stone-100 focus:outline-none focus:border-amber-400">
+            <label class="block text-[10px] uppercase font-bold text-stone-500 mb-1">Password</label>
+            <input type="password" id="auth-password" required class="w-full bg-stone-50 border border-stone-200 rounded-xl p-3 text-xs focus:outline-none focus:border-rose-bronze">
           </div>
-          <button type="submit" class="w-full bg-amber-500 hover:bg-amber-400 text-stone-950 py-3 rounded-lg font-bold text-sm transition">
+          <button type="submit" class="w-full bg-stone-900 hover:bg-stone-800 text-stone-50 py-3 rounded-xl font-medium text-xs tracking-wider uppercase transition">
             Enter Collection
           </button>
         </form>
@@ -44,190 +60,189 @@
     </div>
   </div>
 
-  <!-- MAIN APP CONTAINER (ACCESSIBLE AFTER SIGN IN) -->
+  <!-- MAIN APP CONTAINER -->
   <div id="view-main" class="hidden-view flex flex-col min-h-screen">
     
     <!-- NAVIGATION BAR -->
-    <header class="bg-white border-b border-stone-200 sticky top-0 z-50 px-4 md:px-8 py-4 flex items-center justify-between">
-      <div class="flex items-center space-x-4">
-        <a href="#" onclick="showSection('home')" class="text-2xl md:text-3xl font-serif font-bold tracking-widest text-stone-900">STRIVA</a>
-        <span class="hidden md:inline text-xs uppercase text-amber-700 border-l border-stone-300 pl-3">Demi-Fine</span>
+    <header class="bg-white/80 backdrop-blur-md border-b border-stone-200 sticky top-0 z-50 px-6 py-4 flex items-center justify-between">
+      <div class="flex items-center space-x-3 cursor-pointer" onclick="showSection('home')">
+        <svg class="w-7 h-7 text-rose-bronze" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="3">
+          <polygon points="50,10 90,50 50,90 10,50" />
+          <circle cx="50" cy="50" r="16" />
+        </svg>
+        <span class="text-2xl font-serif font-bold tracking-[0.2em] text-stone-900">STRIVA</span>
       </div>
 
-      <nav class="hidden lg:flex space-x-6 text-sm font-medium">
-        <button onclick="showSection('home')" class="hover:text-amber-700">Home</button>
-        <button onclick="setFilter('women', 'minimal')" class="hover:text-amber-700">Women Minimal</button>
-        <button onclick="setFilter('men', 'minimal')" class="hover:text-amber-700">Men Minimal</button>
-        <button onclick="setFilter('women', 'wedding')" class="hover:text-amber-700">Wedding Women</button>
-        <button onclick="setFilter('men', 'wedding')" class="hover:text-amber-700">Wedding Men</button>
-        <button onclick="showSection('quiz')" class="hover:text-amber-700 text-amber-800 font-bold">✨ Jewelry Quiz</button>
-        <button onclick="showSection('orders')" class="hover:text-amber-700">My Orders</button>
+      <nav class="hidden lg:flex space-x-8 text-xs font-semibold tracking-wider uppercase">
+        <button onclick="showSection('home')" class="hover:text-rose-bronze">Home</button>
+        <button onclick="quickFilter('women', 'minimal')" class="hover:text-rose-bronze">Women Minimal</button>
+        <button onclick="quickFilter('men', 'minimal')" class="hover:text-rose-bronze">Men Minimal</button>
+        <button onclick="quickFilter('women', 'wedding')" class="hover:text-rose-bronze">Wedding Women</button>
+        <button onclick="quickFilter('men', 'wedding')" class="hover:text-rose-bronze">Wedding Men</button>
+        <button onclick="showSection('quiz')" class="text-rose-bronze font-bold">✨ Style Finder</button>
+        <button onclick="showSection('orders')" class="hover:text-rose-bronze">Orders</button>
       </nav>
 
-      <div class="flex items-center space-x-3">
-        <button onclick="toggleCartModal()" class="bg-stone-900 text-white px-4 py-2 rounded-lg text-sm flex items-center gap-2">
-          <span>🛒 Bag</span>
-          <span id="cart-badge" class="bg-amber-500 text-stone-950 font-bold px-2 py-0.5 rounded-full text-xs">0</span>
+      <div class="flex items-center space-x-4">
+        <button onclick="toggleCartModal()" class="bg-stone-900 text-stone-50 px-4 py-2 rounded-full text-xs font-medium flex items-center gap-2">
+          <span>Bag</span>
+          <span id="cart-badge" class="bg-rose-bronze text-white font-bold px-2 py-0.5 rounded-full text-[10px]">0</span>
         </button>
-        <button onclick="logout()" class="text-xs text-red-600 font-bold hover:underline">Sign Out</button>
+        <button onclick="logout()" class="text-xs text-stone-400 hover:text-stone-900">Sign Out</button>
       </div>
     </header>
 
-    <!-- MAIN BODY CONTENT -->
-    <main class="flex-1 max-w-7xl w-full mx-auto p-4 md:p-8">
+    <main class="flex-1 max-w-7xl w-full mx-auto p-6 md:p-10">
 
-      <!-- SECTION: HOME (HERO + CURATED CURATIONS) -->
+      <!-- SECTION: HOME -->
       <section id="sec-home">
-        <div class="bg-stone-900 text-stone-100 rounded-3xl p-8 md:p-12 mb-10 flex flex-col md:flex-row items-center justify-between shadow-2xl">
+        <div class="bg-[#F2ECE4] rounded-3xl p-8 md:p-14 mb-12 flex flex-col md:flex-row items-center justify-between border border-stone-200/50">
           <div class="max-w-xl">
-            <span class="text-xs uppercase tracking-widest text-amber-400 font-bold">18K Gold Vermeil & 925 Sterling Silver</span>
-            <h1 class="text-3xl md:text-5xl font-serif mt-2 mb-4">Demi-Fine Luxury Built For Everyday & Celebrations</h1>
-            <p class="text-stone-400 text-sm mb-6">Explore lightweight wedding sets and waterproof everyday minimal jewelry with custom laser engraving and stackables.</p>
+            <span class="text-[11px] uppercase tracking-[0.25em] text-rose-bronze font-bold">Handcrafted Demi-Fine Fine Jewelry</span>
+            <h1 class="text-3xl md:text-5xl font-serif mt-2 mb-4 text-stone-900 leading-tight">Everyday Luxury & Timeless Celebrations</h1>
+            <p class="text-stone-600 text-xs md:text-sm leading-relaxed mb-6">Designed with solid 18K Gold Vermeil and 925 Sterling Silver. Water-resistant, hypoallergenic, and tarnish-free.</p>
             <div class="flex gap-4">
-              <button onclick="showSection('catalog')" class="bg-amber-500 hover:bg-amber-400 text-stone-950 px-6 py-3 rounded-xl font-bold text-sm">Explore Collection</button>
-              <button onclick="showSection('quiz')" class="bg-stone-800 border border-stone-700 text-amber-400 px-6 py-3 rounded-xl font-bold text-sm">Take Style Quiz</button>
+              <button onclick="showSection('catalog')" class="bg-stone-900 hover:bg-stone-800 text-stone-50 px-6 py-3 rounded-xl text-xs font-medium tracking-wider uppercase">Explore Catalog</button>
+              <button onclick="showSection('quiz')" class="bg-white border border-stone-300 text-stone-900 px-6 py-3 rounded-xl text-xs font-medium tracking-wider uppercase">Take Jewelry Quiz</button>
             </div>
           </div>
         </div>
 
-        <!-- HOME TABS: BESTSELLERS / TRENDING / FAVOURITES / FESTIVE -->
-        <div class="mb-8">
-          <div class="flex space-x-4 border-b border-stone-200 pb-3 font-bold text-sm overflow-x-auto">
-            <button onclick="loadHomeCurated('bestseller')" class="text-amber-800 border-b-2 border-amber-800 pb-1 whitespace-nowrap">🔥 Bestsellers</button>
-            <button onclick="loadHomeCurated('trending')" class="text-stone-500 hover:text-stone-900 whitespace-nowrap">✨ Trending</button>
-            <button onclick="loadHomeCurated('favourites')" class="text-stone-500 hover:text-stone-900 whitespace-nowrap">❤️ Our Favourites</button>
-            <button onclick="loadHomeCurated('festive')" class="text-stone-500 hover:text-stone-900 whitespace-nowrap">🪔 Festive Looks</button>
+        <div class="mb-10">
+          <div class="flex space-x-6 border-b border-stone-200 pb-3 text-xs font-bold uppercase tracking-wider overflow-x-auto">
+            <button onclick="loadHomeCurated('bestseller')" class="text-rose-bronze border-b-2 border-rose-bronze pb-1 whitespace-nowrap">Bestsellers</button>
+            <button onclick="loadHomeCurated('trending')" class="text-stone-400 hover:text-stone-900 whitespace-nowrap">Trending</button>
+            <button onclick="loadHomeCurated('favourites')" class="text-stone-400 hover:text-stone-900 whitespace-nowrap">Our Favourites</button>
+            <button onclick="loadHomeCurated('festive')" class="text-stone-400 hover:text-stone-900 whitespace-nowrap">Festive Edit</button>
           </div>
-          <div id="home-curated-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-6"></div>
+          <div id="home-curated-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-8"></div>
         </div>
       </section>
 
-      <!-- SECTION: CATALOG (WITH CATEGORY & SUB-CATEGORY FILTERS) -->
+      <!-- SECTION: CATALOG (DYNAMIC DUAL-STEP CASCADING FILTERS) -->
       <section id="sec-catalog" class="hidden-view">
-        <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm mb-8">
-          <h2 class="text-lg font-serif font-bold mb-4">Filters & Sub-Categories</h2>
+        <div class="bg-white p-6 rounded-2xl border border-stone-200/80 mb-8 shadow-sm">
+          <h2 class="text-base font-serif font-bold text-stone-900 mb-4">Refine Collection</h2>
           <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+            
+            <!-- STEP 1: GENDER -->
             <div>
-              <label class="block text-xs font-bold text-stone-500 uppercase mb-1">Gender</label>
-              <select id="filter-gender" onchange="applyFilters()" class="w-full border rounded-lg p-2 text-sm">
+              <label class="block text-[10px] font-bold text-stone-500 uppercase tracking-wider mb-1">1. Gender</label>
+              <select id="filter-gender" onchange="updateOccasions()" class="w-full bg-stone-50 border border-stone-200 rounded-xl p-2.5 text-xs focus:outline-none">
                 <option value="all">All Genders</option>
                 <option value="women">Women</option>
                 <option value="men">Men</option>
               </select>
             </div>
+
+            <!-- STEP 2: OCCASION -->
             <div>
-              <label class="block text-xs font-bold text-stone-500 uppercase mb-1">Occasion</label>
-              <select id="filter-occasion" onchange="applyFilters()" class="w-full border rounded-lg p-2 text-sm">
-                <option value="all">All Occasions</option>
-                <option value="minimal">Minimal Everyday</option>
-                <option value="wedding">Wedding</option>
+              <label class="block text-[10px] font-bold text-stone-500 uppercase tracking-wider mb-1">2. Collection Type</label>
+              <select id="filter-occasion" onchange="updateSubCategories()" class="w-full bg-stone-50 border border-stone-200 rounded-xl p-2.5 text-xs focus:outline-none">
+                <option value="all">All Collections</option>
               </select>
             </div>
+
+            <!-- STEP 3: SUB-CATEGORY -->
             <div>
-              <label class="block text-xs font-bold text-stone-500 uppercase mb-1">Sub-Category</label>
-              <select id="filter-subcategory" onchange="applyFilters()" class="w-full border rounded-lg p-2 text-sm">
-                <option value="all">All Items</option>
-                <option value="rings">Rings</option>
-                <option value="earring">Earrings</option>
-                <option value="bracelets">Bracelets</option>
-                <option value="anklets">Anklets</option>
-                <option value="necklaces">Necklaces</option>
-                <option value="chains">Chains</option>
-                <option value="piercings">Piercings</option>
-                <option value="noserings">Nose Rings / Nath</option>
-                <option value="mang tika">Maang Tika</option>
-                <option value="mangalsutra">Mangalsutra</option>
-                <option value="brooch">Brooch</option>
+              <label class="block text-[10px] font-bold text-stone-500 uppercase tracking-wider mb-1">3. Category</label>
+              <select id="filter-subcategory" onchange="fetchCatalogFromAPI()" class="w-full bg-stone-50 border border-stone-200 rounded-xl p-2.5 text-xs focus:outline-none">
+                <option value="all">All Categories</option>
               </select>
             </div>
+
+            <!-- STEP 4: PRICE -->
             <div>
-              <label class="block text-xs font-bold text-stone-500 uppercase mb-1">Max Price (INR)</label>
-              <input type="range" id="filter-price" min="999" max="9000" step="500" value="9000" oninput="applyFilters()" class="w-full accent-amber-800">
-              <span class="text-xs font-bold text-amber-900">Up to ₹<span id="price-disp">9,000</span></span>
+              <label class="block text-[10px] font-bold text-stone-500 uppercase tracking-wider mb-1">Max Price Limit</label>
+              <input type="range" id="filter-price" min="999" max="9000" step="500" value="9000" oninput="fetchCatalogFromAPI()" class="w-full accent-amber-800">
+              <span class="text-xs font-bold text-stone-800">₹<span id="price-disp">9,000</span></span>
             </div>
+
           </div>
         </div>
 
         <div id="catalog-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"></div>
       </section>
 
-      <!-- SECTION: PERSONALIZED QUIZ -->
-      <section id="sec-quiz" class="hidden-view max-w-2xl mx-auto bg-white p-8 rounded-3xl border border-stone-200 shadow-md">
-        <h2 class="text-2xl font-serif font-bold text-stone-900 mb-2">Personalized Style Quiz</h2>
-        <p class="text-xs text-stone-500 mb-6">Find your perfect demi-fine match in 3 questions.</p>
+      <!-- SECTION: ENHANCED INTERACTIVE QUIZ -->
+      <section id="sec-quiz" class="hidden-view max-w-xl mx-auto bg-white p-8 md:p-10 rounded-3xl border border-stone-200 shadow-sm">
+        <span class="text-[10px] uppercase font-bold tracking-widest text-rose-bronze">Personalized Recommendation</span>
+        <h2 class="text-2xl font-serif font-bold text-stone-900 mb-6">Find Your Signature Jewelry Match</h2>
+        
         <form onsubmit="handleQuizSubmit(event)" class="space-y-6">
           <div>
-            <label class="block text-sm font-bold mb-2">1. Who are you shopping for?</label>
-            <select id="quiz-gender" class="w-full border p-3 rounded-xl text-sm">
-              <option value="women">Women</option>
-              <option value="men">Men</option>
-            </select>
+            <label class="block text-xs font-bold uppercase tracking-wider mb-2">1. Who are you styling for today?</label>
+            <div class="grid grid-cols-2 gap-3">
+              <label class="border p-3 rounded-xl text-xs font-medium cursor-pointer flex items-center gap-2 hover:bg-stone-50">
+                <input type="radio" name="q-gender" value="women" checked class="accent-amber-800"> Women
+              </label>
+              <label class="border p-3 rounded-xl text-xs font-medium cursor-pointer flex items-center gap-2 hover:bg-stone-50">
+                <input type="radio" name="q-gender" value="men" class="accent-amber-800"> Men
+              </label>
+            </div>
           </div>
+
           <div>
-            <label class="block text-sm font-bold mb-2">2. What is the occasion?</label>
-            <select id="quiz-occasion" class="w-full border p-3 rounded-xl text-sm">
-              <option value="minimal">Everyday Minimal Wear</option>
-              <option value="wedding">Wedding / Festive Celebrations</option>
+            <label class="block text-xs font-bold uppercase tracking-wider mb-2">2. What occasion are you preparing for?</label>
+            <select id="q-occasion" class="w-full bg-stone-50 border p-3 rounded-xl text-xs">
+              <option value="minimal">Everyday Minimal & Office Wear (₹999 - ₹7,000)</option>
+              <option value="wedding">Wedding, Sangeet & Reception (Up to ₹9,000)</option>
             </select>
           </div>
-          <button type="submit" class="w-full bg-amber-800 text-white font-bold py-3 rounded-xl text-sm">Get Recommendations</button>
+
+          <div>
+            <label class="block text-xs font-bold uppercase tracking-wider mb-2">3. Preferred Metal Finish</label>
+            <select id="q-metal" class="w-full bg-stone-50 border p-3 rounded-xl text-xs">
+              <option value="all">Any Finish</option>
+              <option value="18K Gold Vermeil">18K Warm Gold Vermeil</option>
+              <option value="925 Sterling Silver">925 Silver</option>
+            </select>
+          </div>
+
+          <button type="submit" class="w-full bg-stone-900 text-stone-50 py-3 rounded-xl text-xs font-medium tracking-wider uppercase">
+            View Curated Selection
+          </button>
         </form>
       </section>
 
-      <!-- SECTION: PRODUCT DETAIL MODAL/VIEW -->
-      <div id="modal-product" class="fixed inset-0 bg-black/60 hidden items-center justify-center z-50 p-4">
-        <div class="bg-white rounded-3xl max-w-3xl w-full p-6 md:p-8 max-h-[90vh] overflow-y-auto relative">
-          <button onclick="closeProductModal()" class="absolute top-4 right-4 text-stone-400 text-xl font-bold">✕</button>
+      <!-- PRODUCT MODAL -->
+      <div id="modal-product" class="fixed inset-0 bg-stone-900/40 backdrop-blur-sm hidden items-center justify-center z-50 p-4">
+        <div class="bg-white rounded-3xl max-w-2xl w-full p-6 md:p-8 max-h-[90vh] overflow-y-auto relative border border-stone-200">
+          <button onclick="closeProductModal()" class="absolute top-4 right-4 text-stone-400 font-bold text-lg">✕</button>
           <div id="product-detail-content"></div>
         </div>
       </div>
 
-      <!-- SECTION: MY ORDERS & DATA -->
-      <section id="sec-orders" class="hidden-view max-w-4xl mx-auto">
-        <h2 class="text-2xl font-serif font-bold mb-6">My Saved Account & Orders</h2>
+      <!-- SECTION: ORDERS -->
+      <section id="sec-orders" class="hidden-view max-w-3xl mx-auto">
+        <h2 class="text-2xl font-serif font-bold text-stone-900 mb-6">Saved Account & Orders</h2>
         <div id="orders-list" class="space-y-4"></div>
-      </section>
-
-      <!-- SECTION: ABOUT & SUPPORT -->
-      <section id="sec-support" class="hidden-view max-w-3xl mx-auto bg-white p-8 rounded-3xl border border-stone-200">
-        <h2 class="text-2xl font-serif font-bold mb-4">About STRIVA & Customer Support</h2>
-        <p class="text-sm text-stone-600 mb-6">STRIVA provides 18K Gold Vermeil and 925 Sterling Silver demi-fine jewelry designed for daily luxury and festive moments.</p>
-        <div class="border-t border-stone-200 pt-4 text-sm space-y-2">
-          <p><strong>Email Support:</strong> support@striva-jewelry.com</p>
-          <p><strong>WhatsApp Support:</strong> +91 98765 43210</p>
-          <p><strong>Return Policy:</strong> 15-Day Anti-Tarnish Guarantee & Easy Exchange.</p>
-        </div>
       </section>
 
     </main>
 
     <!-- FOOTER -->
-    <footer class="bg-stone-900 text-stone-400 text-xs py-8 px-6 text-center">
-      <div class="flex justify-center space-x-6 mb-4">
-        <button onclick="showSection('support')" class="hover:text-amber-400">About Us</button>
-        <button onclick="showSection('support')" class="hover:text-amber-400">Customer Support</button>
-        <button onclick="showSection('orders')" class="hover:text-amber-400">Order Tracking</button>
-      </div>
-      <p>© 2026 STRIVA Jewelry. All rights reserved.</p>
+    <footer class="bg-[#F3EEE7] text-stone-500 text-xs py-8 px-6 text-center border-t border-stone-200">
+      <p>© 2026 STRIVA Demi-Fine Jewelry. Solid 18K Vermeil & 925 Sterling Silver.</p>
     </footer>
   </div>
 
   <!-- CART MODAL -->
-  <div id="modal-cart" class="fixed inset-0 bg-black/50 hidden justify-end z-50">
+  <div id="modal-cart" class="fixed inset-0 bg-stone-900/30 backdrop-blur-sm hidden justify-end z-50">
     <div class="bg-white w-full max-w-md h-full p-6 flex flex-col justify-between">
       <div>
-        <div class="flex justify-between items-center mb-6">
-          <h2 class="text-xl font-serif font-bold">Your Bag</h2>
+        <div class="flex justify-between items-center mb-6 border-b pb-3">
+          <h2 class="text-lg font-serif font-bold text-stone-900">Your Shopping Bag</h2>
           <button onclick="toggleCartModal()" class="text-stone-400 font-bold">✕</button>
         </div>
         <div id="cart-items" class="space-y-4 max-h-[60vh] overflow-y-auto"></div>
       </div>
-      <div class="border-t border-stone-200 pt-4">
-        <div class="flex justify-between font-bold text-lg mb-4">
-          <span>Total:</span>
+      <div class="border-t pt-4">
+        <div class="flex justify-between font-bold text-sm mb-4">
+          <span>Subtotal</span>
           <span>₹<span id="cart-total">0</span></span>
         </div>
-        <button onclick="checkout()" class="w-full bg-amber-800 text-white py-3 rounded-xl font-bold text-sm">Place Order</button>
+        <button onclick="checkout()" class="w-full bg-stone-900 text-stone-50 py-3 rounded-xl text-xs font-bold uppercase tracking-wider">Place Order</button>
       </div>
     </div>
   </div>
@@ -235,18 +250,27 @@
   <script>
     let currentUser = null;
     let cart = [];
-    let allProducts = [];
 
-    // AUTH SWITCHER
+    const categoryMap = {
+      women: {
+        minimal: ['rings', 'earring', 'bracelets', 'anklets', 'necklaces'],
+        wedding: ['rings', 'earring', 'bracelets', 'anklets', 'necklaces', 'noserings', 'mang tika', 'mangalsutra']
+      },
+      men: {
+        minimal: ['rings', 'chains', 'bracelets', 'piercings'],
+        wedding: ['rings', 'chains', 'bracelets', 'piercings', 'brooch', 'necklace']
+      }
+    };
+
     function switchAuthTab(type) {
       if(type === 'login') {
         document.getElementById('field-name').classList.add('hidden');
-        document.getElementById('tab-login-btn').className = 'text-amber-400 border-b-2 border-amber-400 pb-1';
-        document.getElementById('tab-signup-btn').className = 'text-stone-400 hover:text-amber-400 pb-1';
+        document.getElementById('tab-login-btn').className = 'text-rose-bronze border-b-2 border-rose-bronze pb-1';
+        document.getElementById('tab-signup-btn').className = 'text-stone-400 hover:text-stone-900 pb-1';
       } else {
         document.getElementById('field-name').classList.remove('hidden');
-        document.getElementById('tab-signup-btn').className = 'text-amber-400 border-b-2 border-amber-400 pb-1';
-        document.getElementById('tab-login-btn').className = 'text-stone-400 hover:text-amber-400 pb-1';
+        document.getElementById('tab-signup-btn').className = 'text-rose-bronze border-b-2 border-rose-bronze pb-1';
+        document.getElementById('tab-login-btn').className = 'text-stone-400 hover:text-stone-900 pb-1';
       }
     }
 
@@ -268,9 +292,7 @@
           document.getElementById('view-auth').classList.add('hidden-view');
           document.getElementById('view-main').classList.remove('hidden-view');
           loadHomeCurated('bestseller');
-        } else {
-          alert(data.message);
-        }
+        } else { alert(data.message); }
       } catch(err) { alert('Authentication failed.'); }
     }
 
@@ -280,16 +302,65 @@
       document.getElementById('view-auth').classList.remove('hidden-view');
     }
 
-    // SECTION NAVIGATION
     function showSection(secId) {
-      ['sec-home', 'sec-catalog', 'sec-quiz', 'sec-orders', 'sec-support'].forEach(id => {
+      ['sec-home', 'sec-catalog', 'sec-quiz', 'sec-orders'].forEach(id => {
         document.getElementById(id).classList.add('hidden-view');
       });
       document.getElementById(`sec-${secId}`).classList.remove('hidden-view');
+      if(secId === 'catalog') updateOccasions();
       if(secId === 'orders') fetchOrders();
     }
 
-    // HOME CURATED TABS
+    function updateOccasions() {
+      const gender = document.getElementById('filter-gender').value;
+      const occasionSel = document.getElementById('filter-occasion');
+      
+      occasionSel.innerHTML = '<option value="all">All Collections</option>';
+      if(gender !== 'all') {
+        occasionSel.innerHTML += '<option value="minimal">Minimal Everyday</option><option value="wedding">Wedding Collection</option>';
+      }
+      updateSubCategories();
+    }
+
+    function updateSubCategories() {
+      const gender = document.getElementById('filter-gender').value;
+      const occasion = document.getElementById('filter-occasion').value;
+      const subSel = document.getElementById('filter-subcategory');
+
+      subSel.innerHTML = '<option value="all">All Categories</option>';
+
+      if(gender !== 'all' && occasion !== 'all') {
+        const available = categoryMap[gender][occasion];
+        available.forEach(cat => {
+          subSel.innerHTML += `<option value="${cat}">${cat.toUpperCase()}</option>`;
+        });
+      }
+      fetchCatalogFromAPI();
+    }
+
+    function quickFilter(gender, occasion) {
+      showSection('catalog');
+      document.getElementById('filter-gender').value = gender;
+      updateOccasions();
+      document.getElementById('filter-occasion').value = occasion;
+      updateSubCategories();
+    }
+
+    async function fetchCatalogFromAPI() {
+      const gender = document.getElementById('filter-gender').value;
+      const occasion = document.getElementById('filter-occasion').value;
+      const sub = document.getElementById('filter-subcategory').value;
+      const maxPrice = document.getElementById('filter-price').value;
+      document.getElementById('price-disp').innerText = parseInt(maxPrice).toLocaleString('en-IN');
+
+      const res = await fetch(`/api/products?gender=${gender}&occasion=${occasion}&sub_category=${sub}&max_price=${maxPrice}`);
+      const data = await res.json();
+      
+      const grid = document.getElementById('catalog-grid');
+      grid.innerHTML = '';
+      data.products.forEach(p => grid.innerHTML += renderProductCard(p));
+    }
+
     async function loadHomeCurated(tag) {
       const res = await fetch(`/api/products?tag=${tag}`);
       const data = await res.json();
@@ -300,82 +371,39 @@
 
     function renderProductCard(p) {
       return `
-        <div class="bg-white border border-stone-200 rounded-2xl p-4 flex flex-col justify-between shadow-sm hover:shadow-md transition">
+        <div class="bg-white border border-stone-200/80 rounded-2xl p-4 flex flex-col justify-between shadow-sm hover:shadow-md transition">
           <div>
             <img src="${p.image_url}" class="h-48 w-full object-cover rounded-xl mb-3" />
-            <span class="text-[10px] font-bold uppercase tracking-wider text-amber-800 bg-amber-50 px-2 py-0.5 rounded">${p.metal}</span>
+            <span class="text-[9px] font-bold uppercase tracking-wider text-rose-bronze bg-[#FAF7F2] px-2 py-1 rounded-md">${p.metal}</span>
             <h3 class="font-serif font-bold text-stone-900 mt-2 text-sm">${p.name}</h3>
-            <div class="text-base font-extrabold text-stone-900 mt-1">₹${parseFloat(p.price_inr).toLocaleString('en-IN')}</div>
+            <div class="text-sm font-extrabold text-stone-900 mt-1">₹${parseFloat(p.price_inr).toLocaleString('en-IN')}</div>
           </div>
-          <button onclick="openProductModal(${p.id})" class="mt-4 w-full bg-stone-900 hover:bg-stone-800 text-white py-2 rounded-lg text-xs font-bold">View & Customize</button>
+          <button onclick="openProductModal(${p.id})" class="mt-4 w-full bg-stone-900 hover:bg-stone-800 text-white py-2 rounded-xl text-xs font-medium uppercase tracking-wider">Customize & View</button>
         </div>
       `;
     }
 
-    // CATALOG & FILTERS
-    function setFilter(gender, occasion) {
-      showSection('catalog');
-      document.getElementById('filter-gender').value = gender;
-      document.getElementById('filter-occasion').value = occasion;
-      applyFilters();
-    }
-
-    async function applyFilters() {
-      const gender = document.getElementById('filter-gender').value;
-      const occasion = document.getElementById('filter-occasion').value;
-      const sub = document.getElementById('filter-subcategory').value;
-      const maxPrice = document.getElementById('filter-price').value;
-      document.getElementById('price-disp').innerText = parseInt(maxPrice).toLocaleString('en-IN');
-
-      const res = await fetch(`/api/products?gender=${gender}&occasion=${occasion}&sub_category=${sub}&max_price=${maxPrice}`);
-      const data = await res.json();
-      allProducts = data.products;
-      const grid = document.getElementById('catalog-grid');
-      grid.innerHTML = '';
-      data.products.forEach(p => grid.innerHTML += renderProductCard(p));
-    }
-
-    // PRODUCT DETAIL & CUSTOMIZATION MODAL
     async function openProductModal(id) {
       const res = await fetch('/api/products?tag=all');
       const data = await res.json();
       const p = data.products.find(item => item.id === id);
-      const suggestions = data.products.filter(item => item.id !== id).slice(0, 2);
 
       const content = document.getElementById('product-detail-content');
       content.innerHTML = `
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <img src="${p.image_url}" class="rounded-2xl h-64 w-full object-cover" />
+          <img src="${p.image_url}" class="rounded-2xl h-56 w-full object-cover" />
           <div>
-            <h2 class="text-2xl font-serif font-bold mb-1">${p.name}</h2>
-            <p class="text-xs text-amber-800 font-bold uppercase mb-2">${p.metal} • ${p.sub_category}</p>
-            <p class="text-2xl font-extrabold mb-4">₹${parseFloat(p.price_inr).toLocaleString('en-IN')}</p>
-            <p class="text-xs text-stone-600 mb-4">${p.description}</p>
+            <h2 class="text-xl font-serif font-bold mb-1">${p.name}</h2>
+            <p class="text-[10px] text-rose-bronze font-bold uppercase mb-2">${p.metal} • ${p.sub_category}</p>
+            <p class="text-xl font-extrabold mb-3">₹${parseFloat(p.price_inr).toLocaleString('en-IN')}</p>
+            <p class="text-xs text-stone-500 mb-4">${p.description}</p>
             
-            <div class="border-t border-stone-200 pt-4 mb-4">
-              <label class="block text-xs font-bold uppercase text-stone-500 mb-1">Custom Engraving (Optional)</label>
-              <input type="text" id="engrave-input" placeholder="e.g. A & S | 2026" class="w-full border p-2 rounded-lg text-sm mb-2">
-              <label class="flex items-center gap-2 text-xs font-bold text-stone-700">
-                <input type="checkbox" id="stack-checkbox" class="accent-amber-800"> Add Stackable Gold Band (+₹999)
-              </label>
+            <div class="border-t pt-3 mb-4">
+              <label class="block text-[10px] font-bold uppercase text-stone-500 mb-1">Laser Engraving (Optional)</label>
+              <input type="text" id="engrave-input" placeholder="Initials / Dates..." class="w-full bg-stone-50 border p-2 rounded-xl text-xs mb-2">
             </div>
 
-            <button onclick="addToBag(${p.id}, '${p.name}', ${p.price_inr})" class="w-full bg-amber-800 text-white py-3 rounded-xl font-bold text-sm">Add to Bag</button>
-          </div>
-        </div>
-
-        <div class="border-t border-stone-200 mt-8 pt-6">
-          <h3 class="font-serif font-bold text-sm mb-4">You Might Also Like</h3>
-          <div class="grid grid-cols-2 gap-4">
-            ${suggestions.map(s => `
-              <div class="border p-3 rounded-xl text-xs flex gap-3 items-center">
-                <img src="${s.image_url}" class="w-12 h-12 rounded-lg object-cover" />
-                <div>
-                  <div class="font-bold">${s.name}</div>
-                  <div class="text-stone-500">₹${s.price_inr}</div>
-                </div>
-              </div>
-            `).join('')}
+            <button onclick="addToBag(${p.id}, '${p.name}', ${p.price_inr})" class="w-full bg-stone-900 text-stone-50 py-3 rounded-xl font-medium text-xs tracking-wider uppercase">Add to Bag</button>
           </div>
         </div>
       `;
@@ -388,13 +416,9 @@
       document.getElementById('modal-product').classList.remove('flex');
     }
 
-    // CART MANAGEMENT
     function addToBag(id, name, price) {
       const engrave = document.getElementById('engrave-input') ? document.getElementById('engrave-input').value : '';
-      const isStacked = document.getElementById('stack-checkbox') ? document.getElementById('stack-checkbox').checked : false;
-      const finalPrice = isStacked ? price + 999 : price;
-
-      cart.push({ id, name: `${name} ${engrave ? '('+engrave+')' : ''} ${isStacked ? '+ Stackable' : ''}`, price: finalPrice });
+      cart.push({ id, name: `${name} ${engrave ? '['+engrave+']' : ''}`, price });
       updateCartUI();
       closeProductModal();
     }
@@ -407,12 +431,12 @@
       cart.forEach((item, index) => {
         total += item.price;
         container.innerHTML += `
-          <div class="flex justify-between items-center border-b pb-2 text-sm">
+          <div class="flex justify-between items-center border-b pb-2 text-xs">
             <div>
               <div class="font-bold">${item.name}</div>
-              <div class="text-xs text-stone-500">₹${item.price.toLocaleString('en-IN')}</div>
+              <div class="text-stone-500">₹${item.price.toLocaleString('en-IN')}</div>
             </div>
-            <button onclick="removeFromCart(${index})" class="text-red-500 text-xs font-bold">Remove</button>
+            <button onclick="removeFromCart(${index})" class="text-red-500 text-[10px] font-bold uppercase">Remove</button>
           </div>
         `;
       });
@@ -423,7 +447,7 @@
     function toggleCartModal() { document.getElementById('modal-cart').classList.toggle('hidden'); document.getElementById('modal-cart').classList.toggle('flex'); }
 
     async function checkout() {
-      if(cart.length === 0) return alert('Your bag is empty.');
+      if(cart.length === 0) return alert('Bag is empty.');
       const total = cart.reduce((acc, i) => acc + i.price, 0);
       const res = await fetch('/api/orders', {
         method: 'POST',
@@ -447,23 +471,22 @@
       list.innerHTML = '';
       data.orders.forEach(o => {
         list.innerHTML += `
-          <div class="bg-white border border-stone-200 p-4 rounded-xl text-sm">
-            <div class="flex justify-between font-bold mb-2">
+          <div class="bg-white border border-stone-200 p-4 rounded-2xl text-xs">
+            <div class="flex justify-between font-bold mb-1">
               <span>Order #${o.id}</span>
-              <span class="text-amber-800">${o.status}</span>
+              <span class="text-rose-bronze">${o.status}</span>
             </div>
-            <div class="text-xs text-stone-500 mb-2">Total: ₹${parseFloat(o.total_amount).toLocaleString('en-IN')}</div>
+            <div class="text-stone-500">Total: ₹${parseFloat(o.total_amount).toLocaleString('en-IN')}</div>
           </div>
         `;
       });
     }
 
-    // QUIZ HANDLER
     function handleQuizSubmit(e) {
       e.preventDefault();
-      const gender = document.getElementById('quiz-gender').value;
-      const occasion = document.getElementById('quiz-occasion').value;
-      setFilter(gender, occasion);
+      const gender = document.querySelector('input[name="q-gender"]:checked').value;
+      const occasion = document.getElementById('q-occasion').value;
+      quickFilter(gender, occasion);
     }
   </script>
 </body>
