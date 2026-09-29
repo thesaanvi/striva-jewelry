@@ -59,31 +59,45 @@ def init_db():
         );
         """)
 
-        # Ensure seed products exist if table is empty
+        # Auto-populate products if empty
         cursor.execute("SELECT COUNT(*) FROM products")
         count = cursor.fetchone()[0]
 
         if count == 0:
             demi_fine_catalog = [
-                # WOMEN - MINIMAL
-                ('Solitaire Vermeil Ring', 'women', 'minimal', 'rings', 2499.00, '18K Gold Vermeil', 'Solid 18K gold vermeil band with a brilliant diamond-cut gemstone.', 'https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=800&auto=format&fit=crop&q=80', 'bestseller', True),
-                ('Celestial Huggie Hoop Earrings', 'women', 'minimal', 'earring', 1999.00, '18K Rose Gold Vermeil', 'Daily water-safe huggies inlaid with micro-paved zirconia.', 'https://images.unsplash.com/photo-1630019852942-f89202989a59?w=800&auto=format&fit=crop&q=80', 'trending', True),
-                ('Sleek Snake Chain Necklace', 'women', 'minimal', 'necklaces', 3899.00, '925 Sterling Silver', 'High-polish anti-tarnish liquid silver fluid chain.', 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=800&auto=format&fit=crop&q=80', 'favourites', True),
-                ('Minimalist Stacking Cuff', 'women', 'minimal', 'bracelets', 2999.00, '18K Gold Vermeil', 'Open-ended sleek gold vermeil wrist cuff.', 'https://images.unsplash.com/photo-1611591475179-62cd34feb0ce?w=800&auto=format&fit=crop&q=80', 'bestseller', True),
-                ('Delicate Gold Bead Anklet', 'women', 'minimal', 'anklets', 1499.00, '18K Gold Vermeil', 'Waterproof everyday gold bead anklet with secure clasp.', 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=800&auto=format&fit=crop&q=80', 'festive', True),
+                # --- WOMEN: MINIMAL EVERYDAY ---
+                ('Aura Emerald Solitaire Vermeil Ring', 'women', 'minimal', 'rings', 2899.00, '18K Gold Vermeil', 'Solid 18K yellow gold vermeil over 925 sterling silver, set with an ethically lab-grown emerald cut gemstone.', 'https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=800&auto=format&fit=crop&q=80', 'bestseller', True),
+                ('Celestial Diamond-Cut Huggies', 'women', 'minimal', 'earring', 1999.00, '18K Rose Gold Vermeil', 'Daily water-safe huggie hoops inlaid with micro-paved cubic zirconia crystals. Hypoallergenic nickel-free post.', 'https://images.unsplash.com/photo-1630019852942-f89202989a59?w=800&auto=format&fit=crop&q=80', 'trending', True),
+                ('Sleek Liquid Silver Snake Chain', 'women', 'minimal', 'necklaces', 3899.00, '925 Sterling Silver', 'High-polish anti-tarnish liquid silver fluid flat chain. Perfect for layering or minimalist everyday wear.', 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=800&auto=format&fit=crop&q=80', 'favourites', True),
+                ('Architectural Stacking Cuff', 'women', 'minimal', 'bracelets', 2999.00, '18K Gold Vermeil', 'Open-ended sleek gold vermeil wrist cuff with tapered ends for comfortable everyday wear.', 'https://images.unsplash.com/photo-1611591475179-62cd34feb0ce?w=800&auto=format&fit=crop&q=80', 'bestseller', True),
+                ('Delicate Gold Bead Anklet', 'women', 'minimal', 'anklets', 1499.00, '18K Gold Vermeil', 'Waterproof everyday gold bead anklet with secure lobster clasp and adjustable extension chain.', 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=800&auto=format&fit=crop&q=80', 'festive', True),
+                ('Minimalist Pearl Droplet Earrings', 'women', 'minimal', 'earring', 2499.00, '18K Gold Vermeil & Freshwater Pearl', 'Genuine grade-A freshwater cultured pearls suspended from solid 18k gold vermeil hooks.', 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=800&auto=format&fit=crop&q=80', 'trending', True),
 
-                # MEN - MINIMAL
-                ('Homme Brushed Signet Ring', 'men', 'minimal', 'rings', 2899.00, '925 Sterling Silver', 'Hand-finished brushed silver geometric signet ring.', 'https://images.unsplash.com/photo-1603561591411-07134e71a2a9?w=800&auto=format&fit=crop&q=80', 'bestseller', True),
-                ('Classic Beveled Curb Chain', 'men', 'minimal', 'chains', 4999.00, '925 Sterling Silver', '4mm solid sterling silver link chain for everyday wear.', 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=800&auto=format&fit=crop&q=80', 'trending', False),
-                ('Textured Gold Kada Cuff', 'men', 'minimal', 'bracelets', 4200.00, '18K Gold Vermeil', 'Hammered architectural gold cuff designed for modern men.', 'https://images.unsplash.com/photo-1611591475179-62cd34feb0ce?w=800&auto=format&fit=crop&q=80', 'favourites', True),
-                ('Single Huggie Ear Piercing', 'men', 'minimal', 'piercings', 1199.00, '925 Sterling Silver', 'Hypoallergenic lightweight daily hoop earring.', 'https://images.unsplash.com/photo-1630019852942-f89202989a59?w=800&auto=format&fit=crop&q=80', 'festive', False),
+                # --- WOMEN: WEDDING & FESTIVE ---
+                ('Royal Kundan Heritage Nath', 'women', 'wedding', 'noserings', 3499.00, '18K Gold Vermeil & Pearl', 'Lightweight bridal nose ring strung with natural pearls and hand-cut polki-style zirconia.', 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=800&auto=format&fit=crop&q=80', 'festive', False),
+                ('Modern Solitaire Mangalsutra', 'women', 'wedding', 'mangalsutra', 6899.00, '18K Gold Vermeil', 'Minimal dual-bead gold chain with a solitary brilliant-cut diamond cz pendant for modern brides.', 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=800&auto=format&fit=crop&q=80', 'bestseller', True),
+                ('Baroque Pearl & CZ Maang Tikka', 'women', 'wedding', 'mang tika', 4199.00, '18K Gold Vermeil', 'Elegantly proportioned forehead ornament featuring handcrafted gold filigree and baroque pearl drop.', 'https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=800&auto=format&fit=crop&q=80', 'festive', False),
+                ('Temple Motif Gold Bangle Pair', 'women', 'wedding', 'bracelets', 7499.00, '18K Gold Vermeil', 'Intricately hand-engraved traditional motifs reimagined in sleek, anti-tarnish gold vermeil.', 'https://images.unsplash.com/photo-1611591475179-62cd34feb0ce?w=800&auto=format&fit=crop&q=80', 'favourites', True),
+                ('Cascading Zirconia Choker', 'women', 'wedding', 'necklaces', 8999.00, '925 Sterling Silver & Rhodium', 'Ultra-luminous baguette cut cubic zirconia crystals lined in solid 925 silver with rhodium coating.', 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=800&auto=format&fit=crop&q=80', 'trending', False),
 
-                # WOMEN - WEDDING
-                ('Royal Heritage Nath', 'women', 'wedding', 'noserings', 3499.00, '18K Gold Vermeil & Pearl', 'Lightweight bridal nose ring strung with natural pearls.', 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=800&auto=format&fit=crop&q=80', 'festive', False),
-                ('Modern Solitaire Mangalsutra', 'women', 'wedding', 'mangalsutra', 6899.00, '18K Gold Vermeil', 'Minimal dual-bead gold chain with solitaire diamond pendant.', 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=800&auto=format&fit=crop&q=80', 'bestseller', True),
+                # --- MEN: MINIMAL EVERYDAY ---
+                ('Homme Brushed Signet Ring', 'men', 'minimal', 'rings', 2899.00, '925 Sterling Silver', 'Hand-finished brushed silver geometric signet ring. Flat-top profile suitable for custom monogram engraving.', 'https://images.unsplash.com/photo-1603561591411-07134e71a2a9?w=800&auto=format&fit=crop&q=80', 'bestseller', True),
+                ('Classic Beveled Curb Chain (5mm)', 'men', 'minimal', 'chains', 4999.00, '925 Sterling Silver', 'Heavy-weight solid sterling silver diamond-cut link chain. Sweatproof and tarnish resistant.', 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=800&auto=format&fit=crop&q=80', 'trending', False),
+                ('Hammered Gold Kada Cuff', 'men', 'minimal', 'bracelets', 4200.00, '18K Gold Vermeil', 'Textured architectural gold cuff designed for modern menswear stacking.', 'https://images.unsplash.com/photo-1611591475179-62cd34feb0ce?w=800&auto=format&fit=crop&q=80', 'favourites', True),
+                ('Single Huggie Ear Piercing Hoop', 'men', 'minimal', 'piercings', 1199.00, '925 Sterling Silver', 'Hypoallergenic lightweight daily hoop earring with smooth rounded edges.', 'https://images.unsplash.com/photo-1630019852942-f89202989a59?w=800&auto=format&fit=crop&q=80', 'festive', False),
+                ('Matte Black Onyx & Silver Band', 'men', 'minimal', 'rings', 3199.00, '925 Sterling Silver & Onyx', 'Natural matte black onyx inlaid into a precision-milled sterling silver band.', 'https://images.unsplash.com/photo-1603561591411-07134e71a2a9?w=800&auto=format&fit=crop&q=80', 'bestseller', True),
 
-                # MEN - WEDDING
-                ('Royal Emerald Coat Brooch', 'men', 'wedding', 'brooch', 4200.00, 'Brass Gold & Emerald CZ', 'Regal sherwani coat pin crafted with micro-pave stones.', 'https://images.unsplash.com/photo-1600003014755-ba31aa59c4b6?w=800&auto=format&fit=crop&q=80', 'festive', False)
+                # --- MEN: WEDDING & CELEBRATION ---
+                ('Royal Emerald Sherwani Brooch', 'men', 'wedding', 'brooch', 4200.00, '18K Gold Vermeil & Emerald CZ', 'Regal coat pin crafted with micro-pave stones and a central teardrop emerald gem.', 'https://images.unsplash.com/photo-1600003014755-ba31aa59c4b6?w=800&auto=format&fit=crop&q=80', 'festive', False),
+                ('Layered Pearl & Gold Groom Chain', 'men', 'wedding', 'necklace', 6499.00, '18K Gold Vermeil & Natural Pearl', 'Multi-strand statement groom necklace with natural basra pearls and gold spacers.', 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=800&auto=format&fit=crop&q=80', 'bestseller', False),
+                ('Imperial Ruby Lapel Pin', 'men', 'wedding', 'brooch', 3899.00, '925 Sterling Silver & Ruby CZ', 'Solid silver architectural brooch set with radiant lab-grown ruby gemstones.', 'https://images.unsplash.com/photo-1600003014755-ba31aa59c4b6?w=800&auto=format&fit=crop&q=80', 'trending', False),
+                ('Engineered Silver Cufflinks', 'men', 'wedding', 'bracelets', 3299.00, '925 Sterling Silver', 'High-polish square cufflinks with bullet-back closures for formal wedding suits.', 'https://images.unsplash.com/photo-1611591475179-62cd34feb0ce?w=800&auto=format&fit=crop&q=80', 'favourites', True),
+
+                # --- UNISEX & SPECIAL EDITIONS ---
+                ('Chunky Rope Chain Necklace', 'women', 'minimal', 'necklaces', 4599.00, '18K Gold Vermeil', 'Classic twist rope chain handcrafted with high-luster 18k yellow gold vermeil finish.', 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=800&auto=format&fit=crop&q=80', 'favourites', False),
+                ('Pave Solitaire Band', 'women', 'minimal', 'rings', 3299.00, '18K Gold Vermeil', 'Eternity band embedded with brilliant-cut simulated diamonds along the top edge.', 'https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=800&auto=format&fit=crop&q=80', 'trending', True),
+                ('Dual-Tone Herringbone Chain', 'women', 'minimal', 'necklaces', 5100.00, '18K Gold Vermeil & 925 Silver', 'Reversible flat herringbone chain with silver on one side and gold vermeil on the other.', 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=800&auto=format&fit=crop&q=80', 'bestseller', False),
+                ('Architectural Open Ring', 'men', 'minimal', 'rings', 2599.00, '925 Sterling Silver', 'Adjustable open-front silver ring designed with geometric cutouts.', 'https://images.unsplash.com/photo-1603561591411-07134e71a2a9?w=800&auto=format&fit=crop&q=80', 'festive', True)
             ]
             
             cursor.executemany("""
@@ -171,6 +185,21 @@ def get_products():
         cursor.close()
         conn.close()
         return jsonify({'status': 'success', 'products': products})
+    except Exception as e:
+        return jsonify({'status': 'error', 'message': str(e)}), 500
+
+@app.route('/api/products/<int:product_id>', methods=['GET'])
+def get_product_by_id(product_id):
+    try:
+        conn = get_db()
+        cursor = conn.cursor(dictionary=True)
+        cursor.execute("SELECT * FROM products WHERE id = %s", (product_id,))
+        product = cursor.fetchone()
+        cursor.close()
+        conn.close()
+        if product:
+            return jsonify({'status': 'success', 'product': product})
+        return jsonify({'status': 'error', 'message': 'Product not found'}), 404
     except Exception as e:
         return jsonify({'status': 'error', 'message': str(e)}), 500
 
