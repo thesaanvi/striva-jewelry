@@ -59,26 +59,45 @@ def init_db():
         );
         """)
 
-        # Re-seed catalog with uploaded images & product metadata
+        # Re-populate catalog with full categories & uploaded imagery
         cursor.execute("TRUNCATE TABLE products")
 
-        uploaded_catalog = [
+        full_catalog = [
+            # --- WOMEN: MINIMAL EVERYDAY (₹999 - ₹7000) ---
             ('Aura Layered Mother-of-Pearl Necklace', 'women', 'minimal', 'necklaces', 4299.00, '18K Gold Vermeil', 'Handcrafted multi-strand gold chain featuring an iridescent organic mother-of-pearl pendant.', 'Aura necklace.jpg', 'bestseller', True),
             ('Classic Solitaire Bezel Ring', 'women', 'minimal', 'rings', 2899.00, '18K Gold Vermeil', 'Brushed gold vermeil bezel band setting a brilliant-cut cubic zirconia solitaire.', 'bezelring.png', 'favourites', True),
             ('Celestial Moon & Star Ring Stack', 'women', 'minimal', 'rings', 3499.00, '18K Gold Vermeil & 925 Silver', 'Set of 4 stackable textured gold vermeil bands with celestial crescent moon and starburst motifs.', 'celestialring.png', 'trending', True),
             ('Chunky Bold Vermeil Hoops', 'women', 'minimal', 'earring', 2199.00, '18K Gold Vermeil', 'Waterproof high-luster thick tubular hoop earrings with secure click-top closure.', 'chunky.png', 'bestseller', True),
-            ('Textured Croissant Dome Ring', 'women', 'minimal', 'rings', 2699.00, '18K Gold Vermeil', 'Ribbed French croissant statement ring crafted in solid 18k yellow gold vermeil over sterling silver.', 'croissantring.png', 'trending', True),
+            ('Textured Croissant Dome Ring', 'women', 'minimal', 'rings', 2699.00, '18K Gold Vermeil', 'Ribbed French croissant statement ring crafted in solid 18k yellow gold vermeil.', 'croissantring.png', 'trending', True),
             ('Heavy High-Polish Dome Ring', 'women', 'minimal', 'rings', 2499.00, '18K Gold Vermeil', 'Ultra-sleek mirror finish gold dome band. Smooth, solid comfort-fit interior.', 'domering.png', 'favourites', True),
             ('Pavé Hexagon Cluster Studs', 'women', 'minimal', 'earring', 1899.00, '18K Gold Vermeil', 'Geometric hexagonal stud earrings encrusted with micro-paved brilliant zirconia crystals.', 'goldstuds.png', 'bestseller', False),
-            ('Liquid Gold Herringbone Snake Chain', 'women', 'minimal', 'necklaces', 3899.00, '18K Gold Vermeil', 'Flat fluid herringbone ribbon chain that lays flat against the collarbone.', 'herringbone.png', 'favourites', False),
+            ('Liquid Gold Herringbone Ribbon Chain', 'women', 'minimal', 'necklaces', 3899.00, '18K Gold Vermeil', 'Flat fluid herringbone ribbon chain that lays flat against the collarbone.', 'herringbone.png', 'favourites', False),
             ('Luna Pearl & Crescent Moon Bracelet', 'women', 'minimal', 'bracelets', 2999.00, '18K Gold Vermeil & Pearl', 'Genuine freshwater pearls alternating with delicate gold crescent moon charms.', 'lunapearl.png', 'trending', True),
-            ('Paperclip Link Charm Bracelet', 'women', 'minimal', 'bracelets', 3299.00, '18K Gold Vermeil', 'Architectural paperclip link chain featuring an engraved STRIVA 18K hallmark coin pendant.', 'paperclip.png', 'bestseller', True)
+            ('Paperclip Link Charm Bracelet', 'women', 'minimal', 'bracelets', 3299.00, '18K Gold Vermeil', 'Architectural paperclip link chain featuring an engraved STRIVA 18K hallmark coin pendant.', 'paperclip.png', 'bestseller', True),
+            ('Delicate Beaded Gold Anklet', 'women', 'minimal', 'anklets', 1499.00, '18K Gold Vermeil', 'Waterproof everyday gold bead anklet with secure lobster clasp and extension chain.', 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=800', 'festive', True),
+
+            # --- WOMEN: WEDDING & CELEBRATION (Up to ₹9000) ---
+            ('Royal Kundan Heritage Nath', 'women', 'wedding', 'noserings', 3499.00, '18K Gold Vermeil & Pearl', 'Lightweight bridal nose ring strung with natural pearls and hand-cut polki-style zirconia.', 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=800', 'festive', False),
+            ('Crescent Kundan Maang Tikka', 'women', 'wedding', 'mang tika', 3199.00, '18K Gold Vermeil & Kundan', 'Handcrafted lightweight forehead ornament for wedding celebrations.', 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=800', 'trending', False),
+            ('Modern Solitaire Mangalsutra', 'women', 'wedding', 'mangalsutra', 6899.00, '18K Gold Vermeil', 'Minimal dual-bead gold chain with a solitary brilliant-cut solitaire pendant.', 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=800', 'bestseller', True),
+            ('Bridal Gold Vermeil Choker', 'women', 'wedding', 'necklaces', 8999.00, '18K Gold Vermeil', 'Intricate lightweight festive choker designed for wedding guest and bridal styling.', 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=800', 'favourites', False),
+            ('Temple Motif Gold Bangle Pair', 'women', 'wedding', 'bracelets', 7499.00, '18K Gold Vermeil', 'Intricately hand-engraved traditional motifs in sleek, anti-tarnish gold vermeil.', 'https://images.unsplash.com/photo-1611591475179-62cd34feb0ce?w=800', 'favourites', True),
+
+            # --- MEN: MINIMAL EVERYDAY (₹999 - ₹7000) ---
+            ('Homme Brushed Silver Signet Ring', 'men', 'minimal', 'rings', 2899.00, '925 Sterling Silver', 'Hand-finished brushed silver geometric signet ring. Suitable for custom monogram engraving.', 'https://images.unsplash.com/photo-1603561591411-07134e71a2a9?w=800', 'bestseller', True),
+            ('Beveled Heavy Curb Chain (5mm)', 'men', 'minimal', 'chains', 4999.00, '925 Sterling Silver', '4mm solid sterling silver link chain built for everyday wear.', 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=800', 'trending', False),
+            ('Hammered Gold Kada Cuff', 'men', 'minimal', 'bracelets', 4200.00, '18K Gold Vermeil', 'Textured architectural gold cuff designed for modern menswear stacking.', 'https://images.unsplash.com/photo-1611591475179-62cd34feb0ce?w=800', 'favourites', True),
+            ('Single Huggie Ear Piercing Hoop', 'men', 'minimal', 'piercings', 1199.00, '925 Sterling Silver', 'Hypoallergenic lightweight daily hoop earring with smooth rounded edges.', 'https://images.unsplash.com/photo-1630019852942-f89202989a59?w=800', 'festive', False),
+
+            # --- MEN: WEDDING & CELEBRATION (Up to ₹9000) ---
+            ('Royal Emerald Sherwani Brooch', 'men', 'wedding', 'brooch', 4200.00, '18K Gold Vermeil & Emerald', 'Regal coat pin crafted with micro-pave stones and a central teardrop emerald gem.', 'https://images.unsplash.com/photo-1600003014755-ba31aa59c4b6?w=800', 'festive', False),
+            ('Groom Layered Pearl & Gold Necklace', 'men', 'wedding', 'necklace', 7999.00, '18K Gold Vermeil & Natural Pearl', 'Traditional multi-strand statement groom necklace with natural basra pearls.', 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=800', 'trending', False)
         ]
 
         cursor.executemany("""
             INSERT INTO products (name, gender, occasion, sub_category, price_inr, metal, description, image_url, tag, is_customizable) 
             VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
-        """, uploaded_catalog)
+        """, full_catalog)
         conn.commit()
 
         cursor.close()
