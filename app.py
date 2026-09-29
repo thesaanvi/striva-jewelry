@@ -59,44 +59,43 @@ def init_db():
         );
         """)
 
-        # Refresh catalog with premium demi-fine imagery
-        cursor.execute("TRUNCATE TABLE products")
-        
-        demi_fine_catalog = [
-            # WOMEN - MINIMAL (999 - 7000)
-            ('Solitaire Vermeil Ring', 'women', 'minimal', 'rings', 2499.00, '18K Gold Vermeil', 'Solid 18K gold vermeil band featuring a brilliant diamond-cut bezel gemstone.', 'https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=800&auto=format&fit=crop&q=80', 'bestseller', True),
-            ('Celestial Huggie Hoop Earrings', 'women', 'minimal', 'earring', 1999.00, '18K Rose Gold Vermeil', 'Daily water-safe huggies inlaid with micro paved zirconia.', 'https://images.unsplash.com/photo-1630019852942-f89202989a59?w=800&auto=format&fit=crop&q=80', 'trending', True),
-            ('Sleek Snake Chain Necklace', 'women', 'minimal', 'necklaces', 3899.00, '925 Sterling Silver', 'High-polish anti-tarnish liquid silver fluid chain.', 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=800&auto=format&fit=crop&q=80', 'favourites', True),
-            ('Minimalist Stacking Cuff', 'women', 'minimal', 'bracelets', 2999.00, '18K Gold Vermeil', 'Open-ended sleek gold vermeil wrist cuff.', 'https://images.unsplash.com/photo-1611591475179-62cd34feb0ce?w=800&auto=format&fit=crop&q=80', 'bestseller', True),
-            ('Delicate Gold Bead Anklet', 'women', 'minimal', 'anklets', 1499.00, '18K Gold Vermeil', 'Waterproof everyday gold bead anklet with secure clasp.', 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=800&auto=format&fit=crop&q=80', 'festive', True),
+        # Ensure seed products exist if table is empty
+        cursor.execute("SELECT COUNT(*) FROM products")
+        count = cursor.fetchone()[0]
 
-            # MEN - MINIMAL (999 - 7000)
-            ('Homme Brushed Signet Ring', 'men', 'minimal', 'rings', 2899.00, '925 Sterling Silver', 'Hand-finished brushed silver geometric signet ring.', 'https://images.unsplash.com/photo-1603561591411-07134e71a2a9?w=800&auto=format&fit=crop&q=80', 'bestseller', True),
-            ('Classic Beveled Curb Chain', 'men', 'minimal', 'chains', 4999.00, '925 Sterling Silver', '4mm solid sterling silver link chain for everyday wear.', 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=800&auto=format&fit=crop&q=80', 'trending', False),
-            ('Textured Gold Kada Cuff', 'men', 'minimal', 'bracelets', 4200.00, '18K Gold Vermeil', 'Hammered architectural gold cuff designed for modern men.', 'https://images.unsplash.com/photo-1611591475179-62cd34feb0ce?w=800&auto=format&fit=crop&q=80', 'favourites', True),
-            ('Single Huggie Ear Piercing', 'men', 'minimal', 'piercings', 1199.00, '925 Sterling Silver', 'Hypoallergenic lightweight daily hoop earring.', 'https://images.unsplash.com/photo-1630019852942-f89202989a59?w=800&auto=format&fit=crop&q=80', 'festive', False),
+        if count == 0:
+            demi_fine_catalog = [
+                # WOMEN - MINIMAL
+                ('Solitaire Vermeil Ring', 'women', 'minimal', 'rings', 2499.00, '18K Gold Vermeil', 'Solid 18K gold vermeil band with a brilliant diamond-cut gemstone.', 'https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=800&auto=format&fit=crop&q=80', 'bestseller', True),
+                ('Celestial Huggie Hoop Earrings', 'women', 'minimal', 'earring', 1999.00, '18K Rose Gold Vermeil', 'Daily water-safe huggies inlaid with micro-paved zirconia.', 'https://images.unsplash.com/photo-1630019852942-f89202989a59?w=800&auto=format&fit=crop&q=80', 'trending', True),
+                ('Sleek Snake Chain Necklace', 'women', 'minimal', 'necklaces', 3899.00, '925 Sterling Silver', 'High-polish anti-tarnish liquid silver fluid chain.', 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=800&auto=format&fit=crop&q=80', 'favourites', True),
+                ('Minimalist Stacking Cuff', 'women', 'minimal', 'bracelets', 2999.00, '18K Gold Vermeil', 'Open-ended sleek gold vermeil wrist cuff.', 'https://images.unsplash.com/photo-1611591475179-62cd34feb0ce?w=800&auto=format&fit=crop&q=80', 'bestseller', True),
+                ('Delicate Gold Bead Anklet', 'women', 'minimal', 'anklets', 1499.00, '18K Gold Vermeil', 'Waterproof everyday gold bead anklet with secure clasp.', 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=800&auto=format&fit=crop&q=80', 'festive', True),
 
-            # WOMEN - WEDDING (UP TO 9000)
-            ('Royal Heritage Nath (Nose Ring)', 'women', 'wedding', 'noserings', 3499.00, '18K Gold Vermeil & Pearl', 'Lightweight bridal nose ring strung with natural pearls.', 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=800&auto=format&fit=crop&q=80', 'festive', False),
-            ('Kundan Crescent Maang Tika', 'women', 'wedding', 'mang tika', 3199.00, 'Gold Vermeil & Kundan', 'Handcrafted lightweight maang tika for wedding functions.', 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=800&auto=format&fit=crop&q=80', 'trending', False),
-            ('Modern Solitaire Mangalsutra', 'women', 'wedding', 'mangalsutra', 6899.00, '18K Gold Vermeil', 'Minimal dual-bead gold chain with solitaire diamond pendant.', 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=800&auto=format&fit=crop&q=80', 'bestseller', True),
-            ('Bridal Vermeil Choker', 'women', 'wedding', 'necklaces', 8999.00, '18K Gold Vermeil', 'Intricate lightweight festive choker set.', 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=800&auto=format&fit=crop&q=80', 'favourites', False),
+                # MEN - MINIMAL
+                ('Homme Brushed Signet Ring', 'men', 'minimal', 'rings', 2899.00, '925 Sterling Silver', 'Hand-finished brushed silver geometric signet ring.', 'https://images.unsplash.com/photo-1603561591411-07134e71a2a9?w=800&auto=format&fit=crop&q=80', 'bestseller', True),
+                ('Classic Beveled Curb Chain', 'men', 'minimal', 'chains', 4999.00, '925 Sterling Silver', '4mm solid sterling silver link chain for everyday wear.', 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=800&auto=format&fit=crop&q=80', 'trending', False),
+                ('Textured Gold Kada Cuff', 'men', 'minimal', 'bracelets', 4200.00, '18K Gold Vermeil', 'Hammered architectural gold cuff designed for modern men.', 'https://images.unsplash.com/photo-1611591475179-62cd34feb0ce?w=800&auto=format&fit=crop&q=80', 'favourites', True),
+                ('Single Huggie Ear Piercing', 'men', 'minimal', 'piercings', 1199.00, '925 Sterling Silver', 'Hypoallergenic lightweight daily hoop earring.', 'https://images.unsplash.com/photo-1630019852942-f89202989a59?w=800&auto=format&fit=crop&q=80', 'festive', False),
 
-            # MEN - WEDDING (UP TO 9000)
-            ('Royal Emerald Coat Brooch', 'men', 'wedding', 'brooch', 4200.00, 'Brass Gold & Emerald CZ', 'Regal sherwani coat pin crafted with micro-pave stones.', 'https://images.unsplash.com/photo-1600003014755-ba31aa59c4b6?w=800&auto=format&fit=crop&q=80', 'festive', False),
-            ('Groom Pearl Layered Necklace', 'men', 'wedding', 'necklace', 7999.00, 'Cultured Pearls & Vermeil', 'Traditional multi-strand royal groomsmen layered necklace.', 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=800&auto=format&fit=crop&q=80', 'trending', False)
-        ]
-        
-        cursor.executemany("""
-            INSERT INTO products (name, gender, occasion, sub_category, price_inr, metal, description, image_url, tag, is_customizable) 
-            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
-        """, demi_fine_catalog)
+                # WOMEN - WEDDING
+                ('Royal Heritage Nath', 'women', 'wedding', 'noserings', 3499.00, '18K Gold Vermeil & Pearl', 'Lightweight bridal nose ring strung with natural pearls.', 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=800&auto=format&fit=crop&q=80', 'festive', False),
+                ('Modern Solitaire Mangalsutra', 'women', 'wedding', 'mangalsutra', 6899.00, '18K Gold Vermeil', 'Minimal dual-bead gold chain with solitaire diamond pendant.', 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=800&auto=format&fit=crop&q=80', 'bestseller', True),
 
-        conn.commit()
+                # MEN - WEDDING
+                ('Royal Emerald Coat Brooch', 'men', 'wedding', 'brooch', 4200.00, 'Brass Gold & Emerald CZ', 'Regal sherwani coat pin crafted with micro-pave stones.', 'https://images.unsplash.com/photo-1600003014755-ba31aa59c4b6?w=800&auto=format&fit=crop&q=80', 'festive', False)
+            ]
+            
+            cursor.executemany("""
+                INSERT INTO products (name, gender, occasion, sub_category, price_inr, metal, description, image_url, tag, is_customizable) 
+                VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+            """, demi_fine_catalog)
+            conn.commit()
+
         cursor.close()
         conn.close()
     except Exception as e:
-        print(f"DB Init Exception: {e}")
+        print(f"DB Init Warning: {e}")
 
 init_db()
 
