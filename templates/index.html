@@ -3,720 +3,714 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>STRIVA | Modern Demi-Fine Jewelry</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <title>Striva - Fine & Demi-Fine Jewelry</title>
+    <!-- Google Fonts & Font Awesome Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <style>
         :root {
-            --bg-alabaster: #FAF8F5;
-            --bg-card: #FFFFFF;
-            --text-charcoal: #181818;
-            --text-muted: #666666;
-            --gold-primary: #C5A059;
-            --gold-hover: #A8833D;
-            --border-light: #EBE7DF;
-            --shadow-subtle: 0 10px 30px rgba(0, 0, 0, 0.04);
-            --font-serif: 'Cormorant Garamond', Georgia, serif;
-            --font-sans: 'Inter', sans-serif;
-            --transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            --primary: #1a1a1a;
+            --accent: #d4af37;
+            --bg-light: #faf8f5;
+            --card-bg: #ffffff;
+            --text-dark: #222222;
+            --text-muted: #777777;
+            --border-color: #e5e0d8;
         }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Montserrat', sans-serif;
+        }
 
         body {
-            background-color: var(--bg-alabaster);
-            color: var(--text-charcoal);
-            font-family: var(--font-sans);
-            -webkit-font-smoothing: antialiased;
+            background-color: var(--bg-light);
+            color: var(--text-dark);
         }
 
-        .announcement-bar {
-            background: var(--text-charcoal);
-            color: #FFFFFF;
+        /* Top Bar & Header */
+        .top-bar {
+            background-color: var(--primary);
+            color: #fff;
             text-align: center;
-            padding: 0.6rem 1rem;
-            font-size: 0.75rem;
-            letter-spacing: 0.15em;
+            padding: 8px;
+            font-size: 12px;
+            letter-spacing: 1px;
             text-transform: uppercase;
         }
 
         header {
-            padding: 1.2rem 3rem;
+            background-color: var(--card-bg);
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid var(--border-light);
-            background: var(--bg-alabaster);
-            position: sticky;
-            top: 0;
-            z-index: 100;
+            padding: 15px 20px;
         }
 
         .brand-logo {
-            font-family: var(--font-serif);
-            font-size: 2.3rem;
-            letter-spacing: 0.35em;
-            text-transform: uppercase;
-            color: var(--text-charcoal);
+            font-family: 'Cinzel', serif;
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            color: var(--primary);
             text-decoration: none;
-            font-weight: 500;
         }
 
-        .nav-links {
+        nav ul {
             display: flex;
-            gap: 2rem;
             list-style: none;
+            gap: 25px;
         }
 
-        .nav-links a {
+        nav a {
             text-decoration: none;
-            color: var(--text-charcoal);
-            font-size: 0.8rem;
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
+            color: var(--text-dark);
+            font-size: 13px;
             font-weight: 500;
-            transition: var(--transition);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: color 0.3s;
         }
 
-        .nav-links a:hover { color: var(--gold-primary); }
+        nav a:hover, nav a.active {
+            color: var(--accent);
+        }
 
         .header-actions {
             display: flex;
             align-items: center;
-            gap: 1.5rem;
+            gap: 20px;
         }
 
-        .auth-btn, .cart-trigger {
+        .action-btn {
             background: none;
             border: none;
-            font-size: 0.8rem;
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
+            font-size: 18px;
+            color: var(--primary);
             cursor: pointer;
-            color: var(--text-charcoal);
-            font-weight: 500;
-        }
-
-        .cart-trigger span {
-            background: var(--gold-primary);
-            color: #FFF;
-            border-radius: 50%;
-            padding: 2px 7px;
-            font-size: 0.7rem;
-            margin-left: 4px;
-        }
-
-        /* HERO BANNER */
-        .hero {
-            height: 75vh;
-            background: linear-gradient(rgba(0,0,0,0.25), rgba(0,0,0,0.35)), url('https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&q=80&w=1600') center/cover no-repeat;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            color: #FFFFFF;
-            padding: 0 1rem;
-        }
-
-        .hero-content h1 {
-            font-family: var(--font-serif);
-            font-size: 4rem;
-            font-weight: 300;
-            margin-bottom: 1rem;
-            letter-spacing: 0.05em;
-        }
-
-        .hero-content p {
-            font-size: 1.1rem;
-            letter-spacing: 0.1em;
-            margin-bottom: 2rem;
-            text-transform: uppercase;
-        }
-
-        .btn-gold {
-            display: inline-block;
-            background: var(--gold-primary);
-            color: #FFFFFF;
-            padding: 1rem 2.5rem;
-            text-decoration: none;
-            font-size: 0.8rem;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-            border: none;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-
-        .btn-gold:hover { background: var(--gold-hover); }
-
-        /* SECTIONS & FILTERS */
-        .section-container {
-            max-width: 1280px;
-            margin: 5rem auto;
-            padding: 0 2rem;
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-
-        .section-header h2 {
-            font-family: var(--font-serif);
-            font-size: 2.8rem;
-            font-weight: 400;
-            margin-bottom: 0.5rem;
-        }
-
-        .filter-tabs {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            margin-bottom: 2.5rem;
-            flex-wrap: wrap;
-        }
-
-        .filter-tab {
-            padding: 0.6rem 1.4rem;
-            border: 1px solid var(--border-light);
-            background: var(--bg-card);
-            font-size: 0.75rem;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-
-        .filter-tab.active {
-            background: var(--text-charcoal);
-            color: #FFFFFF;
-            border-color: var(--text-charcoal);
-        }
-
-        /* PRODUCT GRID */
-        .product-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
-            gap: 2rem;
-        }
-
-        .product-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-light);
-            padding: 1.2rem;
-            text-align: center;
-            transition: var(--transition);
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        .product-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-subtle); }
-
-        .product-card img {
-            width: 100%;
-            height: 300px;
-            object-fit: cover;
-            margin-bottom: 1rem;
-            background-color: #F4F1EA;
-        }
-
-        .product-card .p-metal {
-            font-size: 0.7rem;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            color: var(--text-muted);
-            margin-bottom: 0.4rem;
-        }
-
-        .product-card .p-title {
-            font-family: var(--font-serif);
-            font-size: 1.35rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .product-card .p-price {
-            font-size: 1.05rem;
-            color: var(--gold-primary);
-            font-weight: 500;
-            margin-bottom: 1rem;
-        }
-
-        .btn-add-bag {
-            width: 100%;
-            padding: 0.8rem;
-            background: var(--text-charcoal);
-            color: #FFFFFF;
-            border: none;
-            font-size: 0.75rem;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-
-        .btn-add-bag:hover { background: var(--gold-primary); }
-
-        /* QUIZ MODAL & CONTAINER */
-        .quiz-section {
-            background: #F2EDE4;
-            padding: 5rem 2rem;
-            border-top: 1px solid var(--border-light);
-            border-bottom: 1px solid var(--border-light);
-        }
-
-        .quiz-card {
-            max-width: 800px;
-            margin: 0 auto;
-            background: var(--bg-card);
-            border: 1px solid var(--border-light);
-            padding: 3.5rem;
-            box-shadow: var(--shadow-subtle);
-        }
-
-        .option-card {
-            border: 1px solid var(--border-light);
-            padding: 1.2rem 1.5rem;
-            cursor: pointer;
-            background: var(--bg-alabaster);
-            margin-bottom: 0.8rem;
-            transition: var(--transition);
-        }
-
-        .option-card:hover, .option-card.selected {
-            border-color: var(--gold-primary);
-            background: var(--bg-card);
-        }
-
-        /* MANDATORY AUTH MODAL */
-        .modal-overlay {
-            position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(0, 0, 0, 0.6);
-            display: none;
-            align-items: center;
-            justify-content: center;
-            z-index: 1000;
-        }
-
-        .auth-modal {
-            background: #FFFFFF;
-            padding: 3rem;
-            width: 90%;
-            max-width: 450px;
-            text-align: center;
             position: relative;
         }
 
-        .auth-modal h3 {
-            font-family: var(--font-serif);
-            font-size: 2.2rem;
-            margin-bottom: 0.5rem;
+        .cart-badge {
+            position: absolute;
+            top: -6px;
+            right: -10px;
+            background-color: var(--accent);
+            color: white;
+            font-size: 10px;
+            border-radius: 50%;
+            padding: 2px 6px;
+            font-weight: bold;
         }
 
-        .auth-modal p {
+        /* Filter Controls */
+        .filter-section {
+            max-width: 1200px;
+            margin: 30px auto 10px;
+            padding: 0 20px;
+        }
+
+        .filter-card {
+            background-color: var(--card-bg);
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .filter-group label {
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
             color: var(--text-muted);
-            font-size: 0.9rem;
-            margin-bottom: 1.5rem;
         }
 
-        .input-field {
-            width: 100%;
-            padding: 0.9rem 1rem;
-            margin-bottom: 1rem;
-            border: 1px solid var(--border-light);
+        .filter-group select {
+            padding: 10px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            background-color: #fff;
+            font-size: 14px;
+            color: var(--text-dark);
             outline: none;
-            font-size: 0.9rem;
+            cursor: pointer;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .section-title {
+            font-family: 'Cinzel', serif;
+            font-size: 24px;
+            margin: 40px 0 20px;
+            text-align: center;
+            letter-spacing: 2px;
+            color: var(--primary);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 2px;
+            background-color: var(--accent);
+            margin: 10px auto 0;
+        }
+
+        /* Product Grid */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 25px;
+        }
+
+        .product-card {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+        }
+
+        .product-img {
+            width: 100%;
+            height: 260px;
+            object-fit: cover;
+        }
+
+        .product-info {
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .product-title {
+            font-size: 15px;
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+
+        .product-price {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--accent);
+            margin-bottom: 15px;
+        }
+
+        .add-cart-btn {
+            margin-top: auto;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            font-size: 12px;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .add-cart-btn:hover {
+            background-color: var(--accent);
+        }
+
+        /* Modals */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            max-width: 500px;
+            width: 90%;
+            position: relative;
         }
 
         .close-modal {
             position: absolute;
             top: 15px;
             right: 20px;
-            font-size: 1.5rem;
+            font-size: 22px;
             cursor: pointer;
+            color: var(--text-muted);
         }
 
-        footer {
-            background: #111111;
-            color: #E8E4DC;
-            padding: 4rem 2rem 2rem 2rem;
-            margin-top: 6rem;
+        .form-group {
+            margin-bottom: 15px;
         }
 
-        .footer-grid {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1fr;
-            gap: 3rem;
-            margin-bottom: 4rem;
+        .form-group label {
+            display: block;
+            font-size: 12px;
+            margin-bottom: 5px;
+            font-weight: 600;
         }
 
-        .footer-col h4 {
-            font-family: var(--font-serif);
-            font-size: 1.4rem;
-            margin-bottom: 1.2rem;
-            color: var(--gold-primary);
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
         }
 
-        .footer-col ul { list-style: none; }
-        .footer-col ul li { margin-bottom: 0.8rem; }
-        .footer-col ul li a { color: #A0A0A0; text-decoration: none; font-size: 0.85rem; }
+        /* Sliding Cart Drawer */
+        .cart-drawer {
+            position: fixed;
+            top: 0;
+            right: -400px;
+            width: 350px;
+            height: 100%;
+            background-color: #fff;
+            box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+            z-index: 2001;
+            transition: right 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+        }
 
-        @media (max-width: 850px) {
-            header { flex-direction: column; gap: 1rem; }
-            .nav-links { flex-wrap: wrap; justify-content: center; gap: 1rem; }
-            .hero-content h1 { font-size: 2.8rem; }
-            .footer-grid { grid-template-columns: 1fr 1fr; }
+        .cart-drawer.open {
+            right: 0;
+        }
+
+        .cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .cart-items {
+            flex-grow: 1;
+            overflow-y: auto;
+            margin: 20px 0;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .cart-footer {
+            border-top: 1px solid var(--border-color);
+            padding-top: 15px;
+        }
+
+        .checkout-btn {
+            width: 100%;
+            background-color: var(--accent);
+            color: #fff;
+            border: none;
+            padding: 12px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
         }
     </style>
 </head>
 <body>
 
-    <div class="announcement-bar">
-        Complimentary Express Shipping Across India on All Orders
-    </div>
+    <!-- Top Announcement Bar -->
+    <div class="top-bar">Complimentary Shipping on all Orders Above ₹1,999</div>
 
+    <!-- Header / Navbar -->
     <header>
-        <a href="/" class="brand-logo">STRIVA</a>
-        <ul class="nav-links">
-            <li><a href="#men" onclick="loadCategory('men')">Men</a></li>
-            <li><a href="#women" onclick="loadCategory('women')">Women</a></li>
-            <li><a href="#wedding" onclick="loadCategory('wedding')">Wedding</a></li>
-            <li><a href="#quiz-section">Style Quiz</a></li>
-            <li><a href="#curate">Curate Your Own</a></li>
-        </ul>
-        <div class="header-actions">
-            <button class="auth-btn" id="navAuthBtn" onclick="openAuthModal()">Sign In</button>
-            <button class="cart-trigger" onclick="handleCartClick()">Bag <span id="cartCount">0</span></button>
+        <div class="header-container">
+            <a href="#" class="brand-logo" onclick="filterBySection('all')">STRIVA</a>
+            <nav>
+                <ul>
+                    <li><a href="#" onclick="filterBySection('all')" class="active">Home</a></li>
+                    <li><a href="#" onclick="filterBySection('trending')">Trending</a></li>
+                    <li><a href="#" onclick="filterBySection('best_sellers')">Best Sellers</a></li>
+                    <li><a href="#" onclick="filterBySection('curators_choice')">Curator's Choice</a></li>
+                    <li><a href="#" onclick="openModal('quizModal')">Style Quiz</a></li>
+                    <li><a href="#" onclick="openModal('customModal')">Customize Yours</a></li>
+                </ul>
+            </nav>
+            <div class="header-actions">
+                <button class="action-btn" onclick="openModal('authModal')"><i class="fa-regular fa-user"></i></button>
+                <button class="action-btn" onclick="toggleCart()"><i class="fa-solid fa-bag-shopping"></i><span class="cart-badge" id="cartCount">0</span></button>
+            </div>
         </div>
     </header>
 
-    <section class="hero">
-        <div class="hero-content">
-            <h1>Architecture in Demi-Fine Gold</h1>
-            <p>18k Gold Vermeil & Recycled 925 Silver Built for Daily Identity</p>
-            <a href="#bestsellers" class="btn-gold">Explore Collection</a>
-        </div>
-    </section>
-
-    <!-- SHOP BY FILTER (Men, Women, Couple, Minimal, Wedding) -->
-    <section class="section-container" id="bestsellers">
-        <div class="section-header">
-            <h2>The Permanent Collections</h2>
-            <p style="color: var(--text-muted);">Explore hand-finished demi-fine accessories designed for everyday stacking.</p>
-        </div>
-
-        <div class="filter-tabs">
-            <button class="filter-tab active" onclick="applyCategoryFilter('all', this)">All</button>
-            <button class="filter-tab" onclick="applyCategoryFilter('women', this)">Women</button>
-            <button class="filter-tab" onclick="applyCategoryFilter('men', this)">Men</button>
-            <button class="filter-tab" onclick="applyCategoryFilter('couple', this)">Couple</button>
-            <button class="filter-tab" onclick="applyStyleFilter('minimal', this)">Minimal / Daily</button>
-            <button class="filter-tab" onclick="applyStyleFilter('wedding', this)">Wedding / Traditional</button>
-        </div>
-
-        <div class="product-grid" id="mainProductGrid">
-            <!-- Dynamic Fetch -->
-        </div>
-    </section>
-
-    <!-- TRENDING SECTION -->
-    <section class="section-container" style="background: #FFF; padding: 4rem 2rem; border-top: 1px solid var(--border-light);">
-        <div class="section-header">
-            <h2>Trending Right Now</h2>
-            <p style="color: var(--text-muted);">Pieces currently leading urban street styles and red carpets.</p>
-        </div>
-        <div class="product-grid" id="trendingGrid"></div>
-    </section>
-
-    <!-- CURATOR'S FAVORITE -->
-    <section class="section-container">
-        <div class="section-header">
-            <h2>Curator's Favorites</h2>
-            <p style="color: var(--text-muted);">Personal recommendations handpicked by Striva's lead jewelry designers.</p>
-        </div>
-        <div class="product-grid" id="curatorGrid"></div>
-    </section>
-
-    <!-- STYLE QUIZ SECTION (8 VALID QUESTIONS) -->
-    <section class="quiz-section" id="quiz-section">
-        <div class="quiz-card" id="quizContainer">
-            <span style="font-size: 0.75rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold-primary); display: block; text-align: center; font-weight: 600; margin-bottom: 0.5rem;">Bespoke Concierge</span>
-            <h2 style="font-family: var(--font-serif); font-size: 2.5rem; text-align: center; margin-bottom: 1rem;" id="quizMainTitle">Discover Your Signature Archetype</h2>
-            <p style="text-align: center; color: var(--text-muted); margin-bottom: 2rem;" id="quizMainSub">Answer 8 in-depth questions to receive a tailored 4-piece edit.</p>
-
-            <div id="quizContent">
-                <div class="input-group" style="margin-bottom: 1.5rem;">
-                    <label style="display: block; font-size: 0.8rem; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 0.5rem;">Your Name</label>
-                    <input type="text" id="quizUserName" class="input-field" placeholder="e.g. Ananya" autocomplete="off">
-                </div>
-                <button class="btn-gold" style="width: 100%;" onclick="startQuiz()">Begin 8-Step Evaluation</button>
+    <!-- Filters Section -->
+    <div class="filter-section">
+        <div class="filter-card">
+            <!-- Filter 1: Gender / Audience -->
+            <div class="filter-group">
+                <label>Filter For</label>
+                <select id="genderFilter" onchange="applyFilters()">
+                    <option value="all">All</option>
+                    <option value="female">Female</option>
+                    <option value="male">Male</option>
+                    <option value="couple">Couple</option>
+                </select>
             </div>
-        </div>
-    </section>
 
-    <!-- MANDATORY SIGN-IN MODAL -->
-    <div class="modal-overlay" id="authModal">
-        <div class="auth-modal">
-            <span class="close-modal" onclick="closeAuthModal()">&times;</span>
-            <h3>Sign In to Striva</h3>
-            <p>Please log in to add items to your bag and save your signature quiz edits.</p>
-            <input type="email" id="authEmail" class="input-field" placeholder="Email Address">
-            <input type="password" id="authPassword" class="input-field" placeholder="Password">
-            <button class="btn-gold" style="width: 100%;" onclick="performLogin()">Sign In & Continue</button>
+            <!-- Filter 2: Occasion -->
+            <div class="filter-group">
+                <label>Occasion</label>
+                <select id="occasionFilter" onchange="applyFilters()">
+                    <option value="all">All</option>
+                    <option value="minimal">Minimal</option>
+                    <option value="wedding">Wedding</option>
+                </select>
+            </div>
+
+            <!-- Filter 3: Accessories / Categories -->
+            <div class="filter-group">
+                <label>Category</label>
+                <select id="categoryFilter" onchange="applyFilters()">
+                    <!-- Options populated dynamically based on Gender/Occasion -->
+                </select>
+            </div>
         </div>
     </div>
 
-    <footer>
-        <div class="footer-grid">
-            <div class="footer-col">
-                <h4 style="color: #FFF;">STRIVA</h4>
-                <p style="color: #888888; font-size: 0.85rem; line-height: 1.6;">
-                    Architectural demi-fine jewelry designed for daily identity, effortless stacking, and traditional bridal elegance.
-                </p>
-            </div>
-            <div class="footer-col">
-                <h4>Collections</h4>
-                <ul>
-                    <li><a href="#women" onclick="loadCategory('women')">Women's Daily</a></li>
-                    <li><a href="#men" onclick="loadCategory('men')">Men's Modern</a></li>
-                    <li><a href="#couple" onclick="loadCategory('couple')">Couple Sets</a></li>
-                    <li><a href="#wedding" onclick="loadCategory('wedding')">Traditional Wedding</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h4>Client Care</h4>
-                <ul>
-                    <li><a href="#">Ring Sizing Guide</a></li>
-                    <li><a href="#">Vermeil & Care</a></li>
-                    <li><a href="#">Express Shipping</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h4>Connect</h4>
-                <ul>
-                    <li><a href="#">Instagram</a></li>
-                    <li><a href="#">Pinterest</a></li>
-                </ul>
-            </div>
+    <!-- Dynamic Main Content Grid -->
+    <main class="container">
+        <!-- Dynamic Product Display Area -->
+        <div id="productSections">
+            <!-- Populated via JavaScript dynamically -->
         </div>
-    </footer>
+    </main>
+
+    <!-- Authentication Modal (Sign In / Create Account) -->
+    <div id="authModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('authModal')">&times;</span>
+            <h2 id="authTitle" style="font-family: 'Cinzel', serif; margin-bottom: 20px;">Sign In</h2>
+            <form id="authForm" onsubmit="handleAuth(event)">
+                <div class="form-group" id="nameGroup" style="display: none;">
+                    <label>Full Name</label>
+                    <input type="text" id="authName" placeholder="John Doe">
+                </div>
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <input type="email" required placeholder="user@example.com">
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" required placeholder="••••••••">
+                </div>
+                <button type="submit" class="add-cart-btn" style="width: 100%; padding: 12px;" id="authSubmitBtn">Sign In</button>
+            </form>
+            <p style="text-align: center; margin-top: 15px; font-size: 12px; color: var(--text-muted);">
+                <span id="authToggleText">Don't have an account?</span> 
+                <a href="#" onclick="toggleAuthMode()" style="color: var(--accent); font-weight: bold;">Click Here</a>
+            </p>
+        </div>
+    </div>
+
+    <!-- Style Quiz Modal -->
+    <div id="quizModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('quizModal')">&times;</span>
+            <h2 style="font-family: 'Cinzel', serif; margin-bottom: 15px;">Discover Your Style</h2>
+            <p style="font-size: 13px; margin-bottom: 20px; color: var(--text-muted);">Answer a few questions to find pieces tailored for you.</p>
+            <div class="form-group">
+                <label>What tone do you prefer?</label>
+                <select id="quizTone">
+                    <option value="minimal">Sleek & Minimalist</option>
+                    <option value="wedding">Bold & Traditional</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Primary Metal Finish</label>
+                <select>
+                    <option>18k Gold Vermeil</option>
+                    <option>925 Sterling Silver</option>
+                    <option>Rose Gold</option>
+                </select>
+            </div>
+            <button class="add-cart-btn" style="width: 100%; padding: 12px;" onclick="submitQuiz()">Get Recommendations</button>
+        </div>
+    </div>
+
+    <!-- Customize Yours Modal -->
+    <div id="customModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('customModal')">&times;</span>
+            <h2 style="font-family: 'Cinzel', serif; margin-bottom: 15px;">Customization Studio</h2>
+            <div class="form-group">
+                <label>Custom Engraving Text</label>
+                <input type="text" placeholder="e.g. Initials or Date">
+            </div>
+            <div class="form-group">
+                <label>Choose Metal</label>
+                <select>
+                    <option>18k Gold Vermeil</option>
+                    <option>925 Sterling Silver</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Add-on Birthstone / Gem</label>
+                <select>
+                    <option>Cubic Zirconia Solitaire</option>
+                    <option>Emerald Accent</option>
+                    <option>Ruby Accent</option>
+                </select>
+            </div>
+            <button class="add-cart-btn" style="width: 100%; padding: 12px;" onclick="submitCustomization()">Submit Custom Request</button>
+        </div>
+    </div>
+
+    <!-- Cart Drawer -->
+    <div id="cartDrawer" class="cart-drawer">
+        <div class="cart-header">
+            <h3>Your Shopping Bag</h3>
+            <span class="close-modal" onclick="toggleCart()">&times;</span>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <!-- Dynamic Cart Items -->
+        </div>
+        <div class="cart-footer">
+            <div style="display: flex; justify-content: space-between; font-weight: bold; margin-bottom: 10px;">
+                <span>Total:</span>
+                <span id="cartTotal">₹0</span>
+            </div>
+            <button class="checkout-btn" onclick="alert('Proceeding to Checkout!')">PROCEED TO CHECKOUT</button>
+        </div>
+    </div>
 
     <script>
-        let isAuthenticated = false;
-        let currentUser = null;
-        let cartItems = [];
-        let allProducts = [];
-        let quizQuestions = [];
-        let currentQuizIndex = 0;
-        let quizAnswers = [];
-        let pendingBagProduct = null;
+        let currentSection = 'all';
+        let cart = [];
+        let isSignUp = false;
 
-        window.addEventListener('DOMContentLoaded', async () => {
-            await fetchProducts();
-            await fetchQuizQuestions();
-        });
+        // Base Categories List
+        const baseCategories = [
+            { value: 'all', text: 'All Accessories' },
+            { value: 'rings', text: 'Rings' },
+            { value: 'bracelets', text: 'Bracelets' },
+            { value: 'necklace chain', text: 'Necklaces & Chains' },
+            { value: 'anklets', text: 'Anklets' }
+        ];
 
-        async function fetchProducts() {
-            try {
-                const res = await fetch('/api/products');
-                const data = await res.json();
-                if(data.status === 'success') {
-                    allProducts = data.products;
-                    renderMainGrid(allProducts);
-                    renderGrid('trendingGrid', allProducts.filter(p => p.collection === 'trending'));
-                    renderGrid('curatorGrid', allProducts.filter(p => p.collection === 'curator_fav'));
+        // On Page Load Initialization
+        window.onload = function() {
+            updateCategoryOptions();
+            fetchProducts();
+        };
+
+        // Update Dynamic Categories based on selected Gender & Occasion
+        function updateCategoryOptions() {
+            const gender = document.getElementById('genderFilter').value;
+            const occasion = document.getElementById('occasionFilter').value;
+            const categorySelect = document.getElementById('categoryFilter');
+
+            // Reset options
+            categorySelect.innerHTML = '';
+
+            let categories = [...baseCategories];
+
+            // Add wedding-specific accessories if female/all & wedding occasion
+            if (occasion === 'wedding' || occasion === 'all') {
+                if (gender === 'female' || gender === 'all') {
+                    categories.push(
+                        { value: 'nosering', text: 'Nose Rings' },
+                        { value: 'mang tikka', text: 'Maang Tikkas' },
+                        { value: 'mangalsutra', text: 'Mangalsutras' }
+                    );
                 }
-            } catch(e) {
-                console.error("Error loading catalog:", e);
             }
+
+            categories.forEach(cat => {
+                const opt = document.createElement('option');
+                opt.value = cat.value;
+                opt.innerText = cat.text;
+                categorySelect.appendChild(opt);
+            });
         }
 
-        function renderMainGrid(products) {
-            renderGrid('mainProductGrid', products);
+        // Fetch products from Python API
+        function fetchProducts() {
+            const gender = document.getElementById('genderFilter').value;
+            const occasion = document.getElementById('occasionFilter').value;
+            const category = document.getElementById('categoryFilter').value;
+
+            let url = `/api/products?gender=${gender}&occasion=${occasion}&category=${category}`;
+            if (currentSection !== 'all') {
+                url += `&section=${currentSection}`;
+            }
+
+            fetch(url)
+                .then(res => res.json())
+                .then(data => renderProducts(data))
+                .catch(err => console.error("Error fetching data:", err));
         }
 
-        function renderGrid(containerId, products) {
-            const container = document.getElementById(containerId);
+        function applyFilters() {
+            updateCategoryOptions();
+            fetchProducts();
+        }
+
+        function filterBySection(sectionName) {
+            currentSection = sectionName;
+            fetchProducts();
+        }
+
+        // Render products into structural Homepage sections
+        function renderProducts(products) {
+            const container = document.getElementById('productSections');
             container.innerHTML = '';
-            if(products.length === 0) {
-                container.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: var(--text-muted);">No products found in this category.</p>';
+
+            if (products.length === 0) {
+                container.innerHTML = `<p style="text-align:center; padding: 40px; color: var(--text-muted);">No accessories match your current selection.</p>`;
                 return;
             }
-            products.forEach(p => {
-                const card = document.createElement('div');
-                card.className = 'product-card';
-                card.innerHTML = `
-                    <div>
-                        <img src="${p.image_url}" alt="${p.name}">
-                        <div class="p-metal">${p.metal} • ${p.category}</div>
-                        <div class="p-title">${p.name}</div>
-                        <div class="p-price">₹${p.price.toLocaleString('en-IN')}</div>
-                    </div>
-                    <button class="btn-add-bag" onclick="addToBag('${p.id}')">Add to Bag</button>
-                `;
-                container.appendChild(card);
-            });
-        }
 
-        function applyCategoryFilter(cat, btn) {
-            updateActiveTab(btn);
-            if(cat === 'all') renderMainGrid(allProducts);
-            else renderMainGrid(allProducts.filter(p => p.category === cat));
-        }
+            const sections = [
+                { key: 'trending', title: 'Trending Accessories' },
+                { key: 'best_sellers', title: 'Best Sellers' },
+                { key: 'curators_choice', title: "Curator's Choice" }
+            ];
 
-        function applyStyleFilter(style, btn) {
-            updateActiveTab(btn);
-            renderMainGrid(allProducts.filter(p => p.style === style));
-        }
+            sections.forEach(sec => {
+                const sectionItems = products.filter(p => p.section === sec.key);
+                if (sectionItems.length > 0) {
+                    const secHeader = document.createElement('h2');
+                    secHeader.className = 'section-title';
+                    secHeader.innerText = sec.title;
+                    container.appendChild(secHeader);
 
-        function loadCategory(cat) {
-            const section = document.getElementById('bestsellers');
-            section.scrollIntoView({ behavior: 'smooth' });
-            if(cat === 'wedding') {
-                renderMainGrid(allProducts.filter(p => p.style === 'wedding'));
-            } else {
-                renderMainGrid(allProducts.filter(p => p.category === cat));
-            }
-        }
+                    const grid = document.createElement('div');
+                    grid.className = 'product-grid';
 
-        function updateActiveTab(btn) {
-            document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
-            if(btn) btn.classList.add('active');
-        }
-
-        /* COMPULSORY AUTH & BAG LOGIC */
-        function addToBag(productId) {
-            if(!isAuthenticated) {
-                pendingBagProduct = productId;
-                openAuthModal();
-            } else {
-                cartItems.push(productId);
-                document.getElementById('cartCount').innerText = cartItems.length;
-                alert("Item added to your bag!");
-            }
-        }
-
-        function openAuthModal() {
-            document.getElementById('authModal').style.display = 'flex';
-        }
-
-        function closeAuthModal() {
-            document.getElementById('authModal').style.display = 'none';
-        }
-
-        function performLogin() {
-            const email = document.getElementById('authEmail').value;
-            if(!email) {
-                alert("Please enter a valid email address.");
-                return;
-            }
-            isAuthenticated = true;
-            currentUser = email.split('@')[0];
-            document.getElementById('navAuthBtn').innerText = `Account (${currentUser})`;
-            closeAuthModal();
-
-            if(pendingBagProduct) {
-                addToBag(pendingBagProduct);
-                pendingBagProduct = null;
-            }
-        }
-
-        function handleCartClick() {
-            if(!isAuthenticated) {
-                openAuthModal();
-            } else {
-                alert(`Your bag contains ${cartItems.length} items.`);
-            }
-        }
-
-        /* 8-QUESTION STYLE QUIZ LOGIC */
-        async function fetchQuizQuestions() {
-            try {
-                const res = await fetch('/api/quiz-questions');
-                const data = await res.json();
-                if(data.status === 'success') quizQuestions = data.questions;
-            } catch(e) {
-                console.error("Error loading quiz:", e);
-            }
-        }
-
-        function startQuiz() {
-            const userName = document.getElementById('quizUserName').value.trim() || "Valued Guest";
-            currentQuizIndex = 0;
-            quizAnswers = [];
-            renderQuizQuestion(userName);
-        }
-
-        function renderQuizQuestion(userName) {
-            const q = quizQuestions[currentQuizIndex];
-            const container = document.getElementById('quizContent');
-            
-            document.getElementById('quizMainTitle').innerText = `Question ${currentQuizIndex + 1} of ${quizQuestions.length}`;
-            document.getElementById('quizMainSub').innerText = q.subtitle;
-
-            let html = `<h3 style="font-family: var(--font-serif); font-size: 1.8rem; margin-bottom: 1.5rem; text-align: center;">${q.title}</h3>`;
-            q.options.forEach(opt => {
-                html += `
-                    <div class="option-card" onclick="selectQuizOption('${opt.tag}', '${userName}')">
-                        <strong>${opt.label}</strong>
-                        <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.2rem;">${opt.text}</p>
-                    </div>
-                `;
-            });
-
-            container.innerHTML = html;
-        }
-
-        function selectQuizOption(tag, userName) {
-            quizAnswers.push({ question_id: quizQuestions[currentQuizIndex].id, selected_tag: tag });
-            if(currentQuizIndex < quizQuestions.length - 1) {
-                currentQuizIndex++;
-                renderQuizQuestion(userName);
-            } else {
-                submitQuiz(userName);
-            }
-        }
-
-        async function submitQuiz(userName) {
-            const container = document.getElementById('quizContent');
-            container.innerHTML = '<p style="text-align: center;">Calculating your architectural curation...</p>';
-
-            try {
-                const res = await fetch('/api/calculate-recommendations', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ user_name: userName, answers: quizAnswers })
-                });
-
-                const data = await res.json();
-                if(data.status === 'success') {
-                    document.getElementById('quizMainTitle').innerText = `${data.user_name}'s Curated Edit`;
-                    document.getElementById('quizMainSub').innerText = "Based on your 8-part style analysis, we matched you with these pieces:";
-
-                    let html = '<div class="product-grid">';
-                    data.recommendations.forEach(p => {
-                        html += `
+                    sectionItems.forEach(item => {
+                        grid.innerHTML += `
                             <div class="product-card">
-                                <div>
-                                    <img src="${p.image_url}" alt="${p.name}">
-                                    <div class="p-metal">${p.metal}</div>
-                                    <div class="p-title">${p.name}</div>
-                                    <div class="p-price">₹${p.price.toLocaleString('en-IN')}</div>
+                                <img src="${item.image}" class="product-img" alt="${item.name}">
+                                <div class="product-info">
+                                    <div class="product-title">${item.name}</div>
+                                    <div class="product-price">₹${item.price.toLocaleString()}</div>
+                                    <button class="add-cart-btn" onclick="addToCart('${item.name}', ${item.price})">Add to Bag</button>
                                 </div>
-                                <button class="btn-add-bag" onclick="addToBag('${p.id}')">Add to Bag</button>
                             </div>
                         `;
                     });
-                    html += '</div>';
-                    container.innerHTML = html;
+                    container.appendChild(grid);
                 }
-            } catch(e) {
-                container.innerHTML = '<p style="text-align: center; color: red;">Error generating recommendations.</p>';
-            }
+            });
+        }
+
+        // Cart Actions
+        function addToCart(name, price) {
+            cart.push({ name, price });
+            updateCartUI();
+            toggleCart();
+        }
+
+        function updateCartUI() {
+            document.getElementById('cartCount').innerText = cart.length;
+            const cartItemsContainer = document.getElementById('cartItems');
+            cartItemsContainer.innerHTML = '';
+            let total = 0;
+
+            cart.forEach((item, index) => {
+                total += item.price;
+                cartItemsContainer.innerHTML += `
+                    <div class="cart-item">
+                        <div>
+                            <div style="font-weight: bold; font-size: 13px;">${item.name}</div>
+                            <div style="color: var(--accent); font-size: 12px;">₹${item.price.toLocaleString()}</div>
+                        </div>
+                        <i class="fa-solid fa-trash" style="cursor:pointer; color:red;" onclick="removeFromCart(${index})"></i>
+                    </div>
+                `;
+            });
+            document.getElementById('cartTotal').innerText = `₹${total.toLocaleString()}`;
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCartUI();
+        }
+
+        function toggleCart() {
+            document.getElementById('cartDrawer').classList.toggle('open');
+        }
+
+        // Modal Handlers
+        function openModal(id) { document.getElementById(id).style.display = 'flex'; }
+        function closeModal(id) { document.getElementById(id).style.display = 'none'; }
+
+        // Authentication Toggle System
+        function toggleAuthMode() {
+            isSignUp = !isSignUp;
+            document.getElementById('authTitle').innerText = isSignUp ? "Create Account" : "Sign In";
+            document.getElementById('authSubmitBtn').innerText = isSignUp ? "Create Account" : "Sign In";
+            document.getElementById('nameGroup').style.display = isSignUp ? "block" : "none";
+            document.getElementById('authToggleText').innerText = isSignUp ? "Already have an account?" : "Don't have an account?";
+        }
+
+        function handleAuth(e) {
+            e.preventDefault();
+            alert(isSignUp ? "Account created successfully!" : "Signed in successfully!");
+            closeModal('authModal');
+        }
+
+        function submitQuiz() {
+            const tone = document.getElementById('quizTone').value;
+            document.getElementById('occasionFilter').value = tone;
+            applyFilters();
+            closeModal('quizModal');
+            alert(`Filters applied based on your preference!`);
+        }
+
+        function submitCustomization() {
+            alert("Custom order received! Our designer will contact you shortly.");
+            closeModal('customModal');
         }
     </script>
 </body>
