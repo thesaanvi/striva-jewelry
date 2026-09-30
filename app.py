@@ -1,219 +1,937 @@
-import os
+mport os
+import json
+from decimal import Decimal
+
 from flask import Flask, request, jsonify, send_from_directory
 from flask_cors import CORS
 import mysql.connector
+from mysql.connector import Error
 from werkzeug.security import generate_password_hash, check_password_hash
 
-app = Flask(__name__, static_folder='static')
+
+# ============================================================
+# STRIVA - FLASK BACKEND
+# ============================================================
+
+app = Flask(__name__, static_folder="static")
 CORS(app)
 
-# DEMI-FINE CATALOG SEED DATA
-ALL_PRODUCTS = [
-    ('Aura Mother-of-Pearl Layered Necklace', 'women', 'minimal', 'necklaces', 4299.00, '18K Gold Vermeil', 'Handcrafted multi-strand gold chain with an iridescent organic mother-of-pearl pendant.', 'Aura necklace.jpg', 'bestseller', True),
-    ('Classic Solitaire Bezel Ring', 'women', 'minimal', 'rings', 2899.00, '18K Gold Vermeil', 'Brushed gold vermeil bezel band setting a brilliant-cut cubic zirconia solitaire.', 'bezelring.png', 'favourites', True),
-    ('Celestial Moon & Star Ring Stack', 'women', 'minimal', 'rings', 3499.00, '18K Gold Vermeil', 'Set of 4 stackable textured gold vermeil bands with celestial crescent moon and starburst motifs.', 'celestialring.png', 'trending', True),
-    ('Chunky Bold Vermeil Hoops', 'women', 'minimal', 'earring', 2199.00, '18K Gold Vermeil', 'Waterproof high-luster thick tubular hoop earrings with secure click-top closure.', 'chunky.png', 'bestseller', True),
-    ('Textured Croissant Dome Ring', 'women', 'minimal', 'rings', 2699.00, '18K Gold Vermeil', 'Ribbed French croissant statement ring crafted in solid 18k yellow gold vermeil.', 'croissantring.png', 'trending', True),
-    ('Heavy High-Polish Dome Ring', 'women', 'minimal', 'rings', 2499.00, '18K Gold Vermeil', 'Ultra-sleek mirror finish gold dome band. Smooth, solid comfort-fit interior.', 'domering.png', 'favourites', True),
-    ('Pavé Hexagon Cluster Studs', 'women', 'minimal', 'earring', 1899.00, '18K Gold Vermeil', 'Geometric hexagonal stud earrings encrusted with micro-paved brilliant zirconia crystals.', 'goldstuds.png', 'bestseller', False),
-    ('Liquid Gold Herringbone Ribbon Chain', 'women', 'minimal', 'necklaces', 3899.00, '18K Gold Vermeil', 'Flat fluid herringbone ribbon chain that lays flat against the collarbone.', 'herringbone.png', 'favourites', False),
-    ('Luna Pearl & Crescent Moon Bracelet', 'women', 'minimal', 'bracelets', 2999.00, '18K Gold Vermeil', 'Genuine freshwater pearls alternating with delicate gold crescent moon charms.', 'lunapearl.png', 'trending', True),
-    ('Paperclip Link Charm Bracelet', 'women', 'minimal', 'bracelets', 3299.00, '18K Gold Vermeil', 'Architectural paperclip link chain featuring an engraved STRIVA coin pendant.', 'paperclip.png', 'bestseller', True),
-    ('Delicate Beaded Gold Anklet', 'women', 'minimal', 'anklets', 1499.00, '18K Gold Vermeil', 'Waterproof everyday gold bead anklet with secure lobster clasp.', 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=800', 'festive', True),
-    ('Royal Kundan Heritage Nath', 'women', 'wedding', 'noserings', 3499.00, '18K Gold Vermeil & Pearl', 'Lightweight bridal nose ring strung with natural pearls and polki zirconia.', 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=800', 'festive', False),
-    ('Crescent Kundan Maang Tikka', 'women', 'wedding', 'mang tika', 3199.00, '18K Gold Vermeil', 'Handcrafted lightweight forehead ornament for wedding celebrations.', 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=800', 'trending', False),
-    ('Modern Solitaire Mangalsutra', 'women', 'wedding', 'mangalsutra', 6899.00, '18K Gold Vermeil', 'Minimal dual-bead gold chain with a solitary brilliant-cut solitaire pendant.', 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=800', 'bestseller', True),
-    ('Bridal Gold Vermeil Choker', 'women', 'wedding', 'necklaces', 8999.00, '18K Gold Vermeil', 'Intricate lightweight festive choker designed for wedding styling.', 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=800', 'favourites', False),
-    ('Homme Brushed Silver Signet Ring', 'men', 'minimal', 'rings', 2899.00, '925 Sterling Silver', 'Hand-finished brushed silver geometric signet ring for custom monogram engraving.', 'https://images.unsplash.com/photo-1603561591411-07134e71a2a9?w=800', 'bestseller', True),
-    ('Beveled Heavy Curb Chain (5mm)', 'men', 'minimal', 'chains', 4999.00, '925 Sterling Silver', '4mm solid sterling silver link chain built for everyday wear.', 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=800', 'trending', False),
-    ('Hammered Gold Kada Cuff', 'men', 'minimal', 'bracelets', 4200.00, '18K Gold Vermeil', 'Textured architectural gold cuff designed for modern menswear.', 'https://images.unsplash.com/photo-1611591475179-62cd34feb0ce?w=800', 'favourites', True),
-    ('Single Huggie Ear Piercing Hoop', 'men', 'minimal', 'piercings', 1199.00, '925 Sterling Silver', 'Hypoallergenic lightweight daily hoop earring.', 'https://images.unsplash.com/photo-1630019852942-f89202989a59?w=800', 'festive', False),
-    ('Royal Emerald Sherwani Brooch', 'men', 'wedding', 'brooch', 4200.00, '18K Gold Vermeil & Emerald', 'Regal coat pin crafted with micro-pave stones and emerald gem.', 'https://images.unsplash.com/photo-1600003014755-ba31aa59c4b6?w=800', 'festive', False),
-    ('Groom Layered Pearl & Gold Necklace', 'men', 'wedding', 'necklace', 7999.00, '18K Gold Vermeil & Pearl', 'Traditional multi-strand statement groom necklace.', 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=800', 'trending', False)
-]
 
-def get_db():
+# ============================================================
+# DATABASE SETTINGS
+# ============================================================
+# For local MySQL, these defaults are:
+# host     = localhost
+# port     = 3306
+# user     = root
+# password = ""
+# database = striva
+#
+# If you use another database, set these environment variables:
+# DB_HOST, DB_PORT, DB_USER, DB_PASS, DB_NAME
+# ============================================================
+
+DB_HOST = os.environ.get("DB_HOST", "localhost")
+DB_PORT = int(os.environ.get("DB_PORT", "3306"))
+DB_USER = os.environ.get("DB_USER", "root")
+DB_PASS = os.environ.get("DB_PASS", "")
+DB_NAME = os.environ.get("DB_NAME", "striva")
+
+
+def get_server_connection():
+    """Connect to MySQL server without selecting a database."""
     return mysql.connector.connect(
-        host=os.environ.get('DB_HOST'),
-        port=int(os.environ.get('DB_PORT', 3306)),
-        user=os.environ.get('DB_USER'),
-        password=os.environ.get('DB_PASS'),
-        database=os.environ.get('DB_NAME')
+        host=DB_HOST,
+        port=DB_PORT,
+        user=DB_USER,
+        password=DB_PASS
     )
 
-def ensure_tables_and_seed(conn):
-    try:
-        cursor = conn.cursor()
-        cursor.execute("""
-        CREATE TABLE IF NOT EXISTS users (
-            id INT AUTO_INCREMENT PRIMARY KEY,
-            full_name VARCHAR(255) NOT NULL,
-            email VARCHAR(255) UNIQUE NOT NULL,
-            password_hash VARCHAR(255) NOT NULL,
-            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-        );
-        """)
-        cursor.execute("""
-        CREATE TABLE IF NOT EXISTS products (
-            id INT AUTO_INCREMENT PRIMARY KEY,
-            name VARCHAR(255) NOT NULL,
-            gender VARCHAR(20) NOT NULL,
-            occasion VARCHAR(20) NOT NULL,
-            sub_category VARCHAR(50) NOT NULL,
-            price_inr DECIMAL(10,2) NOT NULL,
-            metal VARCHAR(100) NOT NULL,
-            description TEXT,
-            image_url TEXT,
-            tag VARCHAR(50),
-            is_customizable BOOLEAN DEFAULT TRUE
-        );
-        """)
-        cursor.execute("""
-        CREATE TABLE IF NOT EXISTS orders (
-            id INT AUTO_INCREMENT PRIMARY KEY,
-            user_id INT NOT NULL,
-            items_json TEXT NOT NULL,
-            total_amount DECIMAL(10,2) NOT NULL,
-            status VARCHAR(50) DEFAULT 'Processing',
-            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-            FOREIGN KEY (user_id) REFERENCES users(id)
-        );
-        """)
-        
-        cursor.execute("SELECT COUNT(*) FROM products")
-        if cursor.fetchone()[0] == 0:
-            cursor.executemany("""
-                INSERT INTO products (name, gender, occasion, sub_category, price_inr, metal, description, image_url, tag, is_customizable) 
-                VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
-            """, ALL_PRODUCTS)
-            conn.commit()
-        cursor.close()
-    except Exception as e:
-        print(f"Db seed error: {e}")
 
-@app.route('/')
-def serve_frontend():
-    return send_from_directory('static', 'index.html')
+def create_database_if_needed():
+    """Create the STRIVA database if it does not already exist."""
+    conn = get_server_connection()
+    cursor = conn.cursor()
+    cursor.execute(
+        f"CREATE DATABASE IF NOT EXISTS `{DB_NAME}` "
+        "CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci"
+    )
+    conn.commit()
+    cursor.close()
+    conn.close()
 
-@app.route('/api/auth/register', methods=['POST'])
-def register():
-    data = request.json
+
+def get_db():
+    """Connect directly to the STRIVA database."""
+    return mysql.connector.connect(
+        host=DB_HOST,
+        port=DB_PORT,
+        user=DB_USER,
+        password=DB_PASS,
+        database=DB_NAME
+    )
+
+
+# ============================================================
+# PRODUCT CATALOG
+# ============================================================
+# image_url values are real URLs, NOT Markdown links.
+# ============================================================
+
+ALL_PRODUCTS = [
+    # ---------------- WOMEN / MINIMAL ----------------
+    {
+        "sku": "STR-W-NK-001",
+        "name": "Aura Mother-of-Pearl Layered Necklace",
+        "gender": "women",
+        "occasion": "minimal",
+        "sub_category": "necklaces",
+        "price_inr": 4299,
+        "metal": "18K Gold Vermeil",
+        "description": "A delicate layered necklace finished with a luminous mother-of-pearl inspired pendant.",
+        "image_url": "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=900",
+        "tag": "bestseller",
+        "is_customizable": True
+    },
+    {
+        "sku": "STR-W-RG-001",
+        "name": "Classic Solitaire Bezel Ring",
+        "gender": "women",
+        "occasion": "minimal",
+        "sub_category": "rings",
+        "price_inr": 2899,
+        "metal": "18K Gold Vermeil",
+        "description": "A refined bezel-set solitaire ring designed for understated everyday styling.",
+        "image_url": "https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=900",
+        "tag": "favourites",
+        "is_customizable": True
+    },
+    {
+        "sku": "STR-W-RG-002",
+        "name": "Celestial Moon & Star Ring Stack",
+        "gender": "women",
+        "occasion": "minimal",
+        "sub_category": "rings",
+        "price_inr": 3499,
+        "metal": "18K Gold Vermeil",
+        "description": "A stack of delicate celestial-inspired bands made for effortless layering.",
+        "image_url": "https://images.unsplash.com/photo-1611652022419-a9419f74343d?w=900",
+        "tag": "trending",
+        "is_customizable": True
+    },
+    {
+        "sku": "STR-W-ER-001",
+        "name": "Chunky Polished Vermeil Hoops",
+        "gender": "women",
+        "occasion": "minimal",
+        "sub_category": "earrings",
+        "price_inr": 2199,
+        "metal": "18K Gold Vermeil",
+        "description": "Smooth tubular hoops with a polished finish and a clean contemporary silhouette.",
+        "image_url": "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=900",
+        "tag": "bestseller",
+        "is_customizable": False
+    },
+    {
+        "sku": "STR-W-RG-003",
+        "name": "Textured Croissant Dome Ring",
+        "gender": "women",
+        "occasion": "minimal",
+        "sub_category": "rings",
+        "price_inr": 2699,
+        "metal": "18K Gold Vermeil",
+        "description": "A softly ridged dome ring inspired by sculptural French jewellery forms.",
+        "image_url": "https://images.unsplash.com/photo-1603561591411-07134e71a2a9?w=900",
+        "tag": "trending",
+        "is_customizable": False
+    },
+    {
+        "sku": "STR-W-RG-004",
+        "name": "High-Polish Dome Ring",
+        "gender": "women",
+        "occasion": "minimal",
+        "sub_category": "rings",
+        "price_inr": 2499,
+        "metal": "18K Gold Vermeil",
+        "description": "A sleek rounded dome band with a mirror-polished finish.",
+        "image_url": "https://images.unsplash.com/photo-1627293509201-cd1b3d9d3f6d?w=900",
+        "tag": "favourites",
+        "is_customizable": False
+    },
+    {
+        "sku": "STR-W-ER-002",
+        "name": "Pavé Hexagon Cluster Studs",
+        "gender": "women",
+        "occasion": "minimal",
+        "sub_category": "earrings",
+        "price_inr": 1899,
+        "metal": "18K Gold Vermeil",
+        "description": "Geometric stud earrings with a refined pavé-inspired centre.",
+        "image_url": "https://images.unsplash.com/photo-1630019852942-f89202989a59?w=900",
+        "tag": "bestseller",
+        "is_customizable": False
+    },
+    {
+        "sku": "STR-W-NK-002",
+        "name": "Liquid Gold Herringbone Chain",
+        "gender": "women",
+        "occasion": "minimal",
+        "sub_category": "necklaces",
+        "price_inr": 3899,
+        "metal": "18K Gold Vermeil",
+        "description": "A fluid herringbone-inspired chain designed to sit close to the collarbone.",
+        "image_url": "https://images.unsplash.com/photo-1617038220319-276d3cfab638?w=900",
+        "tag": "favourites",
+        "is_customizable": False
+    },
+    {
+        "sku": "STR-W-BR-001",
+        "name": "Luna Pearl Crescent Bracelet",
+        "gender": "women",
+        "occasion": "minimal",
+        "sub_category": "bracelets",
+        "price_inr": 2999,
+        "metal": "18K Gold Vermeil & Pearl",
+        "description": "A delicate bracelet combining luminous pearl details with a crescent-inspired charm.",
+        "image_url": "https://images.unsplash.com/photo-1611652022419-a9419f74343d?w=900",
+        "tag": "trending",
+        "is_customizable": True
+    },
+    {
+        "sku": "STR-W-BR-002",
+        "name": "Paperclip Link Charm Bracelet",
+        "gender": "women",
+        "occasion": "minimal",
+        "sub_category": "bracelets",
+        "price_inr": 3299,
+        "metal": "18K Gold Vermeil",
+        "description": "A modern paperclip-link bracelet finished with a small signature charm.",
+        "image_url": "https://images.unsplash.com/photo-1573408301185-9146fe634ad0?w=900",
+        "tag": "bestseller",
+        "is_customizable": True
+    },
+    {
+        "sku": "STR-W-AK-001",
+        "name": "Delicate Beaded Gold Anklet",
+        "gender": "women",
+        "occasion": "minimal",
+        "sub_category": "anklets",
+        "price_inr": 1499,
+        "metal": "18K Gold Vermeil",
+        "description": "A fine beaded anklet with a subtle polished finish for everyday styling.",
+        "image_url": "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=900",
+        "tag": "favourites",
+        "is_customizable": False
+    },
+
+    # ---------------- WOMEN / WEDDING ----------------
+    {
+        "sku": "STR-W-WD-001",
+        "name": "Royal Kundan Heritage Nath",
+        "gender": "women",
+        "occasion": "wedding",
+        "sub_category": "nose-rings",
+        "price_inr": 3499,
+        "metal": "18K Gold Vermeil & Pearl",
+        "description": "A lightweight festive nose ring with refined pearl and stone-inspired detailing.",
+        "image_url": "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=900",
+        "tag": "festive",
+        "is_customizable": False
+    },
+    {
+        "sku": "STR-W-WD-002",
+        "name": "Crescent Kundan Maang Tikka",
+        "gender": "women",
+        "occasion": "wedding",
+        "sub_category": "maang-tikka",
+        "price_inr": 3199,
+        "metal": "18K Gold Vermeil",
+        "description": "A lightweight crescent-inspired maang tikka for modern wedding styling.",
+        "image_url": "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=900",
+        "tag": "trending",
+        "is_customizable": False
+    },
+    {
+        "sku": "STR-W-WD-003",
+        "name": "Modern Solitaire Mangalsutra",
+        "gender": "women",
+        "occasion": "wedding",
+        "sub_category": "mangalsutras",
+        "price_inr": 6899,
+        "metal": "18K Gold Vermeil",
+        "description": "A contemporary mangalsutra silhouette centred around a refined solitaire-inspired pendant.",
+        "image_url": "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=900",
+        "tag": "bestseller",
+        "is_customizable": True
+    },
+    {
+        "sku": "STR-W-WD-004",
+        "name": "Bridal Gold Vermeil Choker",
+        "gender": "women",
+        "occasion": "wedding",
+        "sub_category": "necklaces",
+        "price_inr": 8999,
+        "metal": "18K Gold Vermeil",
+        "description": "A refined bridal choker designed to pair with contemporary Indian wedding looks.",
+        "image_url": "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=900",
+        "tag": "favourites",
+        "is_customizable": False
+    },
+    {
+        "sku": "STR-W-WD-005",
+        "name": "Pearl Halo Bridal Earrings",
+        "gender": "women",
+        "occasion": "wedding",
+        "sub_category": "earrings",
+        "price_inr": 7499,
+        "metal": "18K Gold Vermeil & Pearl",
+        "description": "Elegant drop earrings with a pearl-led bridal silhouette.",
+        "image_url": "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=900",
+        "tag": "festive",
+        "is_customizable": False
+    },
+
+    # ---------------- MEN / MINIMAL ----------------
+    {
+        "sku": "STR-M-RG-001",
+        "name": "Homme Brushed Silver Signet Ring",
+        "gender": "men",
+        "occasion": "minimal",
+        "sub_category": "rings",
+        "price_inr": 2899,
+        "metal": "925 Sterling Silver",
+        "description": "A clean brushed-finish signet ring designed for understated everyday wear.",
+        "image_url": "https://images.unsplash.com/photo-1603561591411-07134e71a2a9?w=900",
+        "tag": "bestseller",
+        "is_customizable": True
+    },
+    {
+        "sku": "STR-M-CH-001",
+        "name": "Beveled Heavy Curb Chain",
+        "gender": "men",
+        "occasion": "minimal",
+        "sub_category": "chains",
+        "price_inr": 4999,
+        "metal": "925 Sterling Silver",
+        "description": "A substantial curb-chain silhouette with clean beveled links.",
+        "image_url": "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=900",
+        "tag": "trending",
+        "is_customizable": False
+    },
+    {
+        "sku": "STR-M-BR-001",
+        "name": "Hammered Gold Kada Cuff",
+        "gender": "men",
+        "occasion": "minimal",
+        "sub_category": "bracelets",
+        "price_inr": 4200,
+        "metal": "18K Gold Vermeil",
+        "description": "A sculptural kada-style cuff with subtle hammered texture.",
+        "image_url": "https://images.unsplash.com/photo-1611591475179-62cd34feb0ce?w=900",
+        "tag": "favourites",
+        "is_customizable": True
+    },
+    {
+        "sku": "STR-M-ER-001",
+        "name": "Single Huggie Hoop",
+        "gender": "men",
+        "occasion": "minimal",
+        "sub_category": "earrings",
+        "price_inr": 1199,
+        "metal": "925 Sterling Silver",
+        "description": "A compact polished huggie hoop designed for a subtle everyday look.",
+        "image_url": "https://images.unsplash.com/photo-1630019852942-f89202989a59?w=900",
+        "tag": "bestseller",
+        "is_customizable": False
+    },
+    {
+        "sku": "STR-M-CH-002",
+        "name": "Classic Box Link Chain",
+        "gender": "men",
+        "occasion": "minimal",
+        "sub_category": "chains",
+        "price_inr": 3799,
+        "metal": "925 Sterling Silver",
+        "description": "A clean box-link chain with a polished contemporary finish.",
+        "image_url": "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=900",
+        "tag": "favourites",
+        "is_customizable": False
+    },
+
+    # ---------------- MEN / WEDDING ----------------
+    {
+        "sku": "STR-M-WD-001",
+        "name": "Royal Emerald Sherwani Brooch",
+        "gender": "men",
+        "occasion": "wedding",
+        "sub_category": "brooches",
+        "price_inr": 4200,
+        "metal": "18K Gold Vermeil & Emerald",
+        "description": "A refined statement brooch designed for sherwanis and formal weddingwear.",
+        "image_url": "https://images.unsplash.com/photo-1600003014755-ba31aa59c4b6?w=900",
+        "tag": "festive",
+        "is_customizable": False
+    },
+    {
+        "sku": "STR-M-WD-002",
+        "name": "Groom Layered Pearl Necklace",
+        "gender": "men",
+        "occasion": "wedding",
+        "sub_category": "necklaces",
+        "price_inr": 7999,
+        "metal": "18K Gold Vermeil & Pearl",
+        "description": "A contemporary layered pearl necklace designed for modern groom styling.",
+        "image_url": "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=900",
+        "tag": "trending",
+        "is_customizable": False
+    },
+    {
+        "sku": "STR-M-WD-003",
+        "name": "Wedding Signet Cufflinks",
+        "gender": "men",
+        "occasion": "wedding",
+        "sub_category": "cufflinks",
+        "price_inr": 3999,
+        "metal": "925 Sterling Silver",
+        "description": "Minimal polished cufflinks with a strong signet-inspired face.",
+        "image_url": "https://images.unsplash.com/photo-1603561591411-07134e71a2a9?w=900",
+        "tag": "favourites",
+        "is_customizable": True
+    },
+
+    # ---------------- COUPLE ----------------
+    {
+        "sku": "STR-C-RG-001",
+        "name": "Eternal Couple Ring Set",
+        "gender": "couple",
+        "occasion": "wedding",
+        "sub_category": "couple-rings",
+        "price_inr": 8999,
+        "metal": "18K Gold Vermeil",
+        "description": "A coordinated couple ring set with clean contemporary profiles and optional engraving.",
+        "image_url": "https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=900",
+        "tag": "bestseller",
+        "is_customizable": True
+    },
+    {
+        "sku": "STR-C-RG-002",
+        "name": "Always & Forever Ring Pair",
+        "gender": "couple",
+        "occasion": "wedding",
+        "sub_category": "couple-rings",
+        "price_inr": 9499,
+        "metal": "925 Sterling Silver",
+        "description": "A matching pair of understated bands designed for personal engraving.",
+        "image_url": "https://images.unsplash.com/photo-1617038220319-276d3cfab638?w=900",
+        "tag": "favourites",
+        "is_customizable": True
+    },
+]
+
+
+# ============================================================
+# DATABASE TABLES + SEED
+# ============================================================
+
+def ensure_tables_and_seed():
+    conn = None
+    cursor = None
+
     try:
+        create_database_if_needed()
         conn = get_db()
-        ensure_tables_and_seed(conn)
         cursor = conn.cursor()
-        hashed_pwd = generate_password_hash(data['password'])
-        cursor.execute("INSERT INTO users (full_name, email, password_hash) VALUES (%s, %s, %s)", 
-                       (data['name'], data['email'], hashed_pwd))
+
+        cursor.execute("""
+            CREATE TABLE IF NOT EXISTS users (
+                id INT AUTO_INCREMENT PRIMARY KEY,
+                full_name VARCHAR(255) NOT NULL,
+                email VARCHAR(255) UNIQUE NOT NULL,
+                password_hash VARCHAR(255) NOT NULL,
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            ) ENGINE=InnoDB;
+        """)
+
+        cursor.execute("""
+            CREATE TABLE IF NOT EXISTS products (
+                id INT AUTO_INCREMENT PRIMARY KEY,
+                sku VARCHAR(100) UNIQUE,
+                name VARCHAR(255) NOT NULL,
+                gender VARCHAR(30) NOT NULL,
+                occasion VARCHAR(30) NOT NULL,
+                sub_category VARCHAR(80) NOT NULL,
+                price_inr DECIMAL(10,2) NOT NULL,
+                metal VARCHAR(150) NOT NULL,
+                description TEXT,
+                image_url TEXT,
+                tag VARCHAR(50),
+                is_customizable BOOLEAN DEFAULT TRUE,
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            ) ENGINE=InnoDB;
+        """)
+
+        cursor.execute("""
+            CREATE TABLE IF NOT EXISTS orders (
+                id INT AUTO_INCREMENT PRIMARY KEY,
+                user_id INT NOT NULL,
+                items_json LONGTEXT NOT NULL,
+                total_amount DECIMAL(10,2) NOT NULL,
+                status VARCHAR(50) DEFAULT 'Processing',
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                FOREIGN KEY (user_id) REFERENCES users(id)
+                    ON DELETE CASCADE
+            ) ENGINE=InnoDB;
+        """)
+
+        # Add SKU to an older products table if it was created from the
+        # previous version of this project.
+        try:
+            cursor.execute("SHOW COLUMNS FROM products LIKE 'sku'")
+            if cursor.fetchone() is None:
+                cursor.execute(
+                    "ALTER TABLE products ADD COLUMN sku VARCHAR(100) UNIQUE"
+                )
+        except Error:
+            pass
+
+        # Insert missing products individually.
+        # This fixes the old problem where seeding happened only when
+        # the entire table was empty.
+        insert_sql = """
+            INSERT INTO products
+            (sku, name, gender, occasion, sub_category, price_inr,
+             metal, description, image_url, tag, is_customizable)
+            VALUES
+            (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+            ON DUPLICATE KEY UPDATE
+                name = VALUES(name),
+                gender = VALUES(gender),
+                occasion = VALUES(occasion),
+                sub_category = VALUES(sub_category),
+                price_inr = VALUES(price_inr),
+                metal = VALUES(metal),
+                description = VALUES(description),
+                image_url = VALUES(image_url),
+                tag = VALUES(tag),
+                is_customizable = VALUES(is_customizable)
+        """
+
+        for p in ALL_PRODUCTS:
+            cursor.execute(
+                insert_sql,
+                (
+                    p["sku"],
+                    p["name"],
+                    p["gender"],
+                    p["occasion"],
+                    p["sub_category"],
+                    p["price_inr"],
+                    p["metal"],
+                    p["description"],
+                    p["image_url"],
+                    p["tag"],
+                    p["is_customizable"],
+                ),
+            )
+
+        conn.commit()
+        print(f"STRIVA database ready. Catalog contains {len(ALL_PRODUCTS)} seeded products.")
+
+    except Exception as e:
+        if conn:
+            conn.rollback()
+        print("DATABASE SETUP ERROR:", e)
+        raise
+
+    finally:
+        if cursor:
+            cursor.close()
+        if conn:
+            conn.close()
+
+
+# ============================================================
+# HELPERS
+# ============================================================
+
+def serialize_product(product):
+    """Make Decimal values JSON-friendly."""
+    if product and isinstance(product.get("price_inr"), Decimal):
+        product["price_inr"] = float(product["price_inr"])
+    return product
+
+
+def api_error(message, status=500):
+    return jsonify({
+        "status": "error",
+        "message": message
+    }), status
+
+
+# ============================================================
+# FRONTEND
+# ============================================================
+
+@app.route("/")
+def serve_frontend():
+    return send_from_directory(app.static_folder, "index.html")
+
+
+# ============================================================
+# HEALTH CHECK
+# ============================================================
+
+@app.route("/api/health", methods=["GET"])
+def health():
+    try:
+        ensure_tables_and_seed()
+        conn = get_db()
+        cursor = conn.cursor()
+        cursor.execute("SELECT COUNT(*) FROM products")
+        count = cursor.fetchone()[0]
+        cursor.close()
+        conn.close()
+
+        return jsonify({
+            "status": "success",
+            "message": "STRIVA backend is running.",
+            "product_count": count
+        })
+    except Exception as e:
+        return api_error(str(e))
+
+
+# ============================================================
+# AUTH
+# ============================================================
+
+@app.route("/api/auth/register", methods=["POST"])
+def register():
+    data = request.get_json(silent=True) or {}
+
+    name = str(data.get("name", "")).strip()
+    email = str(data.get("email", "")).strip().lower()
+    password = str(data.get("password", ""))
+
+    if not name or not email or not password:
+        return api_error("Name, email and password are required.", 400)
+
+    try:
+        ensure_tables_and_seed()
+
+        conn = get_db()
+        cursor = conn.cursor()
+
+        password_hash = generate_password_hash(password)
+
+        cursor.execute(
+            """
+            INSERT INTO users (full_name, email, password_hash)
+            VALUES (%s, %s, %s)
+            """,
+            (name, email, password_hash)
+        )
+
         conn.commit()
         user_id = cursor.lastrowid
+
         cursor.close()
         conn.close()
-        return jsonify({'status': 'success', 'user': {'id': user_id, 'name': data['name'], 'email': data['email']}})
-    except Exception as e:
-        return jsonify({'status': 'error', 'message': 'Email address already registered'}), 400
 
-@app.route('/api/auth/login', methods=['POST'])
+        return jsonify({
+            "status": "success",
+            "user": {
+                "id": user_id,
+                "name": name,
+                "email": email
+            }
+        })
+
+    except mysql.connector.IntegrityError:
+        return api_error("Email address is already registered.", 400)
+
+    except Exception as e:
+        return api_error(str(e))
+
+
+@app.route("/api/auth/login", methods=["POST"])
 def login():
-    data = request.json
+    data = request.get_json(silent=True) or {}
+
+    email = str(data.get("email", "")).strip().lower()
+    password = str(data.get("password", ""))
+
+    if not email or not password:
+        return api_error("Email and password are required.", 400)
+
     try:
+        ensure_tables_and_seed()
+
         conn = get_db()
-        ensure_tables_and_seed(conn)
         cursor = conn.cursor(dictionary=True)
-        cursor.execute("SELECT * FROM users WHERE email = %s", (data['email'],))
+
+        cursor.execute(
+            "SELECT * FROM users WHERE email = %s",
+            (email,)
+        )
+
         user = cursor.fetchone()
+
         cursor.close()
         conn.close()
-        if user and check_password_hash(user['password_hash'], data['password']):
-            return jsonify({'status': 'success', 'user': {'id': user['id'], 'name': user['full_name'], 'email': user['email']}})
-        return jsonify({'status': 'error', 'message': 'Invalid credentials'}), 401
-    except Exception as e:
-        return jsonify({'status': 'error', 'message': str(e)}), 500
 
-@app.route('/api/products', methods=['GET'])
+        if user and check_password_hash(
+            user["password_hash"],
+            password
+        ):
+            return jsonify({
+                "status": "success",
+                "user": {
+                    "id": user["id"],
+                    "name": user["full_name"],
+                    "email": user["email"]
+                }
+            })
+
+        return api_error("Invalid email or password.", 401)
+
+    except Exception as e:
+        return api_error(str(e))
+
+
+# ============================================================
+# PRODUCTS
+# ============================================================
+
+@app.route("/api/products", methods=["GET"])
 def get_products():
-    gender = request.args.get('gender')
-    occasion = request.args.get('occasion')
-    sub_category = request.args.get('sub_category')
-    tag = request.args.get('tag')
-    max_price = request.args.get('max_price')
+    gender = request.args.get("gender", "all")
+    occasion = request.args.get("occasion", "all")
+    sub_category = request.args.get("sub_category", "all")
+    tag = request.args.get("tag", "all")
+    max_price = request.args.get("max_price")
 
     try:
+        ensure_tables_and_seed()
+
         conn = get_db()
-        ensure_tables_and_seed(conn)
         cursor = conn.cursor(dictionary=True)
-        
-        query = "SELECT * FROM products WHERE 1=1"
+
+        query = """
+            SELECT
+                id,
+                sku,
+                name,
+                gender,
+                occasion,
+                sub_category,
+                price_inr,
+                metal,
+                description,
+                image_url,
+                tag,
+                is_customizable
+            FROM products
+            WHERE 1=1
+        """
+
         params = []
 
-        if gender and gender != 'all':
+        if gender and gender != "all":
             query += " AND gender = %s"
             params.append(gender)
-        if occasion and occasion != 'all':
+
+        if occasion and occasion != "all":
             query += " AND occasion = %s"
             params.append(occasion)
-        if sub_category and sub_category != 'all':
+
+        if sub_category and sub_category != "all":
             query += " AND sub_category = %s"
             params.append(sub_category)
-        if tag and tag != 'all':
+
+        if tag and tag != "all":
             query += " AND tag = %s"
             params.append(tag)
+
         if max_price:
-            query += " AND price_inr <= %s"
-            params.append(max_price)
+            try:
+                max_price_value = float(max_price)
+                query += " AND price_inr <= %s"
+                params.append(max_price_value)
+            except ValueError:
+                pass
+
+        query += " ORDER BY id ASC"
 
         cursor.execute(query, params)
         products = cursor.fetchall()
+
         cursor.close()
         conn.close()
-        return jsonify({'status': 'success', 'products': products})
-    except Exception as e:
-        return jsonify({'status': 'error', 'message': str(e)}), 500
 
-@app.route('/api/products/<int:product_id>', methods=['GET'])
+        products = [serialize_product(p) for p in products]
+
+        return jsonify({
+            "status": "success",
+            "count": len(products),
+            "products": products
+        })
+
+    except Exception as e:
+        print("PRODUCT API ERROR:", e)
+        return api_error(str(e))
+
+
+@app.route("/api/products/<int:product_id>", methods=["GET"])
 def get_product_by_id(product_id):
     try:
+        ensure_tables_and_seed()
+
         conn = get_db()
-        ensure_tables_and_seed(conn)
         cursor = conn.cursor(dictionary=True)
-        cursor.execute("SELECT * FROM products WHERE id = %s", (product_id,))
+
+        cursor.execute(
+            """
+            SELECT
+                id,
+                sku,
+                name,
+                gender,
+                occasion,
+                sub_category,
+                price_inr,
+                metal,
+                description,
+                image_url,
+                tag,
+                is_customizable
+            FROM products
+            WHERE id = %s
+            """,
+            (product_id,)
+        )
+
         product = cursor.fetchone()
+
         cursor.close()
         conn.close()
-        if product:
-            return jsonify({'status': 'success', 'product': product})
-        return jsonify({'status': 'error', 'message': 'Product not found'}), 404
-    except Exception as e:
-        return jsonify({'status': 'error', 'message': str(e)}), 500
 
-@app.route('/api/orders', methods=['POST'])
+        if not product:
+            return api_error("Product not found.", 404)
+
+        return jsonify({
+            "status": "success",
+            "product": serialize_product(product)
+        })
+
+    except Exception as e:
+        return api_error(str(e))
+
+
+# ============================================================
+# ORDERS
+# ============================================================
+
+@app.route("/api/orders", methods=["POST"])
 def create_order():
-    data = request.json
+    data = request.get_json(silent=True) or {}
+
+    user_id = data.get("user_id")
+    items = data.get("items", [])
+    total_amount = data.get("total_amount", 0)
+
+    if not user_id or not items:
+        return api_error("User and order items are required.", 400)
+
     try:
+        ensure_tables_and_seed()
+
         conn = get_db()
         cursor = conn.cursor()
-        cursor.execute("INSERT INTO orders (user_id, items_json, total_amount) VALUES (%s, %s, %s)",
-                       (data['user_id'], str(data['items']), data['total_amount']))
+
+        cursor.execute(
+            """
+            INSERT INTO orders
+            (user_id, items_json, total_amount)
+            VALUES (%s, %s, %s)
+            """,
+            (
+                user_id,
+                json.dumps(items),
+                total_amount
+            )
+        )
+
         conn.commit()
         order_id = cursor.lastrowid
+
         cursor.close()
         conn.close()
-        return jsonify({'status': 'success', 'order_id': order_id})
-    except Exception as e:
-        return jsonify({'status': 'error', 'message': str(e)}), 500
 
-@app.route('/api/orders/<int:user_id>', methods=['GET'])
+        return jsonify({
+            "status": "success",
+            "order_id": order_id
+        })
+
+    except Exception as e:
+        return api_error(str(e))
+
+
+@app.route("/api/orders/<int:user_id>", methods=["GET"])
 def get_orders(user_id):
     try:
+        ensure_tables_and_seed()
+
         conn = get_db()
         cursor = conn.cursor(dictionary=True)
-        cursor.execute("SELECT * FROM orders WHERE user_id = %s ORDER BY created_at DESC", (user_id,))
+
+        cursor.execute(
+            """
+            SELECT *
+            FROM orders
+            WHERE user_id = %s
+            ORDER BY created_at DESC
+            """,
+            (user_id,)
+        )
+
         orders = cursor.fetchall()
+
         cursor.close()
         conn.close()
-        return jsonify({'status': 'success', 'orders': orders})
-    except Exception as e:
-        return jsonify({'status': 'error', 'message': str(e)}), 500
 
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000)
+        for order in orders:
+            if isinstance(order.get("total_amount"), Decimal):
+                order["total_amount"] = float(order["total_amount"])
+
+        return jsonify({
+            "status": "success",
+            "orders": orders
+        })
+
+    except Exception as e:
+        return api_error(str(e))
+
+
+# ============================================================
+# START SERVER
+# ============================================================
+
+if __name__ == "__main__":
+    print("=" * 55)
+    print("STRIVA backend starting...")
+    print(f"Database: {DB_NAME}")
+    print(f"Server: http://localhost:5000")
+    print("=" * 55)
+
+    try:
+        ensure_tables_and_seed()
+        app.run(
+            host="0.0.0.0",
+            port=int(os.environ.get("PORT", "5000")),
+            debug=True
+        )
+    except Exception as e:
+        print("\nSTRIVA COULD NOT START:")
+        print(e)
+        print("\nCheck your MySQL server and database credentials.")
