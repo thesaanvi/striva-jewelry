@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Striva | Signature Style Quiz</title>
+    <title>Striva | Fine Jewelry & Signature Style Quiz</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -31,20 +31,33 @@
             font-family: var(--font-sans);
             -webkit-font-smoothing: antialiased;
             min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
         }
 
-        header {
-            padding: 2rem;
+        /* ANNOUNCEMENT BAR */
+        .announcement-bar {
+            background: var(--text-charcoal);
+            color: #FFFFFF;
             text-align: center;
+            padding: 0.5rem 1rem;
+            font-size: 0.75rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+        }
+
+        /* NAVIGATION HEADER */
+        header {
+            padding: 1.5rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             border-bottom: 1px solid var(--border-light);
             background: var(--bg-alabaster);
             position: sticky;
             top: 0;
             z-index: 100;
         }
+
+        .brand-container { text-align: left; }
 
         .brand-logo {
             font-family: var(--font-serif);
@@ -56,22 +69,62 @@
             font-weight: 500;
         }
 
-        .brand-sub {
-            font-size: 0.7rem;
-            letter-spacing: 0.25em;
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-charcoal);
+            font-size: 0.8rem;
+            letter-spacing: 0.15em;
             text-transform: uppercase;
-            color: var(--gold-primary);
-            margin-top: 0.2rem;
-            font-weight: 500;
+            transition: var(--transition);
         }
 
+        .nav-links a:hover { color: var(--gold-primary); }
+
+        .nav-actions {
+            display: flex;
+            gap: 1.5rem;
+            font-size: 0.85rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        /* HERO SECTION */
+        .hero-banner {
+            padding: 5rem 2rem;
+            text-align: center;
+            background: #F4F0E8;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .hero-banner h1 {
+            font-family: var(--font-serif);
+            font-size: 3.5rem;
+            font-weight: 300;
+            margin-bottom: 1rem;
+        }
+
+        .hero-banner p {
+            max-width: 600px;
+            margin: 0 auto 2rem auto;
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        /* MAIN WRAPPER */
         main {
-            max-width: 800px;
+            max-width: 1000px;
             width: 90%;
-            margin: 3rem auto;
-            flex-grow: 1;
+            margin: 4rem auto;
         }
 
+        /* QUIZ SECTION */
         .progress-container { margin-bottom: 2.5rem; display: none; }
 
         .progress-labels {
@@ -101,12 +154,12 @@
         .quiz-card {
             background: var(--bg-card);
             border: 1px solid var(--border-light);
-            padding: 3rem 2.5rem;
+            padding: 3.5rem 3rem;
             box-shadow: var(--shadow-subtle);
             border-radius: 2px;
         }
 
-        h1, h2 {
+        h1, h2, h3 {
             font-family: var(--font-serif);
             font-weight: 400;
             color: var(--text-charcoal);
@@ -254,162 +307,342 @@
             font-weight: 600;
         }
 
-        /* PRODUCT RESULTS GRID */
-        .results-grid {
+        /* PRODUCT RESULTS & SHOP GRID */
+        .results-grid, .products-catalog {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 1.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 2rem;
             margin: 2.5rem 0;
         }
 
         .product-card {
             border: 1px solid var(--border-light);
             background: var(--bg-card);
-            padding: 1rem;
+            padding: 1.2rem;
             text-align: center;
             transition: var(--transition);
         }
 
         .product-card:hover { border-color: var(--gold-primary); transform: translateY(-4px); }
 
-       
+        /* PRODUCT IMAGE PLACEHOLDERS */
         .product-card img {
             width: 100%;
-            height: 240px;
+            height: 280px;
             object-fit: cover;
             margin-bottom: 1rem;
-            border-radius: 1px;
-            background-color: #F4F1EA; 
+            background-color: #F4F1EA;
         }
 
-        .product-card .prod-title { font-family: var(--font-serif); font-size: 1.2rem; margin-bottom: 0.3rem; }
+        .product-card .prod-title { font-family: var(--font-serif); font-size: 1.3rem; margin-bottom: 0.3rem; }
         .product-card .prod-metal { font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.5rem; }
-        .product-card .prod-price { font-size: 0.95rem; color: var(--gold-primary); font-weight: 500; }
+        .product-card .prod-price { font-size: 1.05rem; color: var(--gold-primary); font-weight: 500; }
 
-        footer {
-            text-align: center;
-            padding: 2rem;
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            letter-spacing: 0.05em;
-            border-top: 1px solid var(--border-light);
-            background: var(--bg-alabaster);
+        /* WEBSITE CONTENT SECTIONS */
+        .content-section {
+            margin: 6rem 0;
         }
 
-        @media (max-width: 600px) {
-            main { width: 92%; margin: 1.5rem auto; }
-            .quiz-card { padding: 2rem 1.5rem; }
-            .intro-title { font-size: 2.2rem; }
-            .metal-options { grid-template-columns: 1fr; }
+        .section-title {
+            font-size: 2.4rem;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .section-desc {
+            text-align: center;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto 3rem auto;
+        }
+
+        /* STORY SECTION */
+        .story-block {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+            background: #FFFFFF;
+            border: 1px solid var(--border-light);
+            padding: 3rem;
+        }
+
+        .story-img-container img {
+            width: 100%;
+            height: 380px;
+            object-fit: cover;
+        }
+
+        /* FOOTER */
+        footer {
+            background: #111111;
+            color: #E8E4DC;
+            padding: 4rem 2rem 2rem 2rem;
+            margin-top: 6rem;
+        }
+
+        .footer-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 4rem;
+        }
+
+        .footer-col h4 {
+            font-family: var(--font-serif);
+            font-size: 1.4rem;
+            margin-bottom: 1.2rem;
+            color: var(--gold-primary);
+        }
+
+        .footer-col ul { list-style: none; }
+        .footer-col ul li { margin-bottom: 0.8rem; }
+
+        .footer-col ul li a {
+            color: #A0A0A0;
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: var(--transition);
+        }
+
+        .footer-col ul li a:hover { color: #FFFFFF; }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-top: 2rem;
+            border-top: 1px solid #222222;
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.75rem;
+            color: #777777;
+        }
+
+        @media (max-width: 850px) {
+            header { flex-direction: column; gap: 1rem; padding: 1.5rem; }
+            .nav-links { gap: 1.2rem; }
+            .story-block { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
         }
     </style>
 </head>
 <body>
 
+    <div class="announcement-bar">
+        Complimentary Express Shipping Across India on All Demi-Fine Orders
+    </div>
+
+    <!-- NAVIGATION HEADER -->
     <header>
-        <a href="#" class="brand-logo">STRIVA</a>
-        <div class="brand-sub">Fine Jewelry & Signature Edits</div>
+        <div class="brand-container">
+            <a href="#" class="brand-logo">STRIVA</a>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#shop">Shop All</a></li>
+            <li><a href="#quiz">Style Concierge</a></li>
+            <li><a href="#story">Craftsmanship</a></li>
+            <li><a href="#about">About Striva</a></li>
+        </ul>
+        <div class="nav-actions">
+            <span>Bag (0)</span>
+        </div>
     </header>
 
+    <!-- HERO BANNER -->
+    <section class="hero-banner">
+        <h1>Demi-Fine Jewelry Built for Daily Identity</h1>
+        <p>Crafted in Recycled Sterling Silver & 18k Gold Vermeil. Architectural silhouettes designed for personal stacking and minimal expression.</p>
+    </section>
+
     <main>
-        <div class="progress-container" id="progressContainer">
-            <div class="progress-labels">
-                <span id="questionStep">Question 1 of 3</span>
-                <span id="percentText">33%</span>
-            </div>
-            <div class="progress-track">
-                <div class="progress-fill" id="progressFill"></div>
-            </div>
-        </div>
-
-        <!-- INTRO SCREEN -->
-        <div class="quiz-card" id="introCard">
-            <span class="archetype-badge">Personalized Concierge</span>
-            <h1 class="intro-title">Discover Your Signature Edit</h1>
-            <p class="subtitle">A tailored aesthetic experience designed to reveal your archetype and curate your personal Striva jewelry collection.</p>
-            
-            <div class="input-group">
-                <label for="userName">Your Name</label>
-                <input type="text" id="userName" class="text-input" placeholder="e.g. Alexander" autocomplete="off">
-            </div>
-
-            <div class="input-group">
-                <label>Preferred Metal Base</label>
-                <div class="metal-options">
-                    <div class="metal-pill selected" onclick="selectMetal(this, 'Gold Vermeil')">Gold Vermeil</div>
-                    <div class="metal-pill" onclick="selectMetal(this, 'Sterling Silver')">Sterling Silver</div>
-                    <div class="metal-pill" onclick="selectMetal(this, 'No Preference')">No Preference</div>
+        <!-- STYLE QUIZ CONTAINER -->
+        <section id="quiz">
+            <div class="progress-container" id="progressContainer">
+                <div class="progress-labels">
+                    <span id="questionStep">Question 1 of 5</span>
+                    <span id="percentText">20%</span>
+                </div>
+                <div class="progress-track">
+                    <div class="progress-fill" id="progressFill"></div>
                 </div>
             </div>
 
-            <button class="btn-primary" onclick="startQuiz()">Begin Style Quiz</button>
-        </div>
+            <!-- INTRO CARD -->
+            <div class="quiz-card" id="introCard">
+                <span class="archetype-badge">Personalized Concierge</span>
+                <h1 class="intro-title">Discover Your Signature Edit</h1>
+                <p class="subtitle">Complete our 5-part style evaluation to unlock your curated jewelry archetype and personal recommendations.</p>
+                
+                <div class="input-group">
+                    <label for="userName">Your Name</label>
+                    <input type="text" id="userName" class="text-input" placeholder="e.g. Ananya" autocomplete="off">
+                </div>
 
-        <!-- QUESTION SCREEN -->
-        <div class="quiz-card" id="questionCard" style="display: none;">
-            <span class="archetype-badge" id="qNumber">Question 01</span>
-            <h2 class="intro-title" id="qTitle" style="font-size: 2.2rem; margin-bottom: 0.5rem;">Title</h2>
-            <p class="subtitle" id="qSubtitle" style="margin-bottom: 1.5rem;">Subtitle details here...</p>
+                <div class="input-group">
+                    <label>Preferred Precious Metal Base</label>
+                    <div class="metal-options">
+                        <div class="metal-pill selected" onclick="selectMetal(this, 'Gold Vermeil')">Gold Vermeil</div>
+                        <div class="metal-pill" onclick="selectMetal(this, 'Sterling Silver')">Sterling Silver</div>
+                        <div class="metal-pill" onclick="selectMetal(this, 'No Preference')">No Preference</div>
+                    </div>
+                </div>
 
-            <div class="options-grid" id="optionsContainer"></div>
+                <button class="btn-primary" onclick="startQuiz()">Begin Style Quiz</button>
+            </div>
 
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 2rem;">
-                <button class="btn-secondary" id="backBtn" onclick="previousQuestion()" style="display: none;">Back</button>
+            <!-- QUESTION CARD -->
+            <div class="quiz-card" id="questionCard" style="display: none;">
+                <span class="archetype-badge" id="qNumber">Question 01</span>
+                <h2 class="intro-title" id="qTitle" style="font-size: 2.2rem; margin-bottom: 0.5rem;">Title</h2>
+                <p class="subtitle" id="qSubtitle" style="margin-bottom: 1.5rem;">Subtitle details here...</p>
+
+                <div class="options-grid" id="optionsContainer"></div>
+
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 2rem;">
+                    <button class="btn-secondary" id="backBtn" onclick="previousQuestion()" style="display: none;">Back</button>
+                </div>
+            </div>
+
+            <!-- RESULTS CARD -->
+            <div class="quiz-card" id="resultsCard" style="display: none;">
+                <span class="archetype-badge">Your Signature Curation</span>
+                <h1 class="intro-title" id="resArchetype">The Modern Minimalist</h1>
+                <p class="subtitle" id="resGreeting">Based on your aesthetic profile, we curated this bespoke 3-piece edit tailored to your preferred finish and proportions.</p>
+
+                <div class="results-grid" id="resultsGrid"></div>
+
+                <button class="btn-primary" onclick="restartQuiz()">Retake Style Quiz</button>
+            </div>
+        </section>
+
+        <!-- FEATURED CATALOG SECTION -->
+        <section class="content-section" id="shop">
+            <h2 class="section-title">The Permanent Collection</h2>
+            <p class="section-desc">Explore signature Striva pieces designed to transition seamlessly from day to night.</p>
+            
+            <div class="products-catalog">
+                <div class="product-card">
+                    <!-- IMAGE URL PLACEHOLDER 1 -->
+                    <img src="https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&q=80&w=600" alt="Signet Ring">
+                    <div class="prod-metal">18k Gold Vermeil</div>
+                    <div class="prod-title">The Heritage Signet Ring</div>
+                    <div class="prod-price">₹11,999 INR</div>
+                </div>
+
+                <div class="product-card">
+                    <!-- IMAGE URL PLACEHOLDER 2 -->
+                    <img src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&q=80&w=600" alt="Pendant Necklace">
+                    <div class="prod-metal">Recycled 925 Silver</div>
+                    <div class="prod-title">Architectural Bar Pendant</div>
+                    <div class="prod-price">₹14,499 INR</div>
+                </div>
+
+                <div class="product-card">
+                    <!-- IMAGE URL PLACEHOLDER 3 -->
+                    <img src="https://images.unsplash.com/photo-1611591475155-4286fa7c2e7f?auto=format&fit=crop&q=80&w=600" alt="Cuff Bracelet">
+                    <div class="prod-metal">18k Gold Vermeil</div>
+                    <div class="prod-title">Organic Ripple Cuff</div>
+                    <div class="prod-price">₹16,999 INR</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- OUR STORY & CRAFTSMANSHIP SECTION -->
+        <section class="content-section" id="story">
+            <div class="story-block">
+                <div class="story-img-container">
+                    <!-- STORY SECTION IMAGE PLACEHOLDER -->
+                    <img src="https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&q=80&w=800" alt="Craftsmanship atelier">
+                </div>
+                <div>
+                    <span class="archetype-badge" style="text-align: left;">Artisanal Process</span>
+                    <h2 style="font-size: 2.2rem; margin-bottom: 1rem;">Conscious Demi-Fine Jewelry</h2>
+                    <p style="color: var(--text-muted); line-height: 1.7; margin-bottom: 1.5rem;">
+                        At Striva, we reject fast fashion cycles. Every piece is cast in recycled 925 sterling silver and plated in thick 2.5-micron 18k gold vermeil to ensure longevity and hypoallergenic comfort.
+                    </p>
+                    <button class="btn-secondary">Read Our Sustainability Pledge</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FULL WEBSITE FOOTER -->
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h4 style="color: #FFF; letter-spacing: 0.2em;">STRIVA</h4>
+                <p style="color: #888888; font-size: 0.85rem; line-height: 1.6; max-width: 300px;">
+                    Architectural demi-fine jewelry designed for tactile self-expression and effortless daily stacking.
+                </p>
+            </div>
+            <div class="footer-col">
+                <h4>Explore</h4>
+                <ul>
+                    <li><a href="#shop">Signature Rings</a></li>
+                    <li><a href="#shop">Layering Necklaces</a></li>
+                    <li><a href="#shop">Sculptural Cuffs</a></li>
+                    <li><a href="#quiz">Style Concierge</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Client Care</h4>
+                <ul>
+                    <li><a href="#">Ring Sizing Guide</a></li>
+                    <li><a href="#">Material & Care</a></li>
+                    <li><a href="#">Shipping & Returns</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Social</h4>
+                <ul>
+                    <li><a href="#">Instagram</a></li>
+                    <li><a href="#">Pinterest</a></li>
+                    <li><a href="#">Editorial Notes</a></li>
+                </ul>
             </div>
         </div>
 
-        
-        <div class="quiz-card" id="resultsCard" style="display: none;">
-            <span class="archetype-badge">Your Signature Curation</span>
-            <h1 class="intro-title" id="resArchetype">The Modern Minimalist</h1>
-            <p class="subtitle" id="resGreeting">Based on your preferences, we curated this signature edit tailored to your preferred finish and aesthetic choices.</p>
-
-            
-            <div class="results-grid" id="resultsGrid"></div>
-
-            <button class="btn-primary" onclick="restartQuiz()">Retake Style Quiz</button>
+        <div class="footer-bottom">
+            <span>&copy; 2026 STRIVA JEWELRY. ALL RIGHTS RESERVED.</span>
+            <span>PRICES INCLUSIVE OF ALL APPLICABLE TAXES (INR ₹)</span>
         </div>
-    </main>
-
-    <footer>
-        &copy; 2026 STRIVA JEWELRY INC. ALL RIGHTS RESERVED.
     </footer>
 
     <script>
-    
-        let questions = [
-            {
-                id: 1,
-                title: "Daily Uniform",
-                subtitle: "When you’re putting together a quick go-to outfit, what’s your baseline vibe?",
-                options: [
-                    { label: "Tailored", text: "Crisp tailored shirt, structured trousers, clean lines.", tag: "Tailored" },
-                    { label: "Relaxed Blazer", text: "Oversized blazer, relaxed denim, statement sneakers.", tag: "Oversized Blazer" },
-                    { label: "Flowy & Soft", text: "Flowy silhouette, soft textures, natural tones.", tag: "Flowy Silhouette" }
-                ]
-            },
-            {
-                id: 2,
-                title: "Stacking & Layering",
-                subtitle: "How do you prefer to wear your neckwear and rings?",
-                options: [
-                    { label: "Solo Anchor", text: "One clean, striking piece and nothing else.", tag: "Solo Anchor" },
-                    { label: "Curated Stack", text: "2–3 mixed-texture pieces layered together.", tag: "Curated Stack" },
-                    { label: "Delicate Minimalism", text: "Ultra-thin, barely-there accents.", tag: "Delicate Minimalism" }
-                ]
-            }
-        ];
-
-       
-        const DEFAULT_PRODUCT_IMAGES = {
-            "striva-001": "https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&q=80&w=600", // <-- CHANGE IMAGE LINK HERE
-            "striva-002": "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&q=80&w=600", // <-- CHANGE IMAGE LINK HERE
-            "striva-003": "https://images.unsplash.com/photo-1611591475155-4286fa7c2e7f?auto=format&fit=crop&q=80&w=600"  // <-- CHANGE IMAGE LINK HERE
-        };
-
+        let questions = [];
         let currentQuestionIndex = 0;
         let selectedMetal = "Gold Vermeil";
         let userAnswers = [];
+
+        /* =========================================================================
+           FALLBACK PRODUCT IMAGES & PRICES (IN INR ₹)
+        ========================================================================= */
+        const DEFAULT_PRODUCTS = {
+            "striva-001": {
+                name: "The Heritage Signet Ring",
+                price: 11999.00,
+                metal: "Gold Vermeil",
+                style_category: "Classic",
+                image_url: "https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&q=80&w=600"
+            },
+            "striva-002": {
+                name: "Architectural Bar Pendant",
+                price: 14499.00,
+                metal: "Sterling Silver",
+                style_category: "Modern",
+                image_url: "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&q=80&w=600"
+            },
+            "striva-003": {
+                name: "Organic Ripple Cuff",
+                price: 16999.00,
+                metal: "Gold Vermeil",
+                style_category: "Artisanal",
+                image_url: "https://images.unsplash.com/photo-1611591475155-4286fa7c2e7f?auto=format&fit=crop&q=80&w=600"
+            }
+        };
 
         const introCard = document.getElementById('introCard');
         const questionCard = document.getElementById('questionCard');
@@ -427,7 +660,7 @@
                     questions = data.questions;
                 }
             } catch (err) {
-                console.log('Using local questions definition.');
+                console.log('Backend connection pending, using standard fallback logic.');
             }
         });
 
@@ -536,7 +769,6 @@
                     useFallbackResults(nameInput);
                 }
             } catch (err) {
-                console.warn("Backend not reached, rendering local results layout.");
                 useFallbackResults(nameInput);
             }
         }
@@ -550,21 +782,16 @@
             grid.innerHTML = '';
 
             data.recommendations.forEach(prod => {
-                // If DB image URL is missing, fall back to DEFAULT_PRODUCT_IMAGES
-                const finalImgUrl = prod.image_url || DEFAULT_PRODUCT_IMAGES[prod.id] || 'https://via.placeholder.com/400x500?text=Striva+Jewelry';
+                const finalImgUrl = prod.image_url || DEFAULT_PRODUCTS["striva-001"].image_url;
 
                 const prodEl = document.createElement('div');
                 prodEl.className = 'product-card';
                 
-                /* =========================================================================
-                   IMAGE LOCATION OPTION 2: DYNAMIC INJECTION FROM BACKEND / DATABASE
-                   This <img> tag injects the final online URL into the product card!
-                ========================================================================= */
                 prodEl.innerHTML = `
                     <img src="${finalImgUrl}" alt="${prod.name}" loading="lazy">
                     <div class="prod-metal">${prod.metal || 'Gold Vermeil'} • ${prod.style_category || 'Classic'}</div>
                     <div class="prod-title">${prod.name}</div>
-                    <div class="prod-price">$${prod.price ? prod.price.toFixed(2) : '150.00'} USD</div>
+                    <div class="prod-price">₹${prod.price ? prod.price.toLocaleString('en-IN') : '11,999'} INR</div>
                 `;
                 grid.appendChild(prodEl);
             });
@@ -573,11 +800,11 @@
         function useFallbackResults(userName) {
             const fallbackData = {
                 user_name: userName,
-                archetype: "The Heritage Classicist",
+                archetype: "The Architectural Classicist",
                 recommendations: [
-                    { id: "striva-001", name: "The Heritage Signet Ring", price: 145.00, metal: "Gold Vermeil", style_category: "Classic", image_url: DEFAULT_PRODUCT_IMAGES["striva-001"] },
-                    { id: "striva-002", name: "Architectural Bar Pendant", price: 180.00, metal: "Sterling Silver", style_category: "Modern", image_url: DEFAULT_PRODUCT_IMAGES["striva-002"] },
-                    { id: "striva-003", name: "Organic Ripple Cuff", price: 210.00, metal: "Gold Vermeil", style_category: "Artisanal", image_url: DEFAULT_PRODUCT_IMAGES["striva-003"] }
+                    DEFAULT_PRODUCTS["striva-001"],
+                    DEFAULT_PRODUCTS["striva-002"],
+                    DEFAULT_PRODUCTS["striva-003"]
                 ]
             };
             displayResults(fallbackData);
