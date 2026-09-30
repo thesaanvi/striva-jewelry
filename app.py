@@ -1,10 +1,10 @@
 import os
 import pymysql
-from flask import Flask, request, jsonify, render_template_string
+from flask import Flask, request, jsonify, render_template
 
+# Flask automatically searches in the 'templates' folder for render_template
 app = Flask(__name__)
 
-# Fallback product list if Aiven DB is empty or connecting fails
 FALLBACK_PRODUCTS = [
     {
         "id": "striva-001",
@@ -92,11 +92,9 @@ QUIZ_QUESTIONS = [
 ]
 
 def get_db_connection():
-    # Only try connecting if environment variables are provided
     host = os.getenv("AIVEN_DB_HOST")
     if not host:
         return None
-        
     return pymysql.connect(
         host=host,
         port=int(os.getenv("AIVEN_DB_PORT", 3306)),
@@ -110,12 +108,8 @@ def get_db_connection():
 
 @app.route("/")
 def index():
-    # Renders index.html from your templates directory or directly if using template string
-    try:
-        with open("index.html", "r") as f:
-            return f.read()
-    except FileNotFoundError:
-        return "index.html file not found in root directory!", 404
+    # Renders index.html directly from the /templates directory
+    return render_template("index.html")
 
 @app.route("/api/quiz-questions", methods=["GET"])
 def get_questions():
@@ -133,8 +127,6 @@ def calculate_recommendations():
 
         products = []
         conn = None
-        
-        # Safe DB Fetch
         try:
             conn = get_db_connection()
             if conn:
@@ -142,12 +134,11 @@ def calculate_recommendations():
                     cursor.execute("SELECT * FROM products")
                     products = cursor.fetchall()
         except Exception as db_err:
-            print(f"Database connection error: {db_err}")
+            print(f"DB Notice: {db_err}")
         finally:
             if conn:
                 conn.close()
 
-        # Fallback if DB fetch returned nothing or failed
         if not products:
             products = FALLBACK_PRODUCTS
 
