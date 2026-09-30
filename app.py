@@ -505,6 +505,7 @@ def ensure_tables_and_seed():
         # Check every column used by the current API and add it if missing.
         required_columns = {
             "sku": "VARCHAR(100) NULL",
+            "category": "VARCHAR(80) NULL",
             "gender": "VARCHAR(30) NULL",
             "occasion": "VARCHAR(30) NULL",
             "sub_category": "VARCHAR(80) NULL",
@@ -546,6 +547,7 @@ def ensure_tables_and_seed():
 
             values = (
                 p["name"],
+                p["sub_category"],
                 p["gender"],
                 p["occasion"],
                 p["sub_category"],
@@ -563,6 +565,7 @@ def ensure_tables_and_seed():
                     """
                     UPDATE products SET
                         name = %s,
+                        category = %s,
                         gender = %s,
                         occasion = %s,
                         sub_category = %s,
@@ -580,13 +583,14 @@ def ensure_tables_and_seed():
                 cursor.execute(
                     """
                     INSERT INTO products
-                    (sku, name, gender, occasion, sub_category, price_inr,
+                    (sku, name, category, gender, occasion, sub_category, price_inr,
                      metal, description, image_url, tag, is_customizable)
                     VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
                     """,
                     (
                         p["sku"],
                         p["name"],
+                        p["sub_category"],
                         p["gender"],
                         p["occasion"],
                         p["sub_category"],
