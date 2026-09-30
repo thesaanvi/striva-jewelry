@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Striva - Fine & Demi-Fine Jewelry</title>
-    <!-- Google Fonts & Font Awesome Icons -->
+    <title>Striva | Fine & Demi-Fine Jewelry</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
@@ -31,14 +30,13 @@
             color: var(--text-dark);
         }
 
-        /* Top Bar & Header */
         .top-bar {
             background-color: var(--primary);
-            color: #fff;
+            color: #ffffff;
             text-align: center;
             padding: 8px;
-            font-size: 12px;
-            letter-spacing: 1px;
+            font-size: 11px;
+            letter-spacing: 1.5px;
             text-transform: uppercase;
         }
 
@@ -63,7 +61,7 @@
             font-family: 'Cinzel', serif;
             font-size: 28px;
             font-weight: 700;
-            letter-spacing: 3px;
+            letter-spacing: 4px;
             color: var(--primary);
             text-decoration: none;
         }
@@ -71,13 +69,13 @@
         nav ul {
             display: flex;
             list-style: none;
-            gap: 25px;
+            gap: 22px;
         }
 
         nav a {
             text-decoration: none;
             color: var(--text-dark);
-            font-size: 13px;
+            font-size: 12px;
             font-weight: 500;
             text-transform: uppercase;
             letter-spacing: 1px;
@@ -115,10 +113,9 @@
             font-weight: bold;
         }
 
-        /* Filter Controls */
         .filter-section {
             max-width: 1200px;
-            margin: 30px auto 10px;
+            margin: 25px auto 10px;
             padding: 0 20px;
         }
 
@@ -139,7 +136,7 @@
         }
 
         .filter-group label {
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 1px;
@@ -151,13 +148,12 @@
             border: 1px solid var(--border-color);
             border-radius: 4px;
             background-color: #fff;
-            font-size: 14px;
+            font-size: 13px;
             color: var(--text-dark);
             outline: none;
             cursor: pointer;
         }
 
-        /* Main Container */
         .container {
             max-width: 1200px;
             margin: 0 auto;
@@ -166,8 +162,8 @@
 
         .section-title {
             font-family: 'Cinzel', serif;
-            font-size: 24px;
-            margin: 40px 0 20px;
+            font-size: 22px;
+            margin: 35px 0 20px;
             text-align: center;
             letter-spacing: 2px;
             color: var(--primary);
@@ -177,16 +173,15 @@
         .section-title::after {
             content: '';
             display: block;
-            width: 50px;
+            width: 40px;
             height: 2px;
             background-color: var(--accent);
-            margin: 10px auto 0;
+            margin: 8px auto 0;
         }
 
-        /* Product Grid */
         .product-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
             gap: 25px;
         }
 
@@ -201,8 +196,8 @@
         }
 
         .product-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.06);
         }
 
         .product-img {
@@ -219,13 +214,14 @@
         }
 
         .product-title {
-            font-size: 15px;
+            font-size: 14px;
             font-weight: 500;
             margin-bottom: 8px;
+            color: var(--text-dark);
         }
 
         .product-price {
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 600;
             color: var(--accent);
             margin-bottom: 15px;
@@ -239,7 +235,7 @@
             padding: 10px;
             border-radius: 4px;
             text-transform: uppercase;
-            font-size: 12px;
+            font-size: 11px;
             letter-spacing: 1px;
             cursor: pointer;
             transition: background 0.3s;
@@ -249,7 +245,6 @@
             background-color: var(--accent);
         }
 
-        /* Modals */
         .modal {
             display: none;
             position: fixed;
@@ -267,7 +262,7 @@
             background-color: #fff;
             padding: 30px;
             border-radius: 8px;
-            max-width: 500px;
+            max-width: 480px;
             width: 90%;
             position: relative;
         }
@@ -287,19 +282,21 @@
 
         .form-group label {
             display: block;
-            font-size: 12px;
-            margin-bottom: 5px;
+            font-size: 11px;
+            margin-bottom: 6px;
             font-weight: 600;
+            text-transform: uppercase;
+            color: var(--text-muted);
         }
 
-        .form-group input, .form-group select, .form-group textarea {
+        .form-group input, .form-group select {
             width: 100%;
             padding: 10px;
             border: 1px solid var(--border-color);
             border-radius: 4px;
+            font-size: 13px;
         }
 
-        /* Sliding Cart Drawer */
         .cart-drawer {
             position: fixed;
             top: 0;
@@ -338,6 +335,7 @@
             justify-content: space-between;
             align-items: center;
             margin-bottom: 15px;
+            font-size: 13px;
         }
 
         .cart-footer {
@@ -353,25 +351,23 @@
             padding: 12px;
             font-weight: bold;
             cursor: pointer;
-            margin-top: 10px;
+            letter-spacing: 1px;
         }
     </style>
 </head>
 <body>
 
-    <!-- Top Announcement Bar -->
-    <div class="top-bar">Complimentary Shipping on all Orders Above ₹1,999</div>
+    <div class="top-bar">Complimentary Pan-India Express Shipping on Orders Above ₹1,999</div>
 
-    <!-- Header / Navbar -->
     <header>
         <div class="header-container">
             <a href="#" class="brand-logo" onclick="filterBySection('all')">STRIVA</a>
             <nav>
                 <ul>
-                    <li><a href="#" onclick="filterBySection('all')" class="active">Home</a></li>
-                    <li><a href="#" onclick="filterBySection('trending')">Trending</a></li>
-                    <li><a href="#" onclick="filterBySection('best_sellers')">Best Sellers</a></li>
-                    <li><a href="#" onclick="filterBySection('curators_choice')">Curator's Choice</a></li>
+                    <li><a href="#" onclick="filterBySection('all')" id="nav-all" class="active">Home</a></li>
+                    <li><a href="#" onclick="filterBySection('trending')" id="nav-trending">Trending</a></li>
+                    <li><a href="#" onclick="filterBySection('best_sellers')" id="nav-best_sellers">Best Sellers</a></li>
+                    <li><a href="#" onclick="filterBySection('curators_choice')" id="nav-curators_choice">Curator's Choice</a></li>
                     <li><a href="#" onclick="openModal('quizModal')">Style Quiz</a></li>
                     <li><a href="#" onclick="openModal('customModal')">Customize Yours</a></li>
                 </ul>
@@ -383,10 +379,8 @@
         </div>
     </header>
 
-    <!-- Filters Section -->
     <div class="filter-section">
         <div class="filter-card">
-            <!-- Filter 1: Gender / Audience -->
             <div class="filter-group">
                 <label>Filter For</label>
                 <select id="genderFilter" onchange="applyFilters()">
@@ -397,7 +391,6 @@
                 </select>
             </div>
 
-            <!-- Filter 2: Occasion -->
             <div class="filter-group">
                 <label>Occasion</label>
                 <select id="occasionFilter" onchange="applyFilters()">
@@ -407,25 +400,22 @@
                 </select>
             </div>
 
-            <!-- Filter 3: Accessories / Categories -->
             <div class="filter-group">
-                <label>Category</label>
+                <label>Category / Accessory</label>
                 <select id="categoryFilter" onchange="applyFilters()">
-                    <!-- Options populated dynamically based on Gender/Occasion -->
+                    <!-- Populated dynamically based on filters -->
                 </select>
             </div>
         </div>
     </div>
 
-    <!-- Dynamic Main Content Grid -->
     <main class="container">
-        <!-- Dynamic Product Display Area -->
         <div id="productSections">
-            <!-- Populated via JavaScript dynamically -->
+            <!-- Dynamic Grid Insertion -->
         </div>
     </main>
 
-    <!-- Authentication Modal (Sign In / Create Account) -->
+    <!-- Authentication Modal -->
     <div id="authModal" class="modal">
         <div class="modal-content">
             <span class="close-modal" onclick="closeModal('authModal')">&times;</span>
@@ -433,11 +423,11 @@
             <form id="authForm" onsubmit="handleAuth(event)">
                 <div class="form-group" id="nameGroup" style="display: none;">
                     <label>Full Name</label>
-                    <input type="text" id="authName" placeholder="John Doe">
+                    <input type="text" id="authName" placeholder="Enter your name">
                 </div>
                 <div class="form-group">
                     <label>Email Address</label>
-                    <input type="email" required placeholder="user@example.com">
+                    <input type="email" required placeholder="user@striva.com">
                 </div>
                 <div class="form-group">
                     <label>Password</label>
@@ -447,7 +437,7 @@
             </form>
             <p style="text-align: center; margin-top: 15px; font-size: 12px; color: var(--text-muted);">
                 <span id="authToggleText">Don't have an account?</span> 
-                <a href="#" onclick="toggleAuthMode()" style="color: var(--accent); font-weight: bold;">Click Here</a>
+                <a href="#" onclick="toggleAuthMode()" style="color: var(--accent); font-weight: bold;">Create Account</a>
             </p>
         </div>
     </div>
@@ -457,23 +447,21 @@
         <div class="modal-content">
             <span class="close-modal" onclick="closeModal('quizModal')">&times;</span>
             <h2 style="font-family: 'Cinzel', serif; margin-bottom: 15px;">Discover Your Style</h2>
-            <p style="font-size: 13px; margin-bottom: 20px; color: var(--text-muted);">Answer a few questions to find pieces tailored for you.</p>
             <div class="form-group">
-                <label>What tone do you prefer?</label>
+                <label>Preferred Aesthetic</label>
                 <select id="quizTone">
                     <option value="minimal">Sleek & Minimalist</option>
-                    <option value="wedding">Bold & Traditional</option>
+                    <option value="wedding">Bold & Heritage Wedding</option>
                 </select>
             </div>
             <div class="form-group">
-                <label>Primary Metal Finish</label>
+                <label>Primary Metal</label>
                 <select>
                     <option>18k Gold Vermeil</option>
                     <option>925 Sterling Silver</option>
-                    <option>Rose Gold</option>
                 </select>
             </div>
-            <button class="add-cart-btn" style="width: 100%; padding: 12px;" onclick="submitQuiz()">Get Recommendations</button>
+            <button class="add-cart-btn" style="width: 100%; padding: 12px;" onclick="submitQuiz()">Show Recommendations</button>
         </div>
     </div>
 
@@ -481,45 +469,35 @@
     <div id="customModal" class="modal">
         <div class="modal-content">
             <span class="close-modal" onclick="closeModal('customModal')">&times;</span>
-            <h2 style="font-family: 'Cinzel', serif; margin-bottom: 15px;">Customization Studio</h2>
+            <h2 style="font-family: 'Cinzel', serif; margin-bottom: 15px;">Bespoke Studio</h2>
             <div class="form-group">
-                <label>Custom Engraving Text</label>
-                <input type="text" placeholder="e.g. Initials or Date">
+                <label>Custom Engraving</label>
+                <input type="text" placeholder="Initials, Name, or Date">
             </div>
             <div class="form-group">
-                <label>Choose Metal</label>
+                <label>Metal Preference</label>
                 <select>
                     <option>18k Gold Vermeil</option>
                     <option>925 Sterling Silver</option>
                 </select>
             </div>
-            <div class="form-group">
-                <label>Add-on Birthstone / Gem</label>
-                <select>
-                    <option>Cubic Zirconia Solitaire</option>
-                    <option>Emerald Accent</option>
-                    <option>Ruby Accent</option>
-                </select>
-            </div>
-            <button class="add-cart-btn" style="width: 100%; padding: 12px;" onclick="submitCustomization()">Submit Custom Request</button>
+            <button class="add-cart-btn" style="width: 100%; padding: 12px;" onclick="submitCustomization()">Request Bespoke Quote</button>
         </div>
     </div>
 
-    <!-- Cart Drawer -->
+    <!-- Sliding Cart Drawer -->
     <div id="cartDrawer" class="cart-drawer">
         <div class="cart-header">
-            <h3>Your Shopping Bag</h3>
+            <h3 style="font-family: 'Cinzel', serif;">Your Shopping Bag</h3>
             <span class="close-modal" onclick="toggleCart()">&times;</span>
         </div>
-        <div class="cart-items" id="cartItems">
-            <!-- Dynamic Cart Items -->
-        </div>
+        <div class="cart-items" id="cartItems"></div>
         <div class="cart-footer">
-            <div style="display: flex; justify-content: space-between; font-weight: bold; margin-bottom: 10px;">
-                <span>Total:</span>
+            <div style="display: flex; justify-content: space-between; font-weight: bold; margin-bottom: 12px;">
+                <span>Total Amount:</span>
                 <span id="cartTotal">₹0</span>
             </div>
-            <button class="checkout-btn" onclick="alert('Proceeding to Checkout!')">PROCEED TO CHECKOUT</button>
+            <button class="checkout-btn" onclick="alert('Proceeding to Secure Checkout')">CHECKOUT</button>
         </div>
     </div>
 
@@ -528,7 +506,6 @@
         let cart = [];
         let isSignUp = false;
 
-        // Base Categories List
         const baseCategories = [
             { value: 'all', text: 'All Accessories' },
             { value: 'rings', text: 'Rings' },
@@ -537,24 +514,19 @@
             { value: 'anklets', text: 'Anklets' }
         ];
 
-        // On Page Load Initialization
         window.onload = function() {
             updateCategoryOptions();
             fetchProducts();
         };
 
-        // Update Dynamic Categories based on selected Gender & Occasion
         function updateCategoryOptions() {
             const gender = document.getElementById('genderFilter').value;
             const occasion = document.getElementById('occasionFilter').value;
             const categorySelect = document.getElementById('categoryFilter');
 
-            // Reset options
             categorySelect.innerHTML = '';
-
             let categories = [...baseCategories];
 
-            // Add wedding-specific accessories if female/all & wedding occasion
             if (occasion === 'wedding' || occasion === 'all') {
                 if (gender === 'female' || gender === 'all') {
                     categories.push(
@@ -573,7 +545,6 @@
             });
         }
 
-        // Fetch products from Python API
         function fetchProducts() {
             const gender = document.getElementById('genderFilter').value;
             const occasion = document.getElementById('occasionFilter').value;
@@ -587,7 +558,7 @@
             fetch(url)
                 .then(res => res.json())
                 .then(data => renderProducts(data))
-                .catch(err => console.error("Error fetching data:", err));
+                .catch(err => console.error("Error fetching products:", err));
         }
 
         function applyFilters() {
@@ -597,16 +568,18 @@
 
         function filterBySection(sectionName) {
             currentSection = sectionName;
+            document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+            const activeNav = document.getElementById(`nav-${sectionName}`);
+            if (activeNav) activeNav.classList.add('active');
             fetchProducts();
         }
 
-        // Render products into structural Homepage sections
         function renderProducts(products) {
             const container = document.getElementById('productSections');
             container.innerHTML = '';
 
-            if (products.length === 0) {
-                container.innerHTML = `<p style="text-align:center; padding: 40px; color: var(--text-muted);">No accessories match your current selection.</p>`;
+            if (!products || products.length === 0) {
+                container.innerHTML = `<p style="text-align:center; padding: 50px; color: var(--text-muted);">No products match your selected filters.</p>`;
                 return;
             }
 
@@ -633,7 +606,7 @@
                                 <img src="${item.image}" class="product-img" alt="${item.name}">
                                 <div class="product-info">
                                     <div class="product-title">${item.name}</div>
-                                    <div class="product-price">₹${item.price.toLocaleString()}</div>
+                                    <div class="product-price">₹${item.price.toLocaleString('en-IN')}</div>
                                     <button class="add-cart-btn" onclick="addToCart('${item.name}', ${item.price})">Add to Bag</button>
                                 </div>
                             </div>
@@ -644,7 +617,6 @@
             });
         }
 
-        // Cart Actions
         function addToCart(name, price) {
             cart.push({ name, price });
             updateCartUI();
@@ -662,14 +634,14 @@
                 cartItemsContainer.innerHTML += `
                     <div class="cart-item">
                         <div>
-                            <div style="font-weight: bold; font-size: 13px;">${item.name}</div>
-                            <div style="color: var(--accent); font-size: 12px;">₹${item.price.toLocaleString()}</div>
+                            <div style="font-weight: 600;">${item.name}</div>
+                            <div style="color: var(--accent);">₹${item.price.toLocaleString('en-IN')}</div>
                         </div>
-                        <i class="fa-solid fa-trash" style="cursor:pointer; color:red;" onclick="removeFromCart(${index})"></i>
+                        <i class="fa-solid fa-trash" style="cursor:pointer; color: #cc0000;" onclick="removeFromCart(${index})"></i>
                     </div>
                 `;
             });
-            document.getElementById('cartTotal').innerText = `₹${total.toLocaleString()}`;
+            document.getElementById('cartTotal').innerText = `₹${total.toLocaleString('en-IN')}`;
         }
 
         function removeFromCart(index) {
@@ -681,11 +653,9 @@
             document.getElementById('cartDrawer').classList.toggle('open');
         }
 
-        // Modal Handlers
         function openModal(id) { document.getElementById(id).style.display = 'flex'; }
         function closeModal(id) { document.getElementById(id).style.display = 'none'; }
 
-        // Authentication Toggle System
         function toggleAuthMode() {
             isSignUp = !isSignUp;
             document.getElementById('authTitle').innerText = isSignUp ? "Create Account" : "Sign In";
@@ -705,11 +675,10 @@
             document.getElementById('occasionFilter').value = tone;
             applyFilters();
             closeModal('quizModal');
-            alert(`Filters applied based on your preference!`);
         }
 
         function submitCustomization() {
-            alert("Custom order received! Our designer will contact you shortly.");
+            alert("Your custom request has been logged. Our design team will contact you!");
             closeModal('customModal');
         }
     </script>
