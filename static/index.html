@@ -3,15 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Striva | Demi-Fine Jewelry</title>
+  <title>STRIVA | Modern Demi-Fine & Wedding Fine Jewelry</title>
 
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- Google Fonts: Cormorant Garamond for luxury serif headlines & Inter for clean body -->
+  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
   <script>
     tailwind.config = {
@@ -20,10 +20,10 @@
           colors: {
             brand: {
               cream: '#FAF8F5',
-              dark: '#1A1A1A',
+              dark: '#141414',
               gold: '#C5A059',
               'gold-hover': '#B38E46',
-              softgray: '#F3F3F1'
+              softgray: '#F4F4F2'
             }
           },
           fontFamily: {
@@ -35,7 +35,6 @@
     }
   </script>
   <style>
-    /* Custom scrollbar hiding for horizontal category circles */
     .no-scrollbar::-webkit-scrollbar { display: none; }
     .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
   </style>
@@ -43,8 +42,8 @@
 <body class="bg-white font-sans text-brand-dark antialiased selection:bg-brand-gold selection:text-white">
 
   <!-- ================= TOP ANNOUNCEMENT BAR ================= -->
-  <div class="bg-brand-dark text-white text-xs tracking-widest text-center py-2 px-4 uppercase">
-    ✨ FESTIVE SALE: BUY 2 GET 1 FREE | USE CODE: <span class="font-semibold text-brand-gold">STRIVA3</span>
+  <div class="bg-brand-dark text-white text-xs tracking-widest text-center py-2.5 px-4 uppercase">
+    ✨ THE WEDDING & ESSENTIALS EDITION | COMPLIMENTARY EXPRESS SHIPPING | USE CODE: <span class="font-semibold text-brand-gold">STRIVA2026</span>
   </div>
 
   <!-- ================= MAIN NAVIGATION BAR ================= -->
@@ -52,34 +51,28 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between h-20">
 
-        <!-- Mobile Menu Toggle -->
-        <button id="mobile-menu-btn" class="md:hidden text-brand-dark hover:text-brand-gold">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M4 6h16M4 12h16M4 18h16"/></svg>
-        </button>
-
-        <!-- Navigation Links (Left Side - Desktop) -->
-        <nav class="hidden md:flex space-x-8 text-xs font-medium uppercase tracking-widest text-gray-700">
-          <a href="#new-arrivals" class="hover:text-brand-gold transition-colors">New In</a>
+        <!-- Navigation Links (Left) -->
+        <nav class="hidden lg:flex space-x-7 text-xs font-medium uppercase tracking-widest text-gray-800">
+          <a href="#women" class="hover:text-brand-gold transition-colors">Women</a>
+          <a href="#men" class="hover:text-brand-gold transition-colors">Men</a>
+          <a href="#wedding" class="hover:text-brand-gold transition-colors font-semibold text-brand-gold">Wedding & Bridal</a>
           <a href="#bestsellers" class="hover:text-brand-gold transition-colors">Bestsellers</a>
-          <a href="#shop" class="hover:text-brand-gold transition-colors">Rings</a>
-          <a href="#shop" class="hover:text-brand-gold transition-colors">Necklaces</a>
-          <a href="#shop" class="hover:text-brand-gold transition-colors">Earrings</a>
         </nav>
 
         <!-- Brand Logo (Center) -->
         <div class="flex-shrink-0 text-center">
-          <a href="#" class="font-serif text-3xl font-bold tracking-widest text-brand-dark uppercase">STRIVA</a>
-          <span class="block text-[9px] tracking-[0.3em] uppercase text-brand-gold -mt-1">Demi-Fine Luxury</span>
+          <a href="#" class="font-serif text-3xl font-bold tracking-[0.2em] text-brand-dark uppercase">STRIVA</a>
+          <span class="block text-[8px] tracking-[0.35em] uppercase text-brand-gold -mt-1">Demi-Fine & Fine Jewelry</span>
         </div>
 
-        <!-- Utility Icons (Right Side) -->
+        <!-- Utility Icons (Right) -->
         <div class="flex items-center space-x-6">
-          <a href="#" class="hidden sm:block text-gray-700 hover:text-brand-gold">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
-          </a>
-          <a href="#" class="hidden sm:block text-gray-700 hover:text-brand-gold">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
-          </a>
+          <!-- Sign In / Account Icon (Optional Header Access) -->
+          <button id="header-account-btn" class="text-gray-700 hover:text-brand-gold flex items-center gap-1.5 text-xs tracking-wider uppercase font-medium">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+            <span class="hidden md:inline" id="user-status-text">Sign In</span>
+          </button>
+
           <!-- Cart Icon with Badge -->
           <button id="cart-btn" class="relative text-gray-700 hover:text-brand-gold transition-colors">
             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
@@ -92,216 +85,110 @@
 
   <!-- ================= HERO BANNER ================= -->
   <section class="relative bg-brand-cream overflow-hidden">
-    <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between min-h-[550px] px-6 lg:px-8 py-12">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between min-h-[580px] px-6 lg:px-8 py-12">
       <div class="md:w-1/2 z-10 text-center md:text-left mb-8 md:mb-0">
-        <span class="text-xs uppercase tracking-[0.3em] text-brand-gold font-semibold">18k Gold Vermeil & Sterling Silver</span>
+        <span class="text-xs uppercase tracking-[0.3em] text-brand-gold font-semibold">18k Gold Vermeil • 925 Sterling Silver</span>
         <h1 class="font-serif text-4xl sm:text-6xl font-normal tracking-tight text-brand-dark mt-3 mb-6 leading-tight">
-          Everyday Luxury <br><em class="font-serif italic font-light">Made Waterproof.</em>
+          Modern Luxury <br><em class="font-serif italic font-light">For Men, Women & Marriages.</em>
         </h1>
         <p class="text-sm text-gray-600 max-w-md mx-auto md:mx-0 mb-8 font-light leading-relaxed">
-          Anti-tarnish, hypoallergenic, and designed for life in motion. Discover Striva's signature demi-fine collection built to last.
+          Waterproof, anti-tarnish, and hypoallergenic everyday essentials engineered for effortless wear—from daily lifestyle stacks to wedding celebrations.
         </p>
         <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-          <a href="#bestsellers" class="bg-brand-dark text-white text-xs uppercase tracking-widest px-8 py-4 font-medium hover:bg-brand-gold transition-all duration-300 text-center">
-            Shop Bestsellers
+          <a href="#wedding" class="bg-brand-dark text-white text-xs uppercase tracking-widest px-8 py-4 font-medium hover:bg-brand-gold transition-all duration-300 text-center">
+            Explore Wedding Suite
           </a>
-          <a href="#new-arrivals" class="border border-brand-dark text-brand-dark text-xs uppercase tracking-widest px-8 py-4 font-medium hover:bg-brand-dark hover:text-white transition-all duration-300 text-center">
-            Explore Collection
+          <a href="#men" class="border border-brand-dark text-brand-dark text-xs uppercase tracking-widest px-8 py-4 font-medium hover:bg-brand-dark hover:text-white transition-all duration-300 text-center">
+            Shop Men's Edition
           </a>
         </div>
       </div>
       <div class="md:w-1/2 relative w-full flex justify-center">
         <div class="relative w-full max-w-md aspect-[4/5] bg-gray-200 rounded-sm overflow-hidden shadow-xl">
-          <img src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=800&q=80" alt="Striva Demi Fine Jewelry Hero" class="w-full h-full object-cover">
-          <div class="absolute bottom-4 left-4 right-4 bg-white/90 backdrop-blur-sm p-4 text-center">
-            <p class="text-xs tracking-widest uppercase font-semibold text-brand-dark">The Golden Solitaire Pendant</p>
-            <p class="text-xs text-brand-gold mt-0.5">Waterproof • 18k Gold Vermeil</p>
-          </div>
+          <img src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=800&q=80" alt="Striva Modern Jewelry" class="w-full h-full object-cover">
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ================= CIRCULAR CATEGORY QUICK-LINKS ================= -->
+  <!-- ================= CIRCULAR CATEGORIES ================= -->
   <section class="py-10 border-b border-gray-100 bg-white">
     <div class="max-w-7xl mx-auto px-4">
-      <div class="flex items-center justify-between sm:justify-center gap-6 sm:gap-12 overflow-x-auto no-scrollbar py-2">
-        
-        <a href="#" class="flex flex-col items-center min-w-[75px] group">
-          <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-full p-0.5 border-2 border-brand-gold group-hover:scale-105 transition-transform duration-300">
-            <img src="https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=300&q=80" class="w-full h-full object-cover rounded-full" alt="Rings">
+      <div class="flex items-center justify-between sm:justify-center gap-6 sm:gap-10 overflow-x-auto no-scrollbar py-2">
+        <a href="#women" class="flex flex-col items-center min-w-[75px] group">
+          <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-full p-0.5 border-2 border-brand-gold group-hover:scale-105 transition-transform">
+            <img src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=300&q=80" class="w-full h-full object-cover rounded-full" alt="Women">
           </div>
-          <span class="text-xs tracking-wider uppercase mt-2 font-medium text-gray-700 group-hover:text-brand-gold">Rings</span>
+          <span class="text-xs tracking-wider uppercase mt-2 font-medium text-gray-700">Women</span>
         </a>
-
-        <a href="#" class="flex flex-col items-center min-w-[75px] group">
-          <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-full p-0.5 border border-gray-200 group-hover:border-brand-gold group-hover:scale-105 transition-transform duration-300">
-            <img src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=300&q=80" class="w-full h-full object-cover rounded-full" alt="Necklaces">
+        <a href="#men" class="flex flex-col items-center min-w-[75px] group">
+          <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-full p-0.5 border border-gray-200 group-hover:border-brand-gold group-hover:scale-105 transition-transform">
+            <img src="https://images.unsplash.com/photo-1611591475281-8d282322886c?auto=format&fit=crop&w=300&q=80" class="w-full h-full object-cover rounded-full" alt="Men">
           </div>
-          <span class="text-xs tracking-wider uppercase mt-2 font-medium text-gray-700 group-hover:text-brand-gold">Necklaces</span>
+          <span class="text-xs tracking-wider uppercase mt-2 font-medium text-gray-700">Men</span>
         </a>
-
-        <a href="#" class="flex flex-col items-center min-w-[75px] group">
-          <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-full p-0.5 border border-gray-200 group-hover:border-brand-gold group-hover:scale-105 transition-transform duration-300">
-            <img src="https://images.unsplash.com/photo-1635767798638-3e25273a8236?auto=format&fit=crop&w=300&q=80" class="w-full h-full object-cover rounded-full" alt="Earrings">
+        <a href="#wedding" class="flex flex-col items-center min-w-[75px] group">
+          <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-full p-0.5 border-2 border-brand-gold group-hover:scale-105 transition-transform">
+            <img src="https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=300&q=80" class="w-full h-full object-cover rounded-full" alt="Wedding">
           </div>
-          <span class="text-xs tracking-wider uppercase mt-2 font-medium text-gray-700 group-hover:text-brand-gold">Earrings</span>
+          <span class="text-xs tracking-wider uppercase mt-2 font-medium text-brand-gold">Wedding</span>
         </a>
-
-        <a href="#" class="flex flex-col items-center min-w-[75px] group">
-          <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-full p-0.5 border border-gray-200 group-hover:border-brand-gold group-hover:scale-105 transition-transform duration-300">
-            <img src="https://images.unsplash.com/photo-1611591475281-8d282322886c?auto=format&fit=crop&w=300&q=80" class="w-full h-full object-cover rounded-full" alt="Bracelets">
-          </div>
-          <span class="text-xs tracking-wider uppercase mt-2 font-medium text-gray-700 group-hover:text-brand-gold">Bracelets</span>
-        </a>
-
-        <a href="#" class="flex flex-col items-center min-w-[75px] group">
-          <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-full p-0.5 border border-gray-200 group-hover:border-brand-gold group-hover:scale-105 transition-transform duration-300">
-            <img src="https://images.unsplash.com/photo-1603561591411-07134e71a2a9?auto=format&fit=crop&w=300&q=80" class="w-full h-full object-cover rounded-full" alt="Gifts">
-          </div>
-          <span class="text-xs tracking-wider uppercase mt-2 font-medium text-gray-700 group-hover:text-brand-gold">Gifting</span>
-        </a>
-
       </div>
     </div>
   </section>
 
-  <!-- ================= TRUST & BRAND GUARANTEE BAR ================= -->
-  <section class="bg-brand-softgray py-6 border-b border-gray-200">
+  <!-- ================= WEDDING & BRIDAL SECTION ================= -->
+  <section id="wedding" class="py-16 bg-brand-cream/60 border-b border-gray-200">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
-        <div class="flex items-center justify-center space-x-3 py-2">
-          <span class="text-xl">💧</span>
-          <div class="text-left">
-            <h4 class="text-xs font-bold uppercase tracking-wider text-brand-dark">100% Waterproof</h4>
-            <p class="text-[10px] text-gray-500">Swim, shower, exercise</p>
+      <div class="text-center mb-12">
+        <span class="text-xs uppercase tracking-[0.3em] text-brand-gold font-semibold">Forever Collections</span>
+        <h2 class="font-serif text-3xl sm:text-5xl font-normal text-brand-dark mt-1">Wedding & Bridal Suite</h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="bg-white p-4 shadow-sm border border-gray-100 flex flex-col group">
+          <div class="relative aspect-square overflow-hidden mb-4">
+            <span class="absolute top-2 left-2 z-10 bg-brand-gold text-white text-[9px] uppercase tracking-widest font-bold px-2 py-1">BRIDAL EDITION</span>
+            <img src="https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=600&q=80" alt="Royal Solitaire" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+          </div>
+          <h3 class="text-xs font-semibold uppercase tracking-wider text-brand-dark">The Heritage Solitaire Band</h3>
+          <p class="text-[11px] text-gray-500 mt-1">18K Solid Gold / Vermeil • Lab Diamonds</p>
+          <div class="mt-4 flex items-center justify-between pt-3 border-t border-gray-100">
+            <span class="text-xs font-bold text-brand-dark">₹4,999</span>
+            <button class="add-to-cart-btn text-xs font-medium uppercase tracking-widest text-brand-gold hover:text-brand-dark">Add To Bag +</button>
           </div>
         </div>
-        <div class="flex items-center justify-center space-x-3 py-2">
-          <span class="text-xl">✨</span>
-          <div class="text-left">
-            <h4 class="text-xs font-bold uppercase tracking-wider text-brand-dark">Anti-Tarnish Guarantee</h4>
-            <p class="text-[10px] text-gray-500">18K Gold Vermeil layer</p>
+
+        <div class="bg-white p-4 shadow-sm border border-gray-100 flex flex-col group">
+          <div class="relative aspect-square overflow-hidden mb-4">
+            <img src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=600&q=80" alt="Matching Bands" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+          </div>
+          <h3 class="text-xs font-semibold uppercase tracking-wider text-brand-dark">His & Hers Eternity Band Duo</h3>
+          <p class="text-[11px] text-gray-500 mt-1">Custom Engraved • Tarnish Proof</p>
+          <div class="mt-4 flex items-center justify-between pt-3 border-t border-gray-100">
+            <span class="text-xs font-bold text-brand-dark">₹8,499</span>
+            <button class="add-to-cart-btn text-xs font-medium uppercase tracking-widest text-brand-gold hover:text-brand-dark">Add To Bag +</button>
           </div>
         </div>
-        <div class="flex items-center justify-center space-x-3 py-2">
-          <span class="text-xl">🌿</span>
-          <div class="text-left">
-            <h4 class="text-xs font-bold uppercase tracking-wider text-brand-dark">Hypoallergenic</h4>
-            <p class="text-[10px] text-gray-500">Nickel-free, skin safe</p>
+
+        <div class="bg-white p-4 shadow-sm border border-gray-100 flex flex-col group">
+          <div class="relative aspect-square overflow-hidden mb-4">
+            <img src="https://images.unsplash.com/photo-1635767798638-3e25273a8236?auto=format&fit=crop&w=600&q=80" alt="Bridal Earrings" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
           </div>
-        </div>
-        <div class="flex items-center justify-center space-x-3 py-2">
-          <span class="text-xl">🚚</span>
-          <div class="text-left">
-            <h4 class="text-xs font-bold uppercase tracking-wider text-brand-dark">Free Express Shipping</h4>
-            <p class="text-[10px] text-gray-500">On all prepaid orders</p>
+          <h3 class="text-xs font-semibold uppercase tracking-wider text-brand-dark">Aura Statement Bridal Drop</h3>
+          <p class="text-[11px] text-gray-500 mt-1">Hypoallergenic • Hand-set Crystals</p>
+          <div class="mt-4 flex items-center justify-between pt-3 border-t border-gray-100">
+            <span class="text-xs font-bold text-brand-dark">₹6,299</span>
+            <button class="add-to-cart-btn text-xs font-medium uppercase tracking-widest text-brand-gold hover:text-brand-dark">Add To Bag +</button>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ================= BESTSELLERS PRODUCT GRID ================= -->
-  <section id="bestsellers" class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="text-center mb-12">
-      <span class="text-xs uppercase tracking-[0.3em] text-brand-gold font-semibold">Most Loved Items</span>
-      <h2 class="font-serif text-3xl sm:text-4xl font-normal text-brand-dark mt-1">Striva Bestsellers</h2>
-    </div>
-
-    <!-- 4-Column Product Grid -->
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-
-      <!-- Product Card 1 -->
-      <div class="group relative flex flex-col">
-        <div class="relative w-full aspect-square bg-gray-100 overflow-hidden rounded-sm">
-          <span class="absolute top-2 left-2 z-10 bg-brand-gold text-white text-[9px] uppercase tracking-widest font-bold px-2 py-1">BESTSELLER</span>
-          <img src="https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=600&q=80" alt="Celestial Band Ring" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-          <button class="add-to-cart-btn absolute bottom-0 left-0 right-0 bg-brand-dark/90 text-white text-xs uppercase tracking-widest py-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-            Quick Add +
-          </button>
-        </div>
-        <div class="mt-4 text-center flex-1 flex flex-col justify-between">
-          <div>
-            <h3 class="text-xs uppercase tracking-wider font-medium text-brand-dark">Celestial Band Ring</h3>
-            <p class="text-[11px] text-gray-500 mt-1">18K Gold Plated • Waterproof</p>
-          </div>
-          <div class="mt-2 flex items-center justify-center space-x-2">
-            <span class="text-xs font-bold text-brand-dark">₹1,899</span>
-            <span class="text-xs text-gray-400 line-through">₹2,499</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Product Card 2 -->
-      <div class="group relative flex flex-col">
-        <div class="relative w-full aspect-square bg-gray-100 overflow-hidden rounded-sm">
-          <span class="absolute top-2 left-2 z-10 bg-brand-dark text-white text-[9px] uppercase tracking-widest font-bold px-2 py-1">NEW</span>
-          <img src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=600&q=80" alt="Luna Layered Necklace" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-          <button class="add-to-cart-btn absolute bottom-0 left-0 right-0 bg-brand-dark/90 text-white text-xs uppercase tracking-widest py-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-            Quick Add +
-          </button>
-        </div>
-        <div class="mt-4 text-center flex-1 flex flex-col justify-between">
-          <div>
-            <h3 class="text-xs uppercase tracking-wider font-medium text-brand-dark">Luna Layered Necklace</h3>
-            <p class="text-[11px] text-gray-500 mt-1">Sterling Silver Base</p>
-          </div>
-          <div class="mt-2 flex items-center justify-center space-x-2">
-            <span class="text-xs font-bold text-brand-dark">₹2,299</span>
-            <span class="text-xs text-gray-400 line-through">₹2,999</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Product Card 3 -->
-      <div class="group relative flex flex-col">
-        <div class="relative w-full aspect-square bg-gray-100 overflow-hidden rounded-sm">
-          <img src="https://images.unsplash.com/photo-1635767798638-3e25273a8236?auto=format&fit=crop&w=600&q=80" alt="Classic Solitaire Huggies" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-          <button class="add-to-cart-btn absolute bottom-0 left-0 right-0 bg-brand-dark/90 text-white text-xs uppercase tracking-widest py-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-            Quick Add +
-          </button>
-        </div>
-        <div class="mt-4 text-center flex-1 flex flex-col justify-between">
-          <div>
-            <h3 class="text-xs uppercase tracking-wider font-medium text-brand-dark">Solitaire Huggie Earrings</h3>
-            <p class="text-[11px] text-gray-500 mt-1">AAA Grade Cubic Zirconia</p>
-          </div>
-          <div class="mt-2 flex items-center justify-center space-x-2">
-            <span class="text-xs font-bold text-brand-dark">₹1,499</span>
-            <span class="text-xs text-gray-400 line-through">₹1,999</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Product Card 4 -->
-      <div class="group relative flex flex-col">
-        <div class="relative w-full aspect-square bg-gray-100 overflow-hidden rounded-sm">
-          <span class="absolute top-2 left-2 z-10 bg-brand-gold text-white text-[9px] uppercase tracking-widest font-bold px-2 py-1">POPULAR</span>
-          <img src="https://images.unsplash.com/photo-1611591475281-8d282322886c?auto=format&fit=crop&w=600&q=80" alt="Heritage Paperclip Bracelet" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-          <button class="add-to-cart-btn absolute bottom-0 left-0 right-0 bg-brand-dark/90 text-white text-xs uppercase tracking-widest py-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-            Quick Add +
-          </button>
-        </div>
-        <div class="mt-4 text-center flex-1 flex flex-col justify-between">
-          <div>
-            <h3 class="text-xs uppercase tracking-wider font-medium text-brand-dark">Paperclip Chain Bracelet</h3>
-            <p class="text-[11px] text-gray-500 mt-1">18K Vermeil Gold</p>
-          </div>
-          <div class="mt-2 flex items-center justify-center space-x-2">
-            <span class="text-xs font-bold text-brand-dark">₹1,799</span>
-            <span class="text-xs text-gray-400 line-through">₹2,299</span>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- ================= SIDE CART DRAWER (INTERACTIVE MODAL) ================= -->
+  <!-- ================= SIDE CART DRAWER ================= -->
   <div id="cart-drawer-overlay" class="fixed inset-0 bg-black/50 z-50 opacity-0 pointer-events-none transition-opacity duration-300">
     <div id="cart-drawer" class="fixed top-0 right-0 h-full w-full max-w-md bg-white shadow-2xl transform translate-x-full transition-transform duration-300 flex flex-col">
-      <!-- Drawer Header -->
       <div class="p-6 border-b border-gray-200 flex items-center justify-between">
         <h2 class="font-serif text-xl tracking-wider uppercase text-brand-dark">Your Bag (2)</h2>
         <button id="close-cart-btn" class="text-gray-500 hover:text-brand-dark">
@@ -309,120 +196,79 @@
         </button>
       </div>
 
-      <!-- Drawer Item List -->
       <div class="flex-1 overflow-y-auto p-6 space-y-6">
-        <!-- Item 1 -->
         <div class="flex space-x-4 border-b border-gray-100 pb-4">
           <img src="https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=150&q=80" class="w-20 h-20 object-cover rounded-sm" alt="Celestial Ring">
           <div class="flex-1">
-            <h3 class="text-xs font-medium uppercase tracking-wider text-brand-dark">Celestial Band Ring</h3>
-            <p class="text-[10px] text-gray-500 mt-0.5">Size: US 7 • 18k Gold</p>
+            <h3 class="text-xs font-medium uppercase tracking-wider text-brand-dark">The Heritage Solitaire Band</h3>
+            <p class="text-[10px] text-gray-500 mt-0.5">Size: US 7 • Wedding Edition</p>
             <div class="flex items-center justify-between mt-3">
-              <div class="flex items-center border border-gray-200">
-                <button class="px-2 py-0.5 text-xs text-gray-600 hover:bg-gray-100">-</button>
-                <span class="px-2 text-xs font-semibold">1</span>
-                <button class="px-2 py-0.5 text-xs text-gray-600 hover:bg-gray-100">+</button>
-              </div>
-              <span class="text-xs font-bold text-brand-dark">₹1,899</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Item 2 -->
-        <div class="flex space-x-4 border-b border-gray-100 pb-4">
-          <img src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=150&q=80" class="w-20 h-20 object-cover rounded-sm" alt="Luna Necklace">
-          <div class="flex-1">
-            <h3 class="text-xs font-medium uppercase tracking-wider text-brand-dark">Luna Layered Necklace</h3>
-            <p class="text-[10px] text-gray-500 mt-0.5">Length: 18 Inches</p>
-            <div class="flex items-center justify-between mt-3">
-              <div class="flex items-center border border-gray-200">
-                <button class="px-2 py-0.5 text-xs text-gray-600 hover:bg-gray-100">-</button>
-                <span class="px-2 text-xs font-semibold">1</span>
-                <button class="px-2 py-0.5 text-xs text-gray-600 hover:bg-gray-100">+</button>
-              </div>
-              <span class="text-xs font-bold text-brand-dark">₹2,299</span>
+              <span class="text-xs font-bold text-brand-dark">₹4,999</span>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- Drawer Footer -->
       <div class="p-6 border-t border-gray-200 bg-brand-cream/50">
         <div class="flex justify-between text-xs uppercase tracking-wider font-semibold text-brand-dark mb-4">
           <span>Subtotal</span>
-          <span>₹4,198</span>
+          <span>₹4,999</span>
         </div>
-        <p class="text-[10px] text-gray-500 mb-4">Taxes and shipping calculated at checkout.</p>
-        <button class="w-full bg-brand-dark text-white text-xs uppercase tracking-widest py-4 font-semibold hover:bg-brand-gold transition-colors">
+        <!-- Trigger Modal Sign In / Checkout -->
+        <button id="checkout-btn" class="w-full bg-brand-dark text-white text-xs uppercase tracking-widest py-4 font-semibold hover:bg-brand-gold transition-colors">
           Proceed to Checkout
         </button>
       </div>
     </div>
   </div>
 
-  <!-- ================= FOOTER ================= -->
-  <footer class="bg-brand-dark text-white pt-16 pb-12 border-t border-gray-800">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
-        
-        <!-- Brand Intro -->
-        <div>
-          <h3 class="font-serif text-2xl tracking-widest uppercase mb-4">STRIVA</h3>
-          <p class="text-xs text-gray-400 leading-relaxed">
-            Striva delivers everyday demi-fine jewelry crafted in 18k gold vermeil and sterling silver. Waterproof, anti-tarnish, and hypoallergenic.
-          </p>
-        </div>
+  <!-- ================= SIGN IN / CHECKOUT AUTHENTICATION MODAL ================= -->
+  <div id="auth-modal-overlay" class="fixed inset-0 bg-black/60 z-50 opacity-0 pointer-events-none transition-opacity duration-300 flex items-center justify-center p-4">
+    <div id="auth-modal" class="bg-white max-w-md w-full p-8 rounded-sm shadow-2xl relative transform scale-95 transition-transform duration-300">
+      
+      <!-- Close Modal Button -->
+      <button id="close-auth-btn" class="absolute top-4 right-4 text-gray-400 hover:text-brand-dark">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
 
-        <!-- Quick Links -->
-        <div>
-          <h4 class="text-xs font-semibold uppercase tracking-widest mb-4 text-brand-gold">Shop Categories</h4>
-          <ul class="space-y-2 text-xs text-gray-400">
-            <li><a href="#" class="hover:text-white transition-colors">Rings & Bands</a></li>
-            <li><a href="#" class="hover:text-white transition-colors">Pendants & Necklaces</a></li>
-            <li><a href="#" class="hover:text-white transition-colors">Earrings & Huggies</a></li>
-            <li><a href="#" class="hover:text-white transition-colors">Bracelets</a></li>
-            <li><a href="#" class="hover:text-white transition-colors">18K Gold Vermeil</a></li>
-          </ul>
-        </div>
-
-        <!-- Customer Care -->
-        <div>
-          <h4 class="text-xs font-semibold uppercase tracking-widest mb-4 text-brand-gold">Customer Care</h4>
-          <ul class="space-y-2 text-xs text-gray-400">
-            <li><a href="#" class="hover:text-white transition-colors">Track Order</a></li>
-            <li><a href="#" class="hover:text-white transition-colors">Returns & Exchanges</a></li>
-            <li><a href="#" class="hover:text-white transition-colors">Jewelry Care Guide</a></li>
-            <li><a href="#" class="hover:text-white transition-colors">FAQs</a></li>
-            <li><a href="#" class="hover:text-white transition-colors">Contact Us</a></li>
-          </ul>
-        </div>
-
-        <!-- Newsletter Signup -->
-        <div>
-          <h4 class="text-xs font-semibold uppercase tracking-widest mb-4 text-brand-gold">Join The Striva Club</h4>
-          <p class="text-xs text-gray-400 mb-4">Subscribe to receive private updates and 10% off your first order.</p>
-          <form class="flex flex-col gap-2" onsubmit="event.preventDefault();">
-            <input type="email" placeholder="Enter your email" class="bg-gray-900 border border-gray-700 text-xs text-white p-3 focus:outline-none focus:border-brand-gold">
-            <button class="bg-brand-gold text-white text-xs uppercase tracking-widest py-3 font-semibold hover:bg-brand-gold-hover transition-colors">
-              Subscribe
-            </button>
-          </form>
-        </div>
-
+      <!-- Modal Content -->
+      <div class="text-center mb-6">
+        <h3 class="font-serif text-2xl font-bold tracking-widest text-brand-dark uppercase">STRIVA</h3>
+        <p class="text-xs text-gray-500 mt-1">Sign in to save your bag & order history, or continue as guest.</p>
       </div>
 
-      <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row items-center justify-between text-[11px] text-gray-500">
-        <p>&copy; 2026 STRIVA Jewelry. All rights reserved.</p>
-        <div class="flex space-x-6 mt-4 md:mt-0">
-          <a href="#" class="hover:text-gray-400">Privacy Policy</a>
-          <a href="#" class="hover:text-gray-400">Terms of Service</a>
-          <a href="#" class="hover:text-gray-400">Shipping Policy</a>
+      <!-- Quick Social Sign-In -->
+      <button class="w-full border border-gray-300 py-3 px-4 flex items-center justify-center gap-3 text-xs font-medium text-gray-700 hover:bg-gray-50 transition-colors mb-4">
+        <svg class="w-4 h-4" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/></svg>
+        Continue with Google
+      </button>
+
+      <div class="relative flex py-2 items-center mb-4">
+        <div class="flex-grow border-t border-gray-200"></div>
+        <span class="flex-shrink mx-4 text-[10px] text-gray-400 uppercase tracking-widest">Or Phone / Email</span>
+        <div class="flex-grow border-t border-gray-200"></div>
+      </div>
+
+      <!-- Phone / Email Form -->
+      <form id="auth-form" class="space-y-3" onsubmit="event.preventDefault();">
+        <div>
+          <input type="text" placeholder="Mobile number or Email" class="w-full border border-gray-300 p-3 text-xs focus:outline-none focus:border-brand-gold">
         </div>
+        <button type="submit" class="w-full bg-brand-dark text-white text-xs uppercase tracking-widest py-3 font-semibold hover:bg-brand-gold transition-colors">
+          Get OTP / Sign In
+        </button>
+      </form>
+
+      <!-- Guest Option -->
+      <div class="mt-4 text-center border-t border-gray-100 pt-4">
+        <button id="guest-checkout-btn" class="text-xs text-gray-500 underline hover:text-brand-dark transition-colors uppercase tracking-wider font-medium">
+          Continue as Guest →
+        </button>
       </div>
     </div>
-  </footer>
+  </div>
 
-  <!-- ================= JAVASCRIPT FOR UI INTERACTIVITY ================= -->
+  <!-- ================= JAVASCRIPT LOGIC ================= -->
   <script>
     const cartBtn = document.getElementById('cart-btn');
     const closeCartBtn = document.getElementById('close-cart-btn');
@@ -430,6 +276,14 @@
     const cartDrawer = document.getElementById('cart-drawer');
     const addToCartBtns = document.querySelectorAll('.add-to-cart-btn');
 
+    const checkoutBtn = document.getElementById('checkout-btn');
+    const authModalOverlay = document.getElementById('auth-modal-overlay');
+    const authModal = document.getElementById('auth-modal');
+    const closeAuthBtn = document.getElementById('close-auth-btn');
+    const headerAccountBtn = document.getElementById('header-account-btn');
+    const guestCheckoutBtn = document.getElementById('guest-checkout-btn');
+
+    // Cart Drawer Handlers
     function openCart() {
       cartDrawerOverlay.classList.remove('opacity-0', 'pointer-events-none');
       cartDrawer.classList.remove('translate-x-full');
@@ -440,14 +294,35 @@
       cartDrawer.classList.add('translate-x-full');
     }
 
+    // Modal Handlers
+    function openAuthModal() {
+      authModalOverlay.classList.remove('opacity-0', 'pointer-events-none');
+      authModal.classList.remove('scale-95');
+      authModal.classList.add('scale-100');
+    }
+
+    function closeAuthModal() {
+      authModalOverlay.classList.add('opacity-0', 'pointer-events-none');
+      authModal.classList.remove('scale-100');
+      authModal.classList.add('scale-95');
+    }
+
+    // Event Listeners
     cartBtn.addEventListener('click', openCart);
     closeCartBtn.addEventListener('click', closeCart);
-    cartDrawerOverlay.addEventListener('click', (e) => {
-      if (e.target === cartDrawerOverlay) closeCart();
-    });
+    addToCartBtns.forEach(btn => btn.addEventListener('click', openCart));
 
-    addToCartBtns.forEach(btn => {
-      btn.addEventListener('click', openCart);
+    // Open auth modal when clicking Checkout or Top Header Sign-In
+    checkoutBtn.addEventListener('click', () => {
+      closeCart();
+      openAuthModal();
+    });
+    headerAccountBtn.addEventListener('click', openAuthModal);
+
+    closeAuthBtn.addEventListener('click', closeAuthModal);
+    guestCheckoutBtn.addEventListener('click', () => {
+      alert("Redirecting to Guest Delivery & Payment Details...");
+      closeAuthModal();
     });
   </script>
 
