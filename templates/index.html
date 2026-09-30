@@ -3,394 +3,589 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>STRIVA | Demi-Fine Modern Jewelry</title>
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <title>Striva | Signature Style Quiz</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Montserrat', sans-serif; }
-        .font-serif-luxury { font-family: 'Cinzel', serif; }
-        .gold-gradient { background: linear-gradient(135deg, #d4af37 0%, #f3e5ab 50%, #aa7c11 100%); }
+        :root {
+            --bg-alabaster: #FBF9F5;
+            --bg-card: #FFFFFF;
+            --text-charcoal: #1A1A1A;
+            --text-muted: #666666;
+            --gold-primary: #C5A059;
+            --gold-hover: #B08B44;
+            --border-light: #E8E4DC;
+            --border-active: #C5A059;
+            --shadow-subtle: 0 10px 30px rgba(0, 0, 0, 0.03);
+            --font-serif: 'Cormorant Garamond', Georgia, serif;
+            --font-sans: 'Inter', -apple-system, sans-serif;
+            --transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background-color: var(--bg-alabaster);
+            color: var(--text-charcoal);
+            font-family: var(--font-sans);
+            -webkit-font-smoothing: antialiased;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        header {
+            padding: 2rem;
+            text-align: center;
+            border-bottom: 1px solid var(--border-light);
+            background: var(--bg-alabaster);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .brand-logo {
+            font-family: var(--font-serif);
+            font-size: 2.2rem;
+            letter-spacing: 0.35em;
+            text-transform: uppercase;
+            color: var(--text-charcoal);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .brand-sub {
+            font-size: 0.7rem;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: var(--gold-primary);
+            margin-top: 0.2rem;
+            font-weight: 500;
+        }
+
+        main {
+            max-width: 800px;
+            width: 90%;
+            margin: 3rem auto;
+            flex-grow: 1;
+        }
+
+        .progress-container { margin-bottom: 2.5rem; display: none; }
+
+        .progress-labels {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.75rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 0.6rem;
+        }
+
+        .progress-track {
+            height: 2px;
+            background: var(--border-light);
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--gold-primary);
+            width: 0%;
+            transition: width 0.4s ease;
+        }
+
+        .quiz-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-light);
+            padding: 3rem 2.5rem;
+            box-shadow: var(--shadow-subtle);
+            border-radius: 2px;
+        }
+
+        h1, h2 {
+            font-family: var(--font-serif);
+            font-weight: 400;
+            color: var(--text-charcoal);
+        }
+
+        .intro-title {
+            font-size: 2.8rem;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .subtitle {
+            font-size: 1.05rem;
+            color: var(--text-muted);
+            text-align: center;
+            line-height: 1.6;
+            margin-bottom: 2.5rem;
+            font-weight: 300;
+        }
+
+        .input-group { margin-bottom: 2rem; }
+
+        .input-group label {
+            display: block;
+            font-size: 0.8rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--text-charcoal);
+            margin-bottom: 0.8rem;
+            font-weight: 500;
+        }
+
+        .text-input {
+            width: 100%;
+            padding: 1rem 1.2rem;
+            border: 1px solid var(--border-light);
+            background: var(--bg-alabaster);
+            font-family: var(--font-sans);
+            font-size: 1rem;
+            color: var(--text-charcoal);
+            outline: none;
+            transition: var(--transition);
+        }
+
+        .text-input:focus { border-color: var(--border-active); background: var(--bg-card); }
+
+        .metal-options {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .metal-pill {
+            padding: 1.2rem 1rem;
+            border: 1px solid var(--border-light);
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+            background: var(--bg-alabaster);
+            font-size: 0.9rem;
+        }
+
+        .metal-pill.selected, .metal-pill:hover {
+            border-color: var(--gold-primary);
+            background: var(--bg-card);
+            color: var(--gold-primary);
+        }
+
+        .options-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .option-card {
+            border: 1px solid var(--border-light);
+            padding: 1.4rem 1.6rem;
+            cursor: pointer;
+            transition: var(--transition);
+            background: var(--bg-alabaster);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .option-card:hover { border-color: var(--gold-primary); transform: translateX(4px); background: var(--bg-card); }
+
+        .option-card.selected {
+            border-color: var(--gold-primary);
+            background: var(--bg-card);
+            box-shadow: 0 4px 15px rgba(197, 160, 89, 0.12);
+        }
+
+        .option-card .opt-label {
+            font-family: var(--font-serif);
+            font-size: 1.25rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .option-card .opt-text { font-size: 0.9rem; color: var(--text-muted); font-weight: 300; }
+
+        .btn-primary {
+            display: inline-block;
+            width: 100%;
+            padding: 1.2rem 2rem;
+            background: var(--text-charcoal);
+            color: var(--bg-card);
+            border: 1px solid var(--text-charcoal);
+            font-size: 0.85rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: var(--transition);
+            text-align: center;
+            font-weight: 500;
+        }
+
+        .btn-primary:hover { background: var(--gold-primary); border-color: var(--gold-primary); }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-muted);
+            border: 1px solid var(--border-light);
+            padding: 0.8rem 1.5rem;
+            font-size: 0.75rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .btn-secondary:hover { color: var(--text-charcoal); border-color: var(--text-charcoal); }
+
+        .archetype-badge {
+            font-size: 0.75rem;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: var(--gold-primary);
+            margin-bottom: 0.5rem;
+            display: block;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        /* PRODUCT RESULTS GRID */
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.5rem;
+            margin: 2.5rem 0;
+        }
+
+        .product-card {
+            border: 1px solid var(--border-light);
+            background: var(--bg-card);
+            padding: 1rem;
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .product-card:hover { border-color: var(--gold-primary); transform: translateY(-4px); }
+
+       
+        .product-card img {
+            width: 100%;
+            height: 240px;
+            object-fit: cover;
+            margin-bottom: 1rem;
+            border-radius: 1px;
+            background-color: #F4F1EA; 
+        }
+
+        .product-card .prod-title { font-family: var(--font-serif); font-size: 1.2rem; margin-bottom: 0.3rem; }
+        .product-card .prod-metal { font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.5rem; }
+        .product-card .prod-price { font-size: 0.95rem; color: var(--gold-primary); font-weight: 500; }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            letter-spacing: 0.05em;
+            border-top: 1px solid var(--border-light);
+            background: var(--bg-alabaster);
+        }
+
+        @media (max-width: 600px) {
+            main { width: 92%; margin: 1.5rem auto; }
+            .quiz-card { padding: 2rem 1.5rem; }
+            .intro-title { font-size: 2.2rem; }
+            .metal-options { grid-template-columns: 1fr; }
+        }
     </style>
 </head>
-<body class="bg-stone-50 text-stone-900 antialiased flex flex-col min-h-screen">
+<body>
 
-    <!-- Header Navigation -->
-    <header class="sticky top-0 z-50 bg-stone-900 text-stone-100 shadow-xl border-b border-amber-900/40">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-            <a href="#" class="font-serif-luxury text-3xl tracking-widest text-amber-200 hover:text-amber-100 transition">STRIVA</a>
-            
-            <nav class="hidden md:flex space-x-8 text-sm uppercase tracking-wider font-medium text-stone-300">
-                <a href="#catalog" onclick="filterCategory('women')" class="hover:text-amber-300 transition">Women</a>
-                <a href="#catalog" onclick="filterCategory('men')" class="hover:text-amber-300 transition">Men</a>
-                <a href="#catalog" onclick="filterCategory('wedding')" class="hover:text-amber-300 transition">Wedding</a>
-                <a href="#quiz" class="hover:text-amber-300 transition">Style Quiz</a>
-                <a href="#customization" class="text-amber-400 hover:text-amber-200 transition font-semibold">Customization ✨</a>
-            </nav>
-
-            <div class="flex items-center space-x-6">
-                <button onclick="toggleCartModal()" class="relative hover:text-amber-300 transition text-sm flex items-center">
-                    <span>BAG</span>
-                    <span id="cart-count" class="ml-1 bg-amber-500 text-stone-950 font-bold rounded-full w-5 h-5 flex items-center justify-center text-xs">0</span>
-                </button>
-            </div>
-        </div>
+    <header>
+        <a href="#" class="brand-logo">STRIVA</a>
+        <div class="brand-sub">Fine Jewelry & Signature Edits</div>
     </header>
 
-    <!-- Hero Section -->
-    <section class="relative bg-stone-900 text-white py-24 px-4 text-center overflow-hidden">
-        <div class="absolute inset-0 opacity-30 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=1600&q=80');"></div>
-        <div class="relative max-w-4xl mx-auto space-y-6">
-            <p class="text-amber-400 uppercase tracking-widest text-xs font-semibold">Demi-Fine Craftsmanship</p>
-            <h1 class="font-serif-luxury text-4xl sm:text-6xl tracking-wide text-amber-100">Modern Elegance</h1>
-            <p class="text-stone-300 text-base sm:text-lg max-w-2xl mx-auto font-light">
-                Minimal everyday essentials up to ₹7,000. Ceremonial bridal sets, groom brooches, mangalsutras, & kalgis up to ₹10,000.
-            </p>
-            <div class="pt-4 flex justify-center gap-4">
-                <a href="#catalog" class="gold-gradient text-stone-950 px-8 py-3 rounded-none font-semibold uppercase text-xs tracking-widest hover:brightness-110 transition">Explore Catalog</a>
-                <a href="#customization" class="border border-amber-300 text-amber-200 px-8 py-3 rounded-none font-semibold uppercase text-xs tracking-widest hover:bg-amber-300/10 transition">Bespoke Studio</a>
+    <main>
+        <div class="progress-container" id="progressContainer">
+            <div class="progress-labels">
+                <span id="questionStep">Question 1 of 3</span>
+                <span id="percentText">33%</span>
+            </div>
+            <div class="progress-track">
+                <div class="progress-fill" id="progressFill"></div>
             </div>
         </div>
-    </section>
 
-    <!-- Featured Showcase Tabs -->
-    <section id="featured" class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center mb-8">
-            <h2 class="font-serif-luxury text-3xl text-stone-900">Curated Collection</h2>
-            <div class="w-16 h-0.5 bg-amber-500 mx-auto mt-2"></div>
-        </div>
+        <!-- INTRO SCREEN -->
+        <div class="quiz-card" id="introCard">
+            <span class="archetype-badge">Personalized Concierge</span>
+            <h1 class="intro-title">Discover Your Signature Edit</h1>
+            <p class="subtitle">A tailored aesthetic experience designed to reveal your archetype and curate your personal Striva jewelry collection.</p>
+            
+            <div class="input-group">
+                <label for="userName">Your Name</label>
+                <input type="text" id="userName" class="text-input" placeholder="e.g. Alexander" autocomplete="off">
+            </div>
 
-        <div class="flex justify-center space-x-4 mb-10 border-b border-stone-300 pb-4">
-            <button onclick="switchHomeTab('trendy')" id="tab-trendy" class="tab-btn px-6 py-2 uppercase text-xs font-semibold tracking-widest border-b-2 border-amber-600 text-stone-900">Trendy</button>
-            <button onclick="switchHomeTab('bestseller')" id="tab-bestseller" class="tab-btn px-6 py-2 uppercase text-xs font-semibold tracking-widest border-b-2 border-transparent text-stone-500 hover:text-stone-900">Best Sellers</button>
-            <button onclick="switchHomeTab('favorite')" id="tab-favorite" class="tab-btn px-6 py-2 uppercase text-xs font-semibold tracking-widest border-b-2 border-transparent text-stone-500 hover:text-stone-900">Our Favorites</button>
-        </div>
-
-        <div id="featured-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            <!-- Populated via JS -->
-        </div>
-    </section>
-
-    <!-- Main Catalog -->
-    <section id="catalog" class="py-16 bg-stone-100 border-t border-stone-200">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex flex-col md:flex-row justify-between items-center mb-10 gap-4">
-                <div>
-                    <h2 class="font-serif-luxury text-3xl text-stone-900">Browse Full Catalog</h2>
-                    <p class="text-xs text-stone-500 uppercase tracking-wider">30+ handcrafted pieces across categories</p>
-                </div>
-
-                <div class="flex flex-wrap items-center gap-4">
-                    <select id="category-filter" onchange="applyCatalogFilters()" class="bg-white border border-stone-300 text-stone-800 text-xs uppercase px-4 py-2 font-medium focus:outline-none focus:border-amber-600">
-                        <option value="all">All Collections</option>
-                        <option value="women">Women Everyday (Max ₹7,000)</option>
-                        <option value="men">Men Everyday (Max ₹7,000)</option>
-                        <option value="wedding">Wedding & Traditional (Max ₹10,000)</option>
-                    </select>
-
-                    <div class="flex items-center gap-2 bg-white px-4 py-2 border border-stone-300 text-xs">
-                        <label for="price-range" class="text-stone-600 font-medium">Price Cap:</label>
-                        <input type="range" id="price-range" min="1000" max="10000" step="500" value="10000" oninput="updatePriceLabel(this.value)" onchange="applyCatalogFilters()" class="accent-amber-600">
-                        <span id="price-label" class="font-bold text-amber-700 w-16">₹10,000</span>
-                    </div>
+            <div class="input-group">
+                <label>Preferred Metal Base</label>
+                <div class="metal-options">
+                    <div class="metal-pill selected" onclick="selectMetal(this, 'Gold Vermeil')">Gold Vermeil</div>
+                    <div class="metal-pill" onclick="selectMetal(this, 'Sterling Silver')">Sterling Silver</div>
+                    <div class="metal-pill" onclick="selectMetal(this, 'No Preference')">No Preference</div>
                 </div>
             </div>
 
-            <div id="catalog-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-                <!-- Dynamically Loaded -->
+            <button class="btn-primary" onclick="startQuiz()">Begin Style Quiz</button>
+        </div>
+
+        <!-- QUESTION SCREEN -->
+        <div class="quiz-card" id="questionCard" style="display: none;">
+            <span class="archetype-badge" id="qNumber">Question 01</span>
+            <h2 class="intro-title" id="qTitle" style="font-size: 2.2rem; margin-bottom: 0.5rem;">Title</h2>
+            <p class="subtitle" id="qSubtitle" style="margin-bottom: 1.5rem;">Subtitle details here...</p>
+
+            <div class="options-grid" id="optionsContainer"></div>
+
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 2rem;">
+                <button class="btn-secondary" id="backBtn" onclick="previousQuestion()" style="display: none;">Back</button>
             </div>
         </div>
-    </section>
 
-    <!-- Customization Studio -->
-    <section id="customization" class="py-20 bg-stone-900 text-stone-100">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-10">
-                <span class="text-amber-400 text-xs font-semibold uppercase tracking-widest">Personalized Craftsmanship</span>
-                <h2 class="font-serif-luxury text-3xl sm:text-4xl text-amber-100 mt-2">Customization Studio</h2>
-                <p class="text-stone-400 text-sm mt-2 max-w-lg mx-auto">Create custom wedding bands, engraved cufflinks, or personalized pendants. Includes a ₹1,500 bespoke studio crafting fee.</p>
-            </div>
+        
+        <div class="quiz-card" id="resultsCard" style="display: none;">
+            <span class="archetype-badge">Your Signature Curation</span>
+            <h1 class="intro-title" id="resArchetype">The Modern Minimalist</h1>
+            <p class="subtitle" id="resGreeting">Based on your preferences, we curated this signature edit tailored to your preferred finish and aesthetic choices.</p>
 
-            <div class="bg-stone-800 border border-amber-900/50 p-6 sm:p-10 shadow-2xl space-y-6">
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                    <div>
-                        <label class="block text-xs uppercase tracking-wider text-amber-300 font-semibold mb-2">Select Base Piece</label>
-                        <select id="custom-type" onchange="calculateCustomPrice()" class="w-full bg-stone-900 border border-stone-700 text-stone-200 text-sm p-3 focus:outline-none focus:border-amber-500">
-                            <option value="3500" data-name="Engraved Minimal Pendant">Minimal Pendant (Base ₹3,500)</option>
-                            <option value="4500" data-name="Custom Signature Ring">Signature Ring (Base ₹4,500)</option>
-                            <option value="5000" data-name="Groom Monogram Cufflinks">Groom Cufflinks (Base ₹5,000)</option>
-                            <option value="7500" data-name="Wedding Matrimonial Couple Bands">Wedding Couple Bands (Base ₹7,500)</option>
-                        </select>
-                    </div>
+            
+            <div class="results-grid" id="resultsGrid"></div>
 
-                    <div>
-                        <label class="block text-xs uppercase tracking-wider text-amber-300 font-semibold mb-2">Metal Polish</label>
-                        <select id="custom-metal" class="w-full bg-stone-900 border border-stone-700 text-stone-200 text-sm p-3 focus:outline-none focus:border-amber-500">
-                            <option value="18k Gold Vermeil">18k Gold Vermeil</option>
-                            <option value="925 Sterling Silver">925 Sterling Silver</option>
-                            <option value="Rose Gold Vermeil">Rose Gold Vermeil</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div>
-                    <label class="block text-xs uppercase tracking-wider text-amber-300 font-semibold mb-2">Custom Engraving / Notes</label>
-                    <input type="text" id="custom-engraving" placeholder="e.g., Anniversary Date, Monogram, or Special Request" class="w-full bg-stone-900 border border-stone-700 text-stone-200 text-sm p-3 focus:outline-none focus:border-amber-500">
-                </div>
-
-                <div class="p-4 bg-stone-900/80 border border-amber-500/30 flex justify-between items-center">
-                    <div>
-                        <p class="text-xs text-stone-400 uppercase">Total Bespoke Price</p>
-                        <p class="text-xs text-amber-400 font-medium">+ Includes ₹1,500 Crafting Fee</p>
-                    </div>
-                    <div id="custom-total" class="text-2xl font-serif-luxury font-bold text-amber-200">
-                        ₹5,000
-                    </div>
-                </div>
-
-                <button onclick="addCustomToBag()" class="w-full gold-gradient text-stone-950 font-bold uppercase tracking-widest text-xs py-4 hover:brightness-110 transition">
-                    Add Custom Piece To Bag
-                </button>
-            </div>
+            <button class="btn-primary" onclick="restartQuiz()">Retake Style Quiz</button>
         </div>
-    </section>
+    </main>
 
-    <!-- Style Quiz -->
-    <section id="quiz" class="py-16 bg-stone-200 text-stone-900">
-        <div class="max-w-2xl mx-auto px-4 text-center">
-            <h2 class="font-serif-luxury text-3xl">Find Your Ideal Collection</h2>
-            <p class="text-xs text-stone-600 uppercase tracking-widest mt-1 mb-6">Take the 5-second preference selector</p>
-
-            <div class="bg-white p-8 shadow-lg border border-stone-300 text-left space-y-4">
-                <p class="font-medium text-sm text-stone-800">What jewelry pieces are you searching for today?</p>
-                <div class="space-y-2">
-                    <button onclick="recommendStyle('women')" class="w-full text-left p-3 border border-stone-200 hover:border-amber-600 hover:bg-stone-50 text-xs uppercase font-medium">Sleek Daily Women's Jewelry (Rings, Necklaces)</button>
-                    <button onclick="recommendStyle('men')" class="w-full text-left p-3 border border-stone-200 hover:border-amber-600 hover:bg-stone-50 text-xs uppercase font-medium">Minimal Men's Essentials (Chains, Signet Rings, Cufflinks)</button>
-                    <button onclick="recommendStyle('wedding')" class="w-full text-left p-3 border border-stone-200 hover:border-amber-600 hover:bg-stone-50 text-xs uppercase font-medium">Wedding & Traditional (Mangalsutras, Brooches, Kalgis)</button>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <footer class="bg-stone-950 text-stone-400 py-10 border-t border-amber-900/30">
-        <div class="max-w-7xl mx-auto px-4 text-center text-xs space-y-2">
-            <p class="font-serif-luxury text-lg text-amber-200">STRIVA</p>
-            <p>© 2026 STRIVA Modern Fine Jewelry. All rights reserved.</p>
-        </div>
+    <footer>
+        &copy; 2026 STRIVA JEWELRY INC. ALL RIGHTS RESERVED.
     </footer>
 
-    <!-- Bag Slide-Over Modal -->
-    <div id="cart-modal" class="fixed inset-0 bg-stone-950/70 z-50 hidden flex justify-end">
-        <div class="w-full max-w-md bg-white h-full flex flex-col p-6 shadow-2xl">
-            <div class="flex justify-between items-center border-b pb-4">
-                <h3 class="font-serif-luxury text-xl text-stone-900">Your Shopping Bag</h3>
-                <button onclick="toggleCartModal()" class="text-stone-500 hover:text-stone-900 text-lg">✕</button>
-            </div>
-
-            <div id="cart-items" class="flex-1 overflow-y-auto py-4 space-y-4"></div>
-
-            <div class="border-t pt-4 space-y-4">
-                <div class="flex justify-between font-bold text-stone-900">
-                    <span>Subtotal</span>
-                    <span id="cart-subtotal">₹0</span>
-                </div>
-                <button onclick="checkout()" class="w-full gold-gradient text-stone-950 font-bold py-3 uppercase tracking-widest text-xs">Proceed To Checkout</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Frontend Scripting -->
     <script>
-        let allProducts = [];
-        let shoppingBag = [];
-        let activeHomeTab = 'trendy';
+    
+        let questions = [
+            {
+                id: 1,
+                title: "Daily Uniform",
+                subtitle: "When you’re putting together a quick go-to outfit, what’s your baseline vibe?",
+                options: [
+                    { label: "Tailored", text: "Crisp tailored shirt, structured trousers, clean lines.", tag: "Tailored" },
+                    { label: "Relaxed Blazer", text: "Oversized blazer, relaxed denim, statement sneakers.", tag: "Oversized Blazer" },
+                    { label: "Flowy & Soft", text: "Flowy silhouette, soft textures, natural tones.", tag: "Flowy Silhouette" }
+                ]
+            },
+            {
+                id: 2,
+                title: "Stacking & Layering",
+                subtitle: "How do you prefer to wear your neckwear and rings?",
+                options: [
+                    { label: "Solo Anchor", text: "One clean, striking piece and nothing else.", tag: "Solo Anchor" },
+                    { label: "Curated Stack", text: "2–3 mixed-texture pieces layered together.", tag: "Curated Stack" },
+                    { label: "Delicate Minimalism", text: "Ultra-thin, barely-there accents.", tag: "Delicate Minimalism" }
+                ]
+            }
+        ];
 
-        document.addEventListener('DOMContentLoaded', () => {
-            fetchProducts();
-            calculateCustomPrice();
+       
+        const DEFAULT_PRODUCT_IMAGES = {
+            "striva-001": "https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&q=80&w=600", // <-- CHANGE IMAGE LINK HERE
+            "striva-002": "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&q=80&w=600", // <-- CHANGE IMAGE LINK HERE
+            "striva-003": "https://images.unsplash.com/photo-1611591475155-4286fa7c2e7f?auto=format&fit=crop&q=80&w=600"  // <-- CHANGE IMAGE LINK HERE
+        };
+
+        let currentQuestionIndex = 0;
+        let selectedMetal = "Gold Vermeil";
+        let userAnswers = [];
+
+        const introCard = document.getElementById('introCard');
+        const questionCard = document.getElementById('questionCard');
+        const resultsCard = document.getElementById('resultsCard');
+        const progressContainer = document.getElementById('progressContainer');
+        const progressFill = document.getElementById('progressFill');
+        const questionStep = document.getElementById('questionStep');
+        const percentText = document.getElementById('percentText');
+
+        window.addEventListener('DOMContentLoaded', async () => {
+            try {
+                const response = await fetch('/api/quiz-questions');
+                const data = await response.json();
+                if(data.status === 'success' && data.questions.length > 0) {
+                    questions = data.questions;
+                }
+            } catch (err) {
+                console.log('Using local questions definition.');
+            }
         });
 
-        async function fetchProducts() {
-            try {
-                const res = await fetch('/api/products?max_price=10000');
-                const data = await res.json();
-                allProducts = data.products || [];
-                renderHomeFeatured();
-                renderCatalog();
-            } catch (err) {
-                console.error("Failed to fetch products:", err);
-            }
+        function selectMetal(element, metal) {
+            document.querySelectorAll('.metal-pill').forEach(el => el.classList.remove('selected'));
+            element.classList.add('selected');
+            selectedMetal = metal;
         }
 
-        function switchHomeTab(tab) {
-            activeHomeTab = tab;
-            document.querySelectorAll('.tab-btn').forEach(btn => {
-                btn.classList.remove('border-amber-600', 'text-stone-900');
-                btn.classList.add('border-transparent', 'text-stone-500');
-            });
-            const activeBtn = document.getElementById(`tab-${tab}`);
-            if (activeBtn) activeBtn.classList.add('border-amber-600', 'text-stone-900');
-            renderHomeFeatured();
+        function startQuiz() {
+            introCard.style.display = 'none';
+            questionCard.style.display = 'block';
+            progressContainer.style.display = 'block';
+            currentQuestionIndex = 0;
+            userAnswers = [];
+            renderQuestion();
         }
 
-        function renderHomeFeatured() {
-            const grid = document.getElementById('featured-grid');
-            grid.innerHTML = '';
-            const items = allProducts.filter(p => p.collection === activeHomeTab).slice(0, 4);
-            items.forEach(p => grid.appendChild(createProductCard(p)));
-        }
+        function renderQuestion() {
+            const q = questions[currentQuestionIndex];
+            const progress = ((currentQuestionIndex + 1) / questions.length) * 100;
+            
+            progressFill.style.width = progress + '%';
+            questionStep.innerText = `Question ${currentQuestionIndex + 1} of ${questions.length}`;
+            percentText.innerText = `${Math.round(progress)}%`;
 
-        function renderCatalog() {
-            const grid = document.getElementById('catalog-grid');
-            const category = document.getElementById('category-filter').value;
-            const maxPrice = parseFloat(document.getElementById('price-range').value);
+            document.getElementById('backBtn').style.display = currentQuestionIndex > 0 ? 'block' : 'none';
+            document.getElementById('qNumber').innerText = `Question 0${q.id}`;
+            document.getElementById('qTitle').innerText = q.title;
+            document.getElementById('qSubtitle').innerText = q.subtitle;
 
-            grid.innerHTML = '';
-
-            const filtered = allProducts.filter(p => {
-                const matchCat = category === 'all' || p.category === category;
-                const matchPrice = p.price <= maxPrice;
-                return matchCat && matchPrice;
-            });
-
-            filtered.forEach(p => grid.appendChild(createProductCard(p)));
-        }
-
-        function createProductCard(p) {
-            const card = document.createElement('div');
-            card.className = "bg-white border border-stone-200 p-4 flex flex-col justify-between hover:shadow-md transition";
-            card.innerHTML = `
-                <div>
-                    <div class="relative mb-3 aspect-square overflow-hidden bg-stone-100">
-                        <img src="${p.image_url}" alt="${p.name}" class="w-full h-full object-cover hover:scale-105 transition duration-500">
-                        <span class="absolute top-2 left-2 bg-stone-900 text-amber-200 text-[10px] font-bold px-2 py-0.5 uppercase tracking-wider">${p.tag}</span>
-                    </div>
-                    <p class="text-[10px] text-amber-700 uppercase font-semibold tracking-widest">${p.category}</p>
-                    <h4 class="font-serif-luxury text-base text-stone-900">${p.name}</h4>
-                    <p class="text-xs text-stone-500 mt-1 line-clamp-2">${p.description}</p>
-                </div>
-                <div class="mt-4 pt-3 border-t border-stone-100 flex items-center justify-between">
-                    <span class="font-bold text-stone-900 text-sm">₹${p.price.toLocaleString('en-IN')}</span>
-                    <button onclick="addToBag(${p.id})" class="gold-gradient text-stone-950 font-semibold px-3 py-1.5 text-[10px] uppercase tracking-wider">Add to Bag</button>
-                </div>
-            `;
-            return card;
-        }
-
-        function updatePriceLabel(val) {
-            document.getElementById('price-label').innerText = `₹${parseInt(val).toLocaleString('en-IN')}`;
-        }
-
-        function applyCatalogFilters() {
-            renderCatalog();
-        }
-
-        function filterCategory(cat) {
-            document.getElementById('category-filter').value = cat;
-            if (cat === 'wedding') {
-                document.getElementById('price-range').value = 10000;
-                updatePriceLabel(10000);
-            } else {
-                document.getElementById('price-range').value = 7000;
-                updatePriceLabel(7000);
-            }
-            renderCatalog();
-        }
-
-        function calculateCustomPrice() {
-            const select = document.getElementById('custom-type');
-            const basePrice = parseFloat(select.value);
-            const total = basePrice + 1500;
-            document.getElementById('custom-total').innerText = `₹${total.toLocaleString('en-IN')}`;
-        }
-
-        function addCustomToBag() {
-            const select = document.getElementById('custom-type');
-            const selectedOpt = select.options[select.selectedIndex];
-            const baseName = selectedOpt.getAttribute('data-name');
-            const metal = document.getElementById('custom-metal').value;
-            const engraving = document.getElementById('custom-engraving').value.trim();
-            const total = parseFloat(select.value) + 1500;
-
-            const customItem = {
-                id: Date.now(),
-                name: `Custom ${baseName}`,
-                price: total,
-                category: 'custom',
-                image_url: 'https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=600&q=80',
-                description: `Finish: ${metal} | Request: "${engraving || 'None'}" (Incl. ₹1,500 Fee)`
-            };
-
-            shoppingBag.push(customItem);
-            updateBagUI();
-            toggleCartModal();
-        }
-
-        function addToBag(id) {
-            const item = allProducts.find(p => p.id === id);
-            if (item) {
-                shoppingBag.push(item);
-                updateBagUI();
-                toggleCartModal();
-            }
-        }
-
-        function updateBagUI() {
-            document.getElementById('cart-count').innerText = shoppingBag.length;
-            const container = document.getElementById('cart-items');
+            const container = document.getElementById('optionsContainer');
             container.innerHTML = '';
 
-            let total = 0;
-            shoppingBag.forEach((item, index) => {
-                total += item.price;
-                const div = document.createElement('div');
-                div.className = "flex items-center justify-between border-b pb-2 text-xs";
-                div.innerHTML = `
-                    <div>
-                        <p class="font-bold text-stone-900">${item.name}</p>
-                        <p class="text-stone-500">${item.description || ''}</p>
-                        <p class="text-amber-700 font-semibold mt-0.5">₹${item.price.toLocaleString('en-IN')}</p>
-                    </div>
-                    <button onclick="removeFromBag(${index})" class="text-red-500 font-bold ml-2">✕</button>
-                `;
-                container.appendChild(div);
-            });
+            q.options.forEach((opt) => {
+                const optEl = document.createElement('div');
+                optEl.className = 'option-card';
+                optEl.onclick = () => handleOptionSelect(q.id, opt.tag, optEl);
 
-            document.getElementById('cart-subtotal').innerText = `₹${total.toLocaleString('en-IN')}`;
-        }
-
-        function removeFromBag(index) {
-            shoppingBag.splice(index, 1);
-            updateBagUI();
-        }
-
-        function toggleCartModal() {
-            document.getElementById('cart-modal').classList.toggle('hidden');
-        }
-
-        async function checkout() {
-            if (shoppingBag.length === 0) return alert("Your bag is empty.");
-            try {
-                const res = await fetch('/api/orders/place', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ cart: shoppingBag })
-                });
-                const data = await res.json();
-                if (data.success) {
-                    alert(`Order confirmed! Order ID: ${data.orderId}`);
-                    shoppingBag = [];
-                    updateBagUI();
-                    toggleCartModal();
+                const existing = userAnswers.find(a => a.question_id === q.id);
+                if (existing && existing.selected_tag === opt.tag) {
+                    optEl.classList.add('selected');
                 }
-            } catch (e) {
-                alert("Order processing failed.");
+
+                optEl.innerHTML = `
+                    <div>
+                        <div class="opt-label">${opt.label}</div>
+                        <div class="opt-text">${opt.text}</div>
+                    </div>
+                `;
+                container.appendChild(optEl);
+            });
+        }
+
+        function handleOptionSelect(qId, tag, element) {
+            document.querySelectorAll('.option-card').forEach(el => el.classList.remove('selected'));
+            element.classList.add('selected');
+
+            const existingIndex = userAnswers.findIndex(a => a.question_id === qId);
+            if (existingIndex > -1) {
+                userAnswers[existingIndex].selected_tag = tag;
+            } else {
+                userAnswers.push({ question_id: qId, selected_tag: tag });
+            }
+
+            setTimeout(() => {
+                if (currentQuestionIndex < questions.length - 1) {
+                    currentQuestionIndex++;
+                    renderQuestion();
+                } else {
+                    submitQuiz();
+                }
+            }, 300);
+        }
+
+        function previousQuestion() {
+            if (currentQuestionIndex > 0) {
+                currentQuestionIndex--;
+                renderQuestion();
             }
         }
 
-        function recommendStyle(cat) {
-            filterCategory(cat);
-            window.location.hash = '#catalog';
+        async function submitQuiz() {
+            questionCard.style.display = 'none';
+            progressContainer.style.display = 'none';
+
+            const nameInput = document.getElementById('userName').value || "Valued Guest";
+
+            const payload = {
+                user_name: nameInput,
+                preferred_metal: selectedMetal,
+                answers: userAnswers
+            };
+
+            try {
+                const response = await fetch('/api/calculate-recommendations', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                const resData = await response.json();
+                if (resData.status === 'success') {
+                    displayResults(resData);
+                } else {
+                    useFallbackResults(nameInput);
+                }
+            } catch (err) {
+                console.warn("Backend not reached, rendering local results layout.");
+                useFallbackResults(nameInput);
+            }
+        }
+
+        function displayResults(data) {
+            resultsCard.style.display = 'block';
+            document.getElementById('resArchetype').innerText = data.archetype || "The Modern Minimalist";
+            document.getElementById('resGreeting').innerText = `${data.user_name}, based on your responses, we curated this signature edit tailored to your aesthetic choices.`;
+
+            const grid = document.getElementById('resultsGrid');
+            grid.innerHTML = '';
+
+            data.recommendations.forEach(prod => {
+                // If DB image URL is missing, fall back to DEFAULT_PRODUCT_IMAGES
+                const finalImgUrl = prod.image_url || DEFAULT_PRODUCT_IMAGES[prod.id] || 'https://via.placeholder.com/400x500?text=Striva+Jewelry';
+
+                const prodEl = document.createElement('div');
+                prodEl.className = 'product-card';
+                
+                /* =========================================================================
+                   IMAGE LOCATION OPTION 2: DYNAMIC INJECTION FROM BACKEND / DATABASE
+                   This <img> tag injects the final online URL into the product card!
+                ========================================================================= */
+                prodEl.innerHTML = `
+                    <img src="${finalImgUrl}" alt="${prod.name}" loading="lazy">
+                    <div class="prod-metal">${prod.metal || 'Gold Vermeil'} • ${prod.style_category || 'Classic'}</div>
+                    <div class="prod-title">${prod.name}</div>
+                    <div class="prod-price">$${prod.price ? prod.price.toFixed(2) : '150.00'} USD</div>
+                `;
+                grid.appendChild(prodEl);
+            });
+        }
+
+        function useFallbackResults(userName) {
+            const fallbackData = {
+                user_name: userName,
+                archetype: "The Heritage Classicist",
+                recommendations: [
+                    { id: "striva-001", name: "The Heritage Signet Ring", price: 145.00, metal: "Gold Vermeil", style_category: "Classic", image_url: DEFAULT_PRODUCT_IMAGES["striva-001"] },
+                    { id: "striva-002", name: "Architectural Bar Pendant", price: 180.00, metal: "Sterling Silver", style_category: "Modern", image_url: DEFAULT_PRODUCT_IMAGES["striva-002"] },
+                    { id: "striva-003", name: "Organic Ripple Cuff", price: 210.00, metal: "Gold Vermeil", style_category: "Artisanal", image_url: DEFAULT_PRODUCT_IMAGES["striva-003"] }
+                ]
+            };
+            displayResults(fallbackData);
+        }
+
+        function restartQuiz() {
+            resultsCard.style.display = 'none';
+            introCard.style.display = 'block';
         }
     </script>
 </body>
