@@ -3,7 +3,6 @@ import pymysql
 import pymysql.cursors
 from flask import Flask, jsonify, request, render_template_string
 
-# Safe import for dotenv so it never crashes if missing locally or in production
 try:
     from dotenv import load_dotenv
     load_dotenv()
@@ -12,14 +11,12 @@ except ImportError:
 
 app = Flask(__name__)
 
-# Environment variables setup
 DB_HOST = os.environ.get('DB_HOST')
 DB_USER = os.environ.get('DB_USER')
 DB_PASSWORD = os.environ.get('DB_PASSWORD')
 DB_NAME = os.environ.get('DB_NAME')
 DB_PORT = int(os.environ.get('DB_PORT', 3306)) if os.environ.get('DB_PORT') else 3306
 
-# Fallback catalog data used if the live MySQL database is unreachable
 FALLBACK_PRODUCTS = [
     {
         "id": 1,
