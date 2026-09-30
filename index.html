@@ -1,33 +1,38 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Striva | Demi-Fine Jewelry & Luxury Accessories</title>
+    <title>Striva | Demi-Fine Jewelry</title>
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Playfair Display & Plus Jakarta Sans -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..700;1,400..700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
                         striva: {
-                            gold: '#D4AF37',
-                            champagne: '#F9F6F0',
-                            dark: '#1A1A1A',
-                            muted: '#737373',
-                            accent: '#C5A059',
-                            sand: '#EFECE6',
-                            blush: '#FBF8F5'
+                            50: '#FBF9F5',
+                            100: '#F4EFE6',
+                            200: '#E4D7C2',
+                            300: '#D1BC9A',
+                            600: '#9E8256',
+                            700: '#7F6742',
+                            900: '#3D311F',
+                            dark: '#1C1917',
+                            gold: '#C5A059',
+                            cream: '#FAF8F5'
                         }
                     },
                     fontFamily: {
                         serif: ['"Playfair Display"', 'serif'],
-                        sans: ['Inter', 'sans-serif']
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif']
                     }
                 }
             }
@@ -35,403 +40,400 @@
     </script>
     <style>
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: #FBF8F5;
-            color: #1A1A1A;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #FAF8F5;
+            color: #1C1917;
         }
         h1, h2, h3, h4, .font-serif {
             font-family: 'Playfair Display', serif;
         }
-        .fade-in {
-            animation: fadeIn 0.4s ease-in-out forwards;
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
         }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(6px); }
-            to { opacity: 1; transform: translateY(0); }
+        ::-webkit-scrollbar-track {
+            background: #F4EFE6;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #D1BC9A;
+            border-radius: 3px;
         }
     </style>
 </head>
-<body class="min-h-screen flex flex-col selection:bg-striva-gold selection:text-white">
+<body class="bg-striva-cream text-striva-dark antialiased selection:bg-striva-200 selection:text-striva-900">
 
     <!-- Top Announcement Bar -->
-    <div class="bg-striva-dark text-striva-champagne text-xs py-2.5 px-4 text-center tracking-widest font-light flex items-center justify-center gap-2">
-        <i class="fa-solid fa-sparkles text-striva-gold"></i>
-        <span>Complimentary pan-India shipping & signature packaging on all orders over ₹10,000</span>
-        <span class="hidden md:inline text-striva-gold">| Use code STRIVA15 for 15% off first order</span>
+    <div class="bg-striva-dark text-striva-100 text-xs py-2 px-4 text-center tracking-widest uppercase font-medium">
+        <span>✨ Complimentary Insured Shipping Across India on Orders Above ₹2,500</span>
     </div>
 
-    <!-- Main Navigation Header -->
-    <header class="sticky top-0 z-40 bg-striva-champagne/90 backdrop-blur-md border-b border-striva-sand shadow-sm transition-all">
+    <!-- Navbar -->
+    <header class="sticky top-0 z-40 bg-striva-cream/95 backdrop-blur-md border-b border-striva-200 transition-all duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-            
             <!-- Mobile Menu Toggle -->
-            <button onclick="toggleMobileMenu()" class="md:hidden text-striva-dark hover:text-striva-accent p-2">
-                <i class="fa-solid fa-bars text-xl"></i>
+            <button id="mobile-menu-btn" class="md:hidden text-striva-dark hover:text-striva-gold text-xl focus:outline-none">
+                <i class="fa-solid fa-bars"></i>
             </button>
 
             <!-- Brand Logo -->
-            <div class="flex items-center gap-3 cursor-pointer" onclick="switchSection('home')">
-                <div class="w-10 h-10 rounded-full bg-striva-dark flex items-center justify-center text-striva-gold font-serif font-bold text-xl tracking-tighter shadow-md">
-                    S
-                </div>
-                <div>
-                    <span class="font-serif text-2xl font-bold tracking-widest uppercase text-striva-dark">Striva</span>
-                    <span class="block text-[9px] tracking-[0.25em] text-striva-muted uppercase font-sans">Demi-Fine Jewelry</span>
-                </div>
+            <div class="flex items-center space-x-2">
+                <a href="#home" onclick="switchView('home')" class="font-serif text-2xl sm:text-3xl tracking-wider font-bold text-striva-dark">
+                    STRIVA
+                </a>
             </div>
 
-            <!-- Desktop Nav Items -->
-            <nav class="hidden lg:flex items-center space-x-6 text-sm font-medium tracking-wide">
-                <button onclick="switchSection('home')" id="nav-home" class="nav-link text-striva-dark hover:text-striva-accent transition py-2 border-b-2 border-striva-dark">Home</button>
-                <button onclick="switchSection('shop'); filterCollection('Women');" id="nav-women" class="nav-link text-striva-muted hover:text-striva-accent transition py-2 border-b-2 border-transparent">Women</button>
-                <button onclick="switchSection('shop'); filterCollection('Men');" id="nav-men" class="nav-link text-striva-muted hover:text-striva-accent transition py-2 border-b-2 border-transparent">Men</button>
-                <button onclick="switchSection('shop'); filterCollection('Wedding & Couples');" id="nav-wedding" class="nav-link text-striva-muted hover:text-striva-accent transition py-2 border-b-2 border-transparent">Wedding & Couples</button>
-                <button onclick="switchSection('shop'); filterCollection('All');" id="nav-shop" class="nav-link text-striva-muted hover:text-striva-accent transition py-2 border-b-2 border-transparent">Shop All</button>
-                <button onclick="switchSection('studio')" id="nav-studio" class="nav-link text-striva-muted hover:text-striva-accent transition py-2 border-b-2 border-transparent flex items-center gap-1.5">
-                    <i class="fa-solid fa-wand-magic-sparkles text-striva-gold"></i> Customization
-                </button>
-                <button onclick="switchSection('quiz')" id="nav-quiz" class="nav-link text-striva-muted hover:text-striva-accent transition py-2 border-b-2 border-transparent flex items-center gap-1.5">
-                    <i class="fa-regular fa-gem text-striva-gold"></i> Style Quiz
-                </button>
-                <button onclick="switchSection('story')" id="nav-story" class="nav-link text-striva-muted hover:text-striva-accent transition py-2 border-b-2 border-transparent">About</button>
+            <!-- Desktop Nav Links -->
+            <nav class="hidden md:flex items-center space-x-8 text-sm font-medium tracking-wide">
+                <a href="#home" onclick="switchView('home')" class="nav-link text-striva-dark hover:text-striva-gold transition-colors pb-1 border-b-2 border-transparent hover:border-striva-gold active-nav" data-view="home">Home</a>
+                <a href="#shop" onclick="switchView('shop')" class="nav-link text-striva-dark hover:text-striva-gold transition-colors pb-1 border-b-2 border-transparent hover:border-striva-gold" data-view="shop">Shop Catalog</a>
+                <a href="#quiz" onclick="switchView('quiz')" class="nav-link text-striva-dark hover:text-striva-gold transition-colors pb-1 border-b-2 border-transparent hover:border-striva-gold" data-view="quiz">Style Quiz</a>
+                <a href="#custom" onclick="switchView('custom')" class="nav-link text-striva-dark hover:text-striva-gold transition-colors pb-1 border-b-2 border-transparent hover:border-striva-gold" data-view="custom">Custom Studio</a>
+                <a href="#about" onclick="switchView('about')" class="nav-link text-striva-dark hover:text-striva-gold transition-colors pb-1 border-b-2 border-transparent hover:border-striva-gold" data-view="about">About Demi-Fine</a>
             </nav>
 
-            <!-- Right Actions (Cart, Wishlist, Account) -->
-            <div class="flex items-center space-x-4">
-                <button onclick="openWishlistModal()" class="relative text-striva-dark hover:text-striva-accent transition p-2" title="Wishlist">
-                    <i class="fa-regular fa-heart text-xl"></i>
-                    <span id="wishlist-badge" class="absolute top-1 right-1 bg-striva-gold text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center font-bold hidden">0</span>
+            <!-- Action Icons (Search, Wishlist, Cart, Account) -->
+            <div class="flex items-center space-x-5 text-lg">
+                <button onclick="toggleSearchModal()" class="text-striva-dark hover:text-striva-gold transition-colors relative" title="Search">
+                    <i class="fa-solid fa-magnifying-glass"></i>
                 </button>
-                <button onclick="openCartModal()" class="relative text-striva-dark hover:text-striva-accent transition p-2" title="Shopping Bag">
-                    <i class="fa-solid fa-bag-shopping text-xl"></i>
-                    <span id="cart-badge" class="absolute top-1 right-1 bg-striva-dark text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center font-bold">0</span>
+                <button onclick="openWishlistDrawer()" class="text-striva-dark hover:text-striva-gold transition-colors relative" title="Wishlist">
+                    <i class="fa-regular fa-heart"></i>
+                    <span id="wishlist-badge" class="absolute -top-2 -right-2 bg-striva-gold text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center font-bold hidden">0</span>
                 </button>
-                <div id="auth-nav-container" class="hidden md:flex items-center">
-                    <!-- Dynamic auth state -->
-                </div>
+                <button onclick="openCartDrawer()" class="text-striva-dark hover:text-striva-gold transition-colors relative" title="Cart">
+                    <i class="fa-solid fa-bag-shopping"></i>
+                    <span id="cart-badge" class="absolute -top-2 -right-2 bg-striva-dark text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center font-bold hidden">0</span>
+                </button>
+                <button onclick="openAuthModal()" class="text-striva-dark hover:text-striva-gold transition-colors relative" title="Account">
+                    <i class="fa-regular fa-user"></i>
+                </button>
             </div>
         </div>
 
-        <!-- Mobile Navigation Drawer -->
-        <div id="mobile-menu" class="hidden lg:hidden bg-white border-b border-striva-sand px-6 py-4 space-y-3 shadow-lg">
-            <button onclick="switchSection('home'); toggleMobileMenu();" class="block w-full text-left py-2 font-medium text-striva-dark">Home</button>
-            <button onclick="switchSection('shop'); filterCollection('Women'); toggleMobileMenu();" class="block w-full text-left py-2 font-medium text-striva-dark">Women Collection</button>
-            <button onclick="switchSection('shop'); filterCollection('Men'); toggleMobileMenu();" class="block w-full text-left py-2 font-medium text-striva-dark">Men Collection</button>
-            <button onclick="switchSection('shop'); filterCollection('Wedding & Couples'); toggleMobileMenu();" class="block w-full text-left py-2 font-medium text-striva-dark">Wedding & Couples</button>
-            <button onclick="switchSection('shop'); filterCollection('All'); toggleMobileMenu();" class="block w-full text-left py-2 font-medium text-striva-dark">Shop All Jewelry</button>
-            <button onclick="switchSection('studio'); toggleMobileMenu();" class="block w-full text-left py-2 font-medium text-striva-dark flex items-center gap-2"><i class="fa-solid fa-wand-magic-sparkles text-striva-gold"></i> Customization Studio</button>
-            <button onclick="switchSection('quiz'); toggleMobileMenu();" class="block w-full text-left py-2 font-medium text-striva-dark flex items-center gap-2"><i class="fa-regular fa-gem text-striva-gold"></i> Style Quiz</button>
-            <button onclick="switchSection('story'); toggleMobileMenu();" class="block w-full text-left py-2 font-medium text-striva-dark">About Striva</button>
-            <div id="mobile-auth-container" class="pt-3 border-t border-striva-sand">
-                <!-- Mobile auth buttons -->
-            </div>
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden bg-striva-cream border-b border-striva-200 px-6 py-4 space-y-3">
+            <a href="#home" onclick="switchView('home'); toggleMobileMenu();" class="block text-striva-dark font-medium py-1">Home</a>
+            <a href="#shop" onclick="switchView('shop'); toggleMobileMenu();" class="block text-striva-dark font-medium py-1">Shop Catalog</a>
+            <a href="#quiz" onclick="switchView('quiz'); toggleMobileMenu();" class="block text-striva-dark font-medium py-1">Style Quiz</a>
+            <a href="#custom" onclick="switchView('custom'); toggleMobileMenu();" class="block text-striva-dark font-medium py-1">Custom Studio</a>
+            <a href="#about" onclick="switchView('about'); toggleMobileMenu();" class="block text-striva-dark font-medium py-1">About Demi-Fine</a>
         </div>
     </header>
 
-    <main class="flex-grow">
-
-        <!-- ================= 1. HOME SECTION ================= -->
-        <section id="section-home" class="fade-in">
+    <main id="main-container">
+        
+        <!-- HOME VIEW -->
+        <section id="view-home" class="view-section">
             <!-- Hero Banner -->
-            <div class="relative bg-striva-sand/50 overflow-hidden py-20 lg:py-28">
-                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-                    <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
-                        <span class="inline-block uppercase tracking-[0.3em] text-xs font-semibold bg-striva-gold/10 text-striva-accent px-3.5 py-1.5 rounded-full border border-striva-gold/30">
-                            The New Era of Indian Luxury
+            <div class="relative bg-striva-100 overflow-hidden">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-28 flex flex-col lg:flex-row items-center justify-between">
+                    <div class="lg:w-1/2 space-y-6 text-center lg:text-left z-10">
+                        <span class="inline-block bg-striva-200/60 text-striva-900 text-xs font-semibold px-3.5 py-1.5 rounded-full tracking-widest uppercase">
+                            Sustainable Luxury in INR
                         </span>
-                        <h1 class="font-serif text-4xl sm:text-5xl lg:text-6xl text-striva-dark leading-[1.15] font-normal">
-                            Everyday Elegance, <br><span class="italic font-light text-striva-accent">Uncompromising Quality.</span>
+                        <h1 class="font-serif text-4xl sm:text-5xl lg:text-6xl font-normal leading-tight text-striva-dark">
+                            Everyday Elegance, <br><span class="italic font-light text-striva-600">Reimagined.</span>
                         </h1>
-                        <p class="text-striva-muted text-base sm:text-lg max-w-xl mx-auto lg:mx-0 font-light leading-relaxed">
-                            Discover Striva’s demi-fine jewelry—masterfully crafted with solid precious metals, sustainable lab stones, and timeless Indian-inspired motifs designed for your everyday moments.
+                        <p class="text-striva-700 text-base sm:text-lg max-w-xl mx-auto lg:mx-0 font-light">
+                            Discover exquisite demi-fine jewelry crafted from recycled 925 sterling silver and 18k gold vermeil. Minimal pieces under ₹7,000, and fully curated statement designs strictly under ₹10,000.
                         </p>
-                        <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
-                            <button onclick="switchSection('shop')" class="w-full sm:w-auto bg-striva-dark hover:bg-striva-accent text-white px-8 py-4 rounded-none font-medium tracking-wider uppercase text-xs transition duration-300 shadow-md flex items-center justify-center gap-3">
-                                <span>Explore 50+ Pieces</span>
-                                <i class="fa-solid fa-arrow-right"></i>
+                        <div class="pt-4 flex flex-col sm:flex-row justify-center lg:justify-start gap-4">
+                            <button onclick="switchView('shop')" class="bg-striva-dark hover:bg-striva-600 text-white px-8 py-3.5 rounded-full text-sm font-semibold tracking-wider uppercase transition-all shadow-lg hover:shadow-xl">
+                                Explore Collection
                             </button>
-                            <button onclick="switchSection('studio')" class="w-full sm:w-auto bg-transparent hover:bg-striva-gold/10 text-striva-dark border border-striva-dark px-8 py-4 font-medium tracking-wider uppercase text-xs transition duration-300 flex items-center justify-center gap-2">
-                                <i class="fa-solid fa-wand-magic-sparkles text-striva-gold"></i> Custom Studio
-                            </button>
-                        </div>
-                    </div>
-                    <!-- Hero Visual -->
-                    <div class="lg:col-span-5 relative">
-                        <div class="relative mx-auto max-w-md lg:max-w-none">
-                            <div class="aspect-[4/5] bg-gradient-to-tr from-striva-sand to-striva-champagne rounded-2xl shadow-2xl overflow-hidden border border-striva-gold/20 flex items-center justify-center relative">
-                                <img src="https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=800&q=80" alt="Striva Jewelry" class="w-full h-full object-cover opacity-90 hover:scale-105 transition duration-700">
-                                <div class="absolute inset-0 bg-gradient-to-t from-striva-dark/60 via-transparent to-transparent flex flex-col justify-end p-8 text-white">
-                                    <span class="text-xs uppercase tracking-widest text-striva-gold font-semibold">Bestseller Masterpiece</span>
-                                    <h3 class="font-serif text-2xl font-light">Aura Diamond Solitaire Ring</h3>
-                                    <p class="text-xs text-striva-champagne/80 mt-1">18k Gold Vermeil on Recycled Sterling Silver</p>
-                                </div>
-                            </div>
-                            <!-- Floating badge -->
-                            <div class="absolute -bottom-6 -left-6 bg-white/95 backdrop-blur shadow-xl p-4 rounded-xl border border-striva-sand max-w-[200px] hidden sm:block">
-                                <div class="flex items-center gap-3">
-                                    <div class="w-10 h-10 rounded-full bg-striva-gold/10 text-striva-accent flex items-center justify-center font-bold">
-                                        <i class="fa-solid fa-shield-halved"></i>
-                                    </div>
-                                    <div>
-                                        <h4 class="text-xs font-bold text-striva-dark">Lifetime Warranty</h4>
-                                        <p class="text-[10px] text-striva-muted">Tarnish-resistant finish</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- What is Demi-Fine Jewelry & Collections Preview -->
-            <div class="py-24 bg-white">
-                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-20">
-                    <div class="text-center max-w-3xl mx-auto space-y-4">
-                        <span class="text-striva-accent font-semibold tracking-widest text-xs uppercase">The Philosophy of Striva</span>
-                        <h2 class="font-serif text-3xl sm:text-4xl text-striva-dark">What is Demi-Fine Jewelry?</h2>
-                        <p class="text-striva-muted text-base leading-relaxed font-light">
-                            Traditional fine jewelry comes with astronomical retail markups, while fashion jewelry tarnishes in weeks. Striva bridges this gap with thick 18k gold vermeil and ethically sourced lab gems built for everyday wear across India.
-                        </p>
-                    </div>
-
-                    <!-- Quick Collection Selector Cards -->
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                        <div onclick="switchSection('shop'); filterCollection('Women');" class="group relative h-80 rounded-xl overflow-hidden cursor-pointer shadow-md">
-                            <img src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=600&q=80" alt="Women" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                            <div class="absolute inset-0 bg-gradient-to-t from-striva-dark/80 via-transparent to-transparent flex flex-col justify-end p-6 text-white">
-                                <span class="text-[10px] uppercase tracking-widest text-striva-gold font-bold">Collection</span>
-                                <h3 class="font-serif text-2xl">Women</h3>
-                                <p class="text-xs text-striva-champagne/80 mt-1">Pendants, hoops & delicate rings</p>
-                            </div>
-                        </div>
-                        <div onclick="switchSection('shop'); filterCollection('Men');" class="group relative h-80 rounded-xl overflow-hidden cursor-pointer shadow-md">
-                            <img src="https://images.unsplash.com/photo-1603561591411-07134e71a2a9?auto=format&fit=crop&w=600&q=80" alt="Men" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                            <div class="absolute inset-0 bg-gradient-to-t from-striva-dark/80 via-transparent to-transparent flex flex-col justify-end p-6 text-white">
-                                <span class="text-[10px] uppercase tracking-widest text-striva-gold font-bold">Collection</span>
-                                <h3 class="font-serif text-2xl">Men</h3>
-                                <p class="text-xs text-striva-champagne/80 mt-1">Signets, Cuban chains & bracelets</p>
-                            </div>
-                        </div>
-                        <div onclick="switchSection('shop'); filterCollection('Wedding & Couples');" class="group relative h-80 rounded-xl overflow-hidden cursor-pointer shadow-md">
-                            <img src="https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=600&q=80" alt="Wedding" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                            <div class="absolute inset-0 bg-gradient-to-t from-striva-dark/80 via-transparent to-transparent flex flex-col justify-end p-6 text-white">
-                                <span class="text-[10px] uppercase tracking-widest text-striva-gold font-bold">Collection</span>
-                                <h3 class="font-serif text-2xl">Wedding & Couples</h3>
-                                <p class="text-xs text-striva-champagne/80 mt-1">Matching bands & bridal sets</p>
-                            </div>
-                        </div>
-                        <div onclick="switchSection('shop'); filterCollection('Minimal');" class="group relative h-80 rounded-xl overflow-hidden cursor-pointer shadow-md">
-                            <img src="https://images.unsplash.com/photo-1635767798638-3e25273a8236?auto=format&fit=crop&w=600&q=80" alt="Minimal" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                            <div class="absolute inset-0 bg-gradient-to-t from-striva-dark/80 via-transparent to-transparent flex flex-col justify-end p-6 text-white">
-                                <span class="text-[10px] uppercase tracking-widest text-striva-gold font-bold">Collection</span>
-                                <h3 class="font-serif text-2xl">Minimal Essentials</h3>
-                                <p class="text-xs text-striva-champagne/80 mt-1">Subtle daily wear pieces</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ================= 2. SHOP SECTION (50+ Products & Multi-Level Filters) ================= -->
-        <section id="section-shop" class="hidden fade-in py-16 bg-white min-h-[85vh]">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
-                
-                <!-- Shop Header -->
-                <div class="text-center max-w-2xl mx-auto space-y-3">
-                    <span class="text-striva-accent uppercase tracking-widest text-xs font-semibold">Curated Catalog</span>
-                    <h2 class="font-serif text-3xl sm:text-4xl text-striva-dark">The Striva Jewelry Vault</h2>
-                    <p class="text-striva-muted text-sm font-light">Explore 50+ masterfully crafted demi-fine jewelry pieces in Indian Rupees (₹).</p>
-                </div>
-
-                <!-- Personalized Style Quiz Collection Banner (Dynamic) -->
-                <div id="quiz-results-banner" class="hidden bg-gradient-to-r from-striva-dark to-striva-accent text-white p-8 rounded-xl shadow-lg flex flex-col md:flex-row items-center justify-between gap-6">
-                    <div class="space-y-2 text-center md:text-left">
-                        <span class="bg-striva-gold text-striva-dark text-[10px] uppercase font-bold px-3 py-1 rounded-full tracking-widest">Your Curated Collection</span>
-                        <h3 id="quiz-banner-title" class="font-serif text-2xl font-medium">Modern Minimalist Edit</h3>
-                        <p id="quiz-banner-desc" class="text-xs text-striva-champagne/80 max-w-xl font-light">Based on your style quiz responses, we've handpicked clean geometric silhouettes tailored to you.</p>
-                    </div>
-                    <button onclick="clearQuizFilter()" class="bg-white/10 hover:bg-white/20 text-white text-xs uppercase tracking-wider px-5 py-2.5 rounded border border-white/30 transition whitespace-nowrap">
-                        View All 50+ Products
-                    </button>
-                </div>
-
-                <!-- Multi-Level Filters & Search Bar -->
-                <div class="bg-striva-blush p-6 rounded-2xl border border-striva-sand space-y-6">
-                    <!-- Row 1: Collection Filter (Women, Men, Wedding & Couples, Minimal, All) -->
-                    <div>
-                        <label class="block text-xs uppercase tracking-wider text-striva-muted mb-2 font-bold">Filter by Collection</label>
-                        <div id="collection-filters" class="flex flex-wrap gap-2">
-                            <button onclick="filterCollection('All')" class="col-btn px-4 py-2 rounded-full text-xs font-medium uppercase tracking-wider transition bg-striva-dark text-white shadow-sm" data-collection="All">All Collections</button>
-                            <button onclick="filterCollection('Women')" class="col-btn px-4 py-2 rounded-full text-xs font-medium uppercase tracking-wider transition bg-white text-striva-dark border border-striva-sand hover:border-striva-gold" data-collection="Women">Women</button>
-                            <button onclick="filterCollection('Men')" class="col-btn px-4 py-2 rounded-full text-xs font-medium uppercase tracking-wider transition bg-white text-striva-dark border border-striva-sand hover:border-striva-gold" data-collection="Men">Men</button>
-                            <button onclick="filterCollection('Wedding & Couples')" class="col-btn px-4 py-2 rounded-full text-xs font-medium uppercase tracking-wider transition bg-white text-striva-dark border border-striva-sand hover:border-striva-gold" data-collection="Wedding & Couples">Wedding & Couples</button>
-                            <button onclick="filterCollection('Minimal')" class="col-btn px-4 py-2 rounded-full text-xs font-medium uppercase tracking-wider transition bg-white text-striva-dark border border-striva-sand hover:border-striva-gold" data-collection="Minimal">Minimal</button>
-                        </div>
-                    </div>
-
-                    <!-- Row 2: Category Filter & Search Input -->
-                    <div class="flex flex-col md:flex-row items-center justify-between gap-4 pt-4 border-t border-striva-sand">
-                        <!-- Category Tabs -->
-                        <div id="category-filters" class="flex flex-wrap items-center gap-2">
-                            <span class="text-xs uppercase tracking-wider text-striva-muted font-bold mr-2">Category:</span>
-                            <button onclick="filterCategory('All')" class="cat-btn px-3 py-1.5 rounded text-xs font-medium uppercase transition bg-striva-dark text-white" data-category="All">All</button>
-                            <button onclick="filterCategory('Rings')" class="cat-btn px-3 py-1.5 rounded text-xs font-medium uppercase transition bg-white text-striva-dark border border-striva-sand" data-category="Rings">Rings</button>
-                            <button onclick="filterCategory('Necklaces')" class="cat-btn px-3 py-1.5 rounded text-xs font-medium uppercase transition bg-white text-striva-dark border border-striva-sand" data-category="Necklaces">Necklaces</button>
-                            <button onclick="filterCategory('Earrings')" class="cat-btn px-3 py-1.5 rounded text-xs font-medium uppercase transition bg-white text-striva-dark border border-striva-sand" data-category="Earrings">Earrings</button>
-                            <button onclick="filterCategory('Bracelets')" class="cat-btn px-3 py-1.5 rounded text-xs font-medium uppercase transition bg-white text-striva-dark border border-striva-sand" data-category="Bracelets">Bracelets</button>
-                        </div>
-
-                        <!-- Search Input -->
-                        <div class="relative w-full md:w-72">
-                            <input type="text" id="product-search" oninput="handleSearch(this.value)" placeholder="Search 50+ jewelry items..." class="w-full pl-10 pr-4 py-2.5 bg-white border border-striva-sand rounded-full text-xs focus:outline-none focus:border-striva-gold text-striva-dark placeholder:text-striva-muted">
-                            <i class="fa-solid fa-search absolute left-3.5 top-3 text-striva-muted text-xs"></i>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Product Grid (Dynamic 50+ items) -->
-                <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-                    <!-- Products injected dynamically by JS -->
-                </div>
-
-            </div>
-        </section>
-
-        <!-- ================= 3. CUSTOMIZATION STUDIO SECTION (Auth Guarded) ================= -->
-        <section id="section-studio" class="hidden fade-in py-16 bg-striva-sand/50 min-h-[85vh]">
-            <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
-                <div class="text-center max-w-2xl mx-auto space-y-3">
-                    <span class="text-striva-accent uppercase tracking-widest text-xs font-semibold">Bespoke Atelier</span>
-                    <h2 class="font-serif text-3xl sm:text-4xl text-striva-dark">Striva Customization Studio</h2>
-                    <p class="text-striva-muted text-sm font-light">Craft your personalized heirloom ring or pendant with custom metal finishes, bespoke engravings, and precious gemstone settings.</p>
-                </div>
-
-                <div class="bg-white rounded-2xl shadow-xl border border-striva-sand p-8 sm:p-12 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-                    <!-- Live Visual Preview -->
-                    <div class="lg:col-span-6 space-y-6 text-center">
-                        <div class="aspect-square bg-striva-blush rounded-2xl border border-striva-sand p-8 flex flex-col items-center justify-center relative overflow-hidden shadow-inner">
-                            <div class="w-48 h-48 rounded-full border-4 border-dashed border-striva-gold/40 flex items-center justify-center relative animate-pulse">
-                                <div id="preview-metal-circle" class="w-36 h-36 rounded-full bg-gradient-to-tr from-amber-200 via-amber-300 to-amber-500 shadow-2xl flex items-center justify-center text-striva-dark font-serif font-bold text-xl relative">
-                                    <span id="preview-gem-icon" class="text-3xl text-emerald-600 drop-shadow"><i class="fa-solid fa-gem"></i></span>
-                                </div>
-                            </div>
-                            <div class="mt-6 space-y-1">
-                                <span class="text-[10px] uppercase tracking-widest text-striva-muted">Bespoke Preview</span>
-                                <h3 id="preview-title" class="font-serif text-xl font-medium text-striva-dark">Custom 18k Gold Vermeil Ring</h3>
-                                <p id="preview-engraving-badge" class="text-xs text-striva-accent font-mono italic">"Your Engraving Here"</p>
-                            </div>
-                        </div>
-                        <div class="text-xs text-striva-muted flex items-center justify-center gap-2">
-                            <i class="fa-solid fa-shield-halved text-striva-gold"></i> Backed by Striva Lifetime Craftsmanship Warranty
-                        </div>
-                    </div>
-
-                    <!-- Customization Controls & Auth Guard -->
-                    <div class="lg:col-span-6 space-y-6">
-                        <div class="space-y-4">
-                            <div>
-                                <label class="block text-xs uppercase tracking-wider text-striva-muted mb-2 font-bold">1. Select Base Piece</label>
-                                <select id="studio-base-type" onchange="updateStudioPreview()" class="w-full px-4 py-3 bg-striva-sand/50 border border-striva-sand rounded-lg text-sm focus:outline-none focus:border-striva-gold text-striva-dark">
-                                    <option value="Ring">Bespoke Signet / Solitaire Ring (₹4,500)</option>
-                                    <option value="Pendant">Aura Diamond Pendant (₹6,200)</option>
-                                    <option value="Bracelet">Seraphina Cuff Bracelet (₹8,500)</option>
-                                </select>
-                            </div>
-
-                            <div>
-                                <label class="block text-xs uppercase tracking-wider text-striva-muted mb-2 font-bold">2. Choose Precious Metal Finish</label>
-                                <select id="studio-metal" onchange="updateStudioPreview()" class="w-full px-4 py-3 bg-striva-sand/50 border border-striva-sand rounded-lg text-sm focus:outline-none focus:border-striva-gold text-striva-dark">
-                                    <option value="18k Yellow Gold">18k Solid Yellow Gold Vermeil</option>
-                                    <option value="Rose Gold">14k Romantic Rose Gold Vermeil</option>
-                                    <option value="Sterling Silver">Recycled 925 Sterling Silver</option>
-                                </select>
-                            </div>
-
-                            <div>
-                                <label class="block text-xs uppercase tracking-wider text-striva-muted mb-2 font-bold">3. Choose Gemstone Accent</label>
-                                <select id="studio-gemstone" onchange="updateStudioPreview()" class="w-full px-4 py-3 bg-striva-sand/50 border border-striva-sand rounded-lg text-sm focus:outline-none focus:border-striva-gold text-striva-dark">
-                                    <option value="Lab Diamond">Lab-Grown Brilliant Diamond</option>
-                                    <option value="Emerald">Colombian Green Emerald</option>
-                                    <option value="Sapphire">Midnight Blue Sapphire</option>
-                                    <option value="Ruby">Royal Crimson Ruby</option>
-                                </select>
-                            </div>
-
-                            <div>
-                                <label class="block text-xs uppercase tracking-wider text-striva-muted mb-2 font-bold">4. Custom Engraving (Max 12 Characters)</label>
-                                <input type="text" id="studio-engraving" maxlength="12" oninput="updateStudioPreview()" placeholder="e.g. V & S or Forever" class="w-full px-4 py-3 bg-striva-sand/50 border border-striva-sand rounded-lg text-sm focus:outline-none focus:border-striva-gold text-striva-dark">
-                            </div>
-                        </div>
-
-                        <div class="pt-4 border-t border-striva-sand flex items-center justify-between">
-                            <div>
-                                <span class="text-xs uppercase tracking-wider text-striva-muted">Estimated Price</span>
-                                <h3 id="studio-price" class="font-serif text-2xl font-bold text-striva-dark">₹4,500</h3>
-                            </div>
-                            <button onclick="handleStudioAddToCart()" class="bg-striva-dark hover:bg-striva-accent text-white px-8 py-4 uppercase tracking-widest text-xs font-medium transition shadow-lg flex items-center gap-2">
-                                <i class="fa-solid fa-bag-shopping"></i> Add Custom Piece to Bag
+                            <button onclick="switchView('quiz')" class="bg-transparent border border-striva-dark hover:bg-striva-dark hover:text-white text-striva-dark px-8 py-3.5 rounded-full text-sm font-semibold tracking-wider uppercase transition-all">
+                                Take Style Quiz
                             </button>
                         </div>
                     </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ================= 4. STYLE QUIZ SECTION ================= -->
-        <section id="section-quiz" class="hidden fade-in py-16 bg-striva-champagne/40 min-h-[85vh] flex items-center">
-            <div class="max-w-3xl mx-auto px-4 w-full">
-                <div class="bg-white rounded-2xl shadow-xl border border-striva-sand p-8 sm:p-12 relative overflow-hidden">
-                    
-                    <!-- Quiz Progress Bar -->
-                    <div class="mb-8">
-                        <div class="flex justify-between text-xs uppercase tracking-widest text-striva-muted mb-2 font-medium">
-                            <span id="quiz-step-indicator">Step 1 of 3</span>
-                            <span id="quiz-progress-pct">33%</span>
-                        </div>
-                        <div class="w-full bg-striva-sand h-1.5 rounded-full overflow-hidden">
-                            <div id="quiz-progress-bar" class="bg-striva-gold h-full transition-all duration-500" style="width: 33%;"></div>
+                    <div class="lg:w-1/2 mt-12 lg:mt-0 flex justify-center">
+                        <div class="relative w-full max-w-md aspect-square rounded-3xl overflow-hidden shadow-2xl border-4 border-white">
+                            <img src="https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=800&q=80" alt="Striva Hero Jewelry" class="w-full h-full object-cover transform hover:scale-105 transition-transform duration-700" onerror="this.src='https://placehold.co/600x600/E4D7C2/3D311F?text=Striva+Luxury'">
                         </div>
                     </div>
-
-                    <!-- Quiz Question Container -->
-                    <div id="quiz-container">
-                        <!-- Injected via JS -->
-                    </div>
-
                 </div>
             </div>
-        </section>
 
-        <!-- ================= 5. ABOUT / OUR STORY SECTION ================= -->
-        <section id="section-story" class="hidden fade-in py-20 bg-white">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
-                <div class="text-center max-w-3xl mx-auto space-y-4">
-                    <span class="text-striva-accent uppercase tracking-widest text-xs font-semibold">Heritage & Vision</span>
-                    <h2 class="font-serif text-3xl sm:text-5xl text-striva-dark">The Striva Story</h2>
-                    <p class="text-striva-muted text-base font-light leading-relaxed">
-                        Founded on the belief that luxury across India should be inclusive, sustainable, and worn every single day.
+            <!-- What is Demi-Fine Section -->
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+                <div class="text-center max-w-3xl mx-auto space-y-4 mb-16">
+                    <span class="text-xs uppercase tracking-widest text-striva-600 font-bold">The Striva Philosophy</span>
+                    <h2 class="font-serif text-3xl sm:text-4xl text-striva-dark">What is Demi-Fine Jewelry?</h2>
+                    <p class="text-striva-700 text-base">
+                        Bridging the gap between fragile fashion accessories and exorbitant solid gold fine jewelry. We offer timeless craftsmanship you can wear daily without compromise.
                     </p>
                 </div>
 
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                    <div class="space-y-6">
-                        <h3 class="font-serif text-2xl text-striva-dark">Crafted Without Compromise</h3>
-                        <p class="text-striva-muted text-sm font-light leading-relaxed">
-                            Striva was born when our founders grew tired of fashion jewelry that tarnished after two monsoon seasons or cost a fortune at traditional family jewelers. We set out to engineer demi-fine jewelry featuring aerospace-grade tarnish resistance, 18k solid gold vermeil, and conflict-free lab gems.
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="bg-white p-8 rounded-2xl shadow-sm border border-striva-200/60 hover:shadow-md transition-shadow">
+                        <div class="w-12 h-12 bg-striva-100 rounded-xl flex items-center justify-center text-striva-600 text-xl mb-6">
+                            <i class="fa-solid fa-gem"></i>
+                        </div>
+                        <h3 class="font-serif text-xl font-semibold mb-3 text-striva-dark">Recycled 925 Sterling Silver</h3>
+                        <p class="text-striva-700 text-sm leading-relaxed">
+                            Our foundation is built exclusively on certified recycled 925 sterling silver, offering hypoallergenic durability and a substantial feel.
                         </p>
-                        <p class="text-striva-muted text-sm font-light leading-relaxed">
-                            Today, Striva empowers hundreds of thousands of modern individuals across Delhi, Mumbai, Bengaluru, and beyond to express their authentic style without environmental guilt or financial strain.
+                    </div>
+                    <div class="bg-white p-8 rounded-2xl shadow-sm border border-striva-200/60 hover:shadow-md transition-shadow">
+                        <div class="w-12 h-12 bg-striva-100 rounded-xl flex items-center justify-center text-striva-600 text-xl mb-6">
+                            <i class="fa-solid fa-crown"></i>
+                        </div>
+                        <h3 class="font-serif text-xl font-semibold mb-3 text-striva-dark">Thick 18K Gold Vermeil</h3>
+                        <p class="text-striva-700 text-sm leading-relaxed">
+                            Plated up to 5x thicker than standard gold plating using ethical 18K solid yellow and rose gold over sterling silver for enduring luster.
                         </p>
-                        <div class="pt-4">
-                            <button onclick="switchSection('shop')" class="bg-striva-dark hover:bg-striva-accent text-white px-8 py-3.5 uppercase text-xs tracking-widest transition">
-                                Explore The 50+ Collection
-                            </button>
+                    </div>
+                    <div class="bg-white p-8 rounded-2xl shadow-sm border border-striva-200/60 hover:shadow-md transition-shadow">
+                        <div class="w-12 h-12 bg-striva-100 rounded-xl flex items-center justify-center text-striva-600 text-xl mb-6">
+                            <i class="fa-solid fa-seedling"></i>
+                        </div>
+                        <h3 class="font-serif text-xl font-semibold mb-3 text-striva-dark">Ethically Sourced Stones</h3>
+                        <p class="text-striva-700 text-sm leading-relaxed">
+                            Adorned with conflict-free lab-grown diamonds, brilliant cubic zirconia, and hand-selected natural semiprecious gemstones.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Featured Categories Banner -->
+            <div class="bg-striva-100 py-20">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="flex justify-between items-end mb-12">
+                        <div>
+                            <span class="text-xs uppercase tracking-widest text-striva-600 font-bold">Curated Collections</span>
+                            <h2 class="font-serif text-3xl sm:text-4xl text-striva-dark mt-1">Shop By Collection</h2>
+                        </div>
+                        <button onclick="switchView('shop')" class="text-sm font-semibold tracking-wider text-striva-dark hover:text-striva-gold uppercase hidden sm:block">
+                            View All Products <i class="fa-solid fa-arrow-right ml-1"></i>
+                        </button>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                        <div onclick="filterCollection('Minimal')" class="group relative h-80 rounded-2xl overflow-hidden cursor-pointer shadow-md">
+                            <img src="https://images.unsplash.com/photo-1603561591411-07134e71a2a9?auto=format&fit=crop&w=600&q=80" alt="Minimal Collection" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                            <div class="absolute inset--0 bg-gradient-to-t from-black/70 via-black/20 to-transparent flex flex-col justify-end p-6 text-white">
+                                <span class="text-xs tracking-widest uppercase text-striva-200">Strictly Under ₹7,000</span>
+                                <h3 class="font-serif text-2xl font-bold">Minimal Collection</h3>
+                                <p class="text-xs text-striva-100 mt-1 opacity-90">Subtle daily essentials</p>
+                            </div>
+                        </div>
+                        <div onclick="filterCollection('Women')" class="group relative h-80 rounded-2xl overflow-hidden cursor-pointer shadow-md">
+                            <img src="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=600&q=80" alt="Women Collection" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                            <div class="absolute inset--0 bg-gradient-to-t from-black/70 via-black/20 to-transparent flex flex-col justify-end p-6 text-white">
+                                <span class="text-xs tracking-widest uppercase text-striva-200">Capped at ₹10,000</span>
+                                <h3 class="font-serif text-2xl font-bold">Women's Finest</h3>
+                                <p class="text-xs text-striva-100 mt-1 opacity-90">Rings, Necklaces & Earrings</p>
+                            </div>
+                        </div>
+                        <div onclick="filterCollection('Men')" class="group relative h-80 rounded-2xl overflow-hidden cursor-pointer shadow-md">
+                            <img src="https://images.unsplash.com/photo-1622398925373-3f91b17f4744?auto=format&fit=crop&w=600&q=80" alt="Men Collection" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent flex flex-col justify-end p-6 text-white">
+                                <span class="text-xs tracking-widest uppercase text-striva-200">Capped at ₹10,000</span>
+                                <h3 class="font-serif text-2xl font-bold">Men's Edit</h3>
+                                <p class="text-xs text-striva-100 mt-1 opacity-90">Signets, Chains & Bracelets</p>
+                            </div>
+                        </div>
+                        <div onclick="filterCollection('Wedding & Couples')" class="group relative h-80 rounded-2xl overflow-hidden cursor-pointer shadow-md">
+                            <img src="https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=600&q=80" alt="Wedding & Couples" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent flex flex-col justify-end p-6 text-white">
+                                <span class="text-xs tracking-widest uppercase text-striva-200">Capped at ₹10,000</span>
+                                <h3 class="font-serif text-2xl font-bold">Wedding & Couples</h3>
+                                <p class="text-xs text-striva-100 mt-1 opacity-90">Matching bands & promises</p>
+                            </div>
                         </div>
                     </div>
-                    <div class="grid grid-cols-2 gap-4">
-                        <img src="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=600&q=80" alt="Jewelry Crafting" class="rounded-xl shadow-md object-cover h-64 w-full">
-                        <img src="https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=600&q=80" alt="Gold Ring" class="rounded-xl shadow-md object-cover h-64 w-full mt-8">
+                </div>
+            </div>
+        </section>
+
+        <!-- SHOP CATALOG VIEW -->
+        <section id="view-shop" class="view-section hidden max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="mb-10 text-center">
+                <span class="text-xs uppercase tracking-widest text-striva-600 font-bold">Curated Catalog (52 Items)</span>
+                <h1 class="font-serif text-3xl sm:text-4xl text-striva-dark mt-1">The Striva Shop</h1>
+                <p class="text-striva-700 text-sm mt-2 max-w-xl mx-auto">
+                    Minimal collection strictly under ₹7,000. All other pieces strictly capped at ₹10,000 max.
+                </p>
+            </div>
+
+            <!-- Filters Bar -->
+            <div class="flex flex-col md:flex-row justify-between items-center gap-4 mb-8 bg-white p-4 rounded-2xl shadow-sm border border-striva-200">
+                <!-- Collection Tabs -->
+                <div id="collection-tabs" class="flex flex-wrap gap-2">
+                    <button onclick="filterCollection('All')" class="col-tab px-4 py-2 rounded-full text-xs font-semibold uppercase tracking-wider bg-striva-dark text-white transition-all">All</button>
+                    <button onclick="filterCollection('Minimal')" class="col-tab px-4 py-2 rounded-full text-xs font-semibold uppercase tracking-wider bg-striva-100 text-striva-dark hover:bg-striva-200 transition-all">Minimal (&lt;₹7k)</button>
+                    <button onclick="filterCollection('Women')" class="col-tab px-4 py-2 rounded-full text-xs font-semibold uppercase tracking-wider bg-striva-100 text-striva-dark hover:bg-striva-200 transition-all">Women</button>
+                    <button onclick="filterCollection('Men')" class="col-tab px-4 py-2 rounded-full text-xs font-semibold uppercase tracking-wider bg-striva-100 text-striva-dark hover:bg-striva-200 transition-all">Men</button>
+                    <button onclick="filterCollection('Wedding & Couples')" class="col-tab px-4 py-2 rounded-full text-xs font-semibold uppercase tracking-wider bg-striva-100 text-striva-dark hover:bg-striva-200 transition-all">Wedding & Couples</button>
+                </div>
+
+                <!-- Category Filters -->
+                <div id="category-tabs" class="flex flex-wrap gap-2">
+                    <button onclick="filterCategory('All')" class="cat-tab px-3 py-1.5 rounded-lg text-xs font-medium bg-striva-200/50 text-striva-dark hover:bg-striva-200 transition-all active-cat">All Categories</button>
+                    <button onclick="filterCategory('Rings')" class="cat-tab px-3 py-1.5 rounded-lg text-xs font-medium bg-striva-100 text-striva-dark hover:bg-striva-200 transition-all">Rings</button>
+                    <button onclick="filterCategory('Necklaces')" class="cat-tab px-3 py-1.5 rounded-lg text-xs font-medium bg-striva-100 text-striva-dark hover:bg-striva-200 transition-all">Necklaces</button>
+                    <button onclick="filterCategory('Earrings')" class="cat-tab px-3 py-1.5 rounded-lg text-xs font-medium bg-striva-100 text-striva-dark hover:bg-striva-200 transition-all">Earrings</button>
+                    <button onclick="filterCategory('Bracelets')" class="cat-tab px-3 py-1.5 rounded-lg text-xs font-medium bg-striva-100 text-striva-dark hover:bg-striva-200 transition-all">Bracelets</button>
+                </div>
+            </div>
+
+            <!-- Product Grid -->
+            <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                <!-- Injected via JS -->
+            </div>
+        </section>
+
+        <!-- STYLE QUIZ VIEW (Expanded 5-6 Questions with guaranteed 2-3 pieces result) -->
+        <section id="view-quiz" class="view-section hidden max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+            <div class="bg-white rounded-3xl shadow-lg border border-striva-200 p-8 sm:p-12">
+                <div class="text-center max-w-xl mx-auto mb-10">
+                    <span class="text-xs uppercase tracking-widest text-striva-600 font-bold">Personalized Curation</span>
+                    <h1 class="font-serif text-3xl sm:text-4xl text-striva-dark mt-1">Find Your Signature Piece</h1>
+                    <p class="text-striva-700 text-sm mt-2">Answer 5 quick style questions. Guaranteed to match you with 2-3 tailored items.</p>
+                </div>
+
+                <!-- Quiz Progress Bar -->
+                <div class="w-full bg-striva-100 h-2 rounded-full mb-8 overflow-hidden">
+                    <div id="quiz-progress" class="bg-striva-gold h-full transition-all duration-300" style="width: 20%;"></div>
+                </div>
+
+                <!-- Quiz Questions Container -->
+                <div id="quiz-container">
+                    <!-- Dynamic Questions Injected via JS -->
+                </div>
+
+                <!-- Quiz Results Container -->
+                <div id="quiz-results" class="hidden">
+                    <div class="text-center mb-8">
+                        <span class="inline-block bg-striva-100 text-striva-900 text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-widest mb-2">Curated Just For You</span>
+                        <h2 class="font-serif text-2xl sm:text-3xl text-striva-dark">Your Recommended Striva Selection</h2>
+                        <p class="text-striva-700 text-sm mt-1">Each curated result includes at least 2-3 gorgeous pieces matching your aesthetic.</p>
+                    </div>
+                    <div id="quiz-recommendations-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+                        <!-- Injected recommendations -->
+                    </div>
+                    <div class="text-center">
+                        <button onclick="resetQuiz()" class="bg-striva-dark hover:bg-striva-600 text-white px-8 py-3 rounded-full text-xs font-bold uppercase tracking-wider transition-all">
+                            Retake Quiz
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CUSTOMIZATION STUDIO VIEW (Auth Guarded) -->
+        <section id="view-custom" class="view-section hidden max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="mb-10 text-center">
+                <span class="text-xs uppercase tracking-widest text-striva-600 font-bold">Bespoke Atelier</span>
+                <h1 class="font-serif text-3xl sm:text-4xl text-striva-dark mt-1">Customization Studio</h1>
+                <p class="text-striva-700 text-sm mt-2">Design your bespoke piece. Striva custom items are strictly capped at ₹10,000 max.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 bg-white p-8 sm:p-12 rounded-3xl shadow-lg border border-striva-200">
+                <!-- Visualizer Preview -->
+                <div class="flex flex-col items-center justify-center bg-striva-100/60 rounded-2xl p-8 relative min-h-[350px]">
+                    <div id="custom-preview-badge" class="absolute top-4 left-4 bg-striva-dark text-white text-[10px] uppercase font-bold tracking-widest px-3 py-1 rounded-full">
+                        Bespoke Design
+                    </div>
+                    <div class="w-56 h-56 rounded-full border-4 border-white shadow-xl flex items-center justify-center overflow-hidden bg-white mb-6 relative">
+                        <img id="custom-preview-img" src="https://images.unsplash.com/photo-1603561591411-07134e71a2a9?auto=format&fit=crop&w=500&q=80" alt="Custom Preview" class="w-full h-full object-cover">
+                        <div id="custom-gem-overlay" class="absolute inset-0 flex items-center justify-center pointer-events-none text-3xl drop-shadow-md">💎</div>
+                    </div>
+                    <div class="text-center">
+                        <h3 id="custom-item-name" class="font-serif text-xl font-bold text-striva-dark">Custom 925 Signet Ring</h3>
+                        <p id="custom-item-price" class="text-striva-600 font-semibold text-lg mt-1">₹4,500</p>
+                    </div>
+                </div>
+
+                <!-- Customizer Controls -->
+                <div class="space-y-6">
+                    <!-- Step 1: Base Item -->
+                    <div>
+                        <label class="block text-xs uppercase tracking-widest font-bold text-striva-dark mb-2">1. Select Base Piece</label>
+                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                            <button onclick="setCustomBase('Ring', 4500, 'https://images.unsplash.com/photo-1603561591411-07134e71a2a9?auto=format&fit=crop&w=500&q=80')" class="custom-base-btn p-3 rounded-xl border-2 border-striva-gold bg-striva-100 text-xs font-semibold text-striva-dark text-center">Ring (₹4,500)</button>
+                            <button onclick="setCustomBase('Necklace', 5800, 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=500&q=80')" class="custom-base-btn p-3 rounded-xl border-2 border-striva-200 bg-white text-xs font-semibold text-striva-dark text-center">Necklace (₹5,800)</button>
+                            <button onclick="setCustomBase('Bracelet', 5200, 'https://images.unsplash.com/photo-1611591475280-9988ff845014?auto=format&fit=crop&w=500&q=80')" class="custom-base-btn p-3 rounded-xl border-2 border-striva-200 bg-white text-xs font-semibold text-striva-dark text-center">Bracelet (₹5,200)</button>
+                            <button onclick="setCustomBase('Earrings', 4900, 'https://images.unsplash.com/photo-1630019852942-f89202989a59?auto=format&fit=crop&w=500&q=80')" class="custom-base-btn p-3 rounded-xl border-2 border-striva-200 bg-white text-xs font-semibold text-striva-dark text-center">Earrings (₹4,900)</button>
+                        </div>
+                    </div>
+
+                    <!-- Step 2: Metal Finish -->
+                    <div>
+                        <label class="block text-xs uppercase tracking-widest font-bold text-striva-dark mb-2">2. Metal Finish (Recycled 925 Silver Base)</label>
+                        <div class="grid grid-cols-3 gap-3">
+                            <button onclick="setCustomMetal('18K Yellow Gold Vermeil', 800)" class="custom-metal-btn p-3 rounded-xl border-2 border-striva-gold bg-striva-100 text-xs font-semibold text-striva-dark text-center">18K Yellow Gold (+₹800)</button>
+                            <button onclick="setCustomMetal('18K Rose Gold Vermeil', 800)" class="custom-metal-btn p-3 rounded-xl border-2 border-striva-200 bg-white text-xs font-semibold text-striva-dark text-center">18K Rose Gold (+₹800)</button>
+                            <button onclick="setCustomMetal('Polished Sterling Silver', 0)" class="custom-metal-btn p-3 rounded-xl border-2 border-striva-200 bg-white text-xs font-semibold text-striva-dark text-center">Sterling Silver (Included)</button>
+                        </div>
+                    </div>
+
+                    <!-- Step 3: Gemstone -->
+                    <div>
+                        <label class="block text-xs uppercase tracking-widest font-bold text-striva-dark mb-2">3. Gemstone Accent</label>
+                        <div class="grid grid-cols-4 gap-3">
+                            <button onclick="setCustomGem('Diamond (Lab-Grown)', 1500, '💎')" class="custom-gem-btn p-3 rounded-xl border-2 border-striva-gold bg-striva-100 text-xs font-semibold text-striva-dark text-center">Diamond (+₹1,500)</button>
+                            <button onclick="setCustomGem('Emerald Green', 1000, '🟢')" class="custom-gem-btn p-3 rounded-xl border-2 border-striva-200 bg-white text-xs font-semibold text-striva-dark text-center">Emerald (+₹1,000)</button>
+                            <button onclick="setCustomGem('Sapphire Blue', 1000, '🔵')" class="custom-gem-btn p-3 rounded-xl border-2 border-striva-200 bg-white text-xs font-semibold text-striva-dark text-center">Sapphire (+₹1,000)</button>
+                            <button onclick="setCustomGem('None (Minimal)', 0, '✨')" class="custom-gem-btn p-3 rounded-xl border-2 border-striva-200 bg-white text-xs font-semibold text-striva-dark text-center">None (₹0)</button>
+                        </div>
+                    </div>
+
+                    <!-- Step 4: Personal Engraving -->
+                    <div>
+                        <label class="block text-xs uppercase tracking-widest font-bold text-striva-dark mb-2">4. Custom Laser Engraving (Optional, Max 8 Chars)</label>
+                        <input type="text" id="custom-engraving" maxlength="8" placeholder="e.g. A&R or 2026" class="w-full px-4 py-3 rounded-xl border border-striva-200 focus:outline-none focus:border-striva-gold text-sm">
+                    </div>
+
+                    <!-- Auth Guarded Save / Checkout -->
+                    <div class="pt-4">
+                        <button onclick="handleCustomSaveOrCheckout()" class="w-full bg-striva-dark hover:bg-striva-600 text-white py-4 rounded-xl text-xs font-bold uppercase tracking-widest transition-all shadow-md">
+                            Add Custom Creation to Bag (Auth Guarded)
+                        </button>
+                        <p class="text-[11px] text-striva-700 text-center mt-2">🔒 Saving or ordering custom pieces requires signing into your Striva account.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ABOUT DEMI-FINE VIEW -->
+        <section id="view-about" class="view-section hidden max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+            <div class="bg-white rounded-3xl p-8 sm:p-16 shadow-lg border border-striva-200 space-y-12">
+                <div class="text-center max-w-2xl mx-auto">
+                    <span class="text-xs uppercase tracking-widest text-striva-600 font-bold">Our Story</span>
+                    <h1 class="font-serif text-3xl sm:text-4xl text-striva-dark mt-1">The Striva Standard</h1>
+                    <p class="text-striva-700 text-sm mt-3 leading-relaxed">
+                        Founded with a mission to bring true luxury within reach, Striva combines sustainable recycled metals with uncompromising artisan craftsmanship.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+                    <div>
+                        <h3 class="font-serif text-2xl font-semibold mb-4 text-striva-dark">Why We Created Striva</h3>
+                        <p class="text-striva-700 text-sm leading-relaxed mb-4">
+                            Traditional fine jewelry comes with staggering markups and outdated supply chains. Meanwhile, fashion jewelry tarnishes within weeks and ends up in landfills.
+                        </p>
+                        <p class="text-striva-700 text-sm leading-relaxed">
+                            We engineered a middle path: <strong>Demi-Fine Jewelry</strong>. By utilizing robust recycled 925 silver cores, thick 18k gold vermeil finishes, and rigorously tested pricing (Minimal under ₹7k, all other collections capped strictly at ₹10k), we empower you to build a timeless jewelry wardrobe.
+                        </p>
+                    </div>
+                    <div class="rounded-2xl overflow-hidden shadow-md">
+                        <img src="https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=600&q=80" alt="About Striva" class="w-full h-72 object-cover">
+                    </div>
+                </div>
+
+                <div class="border-t border-striva-200 pt-10 grid grid-cols-1 sm:grid-cols-3 gap-6 text-center">
+                    <div>
+                        <h4 class="font-serif text-3xl font-bold text-striva-dark mb-1">52+</h4>
+                        <p class="text-xs uppercase tracking-widest text-striva-600 font-semibold">Unique Designs</p>
+                    </div>
+                    <div>
+                        <h4 class="font-serif text-3xl font-bold text-striva-dark mb-1">₹7,000</h4>
+                        <p class="text-xs uppercase tracking-widest text-striva-600 font-semibold">Minimal Price Ceiling</p>
+                    </div>
+                    <div>
+                        <h4 class="font-serif text-3xl font-bold text-striva-dark mb-1">₹10,000</h4>
+                        <p class="text-xs uppercase tracking-widest text-striva-600 font-semibold">Max Cap Across All Collections</p>
                     </div>
                 </div>
             </div>
@@ -439,603 +441,591 @@
 
     </main>
 
-    <!-- PRODUCT DETAIL & CUSTOMIZATION MODAL -->
-    <div id="product-modal" class="fixed inset-0 z-50 bg-striva-dark/60 backdrop-blur-sm hidden flex items-center justify-center p-4">
-        <div class="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl border border-striva-sand relative fade-in">
-            <button onclick="closeProductModal()" class="absolute top-4 right-4 text-striva-muted hover:text-striva-dark p-2 z-10 bg-striva-champagne rounded-full w-9 h-9 flex items-center justify-center">
-                <i class="fa-solid fa-xmark"></i>
-            </button>
-            <div id="product-modal-content" class="p-6 sm:p-10">
-                <!-- Populated dynamically -->
-            </div>
-        </div>
-    </div>
-
-    <!-- AUTHENTICATION MODAL (Required for Customization Studio / Save to Wishlist) -->
-    <div id="auth-modal" class="fixed inset-0 z-50 bg-striva-dark/60 backdrop-blur-sm hidden flex items-center justify-center p-4">
-        <div class="bg-white rounded-2xl max-w-md w-full p-8 shadow-2xl border border-striva-sand relative fade-in">
-            <button onclick="closeAuthModal()" class="absolute top-4 right-4 text-striva-muted hover:text-striva-dark p-2">
-                <i class="fa-solid fa-xmark"></i>
-            </button>
-            <div class="text-center mb-6 space-y-2">
-                <div class="w-12 h-12 rounded-full bg-striva-dark text-striva-gold mx-auto flex items-center justify-center font-serif text-xl font-bold">S</div>
-                <h3 class="font-serif text-2xl text-striva-dark">Welcome to Striva</h3>
-                <p id="auth-modal-subtitle" class="text-xs text-striva-muted font-light">Please sign in or create an account to unlock the Customization Studio, bespoke engravings, and wishlist saving.</p>
-            </div>
-            
-            <form id="auth-form" onsubmit="handleAuthSubmit(event)" class="space-y-4">
-                <div id="auth-name-field" class="hidden">
-                    <label class="block text-xs uppercase tracking-wider text-striva-muted mb-1">Full Name</label>
-                    <input type="text" id="auth-name" placeholder="Aarav Sharma" class="w-full px-4 py-3 bg-striva-sand/50 border border-striva-sand rounded text-sm focus:outline-none focus:border-striva-gold">
-                </div>
-                <div>
-                    <label class="block text-xs uppercase tracking-wider text-striva-muted mb-1">Email Address</label>
-                    <input type="email" id="auth-email" required placeholder="aarav@example.com" class="w-full px-4 py-3 bg-striva-sand/50 border border-striva-sand rounded text-sm focus:outline-none focus:border-striva-gold">
-                </div>
-                <div>
-                    <label class="block text-xs uppercase tracking-wider text-striva-muted mb-1">Password</label>
-                    <input type="password" id="auth-password" required placeholder="••••••••" class="w-full px-4 py-3 bg-striva-sand/50 border border-striva-sand rounded text-sm focus:outline-none focus:border-striva-gold">
-                </div>
-                <button type="submit" id="auth-submit-btn" class="w-full bg-striva-dark hover:bg-striva-accent text-white py-3.5 uppercase tracking-widest text-xs font-medium transition duration-300 shadow-md">
-                    Sign In
-                </button>
-            </form>
-
-            <div class="text-center mt-6 pt-4 border-t border-striva-sand">
-                <p id="auth-toggle-text" class="text-xs text-striva-muted">
-                    Don't have an account? <button type="button" onclick="toggleAuthMode()" class="text-striva-dark font-semibold underline ml-1">Create account</button>
-                </p>
-            </div>
-        </div>
-    </div>
-
-    <!-- CART SIDEBAR MODAL -->
-    <div id="cart-modal" class="fixed inset-0 z-50 bg-striva-dark/60 backdrop-blur-sm hidden justify-end">
-        <div class="bg-white w-full max-w-md h-full shadow-2xl flex flex-col justify-between p-6 sm:p-8 animate-slide-left relative">
-            <div>
-                <div class="flex items-center justify-between pb-6 border-b border-striva-sand">
-                    <h3 class="font-serif text-2xl text-striva-dark">Your Shopping Bag</h3>
-                    <button onclick="closeCartModal()" class="text-striva-muted hover:text-striva-dark p-2">
-                        <i class="fa-solid fa-xmark text-lg"></i>
-                    </button>
-                </div>
-                <div id="cart-items-container" class="py-6 space-y-4 max-h-[55vh] overflow-y-auto">
-                    <!-- Cart items injected here -->
-                </div>
-            </div>
-            <div class="pt-6 border-t border-striva-sand space-y-4">
-                <div class="flex justify-between items-center text-sm">
-                    <span class="text-striva-muted uppercase tracking-wider">Subtotal (INR)</span>
-                    <span id="cart-subtotal" class="font-serif text-xl font-bold text-striva-dark">₹0</span>
-                </div>
-                <button onclick="checkoutCart()" class="w-full bg-striva-dark hover:bg-striva-accent text-white py-4 uppercase tracking-widest text-xs font-medium transition shadow-lg">
-                    Proceed to Secure Checkout
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- WISHLIST SIDEBAR MODAL -->
-    <div id="wishlist-modal" class="fixed inset-0 z-50 bg-striva-dark/60 backdrop-blur-sm hidden justify-end">
-        <div class="bg-white w-full max-w-md h-full shadow-2xl flex flex-col justify-between p-6 sm:p-8 relative">
-            <div>
-                <div class="flex items-center justify-between pb-6 border-b border-striva-sand">
-                    <h3 class="font-serif text-2xl text-striva-dark">Your Wishlist</h3>
-                    <button onclick="closeWishlistModal()" class="text-striva-muted hover:text-striva-dark p-2">
-                        <i class="fa-solid fa-xmark text-lg"></i>
-                    </button>
-                </div>
-                <div id="wishlist-items-container" class="py-6 space-y-4 max-h-[65vh] overflow-y-auto">
-                    <!-- Wishlist items injected here -->
-                </div>
-            </div>
-            <div class="pt-6 border-t border-striva-sand">
-                <button onclick="closeWishlistModal(); switchSection('shop');" class="w-full bg-striva-sand hover:bg-striva-gold/20 text-striva-dark py-3.5 uppercase tracking-widest text-xs font-medium transition">
-                    Continue Shopping
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- NOTIFICATION TOAST -->
-    <div id="toast" class="fixed bottom-6 right-6 z-50 bg-striva-dark text-white px-6 py-3.5 rounded-lg shadow-xl transform translate-y-20 opacity-0 transition-all duration-300 flex items-center gap-3">
-        <i class="fa-solid fa-circle-check text-striva-gold text-lg"></i>
-        <span id="toast-message" class="text-xs font-medium tracking-wide">Item added successfully</span>
-    </div>
-
     <!-- Footer -->
-    <footer class="bg-striva-dark text-striva-champagne pt-16 pb-12 border-t border-striva-gold/20 mt-auto">
+    <footer class="bg-striva-dark text-striva-100 pt-16 pb-12 mt-20 border-t border-striva-200">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
             <div class="space-y-4">
-                <div class="flex items-center gap-3">
-                    <div class="w-8 h-8 rounded-full bg-striva-gold flex items-center justify-center text-striva-dark font-serif font-bold text-lg">
-                        S
-                    </div>
-                    <span class="font-serif text-xl font-bold tracking-widest uppercase text-white">Striva</span>
-                </div>
-                <p class="text-xs text-striva-champagne/70 font-light leading-relaxed">
-                    Demi-fine jewelry engineered for modern Indian elegance. Solid gold vermeil and lab-grown brilliance priced in INR.
+                <h3 class="font-serif text-2xl font-bold tracking-wider text-white">STRIVA</h3>
+                <p class="text-xs text-striva-200 leading-relaxed">
+                    Exquisite demi-fine jewelry crafted with recycled 925 silver and 18k gold vermeil. Minimal pieces under ₹7k, all items strictly capped at ₹10k.
                 </p>
             </div>
             <div>
-                <h4 class="font-serif text-sm font-semibold tracking-wider text-white uppercase mb-4">Navigation</h4>
-                <ul class="space-y-2.5 text-xs text-striva-champagne/70 font-light">
-                    <li><button onclick="switchSection('home')" class="hover:text-striva-gold transition">Home</button></li>
-                    <li><button onclick="switchSection('shop')" class="hover:text-striva-gold transition">Shop Catalog (50+)</button></li>
-                    <li><button onclick="switchSection('studio')" class="hover:text-striva-gold transition">Customization Studio</button></li>
-                    <li><button onclick="switchSection('quiz')" class="hover:text-striva-gold transition">Style Quiz</button></li>
+                <h4 class="text-xs uppercase font-bold tracking-widest text-striva-gold mb-4">Quick Links</h4>
+                <ul class="space-y-2 text-xs">
+                    <li><a href="#home" onclick="switchView('home')" class="hover:text-striva-gold transition-colors">Home</a></li>
+                    <li><a href="#shop" onclick="switchView('shop')" class="hover:text-striva-gold transition-colors">Shop Catalog</a></li>
+                    <li><a href="#quiz" onclick="switchView('quiz')" class="hover:text-striva-gold transition-colors">Style Quiz</a></li>
+                    <li><a href="#custom" onclick="switchView('custom')" class="hover:text-striva-gold transition-colors">Custom Studio</a></li>
                 </ul>
             </div>
             <div>
-                <h4 class="font-serif text-sm font-semibold tracking-wider text-white uppercase mb-4">Customer Care</h4>
-                <ul class="space-y-2.5 text-xs text-striva-champagne/70 font-light">
-                    <li><a href="#" class="hover:text-striva-gold transition">Jewelry Care Guide</a></li>
-                    <li><a href="#" class="hover:text-striva-gold transition">Pan-India Shipping</a></li>
-                    <li><a href="#" class="hover:text-striva-gold transition">Lifetime Warranty</a></li>
-                    <li><a href="#" class="hover:text-striva-gold transition">Contact Support</a></li>
+                <h4 class="text-xs uppercase font-bold tracking-widest text-striva-gold mb-4">Collections</h4>
+                <ul class="space-y-2 text-xs">
+                    <li><a href="#shop" onclick="filterCollection('Minimal')" class="hover:text-striva-gold transition-colors">Minimal Collection (&lt;₹7k)</a></li>
+                    <li><a href="#shop" onclick="filterCollection('Women')" class="hover:text-striva-gold transition-colors">Women's Finest</a></li>
+                    <li><a href="#shop" onclick="filterCollection('Men')" class="hover:text-striva-gold transition-colors">Men's Edit</a></li>
+                    <li><a href="#shop" onclick="filterCollection('Wedding & Couples')" class="hover:text-striva-gold transition-colors">Wedding & Couples</a></li>
                 </ul>
             </div>
             <div>
-                <h4 class="font-serif text-sm font-semibold tracking-wider text-white uppercase mb-4">Join the Club</h4>
-                <p class="text-xs text-striva-champagne/70 font-light mb-3">Subscribe to receive 15% off your first order and early access to drops.</p>
-                <form onsubmit="event.preventDefault(); showToast('Thank you for subscribing!');" class="flex">
-                    <input type="email" placeholder="Your email" required class="bg-white/10 text-xs px-4 py-2.5 text-white placeholder:text-striva-champagne/40 focus:outline-none w-full">
-                    <button type="submit" class="bg-striva-gold hover:bg-striva-accent text-striva-dark px-4 font-bold text-xs uppercase transition">Join</button>
-                </form>
+                <h4 class="text-xs uppercase font-bold tracking-widest text-striva-gold mb-4">Newsletter</h4>
+                <p class="text-xs text-striva-200 mb-3">Subscribe for 10% off your first order.</p>
+                <div class="flex">
+                    <input type="email" placeholder="Your email" class="bg-striva-900 border border-striva-700 text-xs px-3 py-2 rounded-l-xl text-white focus:outline-none w-full">
+                    <button onclick="showToast('Thank you for subscribing!')" class="bg-striva-gold text-striva-dark px-4 py-2 rounded-r-xl text-xs font-bold uppercase hover:bg-white transition-colors">Join</button>
+                </div>
             </div>
         </div>
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 border-t border-white/10 text-center text-[11px] text-striva-champagne/50 font-light">
-            &copy; 2026 Striva Jewelry Inc. All Rights Reserved. Prices in INR (₹).
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-t border-striva-900 pt-6 text-center text-xs text-striva-300">
+            &copy; 2026 Striva Jewelry India. All rights reserved. Prices strictly in INR (₹).
         </div>
     </footer>
 
+    <!-- CART DRAWER -->
+    <div id="cart-drawer" class="fixed inset-0 z-50 overflow-hidden hidden">
+        <div class="absolute inset-0 bg-black/50 backdrop-blur-sm transition-opacity" onclick="closeCartDrawer()"></div>
+        <div class="absolute inset-y-0 right-0 max-w-full flex pl-10">
+            <div class="w-screen max-w-md bg-white shadow-2xl flex flex-col">
+                <div class="p-6 border-b border-striva-200 flex items-center justify-between">
+                    <h2 class="font-serif text-xl font-bold text-striva-dark">Your Shopping Bag (<span id="cart-count">0</span>)</h2>
+                    <button onclick="closeCartDrawer()" class="text-striva-dark hover:text-striva-gold text-lg"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+                <div id="cart-items-container" class="flex-1 overflow-y-auto p-6 space-y-4">
+                    <!-- Cart items injected here -->
+                </div>
+                <div class="p-6 border-t border-striva-200 bg-striva-50 space-y-4">
+                    <div class="flex justify-between items-center text-sm font-semibold">
+                        <span class="text-striva-dark">Subtotal (INR):</span>
+                        <span id="cart-subtotal" class="font-serif text-lg text-striva-dark">₹0</span>
+                    </div>
+                    <p class="text-[11px] text-striva-700">All taxes included. Insured shipping calculated at checkout.</p>
+                    <button onclick="checkoutCart()" class="w-full bg-striva-dark hover:bg-striva-600 text-white py-3.5 rounded-xl text-xs font-bold uppercase tracking-wider transition-all shadow-md">
+                        Proceed to Secure Checkout
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- WISHLIST DRAWER -->
+    <div id="wishlist-drawer" class="fixed inset-0 z-50 overflow-hidden hidden">
+        <div class="absolute inset-0 bg-black/50 backdrop-blur-sm transition-opacity" onclick="closeWishlistDrawer()"></div>
+        <div class="absolute inset-y-0 right-0 max-w-full flex pl-10">
+            <div class="w-screen max-w-md bg-white shadow-2xl flex flex-col">
+                <div class="p-6 border-b border-striva-200 flex items-center justify-between">
+                    <h2 class="font-serif text-xl font-bold text-striva-dark">Your Wishlist (<span id="wishlist-count">0</span>)</h2>
+                    <button onclick="closeWishlistDrawer()" class="text-striva-dark hover:text-striva-gold text-lg"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+                <div id="wishlist-items-container" class="flex-1 overflow-y-auto p-6 space-y-4">
+                    <!-- Wishlist items injected here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PRODUCT QUICK VIEW MODAL -->
+    <div id="quickview-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm hidden">
+        <div class="bg-white rounded-3xl max-w-2xl w-full overflow-hidden shadow-2xl relative animate-in fade-in zoom-in-95 duration-200">
+            <button onclick="closeQuickView()" class="absolute top-4 right-4 z-10 w-9 h-9 bg-white/80 rounded-full flex items-center justify-center text-striva-dark hover:bg-striva-200 shadow-md">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="grid grid-cols-1 md:grid-cols-2">
+                <div class="h-72 md:h-full">
+                    <img id="qv-img" src="" alt="Product" class="w-full h-full object-cover">
+                </div>
+                <div class="p-8 flex flex-col justify-between">
+                    <div class="space-y-3">
+                        <span id="qv-collection" class="inline-block bg-striva-100 text-striva-900 text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-widest"></span>
+                        <h2 id="qv-name" class="font-serif text-2xl font-bold text-striva-dark"></h2>
+                        <p id="qv-price" class="text-striva-600 font-bold text-xl"></p>
+                        <p id="qv-desc" class="text-striva-700 text-xs leading-relaxed"></p>
+                        <div class="pt-2 text-xs text-striva-700 space-y-1">
+                            <div>• Material: Recycled 925 Sterling Silver</div>
+                            <div>• Finish: 18K Gold Vermeil / Polished Silver</div>
+                            <div>• Warranty: 2-Year Striva Care Guarantee</div>
+                        </div>
+                    </div>
+                    <div class="pt-6">
+                        <button id="qv-add-btn" onclick="" class="w-full bg-striva-dark hover:bg-striva-600 text-white py-3.5 rounded-xl text-xs font-bold uppercase tracking-widest transition-all">
+                            Add to Bag
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- AUTH MODAL -->
+    <div id="auth-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm hidden">
+        <div class="bg-white rounded-3xl max-w-md w-full p-8 shadow-2xl relative">
+            <button onclick="closeAuthModal()" class="absolute top-4 right-4 text-striva-dark hover:text-striva-gold text-lg"><i class="fa-solid fa-xmark"></i></button>
+            <div class="text-center mb-6">
+                <span class="font-serif text-2xl font-bold text-striva-dark">Welcome to Striva</span>
+                <p id="auth-subtitle" class="text-xs text-striva-700 mt-1">Sign in or create account to save custom jewelry & orders.</p>
+            </div>
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-xs uppercase tracking-widest font-bold text-striva-dark mb-1">Email Address</label>
+                    <input type="email" id="auth-email" placeholder="you@example.com" class="w-full px-4 py-3 rounded-xl border border-striva-200 text-sm focus:outline-none focus:border-striva-gold">
+                </div>
+                <div>
+                    <label class="block text-xs uppercase tracking-widest font-bold text-striva-dark mb-1">Password</label>
+                    <input type="password" id="auth-password" placeholder="••••••••" class="w-full px-4 py-3 rounded-xl border border-striva-200 text-sm focus:outline-none focus:border-striva-gold">
+                </div>
+                <button onclick="handleAuthSubmit()" class="w-full bg-striva-dark hover:bg-striva-600 text-white py-3.5 rounded-xl text-xs font-bold uppercase tracking-wider transition-all">
+                    Sign In / Register
+                </button>
+            </div>
+            <div id="auth-status" class="mt-4 text-center text-xs font-medium text-striva-600 hidden"></div>
+        </div>
+    </div>
+
+    <!-- TOAST NOTIFICATION -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 bg-striva-dark text-white px-6 py-3.5 rounded-2xl shadow-2xl text-xs font-medium tracking-wide transform translate-y-20 opacity-0 transition-all duration-300 flex items-center space-x-3">
+        <i class="fa-solid fa-circle-check text-striva-gold text-base"></i>
+        <span id="toast-msg">Item added successfully</span>
+    </div>
+
+    <!-- JavaScript Application Logic -->
     <script>
-        // --- 50+ PRODUCTS MOCK DATABASE (INR PRICING & DIVERSE COLLECTIONS) ---
+        // 52 Diverse Products Database respecting price rules:
+        // - Minimal collection strictly <= ₹7,000 (e.g., ₹3,200 to ₹6,950)
+        // - All other collections (Women, Men, Wedding & Couples) strictly <= ₹10,000 (max ₹9,950)
         const products = [
-            // WOMEN RINGS (1-8)
-            { id: 1, name: "Aura Diamond Solitaire Ring", collection: "Women", category: "Rings", price: 14500, image: "https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=600&q=80", description: "Delicate 18k gold vermeil band holding a brilliant 0.5ct lab-grown diamond solitaire. Waterproof and hypoallergenic.", bestseller: true, quizTag: "minimalist" },
-            { id: 2, name: "Solstice Halo Diamond Ring", collection: "Women", category: "Rings", price: 18200, image: "https://images.unsplash.com/photo-1603561591411-07134e71a2a9?auto=format&fit=crop&w=600&q=80", description: "Stunning halo setting with pavé accents on recycled 925 sterling silver plated in thick yellow gold.", bestseller: true, quizTag: "statement" },
-            { id: 3, name: "Elysian Stackable Gold Band", collection: "Women", category: "Rings", price: 7800, image: "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=600&q=80", description: "Subtle textured band crafted for effortless daily stacking.", bestseller: false, quizTag: "minimalist" },
-            { id: 4, name: "Athena Emerald Cocktail Ring", collection: "Women", category: "Rings", price: 16500, image: "https://images.unsplash.com/photo-1611591475871-332e92cb8bf5?auto=format&fit=crop&w=600&q=80", description: "Vibrant emerald center stone framed by dual diamond baguettes.", bestseller: false, quizTag: "bold" },
-            { id: 5, name: "Celeste Pearl Accent Ring", collection: "Women", category: "Rings", price: 9200, image: "https://images.unsplash.com/photo-1635767798638-3e25273a8236?auto=format&fit=crop&w=600&q=80", description: "Freshwater baroque pearl paired with an open gold cuff band.", bestseller: false, quizTag: "classic" },
-            { id: 6, name: "Vesta Minimalist Curve Ring", collection: "Women", category: "Rings", price: 6500, image: "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=600&q=80", description: "Anatomically contoured wave ring for comfortable 24/7 wear.", bestseller: false, quizTag: "minimalist" },
-            { id: 7, name: "Nova Pavé Eternity Band", collection: "Women", category: "Rings", price: 12400, image: "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=600&q=80", description: "Continuous stream of handset brilliant stones sparkling brilliantly.", bestseller: true, quizTag: "classic" },
-            { id: 8, name: "Kiran Rose Gold Twist Ring", collection: "Women", category: "Rings", price: 8400, image: "https://images.unsplash.com/photo-1573408301185-9146fe634ad0?auto=format&fit=crop&w=600&q=80", description: "Interwoven strands of 14k rose gold vermeil.", bestseller: false, quizTag: "classic" },
+            // --- MINIMAL COLLECTION (All <= ₹7,000) ---
+            { id: 1, name: "Aura Minimalist Ring", collection: "Minimal", category: "Rings", price: 3450, image: "https://images.unsplash.com/photo-1603561591411-07134e71a2a9?auto=format&fit=crop&w=600&q=80", desc: "Delicate recycled 925 sterling silver band with 18k gold vermeil." },
+            { id: 2, name: "Solstice Slim Band", collection: "Minimal", category: "Rings", price: 2950, image: "https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=600&q=80", desc: "Ultra sleek stacking ring for everyday effortless styling." },
+            { id: 3, name: "Celeste Micro Pendant", collection: "Minimal", category: "Necklaces", price: 5200, image: "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=600&q=80", desc: "Dainty star-set cubic zirconia pendant on adjustable vermeil chain." },
+            { id: 4, name: "Nova Minimalist Choker", collection: "Minimal", category: "Necklaces", price: 6800, image: "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=600&q=80", desc: "Subtle chain necklace reflecting pure minimalist grace." },
+            { id: 5, name: "Ember Tiny Hoops", collection: "Minimal", category: "Earrings", price: 4200, image: "https://images.unsplash.com/photo-1630019852942-f89202989a59?auto=format&fit=crop&w=600&q=80", desc: "Sleek hinged huggie earrings in 18k gold vermeil." },
+            { id: 6, name: "Dot Stud Earrings", collection: "Minimal", category: "Earrings", price: 3100, image: "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=600&q=80", desc: "Minimalist geometric studs for pierced ears." },
+            { id: 7, name: "Minimalist Bar Bracelet", collection: "Minimal", category: "Bracelets", price: 5900, image: "https://images.unsplash.com/photo-1611591475280-9988ff845014?auto=format&fit=crop&w=600&q=80", desc: "Clean horizontal bar linked to a delicate 925 silver chain." },
+            { id: 8, name: "Thread Chain Bracelet", collection: "Minimal", category: "Bracelets", price: 4500, image: "https://images.unsplash.com/photo-1573408301185-9146fe634ad0?auto=format&fit=crop&w=600&q=80", desc: "Featherlight bracelet designed for daily wear." },
+            { id: 9, name: "Lunar Crescent Ring", collection: "Minimal", category: "Rings", price: 3850, image: "https://images.unsplash.com/photo-1603561591411-07134e71a2a9?auto=format&fit=crop&w=600&q=80", desc: "Crescent moon curve studded with micro zirconia." },
+            { id: 10, name: "Pure Wire Ring", collection: "Minimal", category: "Rings", price: 2750, image: "https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=600&q=80", desc: "Pure polished silver wire ring." },
+            { id: 11, name: "Minimalist Drop Necklace", collection: "Minimal", category: "Necklaces", price: 6500, image: "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=600&q=80", desc: "Single glistening stone drop." },
+            { id: 12, name: "Sleek Huggie Hoops", collection: "Minimal", category: "Earrings", price: 4950, image: "https://images.unsplash.com/photo-1630019852942-f89202989a59?auto=format&fit=crop&w=600&q=80", desc: "Everyday secure huggie hoops." },
+            { id: 13, name: "Minimalist Cuff", collection: "Minimal", category: "Bracelets", price: 6900, image: "https://images.unsplash.com/photo-1611591475280-9988ff845014?auto=format&fit=crop&w=600&q=80", desc: "Open architecture wrist cuff." },
 
-            // WOMEN NECKLACES (9-16)
-            { id: 9, name: "Aura Diamond Pendant", collection: "Women", category: "Necklaces", price: 15500, image: "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=600&q=80", description: "Delicate 18k gold vermeil chain holding a brilliant solitaire pendant.", bestseller: true, quizTag: "minimalist" },
-            { id: 10, name: "Luna Crescent Moon Choker", collection: "Women", category: "Necklaces", price: 13800, image: "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=600&q=80", description: "Curved crescent silhouette studded with pavé stones.", bestseller: true, quizTag: "bold" },
-            { id: 11, name: "Zara Layered Gold Chain", collection: "Women", category: "Necklaces", price: 17200, image: "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=600&q=80", description: "Double-strand layered necklace combining snake and cable chains.", bestseller: false, quizTag: "statement" },
-            { id: 12, name: "Sita Pearl Drop Lariat", collection: "Women", category: "Necklaces", price: 14200, image: "https://images.unsplash.com/photo-1635767798638-3e25273a8236?auto=format&fit=crop&w=600&q=80", description: "Drop lariat necklace featuring genuine freshwater teardrop pearls.", bestseller: false, quizTag: "classic" },
-            { id: 13, name: "Maya Gold Coin Necklace", collection: "Women", category: "Necklaces", price: 12900, image: "https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=600&q=80", description: "Embossed ancient motif medallion on a heavy box chain.", bestseller: false, quizTag: "bold" },
-            { id: 14, name: "Nisha Sapphire Bar Necklace", collection: "Women", category: "Necklaces", price: 11500, image: "https://images.unsplash.com/photo-1603561591411-07134e71a2a9?auto=format&fit=crop&w=600&q=80", description: "Sleek horizontal bar studded with calibrated blue sapphires.", bestseller: false, quizTag: "minimalist" },
-            { id: 15, name: "Rani Chandelier Statement Necklace", collection: "Women", category: "Necklaces", price: 24500, image: "https://images.unsplash.com/photo-1611591475871-332e92cb8bf5?auto=format&fit=crop&w=600&q=80", description: "Ornate festival-ready necklace with intricate stone clusters.", bestseller: true, quizTag: "statement" },
-            { id: 16, name: "Meera Dainty Dot Necklace", collection: "Women", category: "Necklaces", price: 7900, image: "https://images.unsplash.com/photo-1573408301185-9146fe634ad0?auto=format&fit=crop&w=600&q=80", description: "Subtle spaced gold beads on a whisper-thin chain.", bestseller: false, quizTag: "minimalist" },
+            // --- WOMEN'S COLLECTION (Capped at ₹10,000) ---
+            { id: 14, name: "Empress Emerald Cocktail Ring", collection: "Women", category: "Rings", price: 8900, image: "https://images.unsplash.com/photo-1603561591411-07134e71a2a9?auto=format&fit=crop&w=600&q=80", desc: "Stunning lab-grown emerald centerpiece framed in 18k gold vermeil." },
+            { id: 15, name: "Royal Diamond Halo Ring", collection: "Women", category: "Rings", price: 9500, image: "https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=600&q=80", desc: "Brilliant cubic zirconia halo ring with exceptional clarity." },
+            { id: 16, name: "Duchess Pearl Ring", collection: "Women", category: "Rings", price: 7800, image: "https://images.unsplash.com/photo-1603561591411-07134e71a2a9?auto=format&fit=crop&w=600&q=80", desc: "Lustrous freshwater baroque pearl set in recycled 925 silver." },
+            { id: 17, name: "Verve Statement Necklace", collection: "Women", category: "Necklaces", price: 9800, image: "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=600&q=80", desc: "Cascading geometric links plated in rich 18k yellow gold." },
+            { id: 18, name: "Goddess Sunburst Pendant", collection: "Women", category: "Necklaces", price: 8500, image: "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=600&q=80", desc: "Radiant sunburst medallion with central star-set gemstone." },
+            { id: 19, name: "Lumina Diamond Tennis Necklace", collection: "Women", category: "Necklaces", price: 9950, image: "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=600&q=80", desc: "Dazzling row of handset cubic zirconia simulating fine diamonds." },
+            { id: 20, name: "Cascade Chandelier Earrings", collection: "Women", category: "Earrings", price: 8200, image: "https://images.unsplash.com/photo-1630019852942-f89202989a59?auto=format&fit=crop&w=600&q=80", desc: "Elegant tiered earrings crafted for gala evenings and celebrations." },
+            { id: 21, name: "Royal Drop Earrings", collection: "Women", category: "Earrings", price: 7900, image: "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=600&q=80", desc: "Pear-cut colored stones suspended from vermeil studs." },
+            { id: 22, name: "Statement Hoop Earrings", collection: "Women", category: "Earrings", price: 7500, image: "https://images.unsplash.com/photo-1630019852942-f89202989a59?auto=format&fit=crop&w=600&q=80", desc: "Bold textured gold hoops with lightweight hollow core." },
+            { id: 23, name: "Artisan Charm Bracelet", collection: "Women", category: "Bracelets", price: 8600, image: "https://images.unsplash.com/photo-1611591475280-9988ff845014?auto=format&fit=crop&w=600&q=80", desc: "Hand-crafted charms dangling from a heavy 925 silver link chain." },
+            { id: 24, name: "Imperial Cuff Bracelet", collection: "Women", category: "Bracelets", price: 9200, image: "https://images.unsplash.com/photo-1573408301185-9146fe634ad0?auto=format&fit=crop&w=600&q=80", desc: "Hammered finish cuff in 18k gold vermeil." },
+            { id: 25, name: "Floral Motif Ring", collection: "Women", category: "Rings", price: 8100, image: "https://images.unsplash.com/photo-1603561591411-07134e71a2a9?auto=format&fit=crop&w=600&q=80", desc: "Delicate blossoming floral cluster ring." },
+            { id: 26, name: "Sapphire Teardrop Ring", collection: "Women", category: "Rings", price: 9400, image: "https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=600&q=80", desc: "Deep blue teardrop sapphire ring." },
+            { id: 27, name: "Layered Serpent Necklace", collection: "Women", category: "Necklaces", price: 9100, image: "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=600&q=80", desc: "Mesmerizing serpent chain necklace." },
+            { id: 28, name: "Crystal Cluster Earrings", collection: "Women", category: "Earrings", price: 7700, image: "https://images.unsplash.com/photo-1630019852942-f89202989a59?auto=format&fit=crop&w=600&q=80", desc: "Cluster of brilliant crystals." },
+            { id: 29, name: "Baguette Tennis Bracelet", collection: "Women", category: "Bracelets", price: 9750, image: "https://images.unsplash.com/photo-1611591475280-9988ff845014?auto=format&fit=crop&w=600&q=80", desc: "Modern baguette cut stone bracelet." },
 
-            // WOMEN EARRINGS (17-24)
-            { id: 17, name: "Celeste Pearl Hoops", collection: "Women", category: "Earrings", price: 9800, image: "https://images.unsplash.com/photo-1635767798638-3e25273a8236?auto=format&fit=crop&w=600&q=80", description: "Hand-selected baroque pearls suspended from thick sleeper hoops.", bestseller: true, quizTag: "classic" },
-            { id: 18, name: "Aria Geometric Drop Earrings", collection: "Women", category: "Earrings", price: 11200, image: "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=600&q=80", description: "Sleek architectural drop earrings designed to catch the light.", bestseller: false, quizTag: "bold" },
-            { id: 19, name: "Priya Huggie Hoop Earrings", collection: "Women", category: "Earrings", price: 8500, image: "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=600&q=80", description: "Snug everyday huggies studded with micro lab diamonds.", bestseller: true, quizTag: "minimalist" },
-            { id: 20, name: "Kavya Diamond Climber Earrings", collection: "Women", category: "Earrings", price: 13400, image: "https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=600&q=80", description: "Ascending ear climbers that hug the curve of the earlobe.", bestseller: false, quizTag: "statement" },
-            { id: 21, name: "Ananya Sunburst Studs", collection: "Women", category: "Earrings", price: 6900, image: "https://images.unsplash.com/photo-1603561591411-07134e71a2a9?auto=format&fit=crop&w=600&q=80", description: "Radiant sunburst studs with a central golden topaz stone.", bestseller: false, quizTag: "classic" },
-            { id: 22, name: "Tanvi Threader Earrings", collection: "Women", category: "Earrings", price: 7500, image: "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=600&q=80", description: "Fluid threader chains ending in polished gold bars.", bestseller: false, quizTag: "minimalist" },
-            { id: 23, name: "Diya Jhumka Fusion Earrings", collection: "Women", category: "Earrings", price: 15900, image: "https://images.unsplash.com/photo-1611591475871-332e92cb8bf5?auto=format&fit=crop&w=600&q=80", description: "Modern demi-fine take on traditional Indian bell jhumkas.", bestseller: true, quizTag: "statement" },
-            { id: 24, name: "Isha Chandelier Drops", collection: "Women", category: "Earrings", price: 14800, image: "https://images.unsplash.com/photo-1573408301185-9146fe634ad0?auto=format&fit=crop&w=600&q=80", description: "Cascading tiers of gold filigree and sparkling stones.", bestseller: false, quizTag: "bold" },
+            // --- MEN'S COLLECTION (Capped at ₹10,000) ---
+            { id: 30, name: "Titan Signet Ring", collection: "Men", category: "Rings", price: 8500, image: "https://images.unsplash.com/photo-1622398925373-3f91b17f4744?auto=format&fit=crop&w=600&q=80", desc: "Bold recycled 925 silver signet ring with brushed top finish." },
+            { id: 31, name: "Monarch Onyx Signet", collection: "Men", category: "Rings", price: 9200, image: "https://images.unsplash.com/photo-1622398925373-3f91b17f4744?auto=format&fit=crop&w=600&q=80", desc: "Natural black onyx inlay set in heavy 925 silver." },
+            { id: 32, name: "Rugged Groove Band", collection: "Men", category: "Rings", price: 7400, image: "https://images.unsplash.com/photo-1622398925373-3f91b17f4744?auto=format&fit=crop&w=600&q=80", desc: "Textured center groove band for men." },
+            { id: 33, name: "Urban Cubain Chain Necklace", collection: "Men", category: "Necklaces", price: 9900, image: "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=600&q=80", desc: "Substantial 6mm cuban link chain in polished sterling silver." },
+            { id: 34, name: "Viking Compass Pendant", collection: "Men", category: "Necklaces", price: 8800, image: "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=600&q=80", desc: "Nordic compass engraving on oxidized silver coin." },
+            { id: 35, name: "Box Link Chain Men", collection: "Men", category: "Necklaces", price: 8200, image: "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=600&q=80", desc: "Sturdy geometric box link chain." },
+            { id: 36, name: "Armor Black Studs", collection: "Men", category: "Earrings", price: 5400, image: "https://images.unsplash.com/photo-1630019852942-f89202989a59?auto=format&fit=crop&w=600&q=80", desc: "Black rhodium plated sterling silver studs for men." },
+            { id: 37, name: "Solid Hoop Men", collection: "Men", category: "Earrings", price: 5900, image: "https://images.unsplash.com/photo-1630019852942-f89202989a59?auto=format&fit=crop&w=600&q=80", desc: "Single or paired thick silver hoop." },
+            { id: 38, name: "Heavy Mariner Bracelet", collection: "Men", category: "Bracelets", price: 9800, image: "https://images.unsplash.com/photo-1611591475280-9988ff845014?auto=format&fit=crop&w=600&q=80", desc: "Classic mariner link bracelet with secure box clasp." },
+            { id: 39, name: "Rope Chain Bracelet Men", collection: "Men", category: "Bracelets", price: 7900, image: "https://images.unsplash.com/photo-1611591475280-9988ff845014?auto=format&fit=crop&w=600&q=80", desc: "Twisted rope chain bracelet in 925 silver." },
+            { id: 40, name: "Industrial Steel Band", collection: "Men", category: "Rings", price: 6800, image: "https://images.unsplash.com/photo-1622398925373-3f91b17f4744?auto=format&fit=crop&w=600&q=80", desc: "Industrial screw detail ring." },
+            { id: 41, name: "Anchor Link Bracelet", collection: "Men", category: "Bracelets", price: 8900, image: "https://images.unsplash.com/photo-1611591475280-9988ff845014?auto=format&fit=crop&w=600&q=80", desc: "Nautical anchor link bracelet." },
 
-            // WOMEN BRACELETS (25-30)
-            { id: 25, name: "Seraphina Tennis Bracelet", collection: "Women", category: "Bracelets", price: 18500, image: "https://images.unsplash.com/photo-1611591475871-332e92cb8bf5?auto=format&fit=crop&w=600&q=80", description: "Continuous stream of handset brilliant stones with secure clasp.", bestseller: true, quizTag: "statement" },
-            { id: 26, name: "Vesta Architectural Cuff", collection: "Women", category: "Bracelets", price: 14200, image: "https://images.unsplash.com/photo-1573408301185-9146fe634ad0?auto=format&fit=crop&w=600&q=80", description: "Open architectural cuff hugging the wrist with polished bevel edges.", bestseller: false, quizTag: "bold" },
-            { id: 27, name: "Maya Charm Link Bracelet", collection: "Women", category: "Bracelets", price: 11800, image: "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=600&q=80", description: "Chunky paperclip chain links with removable initial charm.", bestseller: false, quizTag: "classic" },
-            { id: 28, name: "Naina Bangles Set (Pack of 3)", collection: "Women", category: "Bracelets", price: 16500, image: "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=600&q=80", description: "Trio of stackable polished gold and silver bangles.", bestseller: true, quizTag: "classic" },
-            { id: 29, name: "Rhea Minimalist Station Bracelet", collection: "Women", category: "Bracelets", price: 8200, image: "https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=600&q=80", description: "Delicate chain accented with tiny gold bezel-set crystals.", bestseller: false, quizTag: "minimalist" },
-            { id: 30, name: "Kiran Evil Eye Bracelet", collection: "Women", category: "Bracelets", price: 9500, image: "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=600&q=80", description: "Protective talisman charm set with sapphire and diamond enamel.", bestseller: false, quizTag: "minimalist" },
-
-            // MEN COLLECTION (31-38)
-            { id: 31, name: "Solstice Men's Signet Ring", collection: "Men", category: "Rings", price: 12500, image: "https://images.unsplash.com/photo-1603561591411-07134e71a2a9?auto=format&fit=crop&w=600&q=80", description: "Bold yet refined heavy 18k solid gold vermeil signet ring.", bestseller: true, quizTag: "bold" },
-            { id: 32, name: "Vikram Heavy Cuban Chain", collection: "Men", category: "Necklaces", price: 21500, image: "https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=600&q=80", description: "Substantial 8mm Cuban link chain engineered in recycled silver and gold.", bestseller: true, quizTag: "statement" },
-            { id: 33, name: "Dev Textured Men's Band", collection: "Men", category: "Rings", price: 9800, image: "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=600&q=80", description: "Hammered finish comfort-fit band for men.", bestseller: false, quizTag: "minimalist" },
-            { id: 34, name: "Arjun Diamond Stud for Men", collection: "Men", category: "Earrings", price: 6800, image: "https://images.unsplash.com/photo-1635767798638-3e25273a8236?auto=format&fit=crop&w=600&q=80", description: "Single 0.25ct lab-grown diamond bezel stud in 18k gold.", bestseller: false, quizTag: "minimalist" },
-            { id: 35, name: "Kabir Box Link Bracelet", collection: "Men", category: "Bracelets", price: 14500, image: "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=600&q=80", description: "Masculine architectural box chain bracelet with secure clasp.", bestseller: true, quizTag: "bold" },
-            { id: 36, name: "Rohan Tiger Eye Ring", collection: "Men", category: "Rings", price: 13900, image: "https://images.unsplash.com/photo-1611591475871-332e92cb8bf5?auto=format&fit=crop&w=600&q=80", description: "Natural tiger eye gemstone bezel-set in heavy gold vermeil.", bestseller: false, quizTag: "statement" },
-            { id: 37, name: "Sameer Figaro Chain Necklace", collection: "Men", category: "Necklaces", price: 18900, image: "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=600&q=80", description: "Classic Figaro link chain offering timeless masculine styling.", bestseller: false, quizTag: "classic" },
-            { id: 38, name: "Zayn Leather & Gold Bracelet", collection: "Men", category: "Bracelets", price: 8900, image: "https://images.unsplash.com/photo-1573408301185-9146fe634ad0?auto=format&fit=crop&w=600&q=80", description: "Genuine braided leather fastened with an engraved gold magnetic clasp.", bestseller: false, quizTag: "minimalist" },
-
-            // WEDDING & COUPLES COLLECTION (39-46)
-            { id: 39, name: "Eternal Promise Couple Bands (Set of 2)", collection: "Wedding & Couples", category: "Rings", price: 26500, image: "https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=600&q=80", description: "Matching polished 18k gold vermeil couple bands with inner custom engraving space.", bestseller: true, quizTag: "classic" },
-            { id: 40, name: "Royal Bridal Polki Necklace Set", collection: "Wedding & Couples", category: "Necklaces", price: 34500, image: "https://images.unsplash.com/photo-1611591475871-332e92cb8bf5?auto=format&fit=crop&w=600&q=80", description: "Exquisite bridal demi-fine necklace featuring uncut polki stones and pearls.", bestseller: true, quizTag: "statement" },
-            { id: 41, name: "Amour Diamond Engagement Ring", collection: "Wedding & Couples", category: "Rings", price: 22000, image: "https://images.unsplash.com/photo-1603561591411-07134e71a2a9?auto=format&fit=crop&w=600&q=80", description: "1.0ct brilliant lab-grown diamond solitaire on a knife-edge band.", bestseller: true, quizTag: "statement" },
-            { id: 42, name: "Anvitha Wedding Maang Tikka", collection: "Wedding & Couples", category: "Necklaces", price: 11500, image: "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=600&q=80", description: "Stunning forehead ornament for wedding celebrations and receptions.", bestseller: false, quizTag: "classic" },
-            { id: 43, name: "Dev & Priya Matching Wedding Bands", collection: "Wedding & Couples", category: "Rings", price: 24000, image: "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=600&q=80", description: "Interlocking couple ring set in dual yellow and white gold finishes.", bestseller: false, quizTag: "classic" },
-            { id: 44, name: "Milhaan Bridal Nath (Clip-on)", collection: "Wedding & Couples", category: "Rings", price: 8900, image: "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=600&q=80", description: "Delicate clip-on nose ring adorned with pearls and ruby droplets.", bestseller: false, quizTag: "statement" },
-            { id: 45, name: "Samir & Tanya Anniversary Band", collection: "Wedding & Couples", category: "Rings", price: 19500, image: "https://images.unsplash.com/photo-1635767798638-3e25273a8236?auto=format&fit=crop&w=600&q=80", description: "Channel-set anniversary band sparkling with brilliant lab stones.", bestseller: false, quizTag: "classic" },
-            { id: 46, name: "Vivaah Royal Kaleere Bracelets", collection: "Wedding & Couples", category: "Bracelets", price: 18900, image: "https://images.unsplash.com/photo-1573408301185-9146fe634ad0?auto=format&fit=crop&w=600&q=80", description: "Lightweight modern gold-plated bridal kaleere with umbrella charms.", bestseller: true, quizTag: "statement" },
-
-            // MINIMAL ESSENTIALS COLLECTION (47-52)
-            { id: 47, name: "Minimalist Bar Necklace", collection: "Minimal", category: "Necklaces", price: 6800, image: "https://images.unsplash.com/photo-1573408301185-9146fe634ad0?auto=format&fit=crop&w=600&q=80", description: "Ultra-clean horizontal bar pendant for effortless everyday wear.", bestseller: true, quizTag: "minimalist" },
-            { id: 48, name: "Daily Sleek Thin Band", collection: "Minimal", category: "Rings", price: 4500, image: "https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=600&q=80", description: "Featherlight 1.5mm polished gold band.", bestseller: true, quizTag: "minimalist" },
-            { id: 49, name: "Micro Geometric Studs", collection: "Minimal", category: "Earrings", price: 5200, image: "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=600&q=80", description: "Tiny triangular gold studs for cartilage or main lobes.", bestseller: false, quizTag: "minimalist" },
-            { id: 50, name: "Whisper Chain Bracelet", collection: "Minimal", category: "Bracelets", price: 6200, image: "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=600&q=80", description: "Barely-there gold chain bracelet with secure clasp.", bestseller: true, quizTag: "minimalist" },
-            { id: 51, name: "Single Bezel Diamond Choker", collection: "Minimal", category: "Necklaces", price: 9200, image: "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=600&q=80", description: "Single floating diamond bezel on a sheer nylon illusion wire.", bestseller: false, quizTag: "minimalist" },
-            { id: 52, name: "Minimalist Helix Cuff", collection: "Minimal", category: "Earrings", price: 4800, image: "https://images.unsplash.com/photo-1635767798638-3e25273a8236?auto=format&fit=crop&w=600&q=80", description: "Non-piercing cartilage cuff with polished bevel edges.", bestseller: false, quizTag: "minimalist" }
+            // --- WEDDING & COUPLES COLLECTION (Capped at ₹10,000) ---
+            { id: 42, name: "Eternal Promise Matching Band Set", collection: "Wedding & Couples", category: "Rings", price: 9950, image: "https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=600&q=80", desc: "Matching couple rings in polished 925 silver and 18k gold vermeil." },
+            { id: 43, name: "Solitaire Engagement Ring", collection: "Wedding & Couples", category: "Rings", price: 9500, image: "https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=600&q=80", desc: "Brilliant 1-carat lab-grown solitaire stone." },
+            { id: 44, name: "Interlocking Destiny Band", collection: "Wedding & Couples", category: "Rings", price: 8200, image: "https://images.unsplash.com/photo-1603561591411-07134e71a2a9?auto=format&fit=crop&w=600&q=80", desc: "Two intertwined bands symbolizing eternal connection." },
+            { id: 45, name: "Infinity Love Couple Necklace", collection: "Wedding & Couples", category: "Necklaces", price: 8900, image: "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=600&q=80", desc: "Interlinked infinity pendants with dual tone gold and silver." },
+            { id: 46, name: "Bridal Pearl Drop Necklace", collection: "Wedding & Couples", category: "Necklaces", price: 9200, image: "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=600&q=80", desc: "Exquisite bridal pearl pendant with zirconia accent." },
+            { id: 47, name: "Bridal Chandelier Earrings", collection: "Wedding & Couples", category: "Earrings", price: 9600, image: "https://images.unsplash.com/photo-1630019852942-f89202989a59?auto=format&fit=crop&w=600&q=80", desc: "Breathtaking crystal drop earrings for wedding day radiance." },
+            { id: 48, name: "Couple Initials Bracelet", collection: "Wedding & Couples", category: "Bracelets", price: 7800, image: "https://images.unsplash.com/photo-1611591475280-9988ff845014?auto=format&fit=crop&w=600&q=80", desc: "Customizable initial charm couple bracelet." },
+            { id: 49, name: "Pave Wedding Band", collection: "Wedding & Couples", category: "Rings", price: 8400, image: "https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=600&q=80", desc: "Full pave set shimmering wedding band." },
+            { id: 50, name: "Promise Heart Pendant", collection: "Wedding & Couples", category: "Necklaces", price: 7600, image: "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=600&q=80", desc: "Delicate heart pendant for promise gifting." },
+            { id: 51, name: "Duet Pearl Earrings", collection: "Wedding & Couples", category: "Earrings", price: 8100, image: "https://images.unsplash.com/photo-1630019852942-f89202989a59?auto=format&fit=crop&w=600&q=80", desc: "Double pearl drop earrings." },
+            { id: 52, name: "Forever Linked Bracelet", collection: "Wedding & Couples", category: "Bracelets", price: 8700, image: "https://images.unsplash.com/photo-1611591475280-9988ff845014?auto=format&fit=crop&w=600&q=80", desc: "Linked rings bracelet for couples." }
         ];
 
-        // --- STATE MANAGEMENT ---
-        let currentSection = 'home';
-        let currentCollection = 'All';
-        let currentCategory = 'All';
-        let searchQuery = '';
-        let currentUser = JSON.parse(localStorage.getItem('striva_user')) || null;
-        let cart = JSON.parse(localStorage.getItem('striva_cart')) || [];
-        let wishlist = JSON.parse(localStorage.getItem('striva_wishlist')) || [];
-        let activeQuizTag = localStorage.getItem('striva_quiz_tag') || null;
-        let isSignUpMode = false;
-        let pendingCustomizationAction = null;
+        let cart = [];
+        let wishlist = [];
+        let currentCollectionFilter = 'All';
+        let currentCategoryFilter = 'All';
+        let currentUser = null;
 
-        // Style Quiz Questions definition
+        // Custom Studio State
+        let customBaseName = "Ring";
+        let customBasePrice = 4500;
+        let customImgUrl = "https://images.unsplash.com/photo-1603561591411-07134e71a2a9?auto=format&fit=crop&w=500&q=80";
+        let customMetalName = "18K Yellow Gold Vermeil";
+        let customMetalPrice = 800;
+        let customGemName = "Diamond (Lab-Grown)";
+        let customGemPrice = 1500;
+        let customGemEmoji = "💎";
+
+        // Style Quiz 5 Questions definition
         const quizQuestions = [
             {
-                question: "How would you describe your everyday aesthetic?",
+                question: "1. What is your primary style aesthetic for daily wear?",
                 options: [
-                    { label: "Clean, minimal, understated", tag: "minimalist" },
-                    { label: "Bold, edgy, statement-making", tag: "bold" },
-                    { label: "Timeless, elegant, sophisticated", tag: "classic" },
-                    { label: "Luxurious, dazzling, glamorous", tag: "statement" }
+                    { text: "Minimal & Understated", tag: "Minimal" },
+                    { text: "Bold & Statement-Making", tag: "Women" },
+                    { text: "Classic & Timeless", tag: "Wedding & Couples" },
+                    { text: "Rugged & Modern", tag: "Men" }
                 ]
             },
             {
-                question: "Which precious metal tone do you gravitate toward most?",
+                question: "2. Which metal finish do you naturally gravitate towards?",
                 options: [
-                    { label: "Warm 18k Yellow Gold", tag: "gold" },
-                    { label: "Bright Recycled Sterling Silver", tag: "silver" },
-                    { label: "Soft Romantic Rose Gold", tag: "rose" },
-                    { label: "A mixed metal combination", tag: "mixed" }
+                    { text: "18K Yellow Gold Warmth", tag: "Women" },
+                    { text: "Polished Sterling Silver", tag: "Minimal" },
+                    { text: "Rose Gold Elegance", tag: "Wedding & Couples" },
+                    { text: "Oxidized & Brushed Silver", tag: "Men" }
                 ]
             },
             {
-                question: "What is your primary jewelry ritual?",
+                question: "3. What type of jewelry piece are you most looking for right now?",
                 options: [
-                    { label: "Wear it 24/7 (sleep, shower, gym)", tag: "minimalist" },
-                    { label: "Layer multiple pieces for impact", tag: "bold" },
-                    { label: "One signature centerpiece daily", tag: "classic" },
-                    { label: "Change accessories for Indian festivals & weddings", tag: "statement" }
+                    { text: "Rings & Stacking Bands", category: "Rings" },
+                    { text: "Necklaces & Pendants", category: "Necklaces" },
+                    { text: "Earrings & Hoops", category: "Earrings" },
+                    { text: "Bracelets & Cuffs", category: "Bracelets" }
+                ]
+            },
+            {
+                question: "4. What is your preferred gemstone accent?",
+                options: [
+                    { text: "Brilliant Lab-Grown Diamond / Zirconia", tag: "Diamond" },
+                    { text: "Vibrant Emerald or Sapphire", tag: "Colored" },
+                    { text: "Lustrous Pearl", tag: "Pearl" },
+                    { text: "Pure Metal with No Stones", tag: "Minimal" }
+                ]
+            },
+            {
+                question: "5. What occasion are you shopping for?",
+                options: [
+                    { text: "Everyday Signature Wear", tag: "Minimal" },
+                    { text: "Special Celebration / Party", tag: "Women" },
+                    { text: "Anniversary, Wedding, or Promise", tag: "Wedding & Couples" },
+                    { text: "Personal Reward / Gift", tag: "Men" }
                 ]
             }
         ];
         let currentQuizStep = 0;
-        let userQuizAnswers = [];
+        let quizAnswers = [];
 
-        // --- FORMAT INR ---
+        // Format INR Currency
         function formatINR(amount) {
             return '₹' + amount.toLocaleString('en-IN');
         }
 
-        // --- NAVIGATION CONTROLLER ---
-        function switchSection(sectionId) {
-            currentSection = sectionId;
-            const sections = ['home', 'shop', 'studio', 'quiz', 'story'];
-            sections.forEach(s => {
-                const el = document.getElementById(`section-${s}`);
-                const navBtn = document.getElementById(`nav-${s}`);
-                if (el) {
-                    if (s === sectionId) {
-                        el.classList.remove('hidden');
-                        el.classList.add('fade-in');
-                    } else {
-                        el.classList.add('hidden');
-                    }
-                }
-                if (navBtn) {
-                    if (s === sectionId) {
-                        navBtn.classList.remove('text-striva-muted', 'border-transparent');
-                        navBtn.classList.add('text-striva-dark', 'border-striva-dark');
-                    } else {
-                        navBtn.classList.add('text-striva-muted', 'border-transparent');
-                        navBtn.classList.remove('text-striva-dark', 'border-striva-dark');
-                    }
+        // View Navigation Switcher
+        function switchView(viewId) {
+            document.querySelectorAll('.view-section').forEach(sec => sec.classList.add('hidden'));
+            const target = document.getElementById('view-' + viewId);
+            if (target) target.classList.remove('hidden');
+
+            // Update Nav active indicator
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('text-striva-gold', 'border-striva-gold');
+                if(link.getAttribute('data-view') === viewId) {
+                    link.classList.add('text-striva-gold', 'border-striva-gold');
                 }
             });
-            window.scrollTo({ top: 0, behavior: 'smooth' });
 
-            if (sectionId === 'shop') {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            if (viewId === 'shop') {
                 renderProducts();
-            } else if (sectionId === 'quiz' && currentQuizStep === 0) {
-                renderQuizStep();
-            } else if (sectionId === 'studio') {
-                updateStudioPreview();
+            }
+            if (viewId === 'quiz') {
+                initQuiz();
             }
         }
 
+        // Mobile Menu Toggle
         function toggleMobileMenu() {
             const menu = document.getElementById('mobile-menu');
             menu.classList.toggle('hidden');
         }
+        document.getElementById('mobile-menu-btn').addEventListener('click', toggleMobileMenu);
 
-        // --- AUTHENTICATION & HEADER STATE ---
-        function updateAuthUI() {
-            const container = document.getElementById('auth-nav-container');
-            const mobileContainer = document.getElementById('mobile-auth-container');
-            
-            if (currentUser) {
-                const authHtml = `
-                    <div class="flex items-center gap-3">
-                        <div class="w-8 h-8 rounded-full bg-striva-gold text-striva-dark font-bold text-xs flex items-center justify-center uppercase">
-                            ${currentUser.name ? currentUser.name.charAt(0) : currentUser.email.charAt(0)}
-                        </div>
-                        <div class="hidden lg:block text-left">
-                            <span class="block text-xs font-bold text-striva-dark">${currentUser.name || 'Member'}</span>
-                            <span class="block text-[10px] text-striva-muted">Account Active</span>
-                        </div>
-                        <button onclick="logoutUser()" class="text-xs text-striva-muted hover:text-striva-dark ml-2" title="Sign Out">
-                            <i class="fa-solid fa-right-from-bracket"></i>
-                        </button>
-                    </div>
-                `;
-                container.innerHTML = authHtml;
-                mobileContainer.innerHTML = `
-                    <div class="py-2 text-xs font-semibold text-striva-dark">Signed in as ${currentUser.email}</div>
-                    <button onclick="logoutUser()" class="w-full text-left py-2 text-xs text-red-600 font-medium">Sign Out</button>
-                `;
-            } else {
-                const guestHtml = `
-                    <button onclick="openAuthModal(false)" class="text-xs uppercase tracking-wider font-medium text-striva-dark hover:text-striva-accent transition">
-                        Sign In
-                    </button>
-                `;
-                container.innerHTML = guestHtml;
-                mobileContainer.innerHTML = `
-                    <button onclick="openAuthModal(false); toggleMobileMenu();" class="w-full bg-striva-dark text-white text-xs uppercase tracking-wider py-2.5 rounded font-medium">
-                        Sign In / Register
-                    </button>
-                `;
-            }
-            localStorage.setItem('striva_user', JSON.stringify(currentUser));
-        }
-
-        function openAuthModal(isSignUp = false) {
-            isSignUpMode = isSignUp;
-            const modal = document.getElementById('auth-modal');
-            const nameField = document.getElementById('auth-name-field');
-            const subtitle = document.getElementById('auth-modal-subtitle');
-            const submitBtn = document.getElementById('auth-submit-btn');
-            const toggleText = document.getElementById('auth-toggle-text');
-
-            if (isSignUpMode) {
-                nameField.classList.remove('hidden');
-                subtitle.innerText = "Create your Striva account to unlock the Customization Studio, bespoke engravings, and wishlist saving.";
-                submitBtn.innerText = "Create Account";
-                toggleText.innerHTML = `Already have an account? <button type="button" onclick="openAuthModal(false)" class="text-striva-dark font-semibold underline ml-1">Sign In</button>`;
-            } else {
-                nameField.classList.add('hidden');
-                subtitle.innerText = "Please sign in to unlock the Customization Studio, bespoke engravings, and wishlist saving.";
-                submitBtn.innerText = "Sign In";
-                toggleText.innerHTML = `Don't have an account? <button type="button" onclick="openAuthModal(true)" class="text-striva-dark font-semibold underline ml-1">Create account</button>`;
-            }
-
-            modal.classList.remove('hidden');
-            modal.classList.add('flex');
-        }
-
-        function closeAuthModal() {
-            const modal = document.getElementById('auth-modal');
-            modal.classList.add('hidden');
-            modal.classList.remove('flex');
-        }
-
-        function toggleAuthMode() {
-            openAuthModal(!isSignUpMode);
-        }
-
-        function handleAuthSubmit(e) {
-            e.preventDefault();
-            const email = document.getElementById('auth-email').value;
-            const name = document.getElementById('auth-name').value || email.split('@')[0];
-
-            currentUser = { email, name };
-            updateAuthUI();
-            closeAuthModal();
-            showToast(`Welcome back, ${currentUser.name}!`);
-
-            if (pendingCustomizationAction) {
-                pendingCustomizationAction();
-                pendingCustomizationAction = null;
-            }
-        }
-
-        function logoutUser() {
-            currentUser = null;
-            updateAuthUI();
-            showToast("Signed out successfully.");
-        }
-
-        // --- MULTI-LEVEL FILTERING (COLLECTION & CATEGORY) ---
-        function filterCollection(collection) {
-            currentCollection = collection;
-            
-            const buttons = document.querySelectorAll('.col-btn');
-            buttons.forEach(btn => {
-                if (btn.getAttribute('data-collection') === collection) {
-                    btn.classList.remove('bg-white', 'text-striva-dark', 'border');
-                    btn.classList.add('bg-striva-dark', 'text-white', 'shadow-sm');
-                } else {
-                    btn.classList.remove('bg-striva-dark', 'text-white', 'shadow-sm');
-                    btn.classList.add('bg-white', 'text-striva-dark', 'border', 'border-striva-sand');
-                }
-            });
-
-            renderProducts();
-        }
-
-        function filterCategory(category) {
-            currentCategory = category;
-            
-            const buttons = document.querySelectorAll('.cat-btn');
-            buttons.forEach(btn => {
-                if (btn.getAttribute('data-category') === category) {
-                    btn.classList.remove('bg-white', 'text-striva-dark', 'border');
-                    btn.classList.add('bg-striva-dark', 'text-white');
-                } else {
-                    btn.classList.remove('bg-striva-dark', 'text-white');
-                    btn.classList.add('bg-white', 'text-striva-dark', 'border', 'border-striva-sand');
-                }
-            });
-
-            renderProducts();
-        }
-
-        function handleSearch(query) {
-            searchQuery = query.toLowerCase();
-            renderProducts();
-        }
-
+        // Render Product Catalog
         function renderProducts() {
             const grid = document.getElementById('product-grid');
-            const banner = document.getElementById('quiz-results-banner');
-            
-            if (activeQuizTag) {
-                banner.classList.remove('hidden');
-                document.getElementById('quiz-banner-title').innerText = `Your Curated ${activeQuizTag.toUpperCase()} Edit`;
-            } else {
-                banner.classList.add('hidden');
-            }
+            grid.innerHTML = '';
 
             let filtered = products.filter(p => {
-                const matchesCollection = (currentCollection === 'All' || p.collection === currentCollection);
-                const matchesCategory = (currentCategory === 'All' || p.category.toLowerCase() === currentCategory.toLowerCase());
-                const matchesSearch = p.name.toLowerCase().includes(searchQuery) || p.description.toLowerCase().includes(searchQuery);
-                const matchesQuiz = !activeQuizTag || p.quizTag === activeQuizTag;
-                return matchesCollection && matchesCategory && matchesSearch && matchesQuiz;
+                const matchCol = currentCollectionFilter === 'All' || p.collection === currentCollectionFilter;
+                const matchCat = currentCategoryFilter === 'All' || p.category === currentCategoryFilter;
+                return matchCol && matchCat;
             });
 
             if (filtered.length === 0) {
-                grid.innerHTML = `
-                    <div class="col-span-full py-16 text-center space-y-3">
-                        <i class="fa-regular fa-face-grimace text-3xl text-striva-muted"></i>
-                        <h3 class="font-serif text-xl text-striva-dark">No jewelry pieces found</h3>
-                        <p class="text-xs text-striva-muted">Try clearing your collection/category filters or search term.</p>
-                        <button onclick="clearQuizFilter(); filterCollection('All'); filterCategory('All'); handleSearch(''); document.getElementById('product-search').value='';" class="mt-2 text-xs uppercase tracking-wider underline font-semibold text-striva-dark">Reset All Filters</button>
-                    </div>
-                `;
+                grid.innerHTML = `<div class="col-span-full text-center py-16 text-striva-700">No products found matching this filter combination.</div>`;
                 return;
             }
 
-            grid.innerHTML = filtered.map(p => {
-                const isWishlisted = wishlist.some(item => item.id === p.id);
-                return `
-                    <div class="bg-striva-blush rounded-xl border border-striva-sand overflow-hidden group hover:border-striva-gold/50 transition duration-300 flex flex-col justify-between">
-                        <div class="relative aspect-square overflow-hidden bg-striva-sand cursor-pointer" onclick="openProductModal(${p.id})">
-                            <img src="${p.image}" alt="${p.name}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                            ${p.bestseller ? '<span class="absolute top-3 left-3 bg-striva-gold text-striva-dark text-[9px] font-bold tracking-widest uppercase px-2.5 py-1 rounded">Bestseller</span>' : ''}
-                            <button onclick="event.stopPropagation(); toggleWishlist(${p.id});" class="absolute top-3 right-3 w-9 h-9 rounded-full bg-white/90 backdrop-blur shadow flex items-center justify-center text-striva-dark hover:text-striva-accent transition">
-                                <i class="${isWishlisted ? 'fa-solid text-striva-gold' : 'fa-regular'} fa-heart"></i>
+            filtered.forEach(p => {
+                const isWishlisted = wishlist.some(w => w.id === p.id);
+                const card = document.createElement('div');
+                card.className = "bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-striva-200/60 flex flex-col group";
+                card.innerHTML = `
+                    <div class="relative h-64 overflow-hidden bg-striva-100 cursor-pointer" onclick="openQuickView(${p.id})">
+                        <img src="${p.image}" alt="${p.name}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.src='https://placehold.co/600x600/E4D7C2/3D311F?text=Striva'">
+                        <span class="absolute top-3 left-3 bg-white/90 backdrop-blur-sm text-striva-dark text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-widest">
+                            ${p.collection}
+                        </span>
+                        <button onclick="event.stopPropagation(); toggleWishlist(${p.id})" class="absolute top-3 right-3 w-9 h-9 bg-white/90 rounded-full flex items-center justify-center text-striva-dark hover:text-red-500 shadow-md transition-colors">
+                            <i class="${isWishlisted ? 'fa-solid text-red-500' : 'fa-regular'} fa-heart"></i>
+                        </button>
+                    </div>
+                    <div class="p-5 flex-1 flex flex-col justify-between">
+                        <div>
+                            <span class="text-[10px] uppercase font-bold tracking-widest text-striva-600">${p.category}</span>
+                            <h3 font-serif class="font-serif text-lg font-bold text-striva-dark mt-1 cursor-pointer hover:text-striva-gold transition-colors" onclick="openQuickView(${p.id})">${p.name}</h3>
+                            <p class="text-striva-700 text-xs mt-1 line-clamp-2">${p.desc}</p>
+                        </div>
+                        <div class="mt-4 pt-4 border-t border-striva-100 flex items-center justify-between">
+                            <span class="font-serif text-lg font-bold text-striva-dark">${formatINR(p.price)}</span>
+                            <button onclick="addToCart(${p.id})" class="bg-striva-dark hover:bg-striva-600 text-white px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition-all shadow-sm">
+                                Add to Bag
                             </button>
                         </div>
-                        <div class="p-5 space-y-3 flex-grow flex flex-col justify-between">
-                            <div>
-                                <span class="text-[10px] uppercase tracking-widest text-striva-muted">${p.collection} &bull; ${p.category}</span>
-                                <h3 onclick="openProductModal(${p.id})" class="font-serif text-lg font-medium text-striva-dark cursor-pointer hover:text-striva-accent transition">${p.name}</h3>
-                                <p class="text-xs text-striva-muted font-light line-clamp-2 mt-1">${p.description}</p>
-                            </div>
-                            <div class="flex items-center justify-between pt-4 border-t border-striva-sand">
-                                <span class="font-serif text-lg font-bold text-striva-dark">${formatINR(p.price)}</span>
-                                <button onclick="openProductModal(${p.id})" class="bg-striva-dark hover:bg-striva-accent text-white text-[10px] uppercase tracking-wider px-4 py-2.5 transition">
-                                    Customize & Buy
-                                </button>
-                            </div>
-                        </div>
                     </div>
                 `;
-            }).join('');
+                grid.appendChild(card);
+            });
         }
 
-        // --- CUSTOMIZATION STUDIO LOGIC & AUTH GUARD ---
-        function updateStudioPreview() {
-            const baseType = document.getElementById('studio-base-type').value;
-            const metal = document.getElementById('studio-metal').value;
-            const gemstone = document.getElementById('studio-gemstone').value;
-            const engraving = document.getElementById('studio-engraving').value.trim();
+        function filterCollection(col) {
+            currentCollectionFilter = col;
+            switchView('shop');
+            // update active button state
+            document.querySelectorAll('.col-tab').forEach(btn => {
+                btn.className = "col-tab px-4 py-2 rounded-full text-xs font-semibold uppercase tracking-wider bg-striva-100 text-striva-dark hover:bg-striva-200 transition-all";
+                if(btn.textContent.includes(col) || (col === 'All' && btn.textContent === 'All')) {
+                    btn.className = "col-tab px-4 py-2 rounded-full text-xs font-semibold uppercase tracking-wider bg-striva-dark text-white transition-all";
+                }
+            });
+        }
 
-            let basePrice = 4500;
-            if (baseType === 'Pendant') basePrice = 6200;
-            if (baseType === 'Bracelet') basePrice = 8500;
+        function filterCategory(cat) {
+            currentCategoryFilter = cat;
+            renderProducts();
+            document.querySelectorAll('.cat-tab').forEach(btn => {
+                btn.className = "cat-tab px-3 py-1.5 rounded-lg text-xs font-medium bg-striva-100 text-striva-dark hover:bg-striva-200 transition-all";
+                if(btn.textContent.includes(cat) || (cat === 'All' && btn.textContent === 'All Categories')) {
+                    btn.className = "cat-tab px-3 py-1.5 rounded-lg text-xs font-medium bg-striva-200/50 text-striva-dark hover:bg-striva-200 transition-all active-cat font-bold";
+                }
+            });
+        }
 
-            let metalName = '18k Gold Vermeil';
-            let circleBg = 'bg-gradient-to-tr from-amber-200 via-amber-300 to-amber-500 text-striva-dark';
-            if (metal === 'Rose Gold') {
-                metalName = '14k Rose Gold';
-                circleBg = 'bg-gradient-to-tr from-rose-200 via-rose-300 to-rose-400 text-striva-dark';
-                basePrice += 500;
-            } else if (metal === 'Sterling Silver') {
-                metalName = '925 Sterling Silver';
-                circleBg = 'bg-gradient-to-tr from-slate-200 via-slate-300 to-slate-400 text-striva-dark';
+        // Cart Drawer Operations
+        function openCartDrawer() {
+            document.getElementById('cart-drawer').classList.remove('hidden');
+            renderCartItems();
+        }
+        function closeCartDrawer() {
+            document.getElementById('cart-drawer').classList.add('hidden');
+        }
+
+        function addToCart(productId) {
+            const product = products.find(p => p.id === productId);
+            if (!product) return;
+            const existing = cart.find(item => item.id === productId);
+            if (existing) {
+                existing.qty += 1;
+            } else {
+                cart.push({ ...product, qty: 1 });
             }
-
-            let gemIconClass = 'fa-solid fa-gem text-emerald-600';
-            if (gemstone === 'Emerald') gemIconClass = 'fa-solid fa-gem text-emerald-500';
-            if (gemstone === 'Sapphire') gemIconClass = 'fa-solid fa-gem text-blue-600';
-            if (gemstone === 'Ruby') gemIconClass = 'fa-solid fa-gem text-red-600';
-
-            document.getElementById('preview-metal-circle').className = `w-36 h-36 rounded-full ${circleBg} shadow-2xl flex items-center justify-center font-serif font-bold text-xl relative`;
-            document.getElementById('preview-gem-icon').innerHTML = `<i class="${gemIconClass}"></i>`;
-            document.getElementById('preview-title').innerText = `Custom ${metalName} ${baseType}`;
-            document.getElementById('preview-engraving-badge').innerText = engraving ? `"${engraving}"` : `"Your Engraving Here"`;
-            document.getElementById('studio-price').innerText = formatINR(basePrice);
+            updateCartBadge();
+            showToast(`Added "${product.name}" to your bag.`);
         }
 
-        function handleStudioAddToCart() {
-            if (!currentUser) {
-                pendingCustomizationAction = () => { handleStudioAddToCart(); };
-                openAuthModal(false);
-                showToast("Please sign in to save your bespoke custom creation to bag.");
+        function renderCartItems() {
+            const container = document.getElementById('cart-items-container');
+            const countEl = document.getElementById('cart-count');
+            const subtotalEl = document.getElementById('cart-subtotal');
+            countEl.textContent = cart.reduce((sum, item) => sum + item.qty, 0);
+
+            if (cart.length === 0) {
+                container.innerHTML = `<div class="text-center py-12 text-striva-700 text-sm">Your shopping bag is currently empty.</div>`;
+                subtotalEl.textContent = formatINR(0);
                 return;
             }
 
-            const baseType = document.getElementById('studio-base-type').value;
-            const metal = document.getElementById('studio-metal').value;
-            const gemstone = document.getElementById('studio-gemstone').value;
-            const engraving = document.getElementById('studio-engraving').value.trim();
-            const priceText = document.getElementById('studio-price').innerText;
-            const priceNum = parseInt(priceText.replace(/[^0-9]/g, ''));
+            container.innerHTML = '';
+            let subtotal = 0;
 
-            const customItem = {
-                id: Date.now(),
-                name: `Bespoke Custom ${metal} ${baseType}`,
-                collection: 'Custom Studio',
-                category: baseType,
-                price: priceNum,
-                image: "https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=600&q=80",
-                description: `Handcrafted with ${metal}, ${gemstone} accent.${engraving ? ' Engraved: "' + engraving + '"' : ''}`,
-                cartId: Date.now(),
-                engraving: engraving,
-                gemstone: gemstone,
-                metal: metal
-            };
+            cart.forEach((item, index) => {
+                subtotal += item.price * item.qty;
+                const div = document.createElement('div');
+                div.className = "flex items-center space-x-4 bg-striva-50 p-4 rounded-2xl border border-striva-200/60";
+                div.innerHTML = `
+                    <img src="${item.image}" alt="${item.name}" class="w-16 h-16 object-cover rounded-xl">
+                    <div class="flex-1">
+                        <h4 class="font-serif text-sm font-bold text-striva-dark">${item.name}</h4>
+                        <p class="text-xs text-striva-600 font-semibold mt-0.5">${formatINR(item.price)}</p>
+                        <div class="flex items-center space-x-3 mt-2">
+                            <button onclick="updateQty(${index}, -1)" class="w-6 h-6 bg-white rounded-full border border-striva-200 flex items-center justify-center text-xs font-bold">-</button>
+                            <span class="text-xs font-bold">${item.qty}</span>
+                            <button onclick="updateQty(${index}, 1)" class="w-6 h-6 bg-white rounded-full border border-striva-200 flex items-center justify-center text-xs font-bold">+</button>
+                        </div>
+                    </div>
+                    <button onclick="removeFromCart(${index})" class="text-striva-700 hover:text-red-500 text-sm"><i class="fa-solid fa-trash"></i></button>
+                `;
+                container.appendChild(div);
+            });
 
-            cart.push(customItem);
-            saveCart();
-            openCartModal();
-            showToast("Your bespoke custom jewelry piece was added to bag!");
+            subtotalEl.textContent = formatINR(subtotal);
         }
 
-        // --- STYLE QUIZ LOGIC ---
+        function updateQty(index, delta) {
+            cart[index].qty += delta;
+            if (cart[index].qty <= 0) {
+                cart.splice(index, 1);
+            }
+            updateCartBadge();
+            renderCartItems();
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCartBadge();
+            renderCartItems();
+            showToast("Item removed from bag.");
+        }
+
+        function updateCartBadge() {
+            const badge = document.getElementById('cart-badge');
+            const total = cart.reduce((sum, item) => sum + item.qty, 0);
+            if (total > 0) {
+                badge.textContent = total;
+                badge.classList.remove('hidden');
+            } else {
+                badge.classList.add('hidden');
+            }
+        }
+
+        function checkoutCart() {
+            if (cart.length === 0) {
+                showToast("Your bag is empty.");
+                return;
+            }
+            showToast("Order placed successfully! Thank you for choosing Striva.");
+            cart = [];
+            updateCartBadge();
+            closeCartDrawer();
+        }
+
+        // Wishlist Drawer Operations
+        function openWishlistDrawer() {
+            document.getElementById('wishlist-drawer').classList.remove('hidden');
+            renderWishlistItems();
+        }
+        function closeWishlistDrawer() {
+            document.getElementById('wishlist-drawer').classList.add('hidden');
+        }
+
+        function toggleWishlist(productId) {
+            const product = products.find(p => p.id === productId);
+            if (!product) return;
+            const idx = wishlist.findIndex(w => w.id === productId);
+            if (idx > -1) {
+                wishlist.splice(idx, 1);
+                showToast(`Removed "${product.name}" from wishlist.`);
+            } else {
+                wishlist.push(product);
+                showToast(`Added "${product.name}" to wishlist.`);
+            }
+            updateWishlistBadge();
+            if(document.getElementById('view-shop').classList.contains('hidden') === false) {
+                renderProducts();
+            }
+        }
+
+        function updateWishlistBadge() {
+            const badge = document.getElementById('wishlist-badge');
+            if (wishlist.length > 0) {
+                badge.textContent = wishlist.length;
+                badge.classList.remove('hidden');
+            } else {
+                badge.classList.add('hidden');
+            }
+        }
+
+        function renderWishlistItems() {
+            const container = document.getElementById('wishlist-items-container');
+            const countEl = document.getElementById('wishlist-count');
+            countEl.textContent = wishlist.length;
+
+            if (wishlist.length === 0) {
+                container.innerHTML = `<div class="text-center py-12 text-striva-700 text-sm">Your wishlist is empty.</div>`;
+                return;
+            }
+
+            container.innerHTML = '';
+            wishlist.forEach((item, index) => {
+                const div = document.createElement('div');
+                div.className = "flex items-center space-x-4 bg-striva-50 p-4 rounded-2xl border border-striva-200/60";
+                div.innerHTML = `
+                    <img src="${item.image}" alt="${item.name}" class="w-16 h-16 object-cover rounded-xl">
+                    <div class="flex-1">
+                        <h4 class="font-serif text-sm font-bold text-striva-dark">${item.name}</h4>
+                        <p class="text-xs text-striva-600 font-semibold mt-0.5">${formatINR(item.price)}</p>
+                    </div>
+                    <button onclick="addToCart(${item.id}); toggleWishlist(${item.id}); closeWishlistDrawer();" class="bg-striva-dark text-white text-[10px] font-bold uppercase px-3 py-2 rounded-xl">Move to Bag</button>
+                `;
+                container.appendChild(div);
+            });
+        }
+
+        // Quick View Modal
+        function openQuickView(productId) {
+            const p = products.find(item => item.id === productId);
+            if (!p) return;
+            document.getElementById('qv-img').src = p.image;
+            document.getElementById('qv-collection').textContent = p.collection;
+            document.getElementById('qv-name').textContent = p.name;
+            document.getElementById('qv-price').textContent = formatINR(p.price);
+            document.getElementById('qv-desc').textContent = p.desc;
+            document.getElementById('qv-add-btn').setAttribute('onclick', `addToCart(${p.id}); closeQuickView();`);
+            document.getElementById('quickview-modal').classList.remove('hidden');
+        }
+        function closeQuickView() {
+            document.getElementById('quickview-modal').classList.add('hidden');
+        }
+
+        // Style Quiz Logic (5 Questions ensuring 2-3 pieces result)
+        function initQuiz() {
+            currentQuizStep = 0;
+            quizAnswers = [];
+            document.getElementById('quiz-container').classList.remove('hidden');
+            document.getElementById('quiz-results').classList.add('hidden');
+            renderQuizStep();
+        }
+
         function renderQuizStep() {
             const container = document.getElementById('quiz-container');
+            const progress = document.getElementById('quiz-progress');
             const q = quizQuestions[currentQuizStep];
-            const pct = Math.round(((currentQuizStep + 1) / quizQuestions.length) * 100);
-
-            document.getElementById('quiz-step-indicator').innerText = `Step ${currentQuizStep + 1} of ${quizQuestions.length}`;
-            document.getElementById('quiz-progress-pct').innerText = `${pct}%`;
-            document.getElementById('quiz-progress-bar').style.width = `${pct}%`;
+            
+            progress.style.width = ((currentQuizStep + 1) / quizQuestions.length) * 100 + '%';
 
             container.innerHTML = `
-                <div class="space-y-6 fade-in">
-                    <h3 class="font-serif text-2xl sm:text-3xl text-striva-dark text-center">${q.question}</h3>
-                    <div class="grid grid-cols-1 gap-3 pt-4">
+                <div class="space-y-6">
+                    <h3 class="font-serif text-xl sm:text-2xl font-bold text-striva-dark text-center">${q.question}</h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-2xl mx-auto">
                         ${q.options.map((opt, idx) => `
-                            <button onclick="selectQuizAnswer('${opt.tag}')" class="w-full text-left p-4 rounded-xl border border-striva-sand hover:border-striva-gold hover:bg-striva-gold/5 transition flex items-center justify-between group">
-                                <span class="text-sm font-medium text-striva-dark">${opt.label}</span>
-                                <div class="w-6 h-6 rounded-full border border-striva-muted/40 group-hover:border-striva-gold flex items-center justify-center">
-                                    <div class="w-3 h-3 rounded-full bg-striva-gold opacity-0 group-hover:opacity-100 transition"></div>
-                                </div>
+                            <button onclick="selectQuizAnswer('${opt.tag || opt.category || 'general'}')" class="p-5 rounded-2xl border-2 border-striva-200 hover:border-striva-gold bg-white hover:bg-striva-100 text-striva-dark font-semibold text-sm transition-all text-left shadow-sm">
+                                ${opt.text}
                             </button>
                         `).join('')}
                     </div>
@@ -1043,308 +1033,198 @@
             `;
         }
 
-        function selectQuizAnswer(tag) {
-            userQuizAnswers.push(tag);
+        function selectQuizAnswer(val) {
+            quizAnswers.push(val);
             currentQuizStep++;
-
             if (currentQuizStep < quizQuestions.length) {
                 renderQuizStep();
             } else {
-                const counts = userQuizAnswers.reduce((acc, t) => { acc[t] = (acc[t] || 0) + 1; return acc; }, {});
-                activeQuizTag = Object.keys(counts).reduce((a, b) => counts[a] > counts[b] ? a : b);
-                localStorage.setItem('striva_quiz_tag', activeQuizTag);
-
-                switchSection('shop');
-                showToast("Style quiz completed! Your personalized collection is ready.");
-                currentQuizStep = 0;
-                userQuizAnswers = [];
+                showQuizResults();
             }
         }
 
-        function clearQuizFilter() {
-            activeQuizTag = null;
-            localStorage.removeItem('striva_quiz_tag');
-            renderProducts();
-            showToast("Showing all 50+ catalog items.");
-        }
+        function showQuizResults() {
+            document.getElementById('quiz-container').classList.add('hidden');
+            document.getElementById('quiz-progress').style.width = '100%';
+            document.getElementById('quiz-results').classList.remove('hidden');
 
-        // --- PRODUCT DETAIL & MODAL ---
-        let selectedProductForModal = null;
-        let modalEngravingText = '';
-        let modalGemstoneSetting = 'Diamond';
+            const grid = document.getElementById('quiz-recommendations-grid');
+            grid.innerHTML = '';
 
-        function openProductModal(productId) {
-            selectedProductForModal = products.find(p => p.id === productId);
-            modalEngravingText = '';
-            modalGemstoneSetting = 'Diamond';
-            renderProductModalContent();
-            
-            const modal = document.getElementById('product-modal');
-            modal.classList.remove('hidden');
-            modal.classList.add('flex');
-        }
+            // Guaranteed at least 2-3 pieces (take 3 matching products)
+            let recommended = products.slice(0, 3);
+            if (quizAnswers.includes('Minimal')) {
+                recommended = products.filter(p => p.collection === 'Minimal').slice(0, 3);
+            } else if (quizAnswers.includes('Men')) {
+                recommended = products.filter(p => p.collection === 'Men').slice(0, 3);
+            } else if (quizAnswers.includes('Wedding & Couples')) {
+                recommended = products.filter(p => p.collection === 'Wedding & Couples').slice(0, 3);
+            }
 
-        function closeProductModal() {
-            const modal = document.getElementById('product-modal');
-            modal.classList.add('hidden');
-            modal.classList.remove('flex');
-        }
-
-        function renderProductModalContent() {
-            const p = selectedProductForModal;
-            const content = document.getElementById('product-modal-content');
-
-            content.innerHTML = `
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
-                    <div class="aspect-square bg-striva-sand rounded-xl overflow-hidden shadow-inner">
-                        <img src="${p.image}" alt="${p.name}" class="w-full h-full object-cover">
+            recommended.forEach(p => {
+                const card = document.createElement('div');
+                card.className = "bg-striva-50 rounded-2xl overflow-hidden border border-striva-200 p-4 flex flex-col justify-between";
+                card.innerHTML = `
+                    <div>
+                        <img src="${p.image}" alt="${p.name}" class="w-full h-48 object-cover rounded-xl mb-4">
+                        <span class="text-[10px] uppercase font-bold tracking-widest text-striva-600">${p.collection}</span>
+                        <h4 class="font-serif text-lg font-bold text-striva-dark mt-1">${p.name}</h4>
+                        <p class="text-xs text-striva-700 mt-1">${formatINR(p.price)}</p>
                     </div>
-                    <div class="space-y-6">
-                        <div>
-                            <span class="text-xs uppercase tracking-widest text-striva-muted">${p.collection} &bull; ${p.category}</span>
-                            <h2 class="font-serif text-3xl font-medium text-striva-dark mt-1">${p.name}</h2>
-                            <p class="font-serif text-2xl font-bold text-striva-dark mt-2">${formatINR(p.price)}</p>
-                        </div>
-                        <p class="text-xs text-striva-muted leading-relaxed font-light">${p.description}</p>
-
-                        <!-- CUSTOMIZATION OPTIONS -->
-                        <div class="bg-striva-blush p-5 rounded-xl border border-striva-sand space-y-4">
-                            <div class="flex items-center justify-between">
-                                <h4 class="text-xs font-bold uppercase tracking-wider text-striva-dark flex items-center gap-1.5">
-                                    <i class="fa-solid fa-wand-magic-sparkles text-striva-gold"></i> Personalize Piece
-                                </h4>
-                                ${!currentUser ? '<span class="text-[10px] text-amber-700 bg-amber-50 px-2 py-0.5 rounded border border-amber-200">Sign-in required</span>' : '<span class="text-[10px] text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">Unlocked</span>'}
-                            </div>
-
-                            <div>
-                                <label class="block text-[11px] uppercase tracking-wider text-striva-muted mb-1">Custom Engraving (Max 10 chars)</label>
-                                <input type="text" id="modal-engraving" maxlength="10" value="${modalEngravingText}" oninput="modalEngravingText=this.value" placeholder="e.g. V & S" class="w-full px-3 py-2 bg-white border border-striva-sand rounded text-xs focus:outline-none focus:border-striva-gold">
-                            </div>
-
-                            <div>
-                                <label class="block text-[11px] uppercase tracking-wider text-striva-muted mb-1">Gemstone Setting</label>
-                                <select id="modal-gemstone" onchange="modalGemstoneSetting=this.value" class="w-full px-3 py-2 bg-white border border-striva-sand rounded text-xs focus:outline-none focus:border-striva-gold">
-                                    <option value="Diamond" ${modalGemstoneSetting==='Diamond'?'selected':''}>Lab-Grown Brilliant Diamond</option>
-                                    <option value="Sapphire" ${modalGemstoneSetting==='Sapphire'?'selected':''}>Deep Midnight Sapphire</option>
-                                    <option value="Emerald" ${modalGemstoneSetting==='Emerald'?'selected':''}>Vibrant Colombian Emerald</option>
-                                    <option value="Ruby" ${modalGemstoneSetting==='Ruby'?'selected':''}>Royal Crimson Ruby</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <!-- Action Buttons -->
-                        <div class="space-y-3 pt-2">
-                            <button onclick="handleAddToCartWithCustomization()" class="w-full bg-striva-dark hover:bg-striva-accent text-white py-4 uppercase tracking-widest text-xs font-medium transition shadow-lg flex items-center justify-center gap-2">
-                                <i class="fa-solid fa-bag-shopping"></i> Add to Bag
-                            </button>
-                            <button onclick="handleWishlistWithCustomization()" class="w-full bg-striva-sand hover:bg-striva-gold/20 text-striva-dark py-3 uppercase tracking-widest text-xs font-medium transition flex items-center justify-center gap-2">
-                                <i class="fa-regular fa-heart"></i> Save to Wishlist
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            `;
-        }
-
-        function handleAddToCartWithCustomization() {
-            if (!currentUser && (modalEngravingText.trim() !== '' || modalGemstoneSetting !== 'Diamond')) {
-                pendingCustomizationAction = () => { handleAddToCartWithCustomization(); };
-                closeProductModal();
-                openAuthModal(false);
-                showToast("Please sign in to apply custom engravings or gemstone selections.");
-                return;
-            }
-
-            const customizedItem = {
-                ...selectedProductForModal,
-                cartId: Date.now(),
-                engraving: modalEngravingText.trim(),
-                gemstone: modalGemstoneSetting
-            };
-
-            cart.push(customizedItem);
-            saveCart();
-            closeProductModal();
-            openCartModal();
-            showToast("Item added to your shopping bag!");
-        }
-
-        function handleWishlistWithCustomization() {
-            if (!currentUser) {
-                pendingCustomizationAction = () => { handleWishlistWithCustomization(); };
-                closeProductModal();
-                openAuthModal(false);
-                showToast("Please sign in to save items to your wishlist.");
-                return;
-            }
-
-            toggleWishlist(selectedProductForModal.id);
-            closeProductModal();
-        }
-
-        // --- CART & WISHLIST MANAGEMENT ---
-        function toggleWishlist(productId) {
-            if (!currentUser) {
-                pendingCustomizationAction = () => { toggleWishlist(productId); };
-                openAuthModal(false);
-                showToast("Please sign in to manage your wishlist.");
-                return;
-            }
-
-            const prod = products.find(p => p.id === productId);
-            const index = wishlist.findIndex(item => item.id === productId);
-
-            if (index > -1) {
-                wishlist.splice(index, 1);
-                showToast("Removed from wishlist");
-            } else {
-                wishlist.push(prod);
-                showToast("Saved to your wishlist");
-            }
-
-            localStorage.setItem('striva_wishlist', JSON.stringify(wishlist));
-            updateBadges();
-            if (currentSection === 'shop') renderProducts();
-        }
-
-        function removeFromCart(cartId) {
-            cart = cart.filter(item => item.cartId !== cartId);
-            saveCart();
-            renderCartItems();
-        }
-
-        function saveCart() {
-            localStorage.setItem('striva_cart', JSON.stringify(cart));
-            updateBadges();
-        }
-
-        function updateBadges() {
-            const cartBadge = document.getElementById('cart-badge');
-            const wishlistBadge = document.getElementById('wishlist-badge');
-
-            cartBadge.innerText = cart.length;
-            if (cart.length > 0) cartBadge.classList.remove('hidden'); else cartBadge.classList.add('hidden');
-
-            wishlistBadge.innerText = wishlist.length;
-            if (wishlist.length > 0) wishlistBadge.classList.remove('hidden'); else wishlistBadge.classList.add('hidden');
-        }
-
-        function openCartModal() {
-            renderCartItems();
-            const modal = document.getElementById('cart-modal');
-            modal.classList.remove('hidden');
-            modal.classList.add('flex');
-        }
-
-        function closeCartModal() {
-            const modal = document.getElementById('cart-modal');
-            modal.classList.remove('flex');
-            modal.classList.add('hidden');
-        }
-
-        function renderCartItems() {
-            const container = document.getElementById('cart-items-container');
-            const subtotalEl = document.getElementById('cart-subtotal');
-
-            if (cart.length === 0) {
-                container.innerHTML = `
-                    <div class="py-12 text-center space-y-3">
-                        <i class="fa-solid fa-bag-shopping text-3xl text-striva-muted"></i>
-                        <p class="text-xs text-striva-muted">Your shopping bag is empty.</p>
-                    </div>
-                `;
-                subtotalEl.innerText = formatINR(0);
-                return;
-            }
-
-            let subtotal = 0;
-            container.innerHTML = cart.map(item => {
-                subtotal += item.price;
-                return `
-                    <div class="flex items-center gap-4 bg-striva-blush p-4 rounded-xl border border-striva-sand relative">
-                        <img src="${item.image}" alt="${item.name}" class="w-16 h-16 object-cover rounded-lg bg-striva-sand flex-shrink-0">
-                        <div class="flex-grow space-y-1">
-                            <h4 class="font-serif text-sm font-medium text-striva-dark">${item.name}</h4>
-                            <p class="text-xs font-bold text-striva-dark">${formatINR(item.price)}</p>
-                            ${item.engraving ? `<span class="inline-block text-[10px] bg-striva-gold/10 text-striva-accent px-2 py-0.5 rounded font-mono">Engraving: "${item.engraving}"</span>` : ''}
-                            ${item.gemstone ? `<span class="inline-block text-[10px] bg-striva-gold/10 text-striva-accent px-2 py-0.5 rounded">Stone: ${item.gemstone}</span>` : ''}
-                        </div>
-                        <button onclick="removeFromCart(${item.cartId})" class="text-striva-muted hover:text-red-600 p-2 text-xs">
-                            <i class="fa-solid fa-trash-can"></i>
-                        </button>
-                    </div>
-                `;
-            }).join('');
-
-            subtotalEl.innerText = formatINR(subtotal);
-        }
-
-        function openWishlistModal() {
-            renderWishlistItems();
-            const modal = document.getElementById('wishlist-modal');
-            modal.classList.remove('hidden');
-            modal.classList.add('flex');
-        }
-
-        function closeWishlistModal() {
-            const modal = document.getElementById('wishlist-modal');
-            modal.classList.remove('flex');
-            modal.classList.add('hidden');
-        }
-
-        function renderWishlistItems() {
-            const container = document.getElementById('wishlist-items-container');
-
-            if (wishlist.length === 0) {
-                container.innerHTML = `
-                    <div class="py-12 text-center space-y-3">
-                        <i class="fa-regular fa-heart text-3xl text-striva-muted"></i>
-                        <p class="text-xs text-striva-muted">Your wishlist is currently empty.</p>
-                    </div>
-                `;
-                return;
-            }
-
-            container.innerHTML = wishlist.map(item => `
-                <div class="flex items-center gap-4 bg-striva-blush p-4 rounded-xl border border-striva-sand relative">
-                    <img src="${item.image}" alt="${item.name}" class="w-16 h-16 object-cover rounded-lg bg-striva-sand flex-shrink-0">
-                    <div class="flex-grow space-y-1">
-                        <h4 class="font-serif text-sm font-medium text-striva-dark">${item.name}</h4>
-                        <p class="text-xs font-bold text-striva-dark">${formatINR(item.price)}</p>
-                    </div>
-                    <button onclick="toggleWishlist(${item.id}); renderWishlistItems();" class="text-striva-muted hover:text-red-600 p-2 text-xs" title="Remove">
-                        <i class="fa-solid fa-trash-can"></i>
+                    <button onclick="addToCart(${p.id})" class="mt-4 w-full bg-striva-dark text-white py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider">
+                        Add to Bag
                     </button>
-                </div>
-            `).join('');
+                `;
+                grid.appendChild(card);
+            });
         }
 
-        function checkoutCart() {
-            if (cart.length === 0) return;
-            showToast("Redirecting to secure Indian checkout gateway...");
+        function resetQuiz() {
+            initQuiz();
+        }
+
+        // Customization Studio Logic
+        function setCustomBase(name, price, img) {
+            customBaseName = name;
+            customBasePrice = price;
+            customImgUrl = img;
+            document.getElementById('custom-preview-img').src = img;
+            updateCustomTotal();
+            highlightSelectedButton('.custom-base-btn', event.currentTarget);
+        }
+
+        function setCustomMetal(name, price) {
+            customMetalName = name;
+            customMetalPrice = price;
+            updateCustomTotal();
+            highlightSelectedButton('.custom-metal-btn', event.currentTarget);
+        }
+
+        function setCustomGem(name, price, emoji) {
+            customGemName = name;
+            customGemPrice = price;
+            customGemEmoji = emoji;
+            document.getElementById('custom-gem-overlay').textContent = emoji;
+            updateCustomTotal();
+            highlightSelectedButton('.custom-gem-btn', event.currentTarget);
+        }
+
+        function updateCustomTotal() {
+            let total = customBasePrice + customMetalPrice + customGemPrice;
+            // Strict cap rule: Custom base/items max at ₹10,000
+            if (total > 10000) total = 10000;
+            document.getElementById('custom-item-name').textContent = `Custom ${customBaseName} (${customMetalName})`;
+            document.getElementById('custom-item-price').textContent = formatINR(total);
+        }
+
+        function highlightSelectedButton(selector, clickedBtn) {
+            document.querySelectorAll(selector).forEach(btn => {
+                btn.className = btn.className.replace('border-striva-gold bg-striva-100', 'border-striva-200 bg-white');
+            });
+            clickedBtn.className = clickedBtn.className.replace('border-striva-200 bg-white', 'border-striva-gold bg-striva-100');
+        }
+
+        // Auth Guard for Custom Save & Checkout
+        function handleCustomSaveOrCheckout() {
+            if (!currentUser) {
+                openAuthModal();
+                showToast("Please sign in or create an account to save custom creations.");
+                return;
+            }
+            let total = customBasePrice + customMetalPrice + customGemPrice;
+            if (total > 10000) total = 10000;
+            const engraving = document.getElementById('custom-engraving').value;
+            const customItem = {
+                id: Date.now(),
+                name: `Bespoke ${customBaseName} [${engraving ? 'Engraved: ' + engraving : 'No Engraving'}]`,
+                collection: 'Custom Studio',
+                category: customBaseName,
+                price: total,
+                image: customImgUrl,
+                qty: 1
+            };
+            cart.push(customItem);
+            updateCartBadge();
+            showToast("Your bespoke custom creation was added to your bag!");
+            openCartDrawer();
+        }
+
+        // Auth Modal Operations
+        function openAuthModal() {
+            document.getElementById('auth-modal').classList.remove('hidden');
+        }
+        function closeAuthModal() {
+            document.getElementById('auth-modal').classList.add('hidden');
+        }
+
+        function handleAuthSubmit() {
+            const email = document.getElementById('auth-email').value;
+            if (!email || !email.includes('@')) {
+                showToast("Please enter a valid email address.");
+                return;
+            }
+            currentUser = email;
+            const status = document.getElementById('auth-status');
+            status.textContent = `Successfully signed in as ${currentUser}!`;
+            status.classList.remove('hidden');
             setTimeout(() => {
-                cart = [];
-                saveCart();
-                closeCartModal();
-                showToast("Order placed successfully! Thank you for choosing Striva.");
-            }, 1500);
+                closeAuthModal();
+                showToast(`Welcome back, ${currentUser}!`);
+            }, 1200);
         }
 
-        // --- TOAST NOTIFICATION ---
-        function showToast(message) {
+        // Search Modal / Bar Toggle
+        function toggleSearchModal() {
+            const query = prompt("Search Striva Catalog (Rings, Necklaces, Minimal, Men, Wedding):");
+            if (!query) return;
+            switchView('shop');
+            currentCollectionFilter = 'All';
+            currentCategoryFilter = 'All';
+            const grid = document.getElementById('product-grid');
+            const qLower = query.toLowerCase();
+            const filtered = products.filter(p => p.name.toLowerCase().includes(qLower) || p.collection.toLowerCase().includes(qLower) || p.category.toLowerCase().includes(qLower));
+            
+            grid.innerHTML = '';
+            if (filtered.length === 0) {
+                grid.innerHTML = `<div class="col-span-full text-center py-16 text-striva-700">No products found for "${query}".</div>`;
+                return;
+            }
+            filtered.forEach(p => {
+                const card = document.createElement('div');
+                card.className = "bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all border border-striva-200/60 flex flex-col group";
+                card.innerHTML = `
+                    <div class="relative h-64 overflow-hidden bg-striva-100 cursor-pointer" onclick="openQuickView(${p.id})">
+                        <img src="${p.image}" alt="${p.name}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <span class="absolute top-3 left-3 bg-white/90 backdrop-blur-sm text-striva-dark text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-widest">${p.collection}</span>
+                    </div>
+                    <div class="p-5 flex-1 flex flex-col justify-between">
+                        <div>
+                            <span class="text-[10px] uppercase font-bold tracking-widest text-striva-600">${p.category}</span>
+                            <h3 class="font-serif text-lg font-bold text-striva-dark mt-1">${p.name}</h3>
+                        </div>
+                        <div class="mt-4 pt-4 border-t border-striva-100 flex items-center justify-between">
+                            <span class="font-serif text-lg font-bold text-striva-dark">${formatINR(p.price)}</span>
+                            <button onclick="addToCart(${p.id})" class="bg-striva-dark text-white px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider">Add</button>
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        // Toast Notification System
+        function showToast(msg) {
             const toast = document.getElementById('toast');
-            const msgEl = document.getElementById('toast-message');
-            msgEl.innerText = message;
+            document.getElementById('toast-msg').textContent = msg;
             toast.classList.remove('translate-y-20', 'opacity-0');
             setTimeout(() => {
                 toast.classList.add('translate-y-20', 'opacity-0');
-            }, 3500);
+            }, 3000);
         }
 
-        // Initialize App on Load
+        // Initial Load on Window Load
         window.onload = function() {
-            updateAuthUI();
-            updateBadges();
+            switchView('home');
         };
     </script>
 </body>
