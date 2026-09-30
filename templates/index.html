@@ -3,24 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Striva | Fine Jewelry & Signature Style Quiz</title>
+    <title>STRIVA | Modern Demi-Fine Jewelry</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-alabaster: #FBF9F5;
+            --bg-alabaster: #FAF8F5;
             --bg-card: #FFFFFF;
-            --text-charcoal: #1A1A1A;
+            --text-charcoal: #181818;
             --text-muted: #666666;
             --gold-primary: #C5A059;
-            --gold-hover: #B08B44;
-            --border-light: #E8E4DC;
-            --border-active: #C5A059;
-            --shadow-subtle: 0 10px 30px rgba(0, 0, 0, 0.03);
+            --gold-hover: #A8833D;
+            --border-light: #EBE7DF;
+            --shadow-subtle: 0 10px 30px rgba(0, 0, 0, 0.04);
             --font-serif: 'Cormorant Garamond', Georgia, serif;
-            --font-sans: 'Inter', -apple-system, sans-serif;
-            --transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+            --font-sans: 'Inter', sans-serif;
+            --transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -30,23 +29,20 @@
             color: var(--text-charcoal);
             font-family: var(--font-sans);
             -webkit-font-smoothing: antialiased;
-            min-height: 100vh;
         }
 
-        /* ANNOUNCEMENT BAR */
         .announcement-bar {
             background: var(--text-charcoal);
             color: #FFFFFF;
             text-align: center;
-            padding: 0.5rem 1rem;
+            padding: 0.6rem 1rem;
             font-size: 0.75rem;
             letter-spacing: 0.15em;
             text-transform: uppercase;
         }
 
-        /* NAVIGATION HEADER */
         header {
-            padding: 1.5rem 3rem;
+            padding: 1.2rem 3rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -57,11 +53,9 @@
             z-index: 100;
         }
 
-        .brand-container { text-align: left; }
-
         .brand-logo {
             font-family: var(--font-serif);
-            font-size: 2.2rem;
+            font-size: 2.3rem;
             letter-spacing: 0.35em;
             text-transform: uppercase;
             color: var(--text-charcoal);
@@ -71,7 +65,7 @@
 
         .nav-links {
             display: flex;
-            gap: 2.5rem;
+            gap: 2rem;
             list-style: none;
         }
 
@@ -79,214 +73,114 @@
             text-decoration: none;
             color: var(--text-charcoal);
             font-size: 0.8rem;
-            letter-spacing: 0.15em;
+            letter-spacing: 0.12em;
             text-transform: uppercase;
+            font-weight: 500;
             transition: var(--transition);
         }
 
         .nav-links a:hover { color: var(--gold-primary); }
 
-        .nav-actions {
+        .header-actions {
             display: flex;
+            align-items: center;
             gap: 1.5rem;
-            font-size: 0.85rem;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
         }
 
-        /* HERO SECTION */
-        .hero-banner {
-            padding: 5rem 2rem;
-            text-align: center;
-            background: #F4F0E8;
-            border-bottom: 1px solid var(--border-light);
-        }
-
-        .hero-banner h1 {
-            font-family: var(--font-serif);
-            font-size: 3.5rem;
-            font-weight: 300;
-            margin-bottom: 1rem;
-        }
-
-        .hero-banner p {
-            max-width: 600px;
-            margin: 0 auto 2rem auto;
-            color: var(--text-muted);
-            font-size: 1.1rem;
-            line-height: 1.6;
-        }
-
-        /* MAIN WRAPPER */
-        main {
-            max-width: 1000px;
-            width: 90%;
-            margin: 4rem auto;
-        }
-
-        /* QUIZ SECTION */
-        .progress-container { margin-bottom: 2.5rem; display: none; }
-
-        .progress-labels {
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.75rem;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            color: var(--text-muted);
-            margin-bottom: 0.6rem;
-        }
-
-        .progress-track {
-            height: 2px;
-            background: var(--border-light);
-            width: 100%;
-            overflow: hidden;
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: var(--gold-primary);
-            width: 0%;
-            transition: width 0.4s ease;
-        }
-
-        .quiz-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-light);
-            padding: 3.5rem 3rem;
-            box-shadow: var(--shadow-subtle);
-            border-radius: 2px;
-        }
-
-        h1, h2, h3 {
-            font-family: var(--font-serif);
-            font-weight: 400;
-            color: var(--text-charcoal);
-        }
-
-        .intro-title {
-            font-size: 2.8rem;
-            line-height: 1.2;
-            margin-bottom: 1rem;
-            text-align: center;
-        }
-
-        .subtitle {
-            font-size: 1.05rem;
-            color: var(--text-muted);
-            text-align: center;
-            line-height: 1.6;
-            margin-bottom: 2.5rem;
-            font-weight: 300;
-        }
-
-        .input-group { margin-bottom: 2rem; }
-
-        .input-group label {
-            display: block;
+        .auth-btn, .cart-trigger {
+            background: none;
+            border: none;
             font-size: 0.8rem;
-            letter-spacing: 0.15em;
+            letter-spacing: 0.12em;
             text-transform: uppercase;
+            cursor: pointer;
             color: var(--text-charcoal);
-            margin-bottom: 0.8rem;
             font-weight: 500;
         }
 
-        .text-input {
-            width: 100%;
-            padding: 1rem 1.2rem;
-            border: 1px solid var(--border-light);
-            background: var(--bg-alabaster);
-            font-family: var(--font-sans);
-            font-size: 1rem;
-            color: var(--text-charcoal);
-            outline: none;
-            transition: var(--transition);
+        .cart-trigger span {
+            background: var(--gold-primary);
+            color: #FFF;
+            border-radius: 50%;
+            padding: 2px 7px;
+            font-size: 0.7rem;
+            margin-left: 4px;
         }
 
-        .text-input:focus { border-color: var(--border-active); background: var(--bg-card); }
-
-        .metal-options {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1rem;
-            margin-bottom: 2.5rem;
-        }
-
-        .metal-pill {
-            padding: 1.2rem 1rem;
-            border: 1px solid var(--border-light);
-            text-align: center;
-            cursor: pointer;
-            transition: var(--transition);
-            background: var(--bg-alabaster);
-            font-size: 0.9rem;
-        }
-
-        .metal-pill.selected, .metal-pill:hover {
-            border-color: var(--gold-primary);
-            background: var(--bg-card);
-            color: var(--gold-primary);
-        }
-
-        .options-grid {
+        /* HERO BANNER */
+        .hero {
+            height: 75vh;
+            background: linear-gradient(rgba(0,0,0,0.25), rgba(0,0,0,0.35)), url('https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&q=80&w=1600') center/cover no-repeat;
             display: flex;
-            flex-direction: column;
-            gap: 1rem;
-            margin-top: 2rem;
-        }
-
-        .option-card {
-            border: 1px solid var(--border-light);
-            padding: 1.4rem 1.6rem;
-            cursor: pointer;
-            transition: var(--transition);
-            background: var(--bg-alabaster);
-            display: flex;
-            justify-content: space-between;
             align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #FFFFFF;
+            padding: 0 1rem;
         }
 
-        .option-card:hover { border-color: var(--gold-primary); transform: translateX(4px); background: var(--bg-card); }
-
-        .option-card.selected {
-            border-color: var(--gold-primary);
-            background: var(--bg-card);
-            box-shadow: 0 4px 15px rgba(197, 160, 89, 0.12);
-        }
-
-        .option-card .opt-label {
+        .hero-content h1 {
             font-family: var(--font-serif);
-            font-size: 1.25rem;
-            margin-bottom: 0.2rem;
+            font-size: 4rem;
+            font-weight: 300;
+            margin-bottom: 1rem;
+            letter-spacing: 0.05em;
         }
 
-        .option-card .opt-text { font-size: 0.9rem; color: var(--text-muted); font-weight: 300; }
+        .hero-content p {
+            font-size: 1.1rem;
+            letter-spacing: 0.1em;
+            margin-bottom: 2rem;
+            text-transform: uppercase;
+        }
 
-        .btn-primary {
+        .btn-gold {
             display: inline-block;
-            width: 100%;
-            padding: 1.2rem 2rem;
-            background: var(--text-charcoal);
-            color: var(--bg-card);
-            border: 1px solid var(--text-charcoal);
-            font-size: 0.85rem;
+            background: var(--gold-primary);
+            color: #FFFFFF;
+            padding: 1rem 2.5rem;
+            text-decoration: none;
+            font-size: 0.8rem;
             letter-spacing: 0.2em;
             text-transform: uppercase;
+            border: none;
             cursor: pointer;
             transition: var(--transition);
-            text-align: center;
-            font-weight: 500;
         }
 
-        .btn-primary:hover { background: var(--gold-primary); border-color: var(--gold-primary); }
+        .btn-gold:hover { background: var(--gold-hover); }
 
-        .btn-secondary {
-            background: transparent;
-            color: var(--text-muted);
+        /* SECTIONS & FILTERS */
+        .section-container {
+            max-width: 1280px;
+            margin: 5rem auto;
+            padding: 0 2rem;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-header h2 {
+            font-family: var(--font-serif);
+            font-size: 2.8rem;
+            font-weight: 400;
+            margin-bottom: 0.5rem;
+        }
+
+        .filter-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2.5rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-tab {
+            padding: 0.6rem 1.4rem;
             border: 1px solid var(--border-light);
-            padding: 0.8rem 1.5rem;
+            background: var(--bg-card);
             font-size: 0.75rem;
             letter-spacing: 0.15em;
             text-transform: uppercase;
@@ -294,86 +188,156 @@
             transition: var(--transition);
         }
 
-        .btn-secondary:hover { color: var(--text-charcoal); border-color: var(--text-charcoal); }
-
-        .archetype-badge {
-            font-size: 0.75rem;
-            letter-spacing: 0.25em;
-            text-transform: uppercase;
-            color: var(--gold-primary);
-            margin-bottom: 0.5rem;
-            display: block;
-            text-align: center;
-            font-weight: 600;
+        .filter-tab.active {
+            background: var(--text-charcoal);
+            color: #FFFFFF;
+            border-color: var(--text-charcoal);
         }
 
-        /* PRODUCT RESULTS & SHOP GRID */
-        .results-grid, .products-catalog {
+        /* PRODUCT GRID */
+        .product-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
             gap: 2rem;
-            margin: 2.5rem 0;
         }
 
         .product-card {
-            border: 1px solid var(--border-light);
             background: var(--bg-card);
+            border: 1px solid var(--border-light);
             padding: 1.2rem;
             text-align: center;
             transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
 
-        .product-card:hover { border-color: var(--gold-primary); transform: translateY(-4px); }
+        .product-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-subtle); }
 
-        /* PRODUCT IMAGE PLACEHOLDERS */
         .product-card img {
             width: 100%;
-            height: 280px;
+            height: 300px;
             object-fit: cover;
             margin-bottom: 1rem;
             background-color: #F4F1EA;
         }
 
-        .product-card .prod-title { font-family: var(--font-serif); font-size: 1.3rem; margin-bottom: 0.3rem; }
-        .product-card .prod-metal { font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.5rem; }
-        .product-card .prod-price { font-size: 1.05rem; color: var(--gold-primary); font-weight: 500; }
-
-        /* WEBSITE CONTENT SECTIONS */
-        .content-section {
-            margin: 6rem 0;
+        .product-card .p-metal {
+            font-size: 0.7rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 0.4rem;
         }
 
-        .section-title {
-            font-size: 2.4rem;
-            text-align: center;
+        .product-card .p-title {
+            font-family: var(--font-serif);
+            font-size: 1.35rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-card .p-price {
+            font-size: 1.05rem;
+            color: var(--gold-primary);
+            font-weight: 500;
             margin-bottom: 1rem;
         }
 
-        .section-desc {
-            text-align: center;
-            color: var(--text-muted);
-            max-width: 600px;
-            margin: 0 auto 3rem auto;
-        }
-
-        /* STORY SECTION */
-        .story-block {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            align-items: center;
-            background: #FFFFFF;
-            border: 1px solid var(--border-light);
-            padding: 3rem;
-        }
-
-        .story-img-container img {
+        .btn-add-bag {
             width: 100%;
-            height: 380px;
-            object-fit: cover;
+            padding: 0.8rem;
+            background: var(--text-charcoal);
+            color: #FFFFFF;
+            border: none;
+            font-size: 0.75rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: var(--transition);
         }
 
-        /* FOOTER */
+        .btn-add-bag:hover { background: var(--gold-primary); }
+
+        /* QUIZ MODAL & CONTAINER */
+        .quiz-section {
+            background: #F2EDE4;
+            padding: 5rem 2rem;
+            border-top: 1px solid var(--border-light);
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .quiz-card {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--bg-card);
+            border: 1px solid var(--border-light);
+            padding: 3.5rem;
+            box-shadow: var(--shadow-subtle);
+        }
+
+        .option-card {
+            border: 1px solid var(--border-light);
+            padding: 1.2rem 1.5rem;
+            cursor: pointer;
+            background: var(--bg-alabaster);
+            margin-bottom: 0.8rem;
+            transition: var(--transition);
+        }
+
+        .option-card:hover, .option-card.selected {
+            border-color: var(--gold-primary);
+            background: var(--bg-card);
+        }
+
+        /* MANDATORY AUTH MODAL */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0, 0, 0, 0.6);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .auth-modal {
+            background: #FFFFFF;
+            padding: 3rem;
+            width: 90%;
+            max-width: 450px;
+            text-align: center;
+            position: relative;
+        }
+
+        .auth-modal h3 {
+            font-family: var(--font-serif);
+            font-size: 2.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .auth-modal p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 0.9rem 1rem;
+            margin-bottom: 1rem;
+            border: 1px solid var(--border-light);
+            outline: none;
+            font-size: 0.9rem;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
         footer {
             background: #111111;
             color: #E8E4DC;
@@ -399,31 +363,12 @@
 
         .footer-col ul { list-style: none; }
         .footer-col ul li { margin-bottom: 0.8rem; }
-
-        .footer-col ul li a {
-            color: #A0A0A0;
-            text-decoration: none;
-            font-size: 0.85rem;
-            transition: var(--transition);
-        }
-
-        .footer-col ul li a:hover { color: #FFFFFF; }
-
-        .footer-bottom {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding-top: 2rem;
-            border-top: 1px solid #222222;
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.75rem;
-            color: #777777;
-        }
+        .footer-col ul li a { color: #A0A0A0; text-decoration: none; font-size: 0.85rem; }
 
         @media (max-width: 850px) {
-            header { flex-direction: column; gap: 1rem; padding: 1.5rem; }
-            .nav-links { gap: 1.2rem; }
-            .story-block { grid-template-columns: 1fr; }
+            header { flex-direction: column; gap: 1rem; }
+            .nav-links { flex-wrap: wrap; justify-content: center; gap: 1rem; }
+            .hero-content h1 { font-size: 2.8rem; }
             .footer-grid { grid-template-columns: 1fr 1fr; }
         }
     </style>
@@ -431,388 +376,347 @@
 <body>
 
     <div class="announcement-bar">
-        Complimentary Express Shipping Across India on All Demi-Fine Orders
+        Complimentary Express Shipping Across India on All Orders
     </div>
 
-    <!-- NAVIGATION HEADER -->
     <header>
-        <div class="brand-container">
-            <a href="#" class="brand-logo">STRIVA</a>
-        </div>
+        <a href="/" class="brand-logo">STRIVA</a>
         <ul class="nav-links">
-            <li><a href="#shop">Shop All</a></li>
-            <li><a href="#quiz">Style Concierge</a></li>
-            <li><a href="#story">Craftsmanship</a></li>
-            <li><a href="#about">About Striva</a></li>
+            <li><a href="#men" onclick="loadCategory('men')">Men</a></li>
+            <li><a href="#women" onclick="loadCategory('women')">Women</a></li>
+            <li><a href="#wedding" onclick="loadCategory('wedding')">Wedding</a></li>
+            <li><a href="#quiz-section">Style Quiz</a></li>
+            <li><a href="#curate">Curate Your Own</a></li>
         </ul>
-        <div class="nav-actions">
-            <span>Bag (0)</span>
+        <div class="header-actions">
+            <button class="auth-btn" id="navAuthBtn" onclick="openAuthModal()">Sign In</button>
+            <button class="cart-trigger" onclick="handleCartClick()">Bag <span id="cartCount">0</span></button>
         </div>
     </header>
 
-    <!-- HERO BANNER -->
-    <section class="hero-banner">
-        <h1>Demi-Fine Jewelry Built for Daily Identity</h1>
-        <p>Crafted in Recycled Sterling Silver & 18k Gold Vermeil. Architectural silhouettes designed for personal stacking and minimal expression.</p>
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Architecture in Demi-Fine Gold</h1>
+            <p>18k Gold Vermeil & Recycled 925 Silver Built for Daily Identity</p>
+            <a href="#bestsellers" class="btn-gold">Explore Collection</a>
+        </div>
     </section>
 
-    <main>
-        <!-- STYLE QUIZ CONTAINER -->
-        <section id="quiz">
-            <div class="progress-container" id="progressContainer">
-                <div class="progress-labels">
-                    <span id="questionStep">Question 1 of 5</span>
-                    <span id="percentText">20%</span>
+    <!-- SHOP BY FILTER (Men, Women, Couple, Minimal, Wedding) -->
+    <section class="section-container" id="bestsellers">
+        <div class="section-header">
+            <h2>The Permanent Collections</h2>
+            <p style="color: var(--text-muted);">Explore hand-finished demi-fine accessories designed for everyday stacking.</p>
+        </div>
+
+        <div class="filter-tabs">
+            <button class="filter-tab active" onclick="applyCategoryFilter('all', this)">All</button>
+            <button class="filter-tab" onclick="applyCategoryFilter('women', this)">Women</button>
+            <button class="filter-tab" onclick="applyCategoryFilter('men', this)">Men</button>
+            <button class="filter-tab" onclick="applyCategoryFilter('couple', this)">Couple</button>
+            <button class="filter-tab" onclick="applyStyleFilter('minimal', this)">Minimal / Daily</button>
+            <button class="filter-tab" onclick="applyStyleFilter('wedding', this)">Wedding / Traditional</button>
+        </div>
+
+        <div class="product-grid" id="mainProductGrid">
+            <!-- Dynamic Fetch -->
+        </div>
+    </section>
+
+    <!-- TRENDING SECTION -->
+    <section class="section-container" style="background: #FFF; padding: 4rem 2rem; border-top: 1px solid var(--border-light);">
+        <div class="section-header">
+            <h2>Trending Right Now</h2>
+            <p style="color: var(--text-muted);">Pieces currently leading urban street styles and red carpets.</p>
+        </div>
+        <div class="product-grid" id="trendingGrid"></div>
+    </section>
+
+    <!-- CURATOR'S FAVORITE -->
+    <section class="section-container">
+        <div class="section-header">
+            <h2>Curator's Favorites</h2>
+            <p style="color: var(--text-muted);">Personal recommendations handpicked by Striva's lead jewelry designers.</p>
+        </div>
+        <div class="product-grid" id="curatorGrid"></div>
+    </section>
+
+    <!-- STYLE QUIZ SECTION (8 VALID QUESTIONS) -->
+    <section class="quiz-section" id="quiz-section">
+        <div class="quiz-card" id="quizContainer">
+            <span style="font-size: 0.75rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold-primary); display: block; text-align: center; font-weight: 600; margin-bottom: 0.5rem;">Bespoke Concierge</span>
+            <h2 style="font-family: var(--font-serif); font-size: 2.5rem; text-align: center; margin-bottom: 1rem;" id="quizMainTitle">Discover Your Signature Archetype</h2>
+            <p style="text-align: center; color: var(--text-muted); margin-bottom: 2rem;" id="quizMainSub">Answer 8 in-depth questions to receive a tailored 4-piece edit.</p>
+
+            <div id="quizContent">
+                <div class="input-group" style="margin-bottom: 1.5rem;">
+                    <label style="display: block; font-size: 0.8rem; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 0.5rem;">Your Name</label>
+                    <input type="text" id="quizUserName" class="input-field" placeholder="e.g. Ananya" autocomplete="off">
                 </div>
-                <div class="progress-track">
-                    <div class="progress-fill" id="progressFill"></div>
-                </div>
+                <button class="btn-gold" style="width: 100%;" onclick="startQuiz()">Begin 8-Step Evaluation</button>
             </div>
+        </div>
+    </section>
 
-            <!-- INTRO CARD -->
-            <div class="quiz-card" id="introCard">
-                <span class="archetype-badge">Personalized Concierge</span>
-                <h1 class="intro-title">Discover Your Signature Edit</h1>
-                <p class="subtitle">Complete our 5-part style evaluation to unlock your curated jewelry archetype and personal recommendations.</p>
-                
-                <div class="input-group">
-                    <label for="userName">Your Name</label>
-                    <input type="text" id="userName" class="text-input" placeholder="e.g. Ananya" autocomplete="off">
-                </div>
+    <!-- MANDATORY SIGN-IN MODAL -->
+    <div class="modal-overlay" id="authModal">
+        <div class="auth-modal">
+            <span class="close-modal" onclick="closeAuthModal()">&times;</span>
+            <h3>Sign In to Striva</h3>
+            <p>Please log in to add items to your bag and save your signature quiz edits.</p>
+            <input type="email" id="authEmail" class="input-field" placeholder="Email Address">
+            <input type="password" id="authPassword" class="input-field" placeholder="Password">
+            <button class="btn-gold" style="width: 100%;" onclick="performLogin()">Sign In & Continue</button>
+        </div>
+    </div>
 
-                <div class="input-group">
-                    <label>Preferred Precious Metal Base</label>
-                    <div class="metal-options">
-                        <div class="metal-pill selected" onclick="selectMetal(this, 'Gold Vermeil')">Gold Vermeil</div>
-                        <div class="metal-pill" onclick="selectMetal(this, 'Sterling Silver')">Sterling Silver</div>
-                        <div class="metal-pill" onclick="selectMetal(this, 'No Preference')">No Preference</div>
-                    </div>
-                </div>
-
-                <button class="btn-primary" onclick="startQuiz()">Begin Style Quiz</button>
-            </div>
-
-            <!-- QUESTION CARD -->
-            <div class="quiz-card" id="questionCard" style="display: none;">
-                <span class="archetype-badge" id="qNumber">Question 01</span>
-                <h2 class="intro-title" id="qTitle" style="font-size: 2.2rem; margin-bottom: 0.5rem;">Title</h2>
-                <p class="subtitle" id="qSubtitle" style="margin-bottom: 1.5rem;">Subtitle details here...</p>
-
-                <div class="options-grid" id="optionsContainer"></div>
-
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 2rem;">
-                    <button class="btn-secondary" id="backBtn" onclick="previousQuestion()" style="display: none;">Back</button>
-                </div>
-            </div>
-
-            <!-- RESULTS CARD -->
-            <div class="quiz-card" id="resultsCard" style="display: none;">
-                <span class="archetype-badge">Your Signature Curation</span>
-                <h1 class="intro-title" id="resArchetype">The Modern Minimalist</h1>
-                <p class="subtitle" id="resGreeting">Based on your aesthetic profile, we curated this bespoke 3-piece edit tailored to your preferred finish and proportions.</p>
-
-                <div class="results-grid" id="resultsGrid"></div>
-
-                <button class="btn-primary" onclick="restartQuiz()">Retake Style Quiz</button>
-            </div>
-        </section>
-
-        <!-- FEATURED CATALOG SECTION -->
-        <section class="content-section" id="shop">
-            <h2 class="section-title">The Permanent Collection</h2>
-            <p class="section-desc">Explore signature Striva pieces designed to transition seamlessly from day to night.</p>
-            
-            <div class="products-catalog">
-                <div class="product-card">
-                    <!-- IMAGE URL PLACEHOLDER 1 -->
-                    <img src="https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&q=80&w=600" alt="Signet Ring">
-                    <div class="prod-metal">18k Gold Vermeil</div>
-                    <div class="prod-title">The Heritage Signet Ring</div>
-                    <div class="prod-price">₹11,999 INR</div>
-                </div>
-
-                <div class="product-card">
-                    <!-- IMAGE URL PLACEHOLDER 2 -->
-                    <img src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&q=80&w=600" alt="Pendant Necklace">
-                    <div class="prod-metal">Recycled 925 Silver</div>
-                    <div class="prod-title">Architectural Bar Pendant</div>
-                    <div class="prod-price">₹14,499 INR</div>
-                </div>
-
-                <div class="product-card">
-                    <!-- IMAGE URL PLACEHOLDER 3 -->
-                    <img src="https://images.unsplash.com/photo-1611591475155-4286fa7c2e7f?auto=format&fit=crop&q=80&w=600" alt="Cuff Bracelet">
-                    <div class="prod-metal">18k Gold Vermeil</div>
-                    <div class="prod-title">Organic Ripple Cuff</div>
-                    <div class="prod-price">₹16,999 INR</div>
-                </div>
-            </div>
-        </section>
-
-        <!-- OUR STORY & CRAFTSMANSHIP SECTION -->
-        <section class="content-section" id="story">
-            <div class="story-block">
-                <div class="story-img-container">
-                    <!-- STORY SECTION IMAGE PLACEHOLDER -->
-                    <img src="https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&q=80&w=800" alt="Craftsmanship atelier">
-                </div>
-                <div>
-                    <span class="archetype-badge" style="text-align: left;">Artisanal Process</span>
-                    <h2 style="font-size: 2.2rem; margin-bottom: 1rem;">Conscious Demi-Fine Jewelry</h2>
-                    <p style="color: var(--text-muted); line-height: 1.7; margin-bottom: 1.5rem;">
-                        At Striva, we reject fast fashion cycles. Every piece is cast in recycled 925 sterling silver and plated in thick 2.5-micron 18k gold vermeil to ensure longevity and hypoallergenic comfort.
-                    </p>
-                    <button class="btn-secondary">Read Our Sustainability Pledge</button>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <!-- FULL WEBSITE FOOTER -->
     <footer>
         <div class="footer-grid">
             <div class="footer-col">
-                <h4 style="color: #FFF; letter-spacing: 0.2em;">STRIVA</h4>
-                <p style="color: #888888; font-size: 0.85rem; line-height: 1.6; max-width: 300px;">
-                    Architectural demi-fine jewelry designed for tactile self-expression and effortless daily stacking.
+                <h4 style="color: #FFF;">STRIVA</h4>
+                <p style="color: #888888; font-size: 0.85rem; line-height: 1.6;">
+                    Architectural demi-fine jewelry designed for daily identity, effortless stacking, and traditional bridal elegance.
                 </p>
             </div>
             <div class="footer-col">
-                <h4>Explore</h4>
+                <h4>Collections</h4>
                 <ul>
-                    <li><a href="#shop">Signature Rings</a></li>
-                    <li><a href="#shop">Layering Necklaces</a></li>
-                    <li><a href="#shop">Sculptural Cuffs</a></li>
-                    <li><a href="#quiz">Style Concierge</a></li>
+                    <li><a href="#women" onclick="loadCategory('women')">Women's Daily</a></li>
+                    <li><a href="#men" onclick="loadCategory('men')">Men's Modern</a></li>
+                    <li><a href="#couple" onclick="loadCategory('couple')">Couple Sets</a></li>
+                    <li><a href="#wedding" onclick="loadCategory('wedding')">Traditional Wedding</a></li>
                 </ul>
             </div>
             <div class="footer-col">
                 <h4>Client Care</h4>
                 <ul>
                     <li><a href="#">Ring Sizing Guide</a></li>
-                    <li><a href="#">Material & Care</a></li>
-                    <li><a href="#">Shipping & Returns</a></li>
-                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">Vermeil & Care</a></li>
+                    <li><a href="#">Express Shipping</a></li>
                 </ul>
             </div>
             <div class="footer-col">
-                <h4>Social</h4>
+                <h4>Connect</h4>
                 <ul>
                     <li><a href="#">Instagram</a></li>
                     <li><a href="#">Pinterest</a></li>
-                    <li><a href="#">Editorial Notes</a></li>
                 </ul>
             </div>
-        </div>
-
-        <div class="footer-bottom">
-            <span>&copy; 2026 STRIVA JEWELRY. ALL RIGHTS RESERVED.</span>
-            <span>PRICES INCLUSIVE OF ALL APPLICABLE TAXES (INR ₹)</span>
         </div>
     </footer>
 
     <script>
-        let questions = [];
-        let currentQuestionIndex = 0;
-        let selectedMetal = "Gold Vermeil";
-        let userAnswers = [];
-
-        /* =========================================================================
-           FALLBACK PRODUCT IMAGES & PRICES (IN INR ₹)
-        ========================================================================= */
-        const DEFAULT_PRODUCTS = {
-            "striva-001": {
-                name: "The Heritage Signet Ring",
-                price: 11999.00,
-                metal: "Gold Vermeil",
-                style_category: "Classic",
-                image_url: "https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&q=80&w=600"
-            },
-            "striva-002": {
-                name: "Architectural Bar Pendant",
-                price: 14499.00,
-                metal: "Sterling Silver",
-                style_category: "Modern",
-                image_url: "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&q=80&w=600"
-            },
-            "striva-003": {
-                name: "Organic Ripple Cuff",
-                price: 16999.00,
-                metal: "Gold Vermeil",
-                style_category: "Artisanal",
-                image_url: "https://images.unsplash.com/photo-1611591475155-4286fa7c2e7f?auto=format&fit=crop&q=80&w=600"
-            }
-        };
-
-        const introCard = document.getElementById('introCard');
-        const questionCard = document.getElementById('questionCard');
-        const resultsCard = document.getElementById('resultsCard');
-        const progressContainer = document.getElementById('progressContainer');
-        const progressFill = document.getElementById('progressFill');
-        const questionStep = document.getElementById('questionStep');
-        const percentText = document.getElementById('percentText');
+        let isAuthenticated = false;
+        let currentUser = null;
+        let cartItems = [];
+        let allProducts = [];
+        let quizQuestions = [];
+        let currentQuizIndex = 0;
+        let quizAnswers = [];
+        let pendingBagProduct = null;
 
         window.addEventListener('DOMContentLoaded', async () => {
-            try {
-                const response = await fetch('/api/quiz-questions');
-                const data = await response.json();
-                if(data.status === 'success' && data.questions.length > 0) {
-                    questions = data.questions;
-                }
-            } catch (err) {
-                console.log('Backend connection pending, using standard fallback logic.');
-            }
+            await fetchProducts();
+            await fetchQuizQuestions();
         });
 
-        function selectMetal(element, metal) {
-            document.querySelectorAll('.metal-pill').forEach(el => el.classList.remove('selected'));
-            element.classList.add('selected');
-            selectedMetal = metal;
+        async function fetchProducts() {
+            try {
+                const res = await fetch('/api/products');
+                const data = await res.json();
+                if(data.status === 'success') {
+                    allProducts = data.products;
+                    renderMainGrid(allProducts);
+                    renderGrid('trendingGrid', allProducts.filter(p => p.collection === 'trending'));
+                    renderGrid('curatorGrid', allProducts.filter(p => p.collection === 'curator_fav'));
+                }
+            } catch(e) {
+                console.error("Error loading catalog:", e);
+            }
+        }
+
+        function renderMainGrid(products) {
+            renderGrid('mainProductGrid', products);
+        }
+
+        function renderGrid(containerId, products) {
+            const container = document.getElementById(containerId);
+            container.innerHTML = '';
+            if(products.length === 0) {
+                container.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: var(--text-muted);">No products found in this category.</p>';
+                return;
+            }
+            products.forEach(p => {
+                const card = document.createElement('div');
+                card.className = 'product-card';
+                card.innerHTML = `
+                    <div>
+                        <img src="${p.image_url}" alt="${p.name}">
+                        <div class="p-metal">${p.metal} • ${p.category}</div>
+                        <div class="p-title">${p.name}</div>
+                        <div class="p-price">₹${p.price.toLocaleString('en-IN')}</div>
+                    </div>
+                    <button class="btn-add-bag" onclick="addToBag('${p.id}')">Add to Bag</button>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function applyCategoryFilter(cat, btn) {
+            updateActiveTab(btn);
+            if(cat === 'all') renderMainGrid(allProducts);
+            else renderMainGrid(allProducts.filter(p => p.category === cat));
+        }
+
+        function applyStyleFilter(style, btn) {
+            updateActiveTab(btn);
+            renderMainGrid(allProducts.filter(p => p.style === style));
+        }
+
+        function loadCategory(cat) {
+            const section = document.getElementById('bestsellers');
+            section.scrollIntoView({ behavior: 'smooth' });
+            if(cat === 'wedding') {
+                renderMainGrid(allProducts.filter(p => p.style === 'wedding'));
+            } else {
+                renderMainGrid(allProducts.filter(p => p.category === cat));
+            }
+        }
+
+        function updateActiveTab(btn) {
+            document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+            if(btn) btn.classList.add('active');
+        }
+
+        /* COMPULSORY AUTH & BAG LOGIC */
+        function addToBag(productId) {
+            if(!isAuthenticated) {
+                pendingBagProduct = productId;
+                openAuthModal();
+            } else {
+                cartItems.push(productId);
+                document.getElementById('cartCount').innerText = cartItems.length;
+                alert("Item added to your bag!");
+            }
+        }
+
+        function openAuthModal() {
+            document.getElementById('authModal').style.display = 'flex';
+        }
+
+        function closeAuthModal() {
+            document.getElementById('authModal').style.display = 'none';
+        }
+
+        function performLogin() {
+            const email = document.getElementById('authEmail').value;
+            if(!email) {
+                alert("Please enter a valid email address.");
+                return;
+            }
+            isAuthenticated = true;
+            currentUser = email.split('@')[0];
+            document.getElementById('navAuthBtn').innerText = `Account (${currentUser})`;
+            closeAuthModal();
+
+            if(pendingBagProduct) {
+                addToBag(pendingBagProduct);
+                pendingBagProduct = null;
+            }
+        }
+
+        function handleCartClick() {
+            if(!isAuthenticated) {
+                openAuthModal();
+            } else {
+                alert(`Your bag contains ${cartItems.length} items.`);
+            }
+        }
+
+        /* 8-QUESTION STYLE QUIZ LOGIC */
+        async function fetchQuizQuestions() {
+            try {
+                const res = await fetch('/api/quiz-questions');
+                const data = await res.json();
+                if(data.status === 'success') quizQuestions = data.questions;
+            } catch(e) {
+                console.error("Error loading quiz:", e);
+            }
         }
 
         function startQuiz() {
-            introCard.style.display = 'none';
-            questionCard.style.display = 'block';
-            progressContainer.style.display = 'block';
-            currentQuestionIndex = 0;
-            userAnswers = [];
-            renderQuestion();
+            const userName = document.getElementById('quizUserName').value.trim() || "Valued Guest";
+            currentQuizIndex = 0;
+            quizAnswers = [];
+            renderQuizQuestion(userName);
         }
 
-        function renderQuestion() {
-            const q = questions[currentQuestionIndex];
-            const progress = ((currentQuestionIndex + 1) / questions.length) * 100;
+        function renderQuizQuestion(userName) {
+            const q = quizQuestions[currentQuizIndex];
+            const container = document.getElementById('quizContent');
             
-            progressFill.style.width = progress + '%';
-            questionStep.innerText = `Question ${currentQuestionIndex + 1} of ${questions.length}`;
-            percentText.innerText = `${Math.round(progress)}%`;
+            document.getElementById('quizMainTitle').innerText = `Question ${currentQuizIndex + 1} of ${quizQuestions.length}`;
+            document.getElementById('quizMainSub').innerText = q.subtitle;
 
-            document.getElementById('backBtn').style.display = currentQuestionIndex > 0 ? 'block' : 'none';
-            document.getElementById('qNumber').innerText = `Question 0${q.id}`;
-            document.getElementById('qTitle').innerText = q.title;
-            document.getElementById('qSubtitle').innerText = q.subtitle;
-
-            const container = document.getElementById('optionsContainer');
-            container.innerHTML = '';
-
-            q.options.forEach((opt) => {
-                const optEl = document.createElement('div');
-                optEl.className = 'option-card';
-                optEl.onclick = () => handleOptionSelect(q.id, opt.tag, optEl);
-
-                const existing = userAnswers.find(a => a.question_id === q.id);
-                if (existing && existing.selected_tag === opt.tag) {
-                    optEl.classList.add('selected');
-                }
-
-                optEl.innerHTML = `
-                    <div>
-                        <div class="opt-label">${opt.label}</div>
-                        <div class="opt-text">${opt.text}</div>
+            let html = `<h3 style="font-family: var(--font-serif); font-size: 1.8rem; margin-bottom: 1.5rem; text-align: center;">${q.title}</h3>`;
+            q.options.forEach(opt => {
+                html += `
+                    <div class="option-card" onclick="selectQuizOption('${opt.tag}', '${userName}')">
+                        <strong>${opt.label}</strong>
+                        <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.2rem;">${opt.text}</p>
                     </div>
                 `;
-                container.appendChild(optEl);
             });
+
+            container.innerHTML = html;
         }
 
-        function handleOptionSelect(qId, tag, element) {
-            document.querySelectorAll('.option-card').forEach(el => el.classList.remove('selected'));
-            element.classList.add('selected');
-
-            const existingIndex = userAnswers.findIndex(a => a.question_id === qId);
-            if (existingIndex > -1) {
-                userAnswers[existingIndex].selected_tag = tag;
+        function selectQuizOption(tag, userName) {
+            quizAnswers.push({ question_id: quizQuestions[currentQuizIndex].id, selected_tag: tag });
+            if(currentQuizIndex < quizQuestions.length - 1) {
+                currentQuizIndex++;
+                renderQuizQuestion(userName);
             } else {
-                userAnswers.push({ question_id: qId, selected_tag: tag });
-            }
-
-            setTimeout(() => {
-                if (currentQuestionIndex < questions.length - 1) {
-                    currentQuestionIndex++;
-                    renderQuestion();
-                } else {
-                    submitQuiz();
-                }
-            }, 300);
-        }
-
-        function previousQuestion() {
-            if (currentQuestionIndex > 0) {
-                currentQuestionIndex--;
-                renderQuestion();
+                submitQuiz(userName);
             }
         }
 
-        async function submitQuiz() {
-            questionCard.style.display = 'none';
-            progressContainer.style.display = 'none';
-
-            const nameInput = document.getElementById('userName').value || "Valued Guest";
-
-            const payload = {
-                user_name: nameInput,
-                preferred_metal: selectedMetal,
-                answers: userAnswers
-            };
+        async function submitQuiz(userName) {
+            const container = document.getElementById('quizContent');
+            container.innerHTML = '<p style="text-align: center;">Calculating your architectural curation...</p>';
 
             try {
-                const response = await fetch('/api/calculate-recommendations', {
+                const res = await fetch('/api/calculate-recommendations', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload)
+                    body: JSON.stringify({ user_name: userName, answers: quizAnswers })
                 });
 
-                const resData = await response.json();
-                if (resData.status === 'success') {
-                    displayResults(resData);
-                } else {
-                    useFallbackResults(nameInput);
+                const data = await res.json();
+                if(data.status === 'success') {
+                    document.getElementById('quizMainTitle').innerText = `${data.user_name}'s Curated Edit`;
+                    document.getElementById('quizMainSub').innerText = "Based on your 8-part style analysis, we matched you with these pieces:";
+
+                    let html = '<div class="product-grid">';
+                    data.recommendations.forEach(p => {
+                        html += `
+                            <div class="product-card">
+                                <div>
+                                    <img src="${p.image_url}" alt="${p.name}">
+                                    <div class="p-metal">${p.metal}</div>
+                                    <div class="p-title">${p.name}</div>
+                                    <div class="p-price">₹${p.price.toLocaleString('en-IN')}</div>
+                                </div>
+                                <button class="btn-add-bag" onclick="addToBag('${p.id}')">Add to Bag</button>
+                            </div>
+                        `;
+                    });
+                    html += '</div>';
+                    container.innerHTML = html;
                 }
-            } catch (err) {
-                useFallbackResults(nameInput);
+            } catch(e) {
+                container.innerHTML = '<p style="text-align: center; color: red;">Error generating recommendations.</p>';
             }
-        }
-
-        function displayResults(data) {
-            resultsCard.style.display = 'block';
-            document.getElementById('resArchetype').innerText = data.archetype || "The Modern Minimalist";
-            document.getElementById('resGreeting').innerText = `${data.user_name}, based on your responses, we curated this signature edit tailored to your aesthetic choices.`;
-
-            const grid = document.getElementById('resultsGrid');
-            grid.innerHTML = '';
-
-            data.recommendations.forEach(prod => {
-                const finalImgUrl = prod.image_url || DEFAULT_PRODUCTS["striva-001"].image_url;
-
-                const prodEl = document.createElement('div');
-                prodEl.className = 'product-card';
-                
-                prodEl.innerHTML = `
-                    <img src="${finalImgUrl}" alt="${prod.name}" loading="lazy">
-                    <div class="prod-metal">${prod.metal || 'Gold Vermeil'} • ${prod.style_category || 'Classic'}</div>
-                    <div class="prod-title">${prod.name}</div>
-                    <div class="prod-price">₹${prod.price ? prod.price.toLocaleString('en-IN') : '11,999'} INR</div>
-                `;
-                grid.appendChild(prodEl);
-            });
-        }
-
-        function useFallbackResults(userName) {
-            const fallbackData = {
-                user_name: userName,
-                archetype: "The Architectural Classicist",
-                recommendations: [
-                    DEFAULT_PRODUCTS["striva-001"],
-                    DEFAULT_PRODUCTS["striva-002"],
-                    DEFAULT_PRODUCTS["striva-003"]
-                ]
-            };
-            displayResults(fallbackData);
-        }
-
-        function restartQuiz() {
-            resultsCard.style.display = 'none';
-            introCard.style.display = 'block';
         }
     </script>
 </body>
