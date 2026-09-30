@@ -8,57 +8,14 @@ import mysql.connector
 from mysql.connector import Error
 from werkzeug.security import generate_password_hash, check_password_hash
 
-
-# ============================================================
-# STRIVA - FLASK BACKEND
-# ============================================================
-
 app = Flask(__name__, static_folder="static")
 CORS(app)
-
-
-# ============================================================
-# DATABASE SETTINGS
-# ============================================================
-# For local MySQL, these defaults are:
-# host     = localhost
-# port     = 3306
-# user     = root
-# password = ""
-# database = striva
-#
-# If you use another database, set these environment variables:
-# DB_HOST, DB_PORT, DB_USER, DB_PASS, DB_NAME
-# ============================================================
 
 DB_HOST = os.environ.get("DB_HOST", "localhost")
 DB_PORT = int(os.environ.get("DB_PORT", "3306"))
 DB_USER = os.environ.get("DB_USER", "root")
 DB_PASS = os.environ.get("DB_PASS", "")
 DB_NAME = os.environ.get("DB_NAME", "striva")
-
-
-def get_server_connection():
-    """Connect to MySQL server without selecting a database."""
-    return mysql.connector.connect(
-        host=DB_HOST,
-        port=DB_PORT,
-        user=DB_USER,
-        password=DB_PASS
-    )
-
-
-def create_database_if_needed():
-    """Create the STRIVA database if it does not already exist."""
-    conn = get_server_connection()
-    cursor = conn.cursor()
-    cursor.execute(
-        f"CREATE DATABASE IF NOT EXISTS `{DB_NAME}` "
-        "CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci"
-    )
-    conn.commit()
-    cursor.close()
-    conn.close()
 
 
 def get_db():
@@ -72,14 +29,8 @@ def get_db():
     )
 
 
-# ============================================================
-# PRODUCT CATALOG
-# ============================================================
-# image_url values are real URLs, NOT Markdown links.
-# ============================================================
-
 ALL_PRODUCTS = [
-    # ---------------- WOMEN / MINIMAL ----------------
+
     {
         "sku": "STR-W-NK-001",
         "name": "Aura Mother-of-Pearl Layered Necklace",
@@ -223,8 +174,6 @@ ALL_PRODUCTS = [
         "tag": "favourites",
         "is_customizable": False
     },
-
-    # ---------------- WOMEN / WEDDING ----------------
     {
         "sku": "STR-W-WD-001",
         "name": "Royal Kundan Heritage Nath",
@@ -291,7 +240,6 @@ ALL_PRODUCTS = [
         "is_customizable": False
     },
 
-    # ---------------- MEN / MINIMAL ----------------
     {
         "sku": "STR-M-RG-001",
         "name": "Homme Brushed Silver Signet Ring",
@@ -358,7 +306,7 @@ ALL_PRODUCTS = [
         "is_customizable": False
     },
 
-    # ---------------- MEN / WEDDING ----------------
+
     {
         "sku": "STR-M-WD-001",
         "name": "Royal Emerald Sherwani Brooch",
@@ -399,7 +347,7 @@ ALL_PRODUCTS = [
         "is_customizable": True
     },
 
-    # ---------------- COUPLE ----------------
+
     {
         "sku": "STR-C-RG-001",
         "name": "Eternal Couple Ring Set",
@@ -428,31 +376,11 @@ ALL_PRODUCTS = [
     },
 ]
 
-
-# ============================================================
-# DATABASE TABLES + SEED
-# ============================================================
-
 def ensure_tables_and_seed():
-    """Create missing tables/columns and seed the STRIVA catalog.
-
-    IMPORTANT: Aiven already contains the database/table in many deployments.
-    CREATE TABLE IF NOT EXISTS does NOT change an existing table, so this
-    function also performs a small schema migration for older products tables.
-    """
     conn = None
     cursor = None
 
     try:
-        # Aiven normally already provides the database. This is kept for
-        # compatibility with local MySQL setups too.
-        try:
-            create_database_if_needed()
-        except Error as db_create_error:
-            # If the database already exists but the Aiven user is not allowed
-            # to CREATE DATABASE, continue and connect to the existing DB.
-            print("Database creation skipped:", db_create_error)
-
         conn = get_db()
         cursor = conn.cursor()
 
@@ -471,6 +399,7 @@ def ensure_tables_and_seed():
                 id INT AUTO_INCREMENT PRIMARY KEY,
                 sku VARCHAR(100),
                 name VARCHAR(255) NOT NULL,
+                category VARCHAR(80),
                 gender VARCHAR(30),
                 occasion VARCHAR(30),
                 sub_category VARCHAR(80),
@@ -497,12 +426,6 @@ def ensure_tables_and_seed():
             ) ENGINE=InnoDB;
         """)
 
-        # ------------------------------------------------------------
-        # MIGRATE OLD PRODUCTS TABLE
-        # ------------------------------------------------------------
-        # The previous version of STRIVA may already have a products table.
-        # CREATE TABLE IF NOT EXISTS will NOT add columns to that table.
-        # Check every column used by the current API and add it if missing.
         required_columns = {
             "sku": "VARCHAR(100) NULL",
             "category": "VARCHAR(80) NULL",
@@ -527,38 +450,15 @@ def ensure_tables_and_seed():
                 cursor.execute(
                     f"ALTER TABLE products ADD COLUMN `{column_name}` {column_definition}"
                 )
-                print(f"Added missing products column: {column_name}")
 
-        # Existing old rows are allowed to remain. The newly seeded STRIVA
-        # products below always receive complete values.
         conn.commit()
 
-        # ------------------------------------------------------------
-        # SEED / UPDATE PRODUCTS
-        # ------------------------------------------------------------
-        # Do not depend on the table being empty. Match products by SKU so
-        # redeploying on Render does not create duplicates.
         for p in ALL_PRODUCTS:
             cursor.execute(
                 "SELECT id FROM products WHERE sku = %s LIMIT 1",
                 (p["sku"],)
             )
             existing = cursor.fetchone()
-
-            values = (
-                p["name"],
-                p["sub_category"],
-                p["gender"],
-                p["occasion"],
-                p["sub_category"],
-                p["price_inr"],
-                p["metal"],
-                p["description"],
-                p["image_url"],
-                p["tag"],
-                p["is_customizable"],
-                p["sku"],
-            )
 
             if existing:
                 cursor.execute(
@@ -577,7 +477,20 @@ def ensure_tables_and_seed():
                         is_customizable = %s
                     WHERE id = %s
                     """,
-                    values[:-1] + (existing[0],)
+                    (
+                        p["name"],
+                        p["sub_category"],
+                        p["gender"],
+                        p["occasion"],
+                        p["sub_category"],
+                        p["price_inr"],
+                        p["metal"],
+                        p["description"],
+                        p["image_url"],
+                        p["tag"],
+                        p["is_customizable"],
+                        existing[0]
+                    )
                 )
             else:
                 cursor.execute(
@@ -585,7 +498,7 @@ def ensure_tables_and_seed():
                     INSERT INTO products
                     (sku, name, category, gender, occasion, sub_category, price_inr,
                      metal, description, image_url, tag, is_customizable)
-                    VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+                    VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
                     """,
                     (
                         p["sku"],
@@ -605,15 +518,10 @@ def ensure_tables_and_seed():
 
         conn.commit()
 
-        cursor.execute("SELECT COUNT(*) FROM products")
-        total_products = cursor.fetchone()[0]
-        print(f"STRIVA database ready. Catalog contains {total_products} products.")
-
     except Exception as e:
         if conn:
             conn.rollback()
         print("DATABASE SETUP ERROR:", e)
-        raise
 
     finally:
         if cursor:
@@ -621,13 +529,7 @@ def ensure_tables_and_seed():
         if conn:
             conn.close()
 
-
-# ============================================================
-# HELPERS
-# ============================================================
-
 def serialize_product(product):
-    """Make Decimal values JSON-friendly."""
     if product and isinstance(product.get("price_inr"), Decimal):
         product["price_inr"] = float(product["price_inr"])
     return product
@@ -640,18 +542,11 @@ def api_error(message, status=500):
     }), status
 
 
-# ============================================================
-# FRONTEND
-# ============================================================
 
 @app.route("/")
 def serve_frontend():
     return send_from_directory(app.static_folder, "index.html")
 
-
-# ============================================================
-# HEALTH CHECK
-# ============================================================
 
 @app.route("/api/health", methods=["GET"])
 def health():
@@ -673,9 +568,6 @@ def health():
         return api_error(str(e))
 
 
-# ============================================================
-# AUTH
-# ============================================================
 
 @app.route("/api/auth/register", methods=["POST"])
 def register():
@@ -771,9 +663,6 @@ def login():
         return api_error(str(e))
 
 
-# ============================================================
-# PRODUCTS
-# ============================================================
 
 @app.route("/api/products", methods=["GET"])
 def get_products():
@@ -900,10 +789,6 @@ def get_product_by_id(product_id):
         return api_error(str(e))
 
 
-# ============================================================
-# ORDERS
-# ============================================================
-
 @app.route("/api/orders", methods=["POST"])
 def create_order():
     data = request.get_json(silent=True) or {}
@@ -985,17 +870,10 @@ def get_orders(user_id):
         return api_error(str(e))
 
 
-# ============================================================
-# START SERVER
-# ============================================================
-
 if __name__ == "__main__":
     print("=" * 55)
     print("STRIVA backend starting...")
     print(f"Database: {DB_NAME}")
-    print(f"Server: http://localhost:5000")
-    print("=" * 55)
-
     try:
         ensure_tables_and_seed()
         app.run(
