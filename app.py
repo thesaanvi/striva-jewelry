@@ -434,11 +434,25 @@ ALL_PRODUCTS = [
 # ============================================================
 
 def ensure_tables_and_seed():
+    """Create missing tables/columns and seed the STRIVA catalog.
+
+    IMPORTANT: Aiven already contains the database/table in many deployments.
+    CREATE TABLE IF NOT EXISTS does NOT change an existing table, so this
+    function also performs a small schema migration for older products tables.
+    """
     conn = None
     cursor = None
 
     try:
-        create_database_if_needed()
+        # Aiven normally already provides the database. This is kept for
+        # compatibility with local MySQL setups too.
+        try:
+            create_database_if_needed()
+        except Error as db_create_error:
+            # If the database already exists but the Aiven user is not allowed
+            # to CREATE DATABASE, continue and connect to the existing DB.
+            print("Database creation skipped:", db_create_error)
+
         conn = get_db()
         cursor = conn.cursor()
 
@@ -455,13 +469,13 @@ def ensure_tables_and_seed():
         cursor.execute("""
             CREATE TABLE IF NOT EXISTS products (
                 id INT AUTO_INCREMENT PRIMARY KEY,
-                sku VARCHAR(100) UNIQUE,
+                sku VARCHAR(100),
                 name VARCHAR(255) NOT NULL,
-                gender VARCHAR(30) NOT NULL,
-                occasion VARCHAR(30) NOT NULL,
-                sub_category VARCHAR(80) NOT NULL,
-                price_inr DECIMAL(10,2) NOT NULL,
-                metal VARCHAR(150) NOT NULL,
+                gender VARCHAR(30),
+                occasion VARCHAR(30),
+                sub_category VARCHAR(80),
+                price_inr DECIMAL(10,2) NOT NULL DEFAULT 0,
+                metal VARCHAR(150),
                 description TEXT,
                 image_url TEXT,
                 tag VARCHAR(50),
@@ -483,59 +497,113 @@ def ensure_tables_and_seed():
             ) ENGINE=InnoDB;
         """)
 
-        # Add SKU to an older products table if it was created from the
-        # previous version of this project.
-        try:
-            cursor.execute("SHOW COLUMNS FROM products LIKE 'sku'")
+        # ------------------------------------------------------------
+        # MIGRATE OLD PRODUCTS TABLE
+        # ------------------------------------------------------------
+        # The previous version of STRIVA may already have a products table.
+        # CREATE TABLE IF NOT EXISTS will NOT add columns to that table.
+        # Check every column used by the current API and add it if missing.
+        required_columns = {
+            "sku": "VARCHAR(100) NULL",
+            "gender": "VARCHAR(30) NULL",
+            "occasion": "VARCHAR(30) NULL",
+            "sub_category": "VARCHAR(80) NULL",
+            "price_inr": "DECIMAL(10,2) NOT NULL DEFAULT 0",
+            "metal": "VARCHAR(150) NULL",
+            "description": "TEXT NULL",
+            "image_url": "TEXT NULL",
+            "tag": "VARCHAR(50) NULL",
+            "is_customizable": "BOOLEAN DEFAULT TRUE",
+            "created_at": "TIMESTAMP DEFAULT CURRENT_TIMESTAMP"
+        }
+
+        for column_name, column_definition in required_columns.items():
+            cursor.execute(
+                "SHOW COLUMNS FROM products LIKE %s",
+                (column_name,)
+            )
             if cursor.fetchone() is None:
                 cursor.execute(
-                    "ALTER TABLE products ADD COLUMN sku VARCHAR(100) UNIQUE"
+                    f"ALTER TABLE products ADD COLUMN `{column_name}` {column_definition}"
                 )
-        except Error:
-            pass
+                print(f"Added missing products column: {column_name}")
 
-        # Insert missing products individually.
-        # This fixes the old problem where seeding happened only when
-        # the entire table was empty.
-        insert_sql = """
-            INSERT INTO products
-            (sku, name, gender, occasion, sub_category, price_inr,
-             metal, description, image_url, tag, is_customizable)
-            VALUES
-            (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
-            ON DUPLICATE KEY UPDATE
-                name = VALUES(name),
-                gender = VALUES(gender),
-                occasion = VALUES(occasion),
-                sub_category = VALUES(sub_category),
-                price_inr = VALUES(price_inr),
-                metal = VALUES(metal),
-                description = VALUES(description),
-                image_url = VALUES(image_url),
-                tag = VALUES(tag),
-                is_customizable = VALUES(is_customizable)
-        """
+        # Existing old rows are allowed to remain. The newly seeded STRIVA
+        # products below always receive complete values.
+        conn.commit()
 
+        # ------------------------------------------------------------
+        # SEED / UPDATE PRODUCTS
+        # ------------------------------------------------------------
+        # Do not depend on the table being empty. Match products by SKU so
+        # redeploying on Render does not create duplicates.
         for p in ALL_PRODUCTS:
             cursor.execute(
-                insert_sql,
-                (
-                    p["sku"],
-                    p["name"],
-                    p["gender"],
-                    p["occasion"],
-                    p["sub_category"],
-                    p["price_inr"],
-                    p["metal"],
-                    p["description"],
-                    p["image_url"],
-                    p["tag"],
-                    p["is_customizable"],
-                ),
+                "SELECT id FROM products WHERE sku = %s LIMIT 1",
+                (p["sku"],)
+            )
+            existing = cursor.fetchone()
+
+            values = (
+                p["name"],
+                p["gender"],
+                p["occasion"],
+                p["sub_category"],
+                p["price_inr"],
+                p["metal"],
+                p["description"],
+                p["image_url"],
+                p["tag"],
+                p["is_customizable"],
+                p["sku"],
             )
 
+            if existing:
+                cursor.execute(
+                    """
+                    UPDATE products SET
+                        name = %s,
+                        gender = %s,
+                        occasion = %s,
+                        sub_category = %s,
+                        price_inr = %s,
+                        metal = %s,
+                        description = %s,
+                        image_url = %s,
+                        tag = %s,
+                        is_customizable = %s
+                    WHERE id = %s
+                    """,
+                    values[:-1] + (existing[0],)
+                )
+            else:
+                cursor.execute(
+                    """
+                    INSERT INTO products
+                    (sku, name, gender, occasion, sub_category, price_inr,
+                     metal, description, image_url, tag, is_customizable)
+                    VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+                    """,
+                    (
+                        p["sku"],
+                        p["name"],
+                        p["gender"],
+                        p["occasion"],
+                        p["sub_category"],
+                        p["price_inr"],
+                        p["metal"],
+                        p["description"],
+                        p["image_url"],
+                        p["tag"],
+                        p["is_customizable"],
+                    )
+                )
+
         conn.commit()
-        print(f"STRIVA database ready. Catalog contains {len(ALL_PRODUCTS)} seeded products.")
+
+        cursor.execute("SELECT COUNT(*) FROM products")
+        total_products = cursor.fetchone()[0]
+        print(f"STRIVA database ready. Catalog contains {total_products} products.")
 
     except Exception as e:
         if conn:
