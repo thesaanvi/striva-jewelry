@@ -3,28 +3,28 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>STRIVA | Demi-Fine Modern Luxury</title>
+  <title>STRIVA | Haute Demi-Fine Jewelry</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Montserrat:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Montserrat:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    body { font-family: 'Montserrat', sans-serif; background-color: #FAF8F5; color: #1C1917; }
-    .font-serif-luxury { font-family: 'Cormorant Garamond', serif; }
+    body { font-family: 'Montserrat', sans-serif; background-color: #FBF9F5; color: #111111; }
+    .font-serif-luxury { font-family: 'Playfair Display', serif; }
     .hidden-view { display: none !important; }
-    .bg-palmonas-cream { background-color: #F6F2EB; }
-    .text-gold-accent { color: #9E7D55; }
-    .border-gold-accent { border-color: #D2C1A8; }
-    .bg-gold-accent { background-color: #9E7D55; }
+    .bg-ivory-champagne { background-color: #F7F3EC; }
+    .text-gold-accent { color: #A38258; }
+    .border-gold-accent { border-color: #D8C3A5; }
+    .bg-gold-accent { background-color: #A38258; }
   </style>
 </head>
-<body class="bg-[#FAF8F5] text-stone-900 min-h-screen flex flex-col">
+<body class="bg-[#FBF9F5] text-stone-900 min-h-screen flex flex-col selection:bg-stone-900 selection:text-stone-50">
 
-  <!-- ANNOUNCEMENT BANNER -->
-  <div class="bg-stone-900 text-stone-200 text-[10px] tracking-[0.25em] uppercase text-center py-2 font-medium">
-    Waterproof & Tarnish-Free Demi-Fine Jewelry • Complimentary Express Delivery
+  <!-- TOP HIGH-JEWELRY BANNER -->
+  <div class="bg-stone-950 text-stone-300 text-[10px] tracking-[0.3em] uppercase text-center py-2.5 font-light border-b border-stone-800">
+    Complimentary Bespoke Express Delivery Across India • Water Resistant 18K Vermeil
   </div>
 
   <!-- AUTHENTICATION SCREEN -->
-  <div id="view-auth" class="min-h-screen flex flex-col items-center justify-center p-6 bg-[#F6F2EB]">
+  <div id="view-auth" class="min-h-screen flex flex-col items-center justify-center p-6 bg-[#F7F3EC]">
     <div class="text-center max-w-md w-full">
       <div class="flex justify-center mb-6">
         <svg class="w-16 h-16 text-gold-accent" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.2">
@@ -32,8 +32,8 @@
           <circle cx="50" cy="50" r="18" />
         </svg>
       </div>
-      <h1 class="text-5xl font-serif-luxury tracking-[0.35em] font-light text-stone-900 mb-2 uppercase">STRIVA</h1>
-      <p class="text-[10px] uppercase tracking-[0.35em] text-gold-accent mb-10 font-semibold">18K Vermeil & Solid 925 Silver</p>
+      <h1 class="text-5xl font-serif-luxury tracking-[0.35em] font-light text-stone-950 mb-2 uppercase">STRIVA</h1>
+      <p class="text-[10px] uppercase tracking-[0.35em] text-gold-accent mb-10 font-medium">Maison de Haute Demi-Fine</p>
 
       <div class="bg-white p-8 md:p-10 rounded-2xl shadow-sm border border-stone-200/80">
         <div class="flex justify-center space-x-8 mb-8 text-xs font-semibold tracking-widest uppercase border-b pb-4">
@@ -59,7 +59,7 @@
             <button type="button" onclick="openResetModal()" class="text-[11px] text-stone-400 hover:text-gold-accent transition">Forgot Password?</button>
           </div>
 
-          <button type="submit" class="w-full bg-stone-900 hover:bg-stone-800 text-stone-50 py-3.5 rounded-lg text-xs font-semibold tracking-widest uppercase transition">
+          <button type="submit" class="w-full bg-stone-950 hover:bg-stone-800 text-stone-50 py-4 rounded-lg text-[11px] font-medium tracking-[0.2em] uppercase transition">
             Enter Storefront
           </button>
         </form>
@@ -70,46 +70,46 @@
   <!-- MAIN APP CONTAINER -->
   <div id="view-main" class="hidden-view flex flex-col min-h-screen">
     
-    <!-- BRAND NAVIGATION -->
+    <!-- BRAND NAVIGATION HEADER -->
     <header class="bg-white/95 backdrop-blur-md border-b border-stone-200/80 sticky top-0 z-40 px-8 py-5 flex items-center justify-between">
       <div class="flex items-center space-x-3 cursor-pointer" onclick="showSection('home')">
         <svg class="w-7 h-7 text-gold-accent" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.8">
           <polygon points="50,10 90,50 50,90 10,50" />
         </svg>
-        <span class="text-2xl font-serif-luxury font-light tracking-[0.25em] text-stone-900 uppercase">STRIVA</span>
+        <span class="text-2xl font-serif-luxury font-light tracking-[0.25em] text-stone-950 uppercase">STRIVA</span>
       </div>
 
-      <nav class="hidden lg:flex space-x-8 text-[11px] font-medium tracking-[0.18em] uppercase text-stone-600">
-        <button onclick="showSection('home')" class="hover:text-stone-900">Home</button>
-        <button onclick="quickFilter('women', 'minimal')" class="hover:text-stone-900">Women Minimal</button>
-        <button onclick="quickFilter('men', 'minimal')" class="hover:text-stone-900">Men Minimal</button>
-        <button onclick="quickFilter('women', 'wedding')" class="hover:text-stone-900">Wedding Collection</button>
-        <button onclick="showSection('customization')" class="hover:text-gold-accent text-stone-900 font-semibold">Customization Studio</button>
-        <button onclick="showSection('quiz')" class="hover:text-stone-900">Style Quiz</button>
-        <button onclick="showSection('orders')" class="hover:text-stone-900">Orders</button>
+      <nav class="hidden lg:flex space-x-8 text-[11px] font-medium tracking-[0.2em] uppercase text-stone-600">
+        <button onclick="showSection('home')" class="hover:text-stone-950 transition">Home</button>
+        <button onclick="quickFilter('women', 'minimal')" class="hover:text-stone-950 transition">Women Minimal</button>
+        <button onclick="quickFilter('men', 'minimal')" class="hover:text-stone-950 transition">Men Minimal</button>
+        <button onclick="quickFilter('women', 'wedding')" class="hover:text-stone-950 transition">Wedding Collection</button>
+        <button onclick="showSection('customization')" class="hover:text-gold-accent text-stone-950 font-semibold transition">Customization Studio</button>
+        <button onclick="showSection('quiz')" class="hover:text-stone-950 transition">Style Quiz</button>
+        <button onclick="showSection('orders')" class="hover:text-stone-950 transition">Orders</button>
       </nav>
 
       <div class="flex items-center space-x-6">
-        <button onclick="toggleCartModal()" class="bg-stone-900 text-stone-50 px-5 py-2.5 rounded-full text-[11px] font-medium tracking-wider uppercase flex items-center gap-2">
+        <button onclick="toggleCartModal()" class="bg-stone-950 text-stone-50 px-5 py-2.5 rounded-full text-[11px] font-medium tracking-wider uppercase flex items-center gap-2.5 hover:bg-stone-800 transition">
           <span>Bag</span>
           <span id="cart-badge" class="bg-gold-accent text-white font-bold px-2 py-0.5 rounded-full text-[9px]">0</span>
         </button>
-        <button onclick="logout()" class="text-[11px] text-stone-400 hover:text-stone-900 tracking-wider uppercase">Sign Out</button>
+        <button onclick="logout()" class="text-[11px] text-stone-400 hover:text-stone-950 tracking-wider uppercase transition">Sign Out</button>
       </div>
     </header>
 
     <main class="flex-1 max-w-7xl w-full mx-auto p-6 md:p-12">
 
-      <!-- HERO CAMPAIGN SECTION -->
+      <!-- HERO SECTION -->
       <section id="sec-home">
-        <div class="bg-palmonas-cream rounded-3xl p-10 md:p-16 mb-16 border border-stone-200/60 flex flex-col md:flex-row items-center justify-between">
+        <div class="bg-ivory-champagne rounded-3xl p-10 md:p-16 mb-16 border border-stone-200/60 flex flex-col md:flex-row items-center justify-between">
           <div class="max-w-xl">
-            <span class="text-[10px] uppercase tracking-[0.3em] text-gold-accent font-bold">Demi-Fine Fine Artistry</span>
-            <h1 class="text-4xl md:text-6xl font-serif-luxury mt-3 mb-6 text-stone-900 leading-tight">Everyday Luxury Standard</h1>
+            <span class="text-[10px] uppercase tracking-[0.3em] text-gold-accent font-bold">Maison Fine Artistry</span>
+            <h1 class="text-4xl md:text-6xl font-serif-luxury mt-3 mb-6 text-stone-950 leading-tight">Everyday Luxury Standard</h1>
             <p class="text-stone-600 text-xs md:text-sm leading-relaxed mb-8 font-light">Solid 18K Gold Vermeil and 925 Sterling Silver pieces designed for water-resistant daily wear.</p>
             <div class="flex gap-4">
-              <button onclick="showSection('catalog')" class="bg-stone-900 hover:bg-stone-800 text-stone-50 px-8 py-3.5 rounded-lg text-[11px] font-semibold tracking-widest uppercase">Explore Full Catalog</button>
-              <button onclick="showSection('customization')" class="bg-white border border-stone-300 text-stone-900 px-8 py-3.5 rounded-lg text-[11px] font-semibold tracking-widest uppercase">Custom Studio</button>
+              <button onclick="showSection('catalog')" class="bg-stone-950 hover:bg-stone-800 text-stone-50 px-8 py-3.5 rounded-lg text-[11px] font-medium tracking-[0.2em] uppercase transition">Explore Catalog</button>
+              <button onclick="showSection('customization')" class="bg-white border border-stone-300 text-stone-950 px-8 py-3.5 rounded-lg text-[11px] font-medium tracking-[0.2em] uppercase transition">Custom Studio</button>
             </div>
           </div>
         </div>
@@ -127,7 +127,7 @@
       <!-- CATALOG & CATEGORY FILTERING -->
       <section id="sec-catalog" class="hidden-view">
         <div class="bg-white p-8 rounded-2xl border border-stone-200/80 mb-10 shadow-sm">
-          <h2 class="text-xl font-serif-luxury text-stone-900 mb-6">Filter Collection</h2>
+          <h2 class="text-xl font-serif-luxury text-stone-950 mb-6">Filter Collection</h2>
           <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
             <div>
               <label class="block text-[10px] font-bold text-stone-500 uppercase tracking-widest mb-2">Gender</label>
@@ -165,7 +165,7 @@
       <section id="sec-customization" class="hidden-view max-w-4xl mx-auto bg-white p-10 md:p-12 rounded-3xl border border-stone-200/80 shadow-sm">
         <div class="text-center max-w-xl mx-auto mb-10">
           <span class="text-[10px] uppercase font-bold tracking-[0.3em] text-gold-accent">Custom Studio</span>
-          <h2 class="text-3xl font-serif-luxury text-stone-900 mt-2">Personalized Laser Engraving</h2>
+          <h2 class="text-3xl font-serif-luxury text-stone-950 mt-2">Personalized Laser Engraving</h2>
           <p class="text-stone-500 text-xs font-light mt-2">Select a piece and preview your custom initials or dates.</p>
         </div>
 
@@ -188,45 +188,62 @@
               <input type="text" id="custom-text-input" maxlength="20" placeholder="e.g. S & A 2026" oninput="updateCustomStudioText()" class="w-full bg-stone-50 border border-stone-200 rounded-lg p-3 text-xs focus:outline-none">
             </div>
 
-            <button onclick="addCustomizedItemToBag()" class="w-full bg-stone-900 hover:bg-stone-800 text-stone-50 py-4 rounded-lg text-xs font-semibold tracking-widest uppercase transition">
+            <button onclick="addCustomizedItemToBag()" class="w-full bg-stone-950 hover:bg-stone-800 text-stone-50 py-4 rounded-lg text-xs font-semibold tracking-widest uppercase transition">
               Add Customized Piece To Bag
             </button>
           </div>
         </div>
       </section>
 
-      <!-- 10-QUESTION STYLE QUIZ -->
-      <section id="sec-quiz" class="hidden-view max-w-2xl mx-auto bg-white p-10 rounded-3xl border border-stone-200 shadow-sm">
-        <div class="flex justify-between items-center mb-6 border-b pb-4">
-          <div>
-            <span class="text-[10px] uppercase font-bold tracking-widest text-gold-accent">Signature Style Diagnostic</span>
-            <h2 class="text-2xl font-serif-luxury text-stone-900">Style Profiler</h2>
+      <!-- INTELLIGENT 10-QUESTION STYLE QUIZ -->
+      <section id="sec-quiz" class="hidden-view max-w-3xl mx-auto bg-white p-10 rounded-3xl border border-stone-200 shadow-sm">
+        <div id="quiz-question-view">
+          <div class="flex justify-between items-center mb-6 border-b pb-4">
+            <div>
+              <span class="text-[10px] uppercase font-bold tracking-widest text-gold-accent">Bespoke Style Diagnostic</span>
+              <h2 class="text-2xl font-serif-luxury text-stone-950">Curated Style Profiler</h2>
+            </div>
+            <span id="quiz-progress-text" class="text-xs font-semibold text-gold-accent">Question 1 of 10</span>
           </div>
-          <span id="quiz-progress-text" class="text-xs font-semibold text-gold-accent">Question 1 of 10</span>
+
+          <div class="w-full bg-stone-100 h-1 rounded-full mb-8 overflow-hidden">
+            <div id="quiz-progress-bar" class="bg-gold-accent h-full transition-all duration-300 w-[10%]"></div>
+          </div>
+
+          <div id="quiz-question-container"></div>
+
+          <div class="flex justify-between items-center mt-10 pt-4 border-t">
+            <button id="quiz-prev-btn" onclick="prevQuizQuestion()" class="text-xs font-semibold uppercase text-stone-400 hover:text-stone-900 disabled:opacity-30" disabled>Previous</button>
+            <button id="quiz-next-btn" onclick="nextQuizQuestion()" class="bg-stone-950 text-stone-50 px-8 py-3 rounded-lg text-xs font-semibold uppercase tracking-widest hover:bg-stone-800 transition">Next</button>
+          </div>
         </div>
 
-        <div class="w-full bg-stone-100 h-1 rounded-full mb-8 overflow-hidden">
-          <div id="quiz-progress-bar" class="bg-gold-accent h-full transition-all duration-300 w-[10%]"></div>
-        </div>
+        <!-- DYNAMIC QUIZ RESULTS CONTAINER -->
+        <div id="quiz-results-view" class="hidden">
+          <div class="text-center max-w-xl mx-auto mb-10">
+            <span class="text-[10px] uppercase font-bold tracking-[0.3em] text-gold-accent">Diagnostic Complete</span>
+            <h2 class="text-3xl font-serif-luxury text-stone-950 mt-2">Your Bespoke Style Edit</h2>
+            <p class="text-stone-500 text-xs font-light mt-2">Handpicked pieces matching your exact metal, silhouette, and aesthetic preferences.</p>
+          </div>
 
-        <div id="quiz-question-container"></div>
+          <div id="quiz-recommended-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
 
-        <div class="flex justify-between items-center mt-10 pt-4 border-t">
-          <button id="quiz-prev-btn" onclick="prevQuizQuestion()" class="text-xs font-semibold uppercase text-stone-400 hover:text-stone-900 disabled:opacity-30" disabled>Previous</button>
-          <button id="quiz-next-btn" onclick="nextQuizQuestion()" class="bg-stone-900 text-stone-50 px-8 py-3 rounded-lg text-xs font-semibold uppercase tracking-widest">Next</button>
+          <div class="mt-10 text-center">
+            <button onclick="resetQuiz()" class="bg-stone-100 text-stone-700 hover:bg-stone-200 px-6 py-3 rounded-lg text-xs font-semibold uppercase tracking-widest transition">Retake Quiz</button>
+          </div>
         </div>
       </section>
 
       <!-- ORDERS LIST -->
       <section id="sec-orders" class="hidden-view max-w-3xl mx-auto">
-        <h2 class="text-2xl font-serif-luxury text-stone-900 mb-6">Order History</h2>
+        <h2 class="text-2xl font-serif-luxury text-stone-950 mb-6">Order History</h2>
         <div id="orders-list" class="space-y-4"></div>
       </section>
 
     </main>
 
     <!-- PRODUCT DETAIL MODAL -->
-    <div id="modal-product" class="fixed inset-0 bg-stone-900/40 backdrop-blur-sm hidden items-center justify-center z-50 p-4">
+    <div id="modal-product" class="fixed inset-0 bg-stone-950/40 backdrop-blur-sm hidden items-center justify-center z-50 p-4">
       <div class="bg-white rounded-3xl max-w-3xl w-full p-8 md:p-10 max-h-[90vh] overflow-y-auto relative border border-stone-200 shadow-2xl">
         <button onclick="closeProductModal()" class="absolute top-6 right-6 text-stone-400 hover:text-stone-900 font-bold">✕</button>
         <div id="product-detail-content"></div>
@@ -234,10 +251,10 @@
     </div>
 
     <!-- RESET PASSWORD MODAL -->
-    <div id="modal-reset" class="fixed inset-0 bg-stone-900/40 backdrop-blur-sm hidden items-center justify-center z-50 p-4">
+    <div id="modal-reset" class="fixed inset-0 bg-stone-950/40 backdrop-blur-sm hidden items-center justify-center z-50 p-4">
       <div class="bg-white rounded-2xl max-w-md w-full p-8 relative border border-stone-200 shadow-xl">
         <button onclick="closeResetModal()" class="absolute top-5 right-5 text-stone-400 hover:text-stone-900 font-bold">✕</button>
-        <h3 class="text-xl font-serif-luxury text-stone-900 mb-2">Reset Password</h3>
+        <h3 class="text-xl font-serif-luxury text-stone-950 mb-2">Reset Password</h3>
         <p class="text-xs text-stone-500 mb-6">Enter your registered email address.</p>
         
         <form onsubmit="handlePasswordReset(event)" class="space-y-4">
@@ -245,7 +262,7 @@
             <label class="block text-[10px] uppercase font-bold text-stone-500 mb-1">Email Address</label>
             <input type="email" id="reset-email" required class="w-full bg-stone-50 border border-stone-200 rounded-lg p-3 text-xs focus:outline-none">
           </div>
-          <button type="submit" class="w-full bg-stone-900 hover:bg-stone-800 text-stone-50 py-3 rounded-lg text-xs font-semibold tracking-widest uppercase">
+          <button type="submit" class="w-full bg-stone-950 hover:bg-stone-800 text-stone-50 py-3 rounded-lg text-xs font-semibold tracking-widest uppercase transition">
             Send Password Link
           </button>
         </form>
@@ -253,11 +270,11 @@
     </div>
 
     <!-- CART MODAL -->
-    <div id="modal-cart" class="fixed inset-0 bg-stone-900/30 backdrop-blur-sm hidden justify-end z-50">
+    <div id="modal-cart" class="fixed inset-0 bg-stone-950/30 backdrop-blur-sm hidden justify-end z-50">
       <div class="bg-white w-full max-w-md h-full p-8 flex flex-col justify-between">
         <div>
           <div class="flex justify-between items-center mb-6 border-b pb-4">
-            <h2 class="text-xl font-serif-luxury text-stone-900">Shopping Bag</h2>
+            <h2 class="text-xl font-serif-luxury text-stone-950">Shopping Bag</h2>
             <button onclick="toggleCartModal()" class="text-stone-400 font-bold">✕</button>
           </div>
           <div id="cart-items" class="space-y-4 max-h-[60vh] overflow-y-auto"></div>
@@ -267,12 +284,12 @@
             <span>Subtotal</span>
             <span>₹<span id="cart-total">0</span></span>
           </div>
-          <button onclick="checkout()" class="w-full bg-stone-900 text-stone-50 py-4 rounded-lg text-xs font-semibold uppercase tracking-widest">Complete Purchase</button>
+          <button onclick="checkout()" class="w-full bg-stone-950 text-stone-50 py-4 rounded-lg text-xs font-semibold uppercase tracking-widest hover:bg-stone-800 transition">Complete Purchase</button>
         </div>
       </div>
     </div>
 
-    <footer class="bg-palmonas-cream text-stone-500 text-xs py-10 px-8 text-center border-t border-stone-200/80">
+    <footer class="bg-ivory-champagne text-stone-500 text-xs py-10 px-8 text-center border-t border-stone-200/80">
       <p>© 2026 STRIVA Demi-Fine Jewelry. Solid 18K Gold Vermeil & 925 Sterling Silver.</p>
     </footer>
   </div>
@@ -299,16 +316,16 @@
     };
 
     const quizQuestions = [
-      { id: 1, text: "Which metal finish best complements your personal style?", options: ["18K Yellow Gold Vermeil", "Solid 925 Sterling Silver", "Rose Gold Vermeil", "Mixed Metal Layering"] },
-      { id: 2, text: "How would you describe your primary jewelry aesthetic?", options: ["Subtle Everyday Minimal", "Architectural Modern", "Classic Elegance", "Opulent Festive"] },
-      { id: 3, text: "What type of piece do you wear most frequently?", options: ["Delicate Necklaces", "Statement Rings", "Hoops and Studs", "Cuffs and Bracelets"] },
-      { id: 4, text: "What is your preference for jewelry silhouettes?", options: ["Ultra Delicate & Thin", "Medium Structured", "Bold & Chunky"] },
-      { id: 5, text: "Do you prefer plain high-polish metals or gemstone-embellished designs?", options: ["High-Polish Solid Metal", "Paved Zirconia Crystals", "Freshwater Pearls"] },
-      { id: 6, text: "How do you style your daily jewelry?", options: ["Single Standout Focus Piece", "Layered & Stacked Combinations"] },
-      { id: 7, text: "Which occasion profile are you shopping for?", options: ["Everyday Office / College", "Evening Date Night", "Weddings & Celebrations"] },
-      { id: 8, text: "What geometric form appeals to you most?", options: ["Organic Fluid Curves", "Clean Beveled Edges", "Classic Circular Forms"] },
-      { id: 9, text: "Are you interested in bespoke laser engraving?", options: ["Yes, Personalized Monograms", "No, Clean Unengraved Finish"] },
-      { id: 10, text: "Select your essential daily go-to piece:", options: ["Signet Ring", "Tubular Hoop Earring", "Fluid Chain", "Architectural Cuff"] }
+      { id: 1, text: "Which metal finish best complements your personal style?", key: "metal", options: ["18K Gold Vermeil", "925 Sterling Silver", "18K Gold Vermeil & Pearl"] },
+      { id: 2, text: "Which gender collection profile are you seeking?", key: "gender", options: ["women", "men", "couple"] },
+      { id: 3, text: "What type of piece do you wear most frequently?", key: "sub_category", options: ["necklaces", "rings", "earrings", "bracelets", "chains"] },
+      { id: 4, text: "Which occasion profile are you shopping for?", key: "occasion", options: ["minimal", "wedding"] },
+      { id: 5, text: "What is your preference for jewelry silhouettes?", key: "silhouette", options: ["Delicate & Thin", "Medium Structured", "Bold & Chunky"] },
+      { id: 6, text: "Do you prefer plain high-polish metals or gemstone-embellished designs?", key: "finish", options: ["High-Polish Solid Metal", "Paved Zirconia Crystals", "Freshwater Pearls"] },
+      { id: 7, text: "How do you style your daily jewelry?", key: "styling", options: ["Single Standout Focus Piece", "Layered & Stacked Combinations"] },
+      { id: 8, text: "What geometric form appeals to you most?", key: "geometry", options: ["Organic Fluid Curves", "Clean Beveled Edges", "Classic Circular Forms"] },
+      { id: 9, text: "Are you interested in bespoke laser engraving?", key: "custom", options: ["Yes, Personalized Monograms", "No, Clean Unengraved Finish"] },
+      { id: 10, text: "Select your essential daily go-to piece:", key: "essential", options: ["Signet Ring", "Tubular Hoop Earring", "Fluid Chain", "Architectural Cuff"] }
     ];
 
     function switchAuthTab(type) {
@@ -376,7 +393,7 @@
       });
       document.getElementById(`sec-${secId}`).classList.remove('hidden-view');
       if(secId === 'catalog') updateOccasions();
-      if(secId === 'quiz') renderQuizQuestion();
+      if(secId === 'quiz') resetQuiz();
       if(secId === 'orders') fetchOrders();
       if(secId === 'customization') loadCustomizableProducts();
     }
@@ -461,10 +478,10 @@
               <span class="absolute top-3 left-3 text-[9px] font-bold uppercase tracking-widest text-stone-800 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-md border border-stone-200/80">${p.metal}</span>
             </div>
             <span class="text-[9px] font-bold uppercase tracking-widest text-gold-accent">${p.gender} • ${p.sub_category}</span>
-            <h3 class="font-serif-luxury font-normal text-stone-900 mt-1 text-lg leading-snug">${p.name}</h3>
-            <div class="text-sm font-semibold text-stone-900 mt-2">₹${parseFloat(p.price_inr).toLocaleString('en-IN')}</div>
+            <h3 class="font-serif-luxury font-normal text-stone-950 mt-1 text-lg leading-snug">${p.name}</h3>
+            <div class="text-sm font-semibold text-stone-950 mt-2">₹${parseFloat(p.price_inr).toLocaleString('en-IN')}</div>
           </div>
-          <button class="mt-5 w-full bg-stone-900 group-hover:bg-stone-800 text-stone-50 py-3 rounded-lg text-[10px] font-semibold uppercase tracking-widest transition">View Details</button>
+          <button class="mt-5 w-full bg-stone-950 group-hover:bg-stone-800 text-stone-50 py-3 rounded-lg text-[10px] font-semibold uppercase tracking-widest transition">View Details</button>
         </div>
       `;
     }
@@ -493,8 +510,8 @@
           <div class="flex flex-col justify-between">
             <div>
               <span class="text-[10px] font-bold uppercase tracking-widest text-gold-accent">${p.metal}</span>
-              <h2 class="text-3xl font-serif-luxury text-stone-900 mt-1 mb-2">${p.name}</h2>
-              <div class="text-2xl font-semibold text-stone-900 mb-6">₹${parseFloat(p.price_inr).toLocaleString('en-IN')}</div>
+              <h2 class="text-3xl font-serif-luxury text-stone-950 mt-1 mb-2">${p.name}</h2>
+              <div class="text-2xl font-semibold text-stone-950 mb-6">₹${parseFloat(p.price_inr).toLocaleString('en-IN')}</div>
               
               <div class="border-t border-b border-stone-200 py-4 mb-6">
                 <h4 class="text-[10px] uppercase font-bold text-stone-400 mb-1 tracking-wider">Product Description</h4>
@@ -509,7 +526,7 @@
               ` : ''}
             </div>
 
-            <button onclick="addToBag(${p.id}, '${p.name}', ${p.price_inr})" class="w-full bg-stone-900 hover:bg-stone-800 text-stone-50 py-4 rounded-lg font-semibold text-xs tracking-widest uppercase transition">
+            <button onclick="addToBag(${p.id}, '${p.name}', ${p.price_inr})" class="w-full bg-stone-950 hover:bg-stone-800 text-stone-50 py-4 rounded-lg font-semibold text-xs tracking-widest uppercase transition">
               Add To Bag • ₹${parseFloat(p.price_inr).toLocaleString('en-IN')}
             </button>
           </div>
@@ -585,7 +602,7 @@
         container.innerHTML += `
           <div class="flex justify-between items-center border-b border-stone-100 pb-4 text-xs">
             <div>
-              <div class="font-semibold text-stone-900">${item.name}</div>
+              <div class="font-semibold text-stone-950">${item.name}</div>
               <div class="text-stone-500 font-medium mt-1">₹${item.price.toLocaleString('en-IN')}</div>
             </div>
             <button onclick="removeFromCart(${index})" class="text-stone-400 hover:text-red-600 text-[10px] font-bold uppercase tracking-wider">Remove</button>
@@ -627,7 +644,7 @@
             <div class="bg-white border border-stone-200/80 p-5 rounded-2xl text-xs shadow-sm">
               <div class="flex justify-between font-bold mb-2">
                 <span>Order #${o.id}</span>
-                <span class="text-gold-accent uppercase tracking-widest text-[9px] bg-palmonas-cream px-3 py-1 rounded-md border border-stone-200/60">${o.status}</span>
+                <span class="text-gold-accent uppercase tracking-widest text-[9px] bg-ivory-champagne px-3 py-1 rounded-md border border-stone-200/60">${o.status}</span>
               </div>
               <div class="text-stone-500 font-medium">Total Amount: ₹${parseFloat(o.total_amount).toLocaleString('en-IN')}</div>
             </div>
@@ -638,20 +655,32 @@
       }
     }
 
+    // ============================================================
+    // INTELLIGENT STYLE QUIZ ENGINE
+    // ============================================================
+
+    function resetQuiz() {
+      currentQuizIndex = 0;
+      quizAnswers = {};
+      document.getElementById('quiz-question-view').classList.remove('hidden');
+      document.getElementById('quiz-results-view').classList.add('hidden');
+      renderQuizQuestion();
+    }
+
     function renderQuizQuestion() {
       const q = quizQuestions[currentQuizIndex];
       document.getElementById('quiz-progress-text').innerText = `Question ${currentQuizIndex + 1} of 10`;
       document.getElementById('quiz-progress-bar').style.width = `${((currentQuizIndex + 1) / 10) * 100}%`;
       
       let html = `
-        <h3 class="text-base font-semibold text-stone-900 mb-6">${q.text}</h3>
+        <h3 class="text-lg font-serif-luxury text-stone-950 mb-6">${q.text}</h3>
         <div class="space-y-3">
       `;
 
       q.options.forEach((opt) => {
         const isSelected = quizAnswers[q.id] === opt;
         html += `
-          <label onclick="selectQuizOption(${q.id}, '${opt}')" class="block p-4 border rounded-xl text-xs font-medium cursor-pointer transition ${isSelected ? 'border-stone-900 bg-palmonas-cream font-semibold text-stone-900' : 'border-stone-200 hover:bg-stone-50'}">
+          <label onclick="selectQuizOption(${q.id}, '${opt}')" class="block p-4 border rounded-xl text-xs font-medium cursor-pointer transition ${isSelected ? 'border-stone-950 bg-ivory-champagne font-semibold text-stone-950' : 'border-stone-200 hover:bg-stone-50'}">
             <input type="radio" name="q-${q.id}" ${isSelected ? 'checked' : ''} class="hidden"> ${opt}
           </label>
         `;
@@ -660,7 +689,7 @@
       document.getElementById('quiz-question-container').innerHTML = html;
 
       document.getElementById('quiz-prev-btn').disabled = currentQuizIndex === 0;
-      document.getElementById('quiz-next-btn').innerText = (currentQuizIndex === 9) ? 'View Selection' : 'Next';
+      document.getElementById('quiz-next-btn').innerText = (currentQuizIndex === 9) ? 'Generate Personal Edit' : 'Next';
     }
 
     function selectQuizOption(qId, val) {
@@ -677,7 +706,7 @@
         currentQuizIndex++;
         renderQuizQuestion();
       } else {
-        quickFilter('women', 'minimal');
+        processQuizResults();
       }
     }
 
@@ -685,6 +714,38 @@
       if(currentQuizIndex > 0) {
         currentQuizIndex--;
         renderQuizQuestion();
+      }
+    }
+
+    async function processQuizResults() {
+      const preferredMetal = quizAnswers[1];
+      const preferredGender = quizAnswers[2];
+      const preferredCategory = quizAnswers[3];
+      const preferredOccasion = quizAnswers[4];
+
+      const res = await fetch('/api/products');
+      const data = await res.json();
+      
+      if(data.products) {
+        let matches = data.products.filter(p => {
+          let score = 0;
+          if(preferredGender && p.gender === preferredGender) score++;
+          if(preferredOccasion && p.occasion === preferredOccasion) score++;
+          if(preferredMetal && p.metal.includes(preferredMetal)) score++;
+          if(preferredCategory && p.sub_category === preferredCategory) score++;
+          return score >= 1;
+        });
+
+        if(matches.length === 0) matches = data.products.slice(0, 6);
+
+        document.getElementById('quiz-question-view').classList.add('hidden');
+        document.getElementById('quiz-results-view').classList.remove('hidden');
+
+        const grid = document.getElementById('quiz-recommended-grid');
+        grid.innerHTML = '';
+        matches.slice(0, 6).forEach(p => {
+          grid.innerHTML += renderProductCard(p);
+        });
       }
     }
   </script>
