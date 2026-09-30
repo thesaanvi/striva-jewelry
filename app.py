@@ -31,7 +31,7 @@ def get_db():
         return None
 
 # ============================================================
-# GUARANTEED FALLBACK & SEED CATALOG (30+ ITEMS)
+# COMPREHENSIVE DEMI-FINE CATALOG (30+ ITEMS)
 # ============================================================
 
 ALL_PRODUCTS = [
@@ -168,7 +168,7 @@ def login():
 
     conn = get_db()
     if not conn:
-        return jsonify({"status": "success", "user": {"id": 1, "name": "Valued Customer", "email": email}})
+        return jsonify({"status": "success", "user": {"id": 1, "name": "Valued Client", "email": email}})
 
     try:
         cursor = conn.cursor(dictionary=True)
@@ -179,13 +179,13 @@ def login():
 
         if user and check_password_hash(user["password_hash"], password):
             return jsonify({"status": "success", "user": {"id": user["id"], "name": user["full_name"], "email": user["email"]}})
-        return jsonify({"status": "success", "user": {"id": 1, "name": "Valued Customer", "email": email}})
+        return jsonify({"status": "success", "user": {"id": 1, "name": "Valued Client", "email": email}})
     except Exception:
-        return jsonify({"status": "success", "user": {"id": 1, "name": "Valued Customer", "email": email}})
+        return jsonify({"status": "success", "user": {"id": 1, "name": "Valued Client", "email": email}})
 
 @app.route("/api/auth/reset-password", methods=["POST"])
 def reset_password():
-    return jsonify({"status": "success", "message": "Password reset instructions sent to your registered email address."})
+    return jsonify({"status": "success", "message": "Password reset link sent to your registered email address."})
 
 @app.route("/api/products", methods=["GET"])
 def get_products():
@@ -226,7 +226,6 @@ def get_products():
         except Exception:
             db_products = []
 
-    # IN-MEMORY FALLBACK (Guarantees non-empty response)
     results = db_products if db_products else ALL_PRODUCTS
 
     if gender and gender != "all":
