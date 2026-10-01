@@ -22,12 +22,12 @@ FALLBACK_PRODUCTS = [
     # --- TRENDING (Women Minimal & Wedding) ---
     {
         "id": 1, "name": "Aura Solitaire Diamond Ring", "gender": "female", "occasion": "minimal", "category": "rings", "price": 1499, "section": "trending", 
-        "image": "https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=500&q=80",
+        "image": "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTaoqyh1mcAd6fwebKjWgs7BwqTiUGd6MaCNzL25tbFVOIEJ3Mx",
         "description": "Crafted in 18k gold vermeil with a brilliant-cut solitaire diamond centerpiece. Designed for everyday grace and effortless layering."
     },
     {
         "id": 2, "name": "Kundan Floral Nose Ring", "gender": "female", "occasion": "wedding", "category": "nosering", "price": 1999, "section": "trending", 
-        "image": "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=500&q=80",
+        "image": "https://silvertrendy.in/wp-content/uploads/2024/10/ChatGPT-Image-Sep-12-2026-06_07_42-PM.png",
         "description": "Traditional Kundan craftsmanship meets lightweight modern wear. Perfect for bridal grandeur and festive celebrations."
     },
     {
