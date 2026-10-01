@@ -562,6 +562,69 @@
             </div>
         </div>
     </div>
+    <!-- Ring Size Guide Modal -->
+<div id="ringSizeModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm hidden">
+    <div class="relative w-full max-w-lg p-6 bg-white rounded-2xl shadow-2xl mx-4 overflow-y-auto max-h-[90vh]">
+        <!-- Close Button -->
+        <button onclick="closeRingSizeModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-750 transition-colors">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+        </button>
+
+        <!-- Modal Header -->
+        <div class="text-center mb-6">
+            <span class="text-xs uppercase tracking-widest text-amber-600 font-semibold">Striva Atelier</span>
+            <h3 class="text-2xl font-serif text-gray-900 mt-1">Ring Size Guide & Finder</h3>
+            <p class="text-sm text-gray-500 mt-1">Find your perfect fit for our sterling silver & gold vermeil rings.</p>
+        </div>
+
+        <!-- Interactive Finder Tool -->
+        <div class="bg-amber-50/50 border border-amber-100 rounded-xl p-4 mb-6">
+            <h4 class="text-sm font-semibold text-gray-800 mb-2">✨ Quick Ring Size Calculator</h4>
+            <div class="space-y-3">
+                <div>
+                    <label class="block text-xs font-medium text-gray-600 mb-1">Measure inner diameter (mm):</label>
+                    <div class="flex gap-2">
+                        <input type="number" id="ringDiameterInput" step="0.1" placeholder="e.g. 16.5" class="flex-1 px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500 bg-white">
+                        <button onclick="calculateRingSize()" class="px-4 py-2 bg-gray-900 text-white text-sm font-medium rounded-lg hover:bg-gray-800 transition-colors">Calculate</button>
+                    </div>
+                </div>
+                <div id="ringSizeResult" class="hidden text-sm font-medium text-amber-900 bg-amber-100/70 p-3 rounded-lg text-center">
+                    <!-- Dynamic Result populated by JS -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Standard Size Conversion Table -->
+        <div>
+            <h4 class="text-sm font-semibold text-gray-800 mb-3">International Size Conversion</h4>
+            <div class="border border-gray-200 rounded-xl overflow-hidden">
+                <table class="w-full text-left text-xs">
+                    <thead class="bg-gray-50 text-gray-700 uppercase font-semibold border-b border-gray-200">
+                        <tr>
+                            <th class="px-4 py-2.5">US Size</th>
+                            <th class="px-4 py-2.5">Diameter (mm)</th>
+                            <th class="px-4 py-2.5">Circumference (mm)</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-100 text-gray-600">
+                        <tr class="hover:bg-gray-50/50"><td class="px-4 py-2 font-medium">5</td><td class="px-4 py-2">15.7 mm</td><td class="px-4 py-2">49.3 mm</td></tr>
+                        <tr class="hover:bg-gray-50/50"><td class="px-4 py-2 font-medium">6</td><td class="px-4 py-2">16.5 mm</td><td class="px-4 py-2">51.9 mm</td></tr>
+                        <tr class="hover:bg-gray-50/50"><td class="px-4 py-2 font-medium">7</td><td class="px-4 py-2">17.3 mm</td><td class="px-4 py-2">54.4 mm</td></tr>
+                        <tr class="hover:bg-gray-50/50"><td class="px-4 py-2 font-medium">8</td><td class="px-4 py-2">18.1 mm</td><td class="px-4 py-2">57.0 mm</td></tr>
+                        <tr class="hover:bg-gray-50/50"><td class="px-4 py-2 font-medium">9</td><td class="px-4 py-2">18.9 mm</td><td class="px-4 py-2">59.5 mm</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Pro-Tip Footer -->
+        <p class="text-xs text-gray-400 text-center mt-6">
+            Tip: Measure an existing ring that fits well, or measure your finger at the end of the day when it is warmest.
+        </p>
+    </div>
+</div>
 
     <!-- ==================== WISHLIST DRAWER ==================== -->
     <div id="wishlist-drawer" class="fixed inset-y-0 right-0 z-50 w-full max-w-md bg-white shadow-2xl transform translate-x-full transition-transform duration-300 flex flex-col">
@@ -670,7 +733,7 @@
                 price: 8950,
                 rating: 4.8,
                 reviews: 31,
-                image: "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&q=80&w=800",
+                image: "https://moncheri.in/cdn/shop/files/close-up-snake-pendant-green-eyes-cz-stones.webp?v=1774100893&width=1000",
                 desc: "A luxurious dual-strand chain necklace featuring a delicate snake chain paired with an emerald-accented pendant."
             },
             {
@@ -681,7 +744,7 @@
                 price: 4800,
                 rating: 4.7,
                 reviews: 28,
-                image: "https://images.unsplash.com/photo-1630019852942-f89202989a59?auto=format&fit=crop&q=80&w=800",
+                image: "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcRCvm0Eio6Swgceq6I94FAWZ7TmjlxWS1zu1M0FIWAONklZwqEbmkaglvPCKGDidrIigwlK0y3bqx48eGEIW4avy2hvEuHRnA",
                 desc: "Dainty pavé-set huggie hoops designed for 24/7 wear with secure click closures."
             },
             {
@@ -692,7 +755,7 @@
                 price: 9950,
                 rating: 5.0,
                 reviews: 56,
-                image: "https://images.unsplash.com/photo-1611591475715-1a3b429d479e?auto=format&fit=crop&q=80&w=800",
+                image: "https://lorvelleco.com/cdn/shop/files/50.webp?v=1780434643&width=960",
                 desc: "An exquisite tennis bracelet encrusted with brilliant hand-set cubic zirconia stones."
             },
             {
@@ -703,7 +766,7 @@
                 price: 6200,
                 rating: 4.6,
                 reviews: 19,
-                image: "https://images.unsplash.com/photo-1598560917505-59a3955c964a?auto=format&fit=crop&q=80&w=800",
+                image: "https://kymee.in/cdn/shop/files/KRW0039_1.jpg?v=1752053564&width=493",
                 desc: "Architectural lines meet warm 18k gold vermeil for an everyday statement."
             },
             {
@@ -1443,6 +1506,47 @@
         function closeProductModal() {
             document.getElementById('product-modal').classList.add('hidden');
         }
+        // Ring Size Modal Control Functions (Step 2)
+function openRingSizeModal() {
+    const modal = document.getElementById('ringSizeModal');
+    if (modal) modal.classList.remove('hidden');
+}
+
+function closeRingSizeModal() {
+    const modal = document.getElementById('ringSizeModal');
+    if (modal) modal.classList.add('hidden');
+}
+
+function calculateRingSize() {
+    const input = document.getElementById('ringDiameterInput');
+    const resultBox = document.getElementById('ringSizeResult');
+    const mm = parseFloat(input.value);
+
+    if (!mm || isNaN(mm)) {
+        resultBox.textContent = "Please enter a valid diameter in millimeters.";
+        resultBox.classList.remove('hidden');
+        return;
+    }
+
+    let size = "Custom/Unknown";
+         if (mm >= 15.3 && mm < 16.1) size = "US 5 (Circumference ~49.3 mm)";
+    else if (mm >= 16.1 && mm < 16.9) size = "US 6 (Circumference ~51.9 mm)";
+    else if (mm >= 16.9 && mm < 17.7) size = "US 7 (Circumference ~54.4 mm)";
+    else if (mm >= 17.7 && mm < 18.5) size = "US 8 (Circumference ~57.0 mm)";
+    else if (mm >= 18.5 && mm <= 19.3) size = "US 9 (Circumference ~59.5 mm)";
+    else if (mm < 15.3) size = "Smaller than US 5";
+    else size = "Larger than US 9";
+
+    resultBox.innerHTML = `Recommended Striva Size: <span class="font-bold">${size}</span>`;
+    resultBox.classList.remove('hidden');
+}
+
+window.addEventListener('click', function(e) {
+    const modal = document.getElementById('ringSizeModal');
+    if (e.target === modal) {
+        closeRingSizeModal();
+    }
+});
 
         // Custom Studio Logic & Auth Guard
         function updateCustomPreview() {
@@ -1497,6 +1601,51 @@
             updateBadges();
             toggleCartDrawer();
         }
+        // Open the Ring Size Modal
+function openRingSizeModal() {
+    const modal = document.getElementById('ringSizeModal');
+    if (modal) modal.classList.remove('hidden');
+}
+
+// Close the Ring Size Modal
+function closeRingSizeModal() {
+    const modal = document.getElementById('ringSizeModal');
+    if (modal) modal.classList.add('hidden');
+}
+
+// Interactive Diameter-to-Size Calculator Logic
+function calculateRingSize() {
+    const input = document.getElementById('ringDiameterInput');
+    const resultBox = document.getElementById('ringSizeResult');
+    const mm = parseFloat(input.value);
+
+    if (!mm || isNaN(mm)) {
+        resultBox.textContent = "Please enter a valid diameter in millimeters.";
+        resultBox.classList.remove('hidden');
+        return;
+    }
+
+    // Lookup mapping based on standard inner diameters
+    let size = "Custom/Unknown";
+         if (mm >= 15.3 && mm < 16.1) size = "US 5 (Circumference ~49.3 mm)";
+    else if (mm >= 16.1 && mm < 16.9) size = "US 6 (Circumference ~51.9 mm)";
+    else if (mm >= 16.9 && mm < 17.7) size = "US 7 (Circumference ~54.4 mm)";
+    else if (mm >= 17.7 && mm < 18.5) size = "US 8 (Circumference ~57.0 mm)";
+    else if (mm >= 18.5 && mm <= 19.3) size = "US 9 (Circumference ~59.5 mm)";
+    else if (mm < 15.3) size = "Smaller than US 5";
+    else size = "Larger than US 9";
+
+    resultBox.innerHTML = `Recommended Striva Size: <span class="font-bold">${size}</span>`;
+    resultBox.classList.remove('hidden');
+}
+
+// Optional: Close modal when clicking outside the box content
+window.addEventListener('click', function(e) {
+    const modal = document.getElementById('ringSizeModal');
+    if (e.target === modal) {
+        closeRingSizeModal();
+    }
+});
 
         // Cart & Wishlist Management
         function addToCart(id) {
