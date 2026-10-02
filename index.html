@@ -1465,7 +1465,7 @@
         }
 
         // Custom Studio Logic & Auth Guard
-      function updateCustomPreview() {
+     function updateCustomPreview() {
     const baseSelect = document.getElementById('custom-base');
     const metalSelect = document.getElementById('custom-metal');
     const stoneSelect = document.getElementById('custom-stone');
@@ -1475,18 +1475,19 @@
     const metalAdd = parseInt(metalSelect.options[metalSelect.selectedIndex].getAttribute('data-add')) || 0;
     const stoneAdd = parseInt(stoneSelect.options[stoneSelect.selectedIndex].getAttribute('data-add')) || 0;
     
-    // The conditional cap line has been removed to allow true pricing totals
-    let totalPrice = basePrice + metalAdd + stoneAdd;
+    // Check if user has typed anything in the engraving input box
+    const eng = engravingInput.value.trim();
+    const engravingAdd = eng.length > 0 ? 200 : 0;
+
+    // Calculate the absolute total including the engraving fee if applicable
+    let totalPrice = basePrice + metalAdd + stoneAdd + engravingAdd;
 
     document.getElementById('preview-price-text').innerText = `₹${totalPrice.toLocaleString('en-IN')}`;
     document.getElementById('preview-title-text').innerText = `Custom ${baseSelect.options[baseSelect.selectedIndex].text.split('(')[0]}`;
     document.getElementById('preview-metal-text').innerText = `${metalSelect.options[metalSelect.selectedIndex].text} • ${stoneSelect.options[stoneSelect.selectedIndex].text}`;
     
-    const eng = engravingInput.value.trim();
     document.getElementById('preview-engraving-text').innerText = eng ? `Engraving: "${eng}"` : '';
-}
-
-        
+}        
 
         function handleCustomAddToCart() {
             if (!currentUser) {
