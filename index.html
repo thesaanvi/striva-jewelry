@@ -243,7 +243,7 @@
             <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-10 pb-6 border-b border-brand-sand">
                 <div>
                     <h1 class="font-serif text-3xl sm:text-4xl text-brand-dark">Striva Jewelry Catalog</h1>
-                    <p class="text-sm text-brand-muted mt-1">Discover over 60+ handcrafted demi-fine masterpieces in INR pricing.</p>
+                    <p class="text-sm text-brand-muted mt-1">Discover handcrafted demi-fine masterpiece curated just for you.</p>
                 </div>
                 <div class="w-full md:w-72 relative">
                     <input type="text" id="product-search" oninput="filterProducts()" placeholder="Search rings, necklaces, etc..." class="w-full bg-white border border-brand-sand px-4 py-2.5 text-sm focus:outline-none focus:border-amber-700">
@@ -259,8 +259,8 @@
                     <button onclick="filterCollection('all')" id="btn-col-all" class="col-filter-btn px-4 py-2 text-xs font-semibold uppercase tracking-wider bg-brand-dark text-white transition-colors">All</button>
                     <button onclick="filterCollection('women')" id="btn-col-women" class="col-filter-btn px-4 py-2 text-xs font-semibold uppercase tracking-wider bg-white text-brand-dark border border-brand-sand hover:border-brand-dark transition-colors">Women</button>
                     <button onclick="filterCollection('men')" id="btn-col-men" class="col-filter-btn px-4 py-2 text-xs font-semibold uppercase tracking-wider bg-white text-brand-dark border border-brand-sand hover:border-brand-dark transition-colors">Men</button>
-                    <button onclick="filterCollection('wedding')" id="btn-col-wedding" class="col-filter-btn px-4 py-2 text-xs font-semibold uppercase tracking-wider bg-white text-brand-dark border border-brand-sand hover:border-brand-dark transition-colors">Wedding & Guests</button>
-                    <button onclick="filterCollection('minimal')" id="btn-col-minimal" class="col-filter-btn px-4 py-2 text-xs font-semibold uppercase tracking-wider bg-white text-brand-dark border border-brand-sand hover:border-brand-dark transition-colors">Minimal (&lt;₹7k)</button>
+                    <button onclick="filterCollection('wedding')" id="btn-col-wedding" class="col-filter-btn px-4 py-2 text-xs font-semibold uppercase tracking-wider bg-white text-brand-dark border border-brand-sand hover:border-brand-dark transition-colors">Wedding Collection</button>
+                    <button onclick="filterCollection('minimal')" id="btn-col-minimal" class="col-filter-btn px-4 py-2 text-xs font-semibold uppercase tracking-wider bg-white text-brand-dark border border-brand-sand hover:border-brand-dark transition-colors">Minimal</button>
                 </div>
 
                 <!-- Category Filters -->
@@ -271,11 +271,12 @@
                     <button onclick="filterCategory('necklace')" id="btn-cat-necklace" class="cat-filter-btn px-3 py-1.5 text-xs font-medium bg-white text-brand-dark border border-brand-sand hover:border-brand-dark transition-colors">Necklaces</button>
                     <button onclick="filterCategory('earring')" id="btn-cat-earring" class="cat-filter-btn px-3 py-1.5 text-xs font-medium bg-white text-brand-dark border border-brand-sand hover:border-brand-dark transition-colors">Earrings</button>
                     <button onclick="filterCategory('bracelet')" id="btn-cat-bracelet" class="cat-filter-btn px-3 py-1.5 text-xs font-medium bg-white text-brand-dark border border-brand-sand hover:border-brand-dark transition-colors">Bracelets</button>
-                    <button onclick="filterCategory('traditional')" id="btn-cat-traditional" class="cat-filter-btn px-3 py-1.5 text-xs font-medium bg-white text-brand-dark border border-brand-sand hover:border-brand-dark transition-colors">Traditional & Wedding</button>
-                    <button onclick="filterCategory('piercing')" id="btn-cat-piercing" class="cat-filter-btn px-3 py-1.5 text-xs font-medium bg-white text-brand-dark border border-brand-sand hover:border-brand-dark transition-colors">Piercings & Anklets</button>
+                    <button onclick="filterCategory('traditional')" id="btn-cat-traditional" class="cat-filter-btn px-3 py-1.5 text-xs font-medium bg-white text-brand-dark border border-brand-sand hover:border-brand-dark transition-colors">Traditional</button>
+                    <button onclick="filterCategory('piercing')" id="btn-cat-piercing" class="cat-filter-btn px-3 py-1.5 text-xs font-medium bg-white text-brand-dark border border-brand-sand hover:border-brand-dark transition-colors">Piercings</button>
+                     <button onclick="filterCategory('anklets')" id="btn-cat-anklets" class="cat-filter-btn px-3 py-1.5 text-xs font-medium bg-white text-brand-dark border border-brand-sand hover:border-brand-dark transition-colors">Anklets</button>
                 </div>
             </div>
-
+0
             <!-- Product Grid -->
             <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
                 <!-- Dynamically populated via JavaScript -->
@@ -324,6 +325,11 @@
                             <option value="band" data-price="5500">Minimalist Couple Wedding Band (₹5,500)</option>
                             <option value="necklace" data-price="8500">Delicate Pendant Necklace (₹8,500)</option>
                             <option value="bracelet" data-price="7800">Curb Chain Bracelet (₹7,800)</option>
+                            <option value="necklace" data-price="7800">Layered Necklace (₹,800)</option>
+                            <option value="bracelet" data-price="8000">Tennis Bracelet (₹8,000)</option>
+                            <option value="earrings" data-price="5100">Huggie Hoop Earrings (₹5100)</option>
+                            <option value="traditional" data-price="9500"> Delicate Solitaire Mangalsutra (₹9500)</option>
+                            <option value="anklets" data-price="5000"> Minimalist Anklets(₹5000)</option>
                         </select>
                     </div>
 
@@ -339,16 +345,22 @@
                     <div>
                         <label class="block text-xs uppercase tracking-wider font-bold text-brand-dark mb-2">3. Gemstone Accent</label>
                         <select id="custom-stone" onchange="updateCustomPreview()" class="w-full bg-brand-sand/40 border border-brand-sand px-4 py-3 text-sm focus:outline-none focus:border-amber-700">
-                            <option value="diamond" data-add="0">Lab-Grown Diamond Solitaire</option>
+                            <option value="diamond" data-add="700">Lab-Grown Diamond Solitaire (+₹700)</option>
                             <option value="emerald" data-add="400">Emerald Green Spinel (+₹400)</option>
                             <option value="sapphire" data-add="400">Royal Sapphire (+₹400)</option>
-                            <option value="none" data-add="-500">Plain Metal (No Stone) (-₹500)</option>
+                            <option value="none" data-add="0">Plain Metal (No Stone)</option>
                         </select>
                     </div>
 
                     <div>
                         <label class="block text-xs uppercase tracking-wider font-bold text-brand-dark mb-2">4. Custom Laser Engraving (Max 15 chars)</label>
                         <input type="text" id="custom-engraving" maxlength="15" oninput="updateCustomPreview()" placeholder="e.g. Forever Yours" class="w-full bg-brand-sand/40 border border-brand-sand px-4 py-3 text-sm focus:outline-none focus:border-amber-700">
+                    </div>
+                    <div class="bg-brand-sand/20 border-l-2 border-amber-700 p-4 my-4">
+                        <p class="text-xs font-bold text-brand-dark uppercase tracking-wider mb-1">✨ Looking for completely bespoke design?</p>
+                        <p class="text-xs text-neutral-600 leading-relaxed">  If you would like a bespoke design or specific modifications to any item, we would love to bring your vision to life! Please contact our design studio directly using the information below. 
+                        <a href="#contact" class="text-amber-700 underline font-semibold hover:text-amber-950">Contact our design team</a>.
+                        </p>
                     </div>
 
                     <button onclick="handleCustomAddToCart()" class="w-full bg-brand-dark text-white font-medium py-4 text-xs uppercase tracking-widest hover:bg-amber-800 transition-colors">
@@ -430,6 +442,9 @@
                         <label class="flex items-center p-4 border border-brand-sand hover:border-brand-dark cursor-pointer transition-colors">
                             <input type="radio" name="q3" value="earring" class="accent-brand-dark mr-3">
                             <span class="text-sm font-medium">Earrings, Hoops & Studs</span>
+                        label class="flex items-center p-4 border border-brand-sand hover:border-brand-dark cursor-pointer transition-colors">
+                            <input type="radio" name="q3" value="anklets,piercing" class="accent-brand-dark mr-3" checked>
+                            <span class="text-sm font-medium">Minimalist Anklets and Piercings</span>
                         </label>
                     </div>
                     <div class="flex gap-4 mt-8">
@@ -594,16 +609,7 @@
         </div>
     </div>
     <!-- Put this inside your product card or product modal HTML -->
-<div class="product-options">
-  <label for="ring-size">Band Size:</label>
-  <select id="ring-size" class="ring-size-select">
-    <option value="5">Size 5</option>
-    <option value="6" selected>Size 6</option>
-    <option value="7">Size 7</option>
-    <option value="8">Size 8</option>
-    <option value="9">Size 9</option>
-  </select>
-</div>
+
 
     <!-- Footer -->
     <footer class="bg-brand-dark text-brand-lightgold pt-16 pb-12">
@@ -660,6 +666,16 @@
         // 56+ Products Database adhering strictly to rules:
         // - Minimal collection items strictly <= ₹7,000
         // - All other collections & wedding & custom capped <= ₹10,000 (max ₹9,950)
+        <div class="product-options">
+  <label for="ring-size">Band Size:</label>
+  <select id="ring-size" class="ring-size-select">
+    <option value="5">Size 5</option>
+    <option value="6" selected>Size 6</option>
+    <option value="7">Size 7</option>
+    <option value="8">Size 8</option>
+    <option value="9">Size 9</option>
+  </select>
+</div>
         const products = [
             // --- WOMEN COLLECTION (15 items) ---
             {
@@ -1156,7 +1172,7 @@
                 id: 45,
                 name: "Dainty Gold Anklet with Charms",
                 collection: "minimal",
-                category: "piercing",
+                category: "anklets",
                 price: 4500,
                 rating: 4.9,
                 reviews: 48,
@@ -1167,7 +1183,7 @@
                 id: 46,
                 name: "Minimalist Snake Anklet",
                 collection: "minimal",
-                category: "piercing",
+                category: "anklets",
                 price: 4950,
                 rating: 4.8,
                 reviews: 39,
@@ -1183,7 +1199,7 @@
                 rating: 4.8,
                 reviews: 32,
                 image: "https://i.etsystatic.com/15350130/r/il/a0d901/7568056150/il_fullxfull.7568056150_p58c.jpg",
-                desc: "A trio of minimal stackable ear cuffs requiring no additional piercings."
+                desc: "Minimal stackable ear cuffs requiring no additional piercings."
             },
             {
                 id: 48,
