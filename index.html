@@ -317,57 +317,72 @@
                 </div>
 
                 <!-- Customization Controls -->
-                <div class="space-y-6">
-                    <div>
-                        <label class="block text-xs uppercase tracking-wider font-bold text-brand-dark mb-2">1. Select Base Piece</label>
-                        <select id="custom-base" onchange="updateCustomPreview()" class="w-full bg-brand-sand/40 border border-brand-sand px-4 py-3 text-sm focus:outline-none focus:border-amber-700">
-                            <option value="ring" data-price="6500">Classic Solitaire Ring (₹6,500)</option>
-                            <option value="band" data-price="5500">Minimalist Couple Wedding Band (₹5,500)</option>
-                            <option value="necklace" data-price="8500">Delicate Pendant Necklace (₹8,500)</option>
-                            <option value="bracelet" data-price="7800">Curb Chain Bracelet (₹7,800)</option>
-                            <option value="necklace" data-price="7800">Layered Necklace (₹,800)</option>
-                            <option value="bracelet" data-price="8000">Tennis Bracelet (₹8,000)</option>
-                            <option value="earrings" data-price="5100">Huggie Hoop Earrings (₹5100)</option>
-                            <option value="traditional" data-price="9500"> Delicate Solitaire Mangalsutra (₹9500)</option>
-                            <option value="anklets" data-price="5000"> Minimalist Anklets(₹5000)</option>
-                        </select>
-                    </div>
+               <div class="space-y-6">
+    <!-- 1. Select Base Piece Dropdown -->
+    <div>
+        <label class="block text-xs uppercase tracking-wider font-bold text-brand-dark mb-2">1. Select Base Piece</label>
+        <select id="custom-base" onchange="updateCustomPreview()" class="w-full bg-brand-sand/40 border border-brand-sand px-4 py-3 text-sm focus:outline-none focus:border-amber-700">
+            <option value="ring" data-price="6500">Classic Solitaire Ring (₹6,500)</option>
+            <option value="band" data-price="5500">Minimalist Couple Wedding Band (₹5,500)</option>
+            <option value="necklace" data-price="8500">Delicate Pendant Necklace (₹8,500)</option>
+            <option value="bracelet" data-price="7800">Curb Chain Bracelet (₹7,800)</option>
+            <option value="layered-necklace" data-price="7800">Layered Necklace (₹7,800)</option>
+            <option value="tennis-bracelet" data-price="8000">Tennis Bracelet (₹8,000)</option>
+            <option value="earrings" data-price="5100">Huggie Hoop Earrings (₹5,100)</option>
+            <option value="mangalsutra" data-price="9500">Delicate Solitaire Mangalsutra (₹9,500)</option>
+            <option value="anklets" data-price="5000">Minimalist Anklets (₹5,000)</option>
+        </select>
+    </div>
 
-                    <div>
-                        <label class="block text-xs uppercase tracking-wider font-bold text-brand-dark mb-2">2. Metal Finish (All capped at ₹10k)</label>
-                        <select id="custom-metal" onchange="updateCustomPreview()" class="w-full bg-brand-sand/40 border border-brand-sand px-4 py-3 text-sm focus:outline-none focus:border-amber-700">
-                            <option value="yellow" data-add="0">18k Yellow Gold Vermeil (Included)</option>
-                            <option value="rose" data-add="200">18k Rose Gold Vermeil (+₹200)</option>
-                            <option value="white" data-add="300">Platinum Plated Sterling Silver (+₹300)</option>
-                        </select>
-                    </div>
+    <!-- 2. Metal Finish -->
+    <div>
+        <label class="block text-xs uppercase tracking-wider font-bold text-brand-dark mb-2">2. Metal Finish</label>
+        <select id="custom-metal" onchange="updateCustomPreview()" class="w-full bg-brand-sand/40 border border-brand-sand px-4 py-3 text-sm focus:outline-none focus:border-amber-700">
+            <option value="yellow" data-add="0">18k Yellow Gold Vermeil (Included)</option>
+            <option value="rose" data-add="200">18k Rose Gold Vermeil (+₹200)</option>
+            <option value="white" data-add="300">Platinum Plated Sterling Silver (+₹300)</option>
+        </select>
+    </div>
 
-                    <div>
-                        <label class="block text-xs uppercase tracking-wider font-bold text-brand-dark mb-2">3. Gemstone Accent</label>
-                        <select id="custom-stone" onchange="updateCustomPreview()" class="w-full bg-brand-sand/40 border border-brand-sand px-4 py-3 text-sm focus:outline-none focus:border-amber-700">
-                            <option value="diamond" data-add="900">Lab-Grown Diamond Solitaire (+₹900)</option>
-                            <option value="emerald" data-add="1000">Emerald Green Spinel (+₹1000)</option>
-                            <option value="sapphire" data-add="1200">Royal Sapphire (+₹1200)</option>
-                            <option value="none" data-add="0">Plain Metal (No Stone)</option>
-                        </select>
-                    </div>
+    <!-- 3. Gemstone Accent -->
+    <div>
+        <label class="block text-xs uppercase tracking-wider font-bold text-brand-dark mb-2">3. Gemstone Accent</label>
+        <select id="custom-stone" onchange="updateCustomPreview()" class="w-full bg-brand-sand/40 border border-brand-sand px-4 py-3 text-sm focus:outline-none focus:border-amber-700">
+            <option value="diamond" data-add="900">Lab-Grown Diamond Solitaire (+₹900)</option>
+            <option value="emerald" data-add="1000">Emerald Green Spinel (+₹1000)</option>
+            <option value="sapphire" data-add="1200">Royal Sapphire (+₹1200)</option>
+            <option value="none" data-add="0">Plain Metal (No Stone) (0)</option>
+        </select>
+    </div>
 
-                    <div>
-                    <label class="block text-xs uppercase tracking-wider font-bold text-brand-dark mb-2">4. Custom Laser Engraving (+₹200) (Max 15 chars)</label>
-                    <input type="text" id="custom-engraving" maxlength="15" oninput="updateCustomPreview()" placeholder="e.g. Forever Yours" class="w-full bg-brand-sand/40 border border-brand-sand px-4 py-3 text-sm focus:outline-none focus:border-amber-700">
-                    </div>
+    <!-- 4. Laser Engraving Field Configuration -->
+    <div>
+        <label class="block text-xs uppercase tracking-wider font-bold text-brand-dark mb-2">4. Custom Laser Engraving (+₹200) (Max 15 chars)</label>
+        <input type="text" id="custom-engraving" maxlength="15" oninput="updateCustomPreview()" placeholder="e.g. Forever Yours" class="w-full bg-brand-sand/40 border border-brand-sand px-4 py-3 text-sm focus:outline-none focus:border-amber-700">
+    </div>
 
-                    <div class="bg-brand-sand/20 border-l-2 border-amber-700 p-4 my-4">
-                        <p class="text-xs font-bold text-brand-dark uppercase tracking-wider mb-1"> Looking for completely bespoke design?</p>
-                        <p class="text-xs text-neutral-600 leading-relaxed">  If you're looking for a bespoke design or specific modifications to any particular item, we would love to bring your vision to life! Please contact our design studio directly using the information below. 
-                        <a href="#contact" class="text-amber-700 underline font-semibold hover:text-amber-950">Contact our design team</a>.
-                        </p>
-                    </div>
+    <!-- 5. Dynamic Sizing Target Container Node -->
+    <div id="size-selection-container" class="hidden">
+        <label class="block text-xs uppercase tracking-wider font-bold text-brand-dark mb-2">5. Select Size</label>
+        <select id="custom-size" class="w-full bg-brand-sand/40 border border-brand-sand px-4 py-3 text-sm focus:outline-none focus:border-amber-700">
+            <!-- Driven via JavaScript dynamic array loop injections -->
+        </select>
+    </div>
 
-                    <button onclick="handleCustomAddToCart()" class="w-full bg-brand-dark text-white font-medium py-4 text-xs uppercase tracking-widest hover:bg-amber-800 transition-colors">
-                        Add Custom Creation to Bag
-                    </button>
-                </div>
+    <!-- Special Fictional Customization Support Note Callout -->
+    <div class="bg-brand-sand/20 border-l-2 border-amber-700 p-4 my-4">
+        <p class="text-xs font-bold text-brand-dark uppercase tracking-wider mb-1">✨ Looking for completely bespoke design?</p>
+        <p class="text-xs text-neutral-600 leading-relaxed">
+            If you're looking for a bespoke design or specific modifications to any particular item, we would love to bring your vision to life! Please contact our design studio directly using the information below. 
+            <a href="javascript:void(0)" onclick="openMockStudioSupport()" class="text-amber-700 underline font-semibold hover:text-amber-950">Contact our design team</a>.
+        </p>
+    </div>
+
+    <button onclick="handleCustomAddToCart()" class="w-full bg-brand-dark text-white font-medium py-4 text-xs uppercase tracking-widest hover:bg-amber-800 transition-colors">
+        Add Custom Creation to Bag
+    </button>
+</div>
+
             </div>
         </div>
     </main>
@@ -661,6 +676,22 @@
                 <a href="#" class="hover:text-white">Terms of Service</a>
             </div>
         </div>
+        <!-- Atelier Help Desk Section Module -->
+<section class="max-w-4xl mx-auto px-4 py-16 border-t border-brand-sand/40">
+    <h2 class="text-xs uppercase tracking-widest font-bold text-brand-dark mb-8 text-center font-sans">Atelier Help Desk & Studio Support</h2>
+    
+    <div class="space-y-3">
+        <div class="border border-brand-sand/80 p-4 cursor-pointer bg-brand-sand/10 rounded transition-colors" onclick="toggleHelpAccordion('help-1')">
+            <h4 class="text-xs uppercase font-bold tracking-wider text-brand-dark flex justify-between items-center">✨ How do I find my ring/band size? <span id="help-1-icon" class="text-sm font-light">＋</span></h4>
+            <p id="help-1-content" class="text-xs text-neutral-600 mt-2 leading-relaxed hidden">We map allocations to standard Indian ring scales. Loop a non-elastic string tightly around your base knuckle layout frame, mark the precise overlap parameter metric, and cross-reference its millimeter distance output against our dynamic select parameters.</p>
+        </div>
+        
+        <div class="border border-brand-sand/80 p-4 cursor-pointer bg-brand-sand/10 rounded transition-colors" onclick="toggleHelpAccordion('help-2')">
+            <h4 class="text-xs uppercase font-bold tracking-wider text-brand-dark flex justify-between items-center">✨ What is your gold plating lifetime guarantee? <span id="help-2-icon" class="text-sm font-light">＋</span></h4>
+            <p id="help-2-content" class="text-xs text-neutral-600 mt-2 leading-relaxed hidden">Striva custom items carry a strict lifetime warranty backing the 18k Vermeil thickness integrity. If structural discoloration metrics breach standard thresholds, our production team handles complete laboratory re-plating configurations free of charge.</p>
+        </div>
+    </div>
+</section>
     </footer>
 
     <!-- JavaScript Application Logic -->
@@ -1470,56 +1501,87 @@
     const metalSelect = document.getElementById('custom-metal');
     const stoneSelect = document.getElementById('custom-stone');
     const engravingInput = document.getElementById('custom-engraving');
+    const sizeContainer = document.getElementById('size-selection-container');
+    const sizeSelect = document.getElementById('custom-size');
 
+    // 1. Calculate pricing securely based on data elements
     const basePrice = parseInt(baseSelect.options[baseSelect.selectedIndex].getAttribute('data-price')) || 0;
     const metalAdd = parseInt(metalSelect.options[metalSelect.selectedIndex].getAttribute('data-add')) || 0;
     const stoneAdd = parseInt(stoneSelect.options[stoneSelect.selectedIndex].getAttribute('data-add')) || 0;
     
-    // Check if user has typed anything in the engraving input box
     const eng = engravingInput.value.trim();
     const engravingAdd = eng.length > 0 ? 200 : 0;
 
-    // Calculate the absolute total including the engraving fee if applicable
+    // The manual 9950 cap line has been removed to display actual premium calculation totals
     let totalPrice = basePrice + metalAdd + stoneAdd + engravingAdd;
 
-    document.getElementById('preview-price-text').innerText = `₹${totalPrice.toLocaleString('en-IN')}`;
-    document.getElementById('preview-title-text').innerText = `Custom ${baseSelect.options[baseSelect.selectedIndex].text.split('(')[0]}`;
-    document.getElementById('preview-metal-text').innerText = `${metalSelect.options[metalSelect.selectedIndex].text} • ${stoneSelect.options[stoneSelect.selectedIndex].text}`;
-    
-    document.getElementById('preview-engraving-text').innerText = eng ? `Engraving: "${eng}"` : '';
-}        
+    // 2. Safely output to the studio front-end preview layout panels
+    if (document.getElementById('preview-price-text')) {
+        document.getElementById('preview-price-text').innerText = `₹${totalPrice.toLocaleString('en-IN')}`;
+    }
+    if (document.getElementById('preview-title-text')) {
+        document.getElementById('preview-title-text').innerText = `Custom ${baseSelect.options[baseSelect.selectedIndex].text.split('(')[0].trim()}`;
+    }
+    if (document.getElementById('preview-metal-text')) {
+        document.getElementById('preview-metal-text').innerText = `${metalSelect.options[metalSelect.selectedIndex].text.split('(')[0].trim()} • ${stoneSelect.options[stoneSelect.selectedIndex].text.split('(')[0].trim()}`;
+    }
+    if (document.getElementById('preview-engraving-text')) {
+        document.getElementById('preview-engraving-text').innerText = eng ? `Engraving: "${eng}" (+₹200)` : '';
+    }
 
-        function handleCustomAddToCart() {
-            if (!currentUser) {
-                alert("Please sign in or create an account to save and order custom jewelry creations.");
-                toggleAuthModal();
-                return;
-            }
+    // 3. Dynamic Size selector framework manager
+    const baseType = baseSelect.value;
+    if (sizeGuides[baseType]) {
+        sizeContainer.classList.remove('hidden');
+        sizeSelect.innerHTML = sizeGuides[baseType].map(sz => `<option value="${sz}">${sz}</option>`).join('');
+    } else {
+        sizeContainer.classList.add('hidden');
+        sizeSelect.innerHTML = '';
+    }
+}
 
-            const baseSelect = document.getElementById('custom-base');
-            const metalSelect = document.getElementById('custom-metal');
-            const stoneSelect = document.getElementById('custom-stone');
-            const engravingInput = document.getElementById('custom-engraving');
-
-            const basePrice = parseInt(baseSelect.options[baseSelect.selectedIndex].getAttribute('data-price'));
-            const metalAdd = parseInt(metalSelect.options[metalSelect.selectedIndex].getAttribute('data-add'));
-            const stoneAdd = parseInt(stoneSelect.options[stoneSelect.selectedIndex].getAttribute('data-add'));
-            let totalPrice = basePrice + metalAdd + stoneAdd;
-            if(totalPrice > 10000) totalPrice = 9950;
-
-            const customItem = {
-                id: 'custom-' + Date.now(),
-                name: `Custom ${baseSelect.options[baseSelect.selectedIndex].text.split('(')[0]}`,
-                price: totalPrice,
-                image: "https://images.unsplash.com/photo-1603561591411-07134e71a2a9?auto=format&fit=crop&q=80&w=800",
-                details: `${metalSelect.options[metalSelect.selectedIndex].text}, ${stoneSelect.options[stoneSelect.selectedIndex].text} ${engravingInput.value ? ' | Engraving: ' + engravingInput.value : ''}`,
-                quantity: 1
-            };
-
-            cart.push(customItem);
-            updateBadges();
-            toggleCartDrawer();
+       function handleCustomAddToCart() {
+    // Fictional Account system integration prompt verification step
+    if (!currentUser) {
+        let fakeName = prompt("✨ Welcome to Striva Atelier. Please input your Full Name to instantly build your complimentary collector profile account for saving configurations:", "");
+        if (fakeName && fakeName.trim().length > 0) {
+            currentUser = fakeName.trim();
+            updateAuthHeaderUI();
+        } else {
+            alert("🔒 Account profile sync required to process workshop configurations.");
+            return;
         }
+    }
+    
+    const baseSelect = document.getElementById('custom-base');
+    const metalSelect = document.getElementById('custom-metal');
+    const stoneSelect = document.getElementById('custom-stone');
+    const engravingInput = document.getElementById('custom-engraving');
+    const sizeSelect = document.getElementById('custom-size');
+
+    const basePrice = parseInt(baseSelect.options[baseSelect.selectedIndex].getAttribute('data-price')) || 0;
+    const metalAdd = parseInt(metalSelect.options[metalSelect.selectedIndex].getAttribute('data-add')) || 0;
+    const stoneAdd = parseInt(stoneSelect.options[stoneSelect.selectedIndex].getAttribute('data-add')) || 0;
+    const eng = engravingInput.value.trim();
+    const engravingAdd = eng.length > 0 ? 200 : 0;
+
+    let finalCalculatedPrice = basePrice + metalAdd + stoneAdd + engravingAdd;
+    let selectedSize = sizeGuides[baseSelect.value] ? sizeSelect.value : "Standard Size";
+
+    const customItem = {
+        id: "custom-" + Date.now(),
+        title: `Custom ${baseSelect.options[baseSelect.selectedIndex].text.split('(')[0].trim()}`,
+        specs: `${metalSelect.options[metalSelect.selectedIndex].text.split('(')[0].trim()} | ${stoneSelect.options[stoneSelect.selectedIndex].text.split('(')[0].trim()}`,
+        engraving: eng ? eng : "None",
+        size: selectedSize,
+        price: finalCalculatedPrice
+    };
+
+    shoppingCart.push(customItem);
+    updateCartUI();
+    alert(`✨ ${customItem.title} successfully added to your shopping bag!`);
+}
+
 
         // Cart & Wishlist Management
         function addToCart(id) {
@@ -1787,5 +1849,43 @@
             nextQuizStep(1);
         }
     </script>
+    <div id="checkout-gateway-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white max-w-md w-full p-6 border border-brand-sand rounded shadow-2xl relative">
+        <button onclick="closeCheckoutModal()" class="absolute top-4 right-4 text-neutral-400 hover:text-black text-sm">✕</button>
+        
+        <!-- View Pane A: Fictional QR Code Window Layout -->
+        <div id="gateway-payment-view">
+            <h3 class="text-xs font-bold uppercase tracking-widest text-brand-dark mb-2 text-center">🔐 Striva Secure Sandbox Payment</h3>
+            <p class="text-[10px] text-neutral-500 text-center mb-4">College Evaluation Mode: No real funds will be processed.</p>
+            
+            <div class="w-48 h-48 bg-neutral-50 mx-auto border-2 border-dashed border-brand-dark flex flex-col items-center justify-center p-4 text-center my-4">
+                <span class="text-3xl mb-1">📱</span>
+                <span class="text-xs font-bold text-brand-dark tracking-wider">MOCK SCANNER PREVIEW</span>
+                <span class="text-[9px] text-neutral-400 mt-2 font-mono">UPI ID: striva.luxury@icici(mock)</span>
+            </div>
+            
+            <p class="text-center font-bold text-sm text-brand-dark my-3">Subtotal Due: <span id="modal-payment-total" class="text-amber-700">₹0</span></p>
+            <button onclick="simulateOrderSuccess()" class="w-full bg-brand-dark text-white font-medium py-3 text-xs uppercase tracking-widest hover:bg-amber-800 transition-colors mt-2">
+                Simulate Payment Success ✔
+            </button>
+        </div>
+
+        <!-- View Pane B: Live Shipment Tracking View Dashboard Terminal -->
+        <div id="gateway-tracking-view" class="hidden">
+            <h3 class="text-xs font-bold uppercase tracking-widest text-brand-dark mb-1 text-center">📦 Order Tracking Portal</h3>
+            <p class="text-[9px] font-mono text-neutral-400 text-center mb-6" id="mock-order-id-label">Order Reference ID: #SRV-104921</p>
+            
+            <div class="space-y-4 my-6 pl-4 border-l-2 border-brand-sand">
+                <div id="track-step-1" class="flex items-center space-x-3 text-neutral-400 transition-all"><span class="text-xs">⚪</span> <p class="text-xs font-medium">Order Confirmed & Atelier Assigned</p></div>
+                <div id="track-step-2" class="flex items-center space-x-3 text-neutral-400 transition-all"><span class="text-xs">⚪</span> <p class="text-xs font-medium">Handcrafted & Polished in Gold Vermeil</p></div>
+                <div id="track-step-3" class="flex items-center space-x-3 text-neutral-400 transition-all"><span class="text-xs">⚪</span> <p class="text-xs font-medium">Handed over to BlueDart Insured Delivery</p></div>
+            </div>
+            
+            <button onclick="advanceMockTracking()" class="w-full bg-amber-700 text-white font-medium py-2 text-xs uppercase tracking-wider hover:bg-amber-800 mt-4">
+                Advance Tracking Stage (For Viva Presentation) ⚡
+            </button>
+        </div>
+    </div>
+</div>
 </body>
 </html>
