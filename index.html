@@ -1848,23 +1848,70 @@
             document.getElementById('quiz-results').classList.add('hidden');
             nextQuizStep(1);
         }
-    </script>
-    <div id="checkout-gateway-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <!-- CONSTANT FLOATING HELP HUB WIDGET -->
+<div class="fixed bottom-6 right-6 z-50 font-sans">
+    <!-- The Floating Button that stays constant on screen -->
+    <button onclick="toggleFloatingHelpHub()" class="bg-brand-dark text-white shadow-xl px-5 py-3 rounded-full text-xs font-bold uppercase tracking-wider flex items-center space-x-2 border border-brand-sand hover:bg-amber-900 transition-all">
+        <span>✨</span> <span>Atelier Help Hub</span>
+    </button>
+
+    <!-- The Slide-Up Accordion Panel Content Box -->
+    <div id="floating-help-panel" class="absolute bottom-16 right-0 w-80 sm:w-96 bg-white border border-brand-sand rounded shadow-2xl p-5 hidden transition-all max-h-[400px] overflow-y-auto">
+        <div class="flex justify-between items-center border-b border-brand-sand/50 pb-3 mb-4">
+            <h4 class="text-xs uppercase font-bold tracking-widest text-brand-dark">Studio Guide & Support</h4>
+            <button onclick="toggleFloatingHelpHub()" class="text-neutral-400 hover:text-black font-bold text-xs">✕</button>
+        </div>
+
+        <!-- Inner Accordion Items -->
+        <div class="space-y-3">
+            <!-- Item 1 -->
+            <div class="border border-brand-sand/60 p-3 bg-brand-sand/10 rounded cursor-pointer" onclick="toggleHelpAccordion('help-1')">
+                <h5 class="text-xs font-bold tracking-wider text-brand-dark flex justify-between items-center">
+                    How do I find my ring/band size? <span id="help-1-icon">＋</span>
+                </h5>
+                <p id="help-1-content" class="text-[11px] text-neutral-600 mt-2 leading-relaxed hidden">
+                    We follow standard Indian ring dimensions. Loop a non-elastic string tightly around your base knuckle layout frame, mark the precise overlap parameter metric, and cross-reference its millimeter distance output against our dynamic select parameters.
+                </p>
+            </div>
+            
+            <!-- Item 2 -->
+            <div class="border border-brand-sand/60 p-3 bg-brand-sand/10 rounded cursor-pointer" onclick="toggleHelpAccordion('help-2')">
+                <h5 class="text-xs font-bold tracking-wider text-brand-dark flex justify-between items-center">
+                    What is your gold plating guarantee? <span id="help-2-icon">＋</span>
+                </h5>
+                <p id="help-2-content" class="text-[11px] text-neutral-600 mt-2 leading-relaxed hidden">
+                    Striva custom items carry a strict lifetime warranty backing the 18k Vermeil thickness integrity. If structural discoloration metrics breach standard thresholds, our production team handles complete laboratory re-plating configurations free of charge.
+                </p>
+            </div>
+        </div>
+        
+        <!-- Quick Call Fallback -->
+        <div class="mt-4 pt-3 border-t border-brand-sand/50 text-center">
+            <a href="javascript:void(0)" onclick="openMockStudioSupport()" class="text-[11px] uppercase tracking-wider text-amber-700 font-bold underline hover:text-amber-900 block">
+                📞 Speak to our Artisan Team
+            </a>
+        </div>
+    </div>
+</div>
+
+    <!-- Fictional Sandbox Payment Gateway & Order Tracker -->
+<div id="checkout-gateway-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
     <div class="bg-white max-w-md w-full p-6 border border-brand-sand rounded shadow-2xl relative">
         <button onclick="closeCheckoutModal()" class="absolute top-4 right-4 text-neutral-400 hover:text-black text-sm">✕</button>
         
         <!-- View Pane A: Fictional QR Code Window Layout -->
         <div id="gateway-payment-view">
-            <h3 class="text-xs font-bold uppercase tracking-widest text-brand-dark mb-2 text-center">🔐 Striva Secure Sandbox Payment</h3>
-            <p class="text-[10px] text-neutral-500 text-center mb-4">College Evaluation Mode: No real funds will be processed.</p>
+            <h3 class="text-xs font-bold uppercase tracking-widest text-brand-dark mb-2 text-center">🔐 Razorpay Sandbox Secure Checkout</h3>
+            <p class="text-[10px] text-neutral-500 text-center mb-4">College Evaluation Mode: Amount is securely locked inside this transaction vector grid.</p>
             
-            <div class="w-48 h-48 bg-neutral-50 mx-auto border-2 border-dashed border-brand-dark flex flex-col items-center justify-center p-4 text-center my-4">
-                <span class="text-3xl mb-1">📱</span>
-                <span class="text-xs font-bold text-brand-dark tracking-wider">MOCK SCANNER PREVIEW</span>
-                <span class="text-[9px] text-neutral-400 mt-2 font-mono">UPI ID: striva.luxury@icici(mock)</span>
+            <!-- Real Dynamic Scannable Matrix Output target element -->
+            <div class="w-48 h-48 bg-white mx-auto border-2 border-brand-dark flex flex-col items-center justify-center p-2 my-4 shadow-sm">
+                <img id="sandbox-dynamic-qr-img" src="" alt="Dynamic Secure Transaction QR Grid Matrix" class="w-full h-full object-contain">
             </div>
             
-            <p class="text-center font-bold text-sm text-brand-dark my-3">Subtotal Due: <span id="modal-payment-total" class="text-amber-700">₹0</span></p>
+            <p class="text-center font-bold text-sm text-brand-dark my-3">Exact Total Due: <span id="modal-payment-total" class="text-amber-700 font-mono">₹0</span></p>
+            <p class="text-[9px] text-center text-neutral-400 max-w-xs mx-auto mb-2">💡 Scanning this sample visual grid via PhonePe/GPay initializes a mock sequence pre-filled with this exact balance metric. Do not complete processing transactions inside third-party apps.</p>
+            
             <button onclick="simulateOrderSuccess()" class="w-full bg-brand-dark text-white font-medium py-3 text-xs uppercase tracking-widest hover:bg-amber-800 transition-colors mt-2">
                 Simulate Payment Success ✔
             </button>
@@ -1887,5 +1934,66 @@
         </div>
     </div>
 </div>
-</body>
+     // ==========================================
+// NEW FUNCTION: SANDBOX CHECKOUT GATEWAY WITH EXACT QR TOTAL
+// ==========================================
+function handleProceedToCheckout() {
+    // 1. Safety Guard Check: If there are no items in the cart array, stop here.
+    if (shoppingCart.length === 0) {
+        alert("Your shopping bag is empty! Add custom items to your bag before checking out.");
+        return;
+    }
+    
+    // 2. Exact Math Calculation: Calculate the absolute live total of all items in the array
+    let subCalculatedValue = 0;
+    shoppingCart.forEach(item => {
+        subCalculatedValue += item.price;
+    });
+    
+    // 3. UI State Toggle: Reveal your modal elements and hide the tracking portal for now
+    document.getElementById('checkout-gateway-modal').classList.remove('hidden');
+    document.getElementById('gateway-payment-view').classList.remove('hidden');
+    document.getElementById('gateway-tracking-view').classList.add('hidden');
+    
+    // 4. Set Label Price: Update the textual confirmation total element
+    document.getElementById('modal-payment-total').innerText = `₹${subCalculatedValue.toLocaleString('en-IN')}`;
+
+    // 5. Dynamic Scannable QR Generation:
+    const mockVpa = "striva.luxury@icici"; // Fictional brand UPI handle string
+    const merchantName = "Striva Luxury Atelier";
+    
+    // Formulate official UPI payload structure with absolute price parameter mapping (&am=)
+    // This locks the EXACT price into the visual QR matrix so the user cannot alter it!
+    const upiPayloadString = `upi://pay?pa=${mockVpa}&pn=${encodeURIComponent(merchantName)}&am=${subCalculatedValue}&cu=INR&tn=StrivaAtelierOrder`;
+    
+    // Request a live image from the API using our custom exact payment string link
+    const qrImageTarget = document.getElementById('sandbox-dynamic-qr-img');
+    if (qrImageTarget) {
+        qrImageTarget.src = `https://qrserver.com{encodeURIComponent(upiPayloadString)}`;
+    }
+}
+
+function toggleFloatingHelpHub() {
+            const helpPanel = document.getElementById('floating-help-panel');
+            if (helpPanel.classList.contains('hidden')) {
+                helpPanel.classList.remove('hidden');
+            } else {
+                helpPanel.classList.add('hidden');
+            }
+        }
+
+        function toggleHelpAccordion(id) {
+            const content = document.getElementById(`${id}-content`);
+            const icon = document.getElementById(`${id}-icon`);
+            
+            if (content.classList.contains('hidden')) {
+                content.classList.remove('hidden');
+                icon.innerText = "✕";
+            } else {
+                content.classList.add('hidden');
+                icon.innerText = "＋";
+            }
+        }
+    </script>
+    </body>
 </html>
