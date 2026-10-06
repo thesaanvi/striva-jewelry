@@ -676,38 +676,6 @@
                 <a href="#" class="hover:text-white">Terms of Service</a>
             </div>
         </div>
-        <!-- Atelier Help Desk Section Module -->
-<section class="max-w-4xl mx-auto px-4 py-16 border-t border-brand-sand/40">
-    <!-- Changed header text to high-contrast brand-sand/white scale -->
-    <h2 class="text-xs uppercase tracking-widest font-bold text-brand-sand mb-8 text-center font-sans">Atelier Help Desk & Studio Support</h2>
-    
-    <div class="space-y-3">
-        <!-- Accordion Box 1 (Enhanced contrast text properties) -->
-        <div class="border border-brand-sand/80 p-4 cursor-pointer bg-brand-sand/10 rounded transition-colors hover:bg-brand-sand/20" onclick="toggleHelpAccordion('help-1')">
-            <!-- Swapped title label color text to bright white/sand -->
-            <h4 class="text-xs uppercase font-bold tracking-wider text-brand-sand flex justify-between items-center">
-                ✨ How do I find my ring/band size? <span id="help-1-icon" class="text-sm font-light text-white">＋</span>
-            </h4>
-            <!-- Swapped item paragraph color text to neutral-300 light silver-gray -->
-            <p id="help-1-content" class="text-xs text-neutral-300 mt-2 leading-relaxed hidden">
-                We map allocations to standard Indian ring scales. Loop a non-elastic string tightly around your base knuckle layout frame, mark the precise overlap parameter metric, and cross-reference its millimeter distance output against our dynamic select parameters.
-            </p>
-        </div>
-        
-        <!-- Accordion Box 2 (Enhanced contrast text properties) -->
-        <div class="border border-brand-sand/80 p-4 cursor-pointer bg-brand-sand/10 rounded transition-colors hover:bg-brand-sand/20" onclick="toggleHelpAccordion('help-2')">
-            <!-- Swapped title label color text to bright white/sand -->
-            <h4 class="text-xs uppercase font-bold tracking-wider text-brand-sand flex justify-between items-center">
-                ✨ What is your gold plating lifetime guarantee? <span id="help-2-icon" class="text-sm font-light text-white">＋</span>
-            </h4>
-            <!-- Swapped item paragraph color text to neutral-300 light silver-gray -->
-            <p id="help-2-content" class="text-xs text-neutral-300 mt-2 leading-relaxed hidden">
-                Striva custom items carry a strict lifetime warranty backing the 18k Vermeil thickness integrity. If structural discoloration metrics breach standard thresholds, our production team handles complete laboratory re-plating configurations free of charge.
-            </p>
-        </div>
-    </div>
-</section>
-
     </footer>
 
     <!-- JavaScript Application Logic -->
@@ -1988,28 +1956,32 @@ function handleProceedToCheckout() {
         qrImageTarget.src = `https://qrserver.com{encodeURIComponent(upiPayloadString)}`;
     }
 }
-
-function toggleFloatingHelpHub() {
+     function toggleFloatingHelpHub() {
             const helpPanel = document.getElementById('floating-help-panel');
-            if (helpPanel.classList.contains('hidden')) {
-                helpPanel.classList.remove('hidden');
-            } else {
-                helpPanel.classList.add('hidden');
+            if (helpPanel) {
+                if (helpPanel.classList.contains('hidden')) {
+                    helpPanel.classList.remove('hidden');
+                } else {
+                    helpPanel.classList.add('hidden');
+                }
             }
         }
 
         function toggleHelpAccordion(id) {
-            const content = document.getElementById(`${id}-content`);
-            const icon = document.getElementById(`${id}-icon`);
+            const contentBlock = document.getElementById(`${id}-content`);
+            const iconLabel = document.getElementById(`${id}-icon`);
             
-            if (content.classList.contains('hidden')) {
-                content.classList.remove('hidden');
-                icon.innerText = "✕";
-            } else {
-                content.classList.add('hidden');
-                icon.innerText = "＋";
+            if (contentBlock) {
+                if (contentBlock.classList.contains('hidden')) {
+                    contentBlock.classList.remove('hidden');
+                    if (iconLabel) iconLabel.innerText = "✕";
+                } else {
+                    contentBlock.classList.add('hidden');
+                    if (iconLabel) iconLabel.innerText = "＋";
+                }
             }
         }
+
     </script>
     </body>
 </html>
