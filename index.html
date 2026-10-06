@@ -554,7 +554,7 @@
                 <h3 id="auth-title" class="font-serif text-2xl font-bold">Sign In to Striva</h3>
                 <p id="auth-subtitle" class="text-xs text-brand-muted mt-1">Access custom studio, tracking, and exclusive perks.</p>
             </div>
-            <div class="space-y-4">
+            <form onsubmit="handleProfileAccountSignIn(event)" class="space-y-4">
                 <div id="auth-name-field" class="hidden">
                     <label class="block text-xs font-bold uppercase tracking-wider text-brand-dark mb-1">Full Name</label>
                     <input type="text" id="auth-name-input" placeholder="Aarav Sharma" class="w-full bg-brand-sand/40 border border-brand-sand px-4 py-2.5 text-sm focus:outline-none focus:border-amber-700">
@@ -1319,17 +1319,25 @@
         let currentCategoryFilter = 'all';
         let currentQuizStep = 1;
 
+            const sizeGuides = {
+            ring: ["Size 6 (16.5mm)", "Size 7 (17.3mm)", "Size 8 (18.1mm)", "Size 9 (18.9mm)", "Size 10 (19.8mm)"],
+            band: ["Size 7 (17.3mm)", "Size 8 (18.1mm)", "Size 9 (18.9mm)", "Size 11 (20.6mm)", "Size 12 (21.4mm)"],
+            bracelet: ["6.0 Inches (Petite)", "6.5 Inches (Small)", "7.0 Inches (Standard)", "7.5 Inches (Large)"],
+            anklets: ["8.5 Inches (Standard)", "9.0 Inches", "10 Inches"]
+        };
+        
         // Initialization
-        document.addEventListener('DOMContentLoaded', () => {
-            renderProducts(products);
-            updateBadges();
-            updateCustomPreview();
+               document.addEventListener('DOMContentLoaded', () => {
+            if (typeof renderProducts === 'function') renderProducts(products);
+            if (typeof updateBadges === 'function') updateBadges();
+            updateCustomPreview(); // This can now run error-free because sizeGuides is initialized above it!
         });
 
-        // Tab Navigation
+        // Tab Navigation Menu System
         function switchTab(tabId) {
             document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
-            document.getElementById(`tab-${tabId}`).classList.remove('hidden');
+            const targetTab = document.getElementById(`tab-${tabId}`);
+            if (targetTab) targetTab.classList.remove('hidden');
             
             document.querySelectorAll('.nav-link').forEach(link => {
                 link.classList.remove('text-brand-dark', 'border-brand-dark');
@@ -1341,7 +1349,7 @@
             });
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
-
+        
         function toggleMobileMenu() {
             const menu = document.getElementById('mobile-menu');
             menu.classList.toggle('hidden');
@@ -1478,9 +1486,62 @@
         function closeProductModal() {
             document.getElementById('product-modal').classList.add('hidden');
         }
+        
 
-        // Custom Studio Logic & Auth Guard
-     function updateCustomPreview() {
+       function updateCartUI() {
+    // Locate where products should render inside your slider layout panel drawer
+    let cartContainer = document.getElementById('shopping-bag-items-list');
+    if (!cartContainer) {
+        // Safe selector fallback looking for space container rows
+        cartContainer = document.querySelector('.shopping-bag-items-container-selector') || document.querySelector('[class*="space-y-4"]');
+    }
+
+    if (!cartContainer) return;
+
+    // Reset placeholder if cart length drops to zero
+    if (cart.length === 0) {
+        cartContainer.innerHTML = `
+            <div class="text-center py-12 px-4 text-neutral-400">
+                <p class="text-xs uppercase tracking-widest font-bold">Your Bag is Empty</p>
+                <p class="text-[10px] mt-1">Select fine pieces to build your signature stack.</p>
+            </div>`;
+        const subtotalTextNode = document.getElementById('bag-subtotal-display') || document.getElementById('cart-subtotal');
+        if (subtotalTextNode) subtotalTextNode.innerText = "₹0";
+        return;
+    }
+
+    // Map each item in the database directly into scannable high-contrast layout rows
+    let absoluteBagSum = 0;
+    cartContainer.innerHTML = cart.map((item, index) => {
+        absoluteBagSum += item.price;
+        return `
+            <div class="flex items-start justify-between border-b border-white/10 pb-4 pt-2 text-left font-sans text-white">
+                <div class="space-y-0.5">
+                    <h4 class="text-xs font-bold uppercase tracking-wider text-brand-sand">${item.title}</h4>
+                    <p class="text-[10px] text-neutral-400">${item.specs} • <span class="text-white font-semibold">${item.size}</span></p>
+                    ${item.engraving !== "None" ? `<p class="text-[9px] text-amber-400 italic">Engraving: "\${item.engraving}"</p>` : ''}
+                    <span class="text-xs font-bold text-white block mt-1">₹${item.price.toLocaleString('en-IN')}</span>
+                </div>
+                <!-- DYNAMIC DELETION ATTACHMENT HUB BUTTON LINK -->
+                <button onclick="removeFromCart(${index})" class="text-[10px] uppercase font-bold tracking-widest text-neutral-400 hover:text-red-400 transition-colors bg-transparent border-0 cursor-pointer p-1 focus:outline-none">
+                    ✕ Remove
+                </button>
+            </div>
+        `;
+    }).join('');
+
+    const subtotalTextNode = document.getElementById('bag-subtotal-display') || document.getElementById('cart-subtotal');
+    if (subtotalTextNode) {
+        subtotalTextNode.innerText = `₹${absoluteBagSum.toLocaleString('en-IN')}`;
+    }
+}
+
+        function removeFromCart(index) {
+    cart.splice(index, 1);
+    if (typeof updateBadges === 'function') updateBadges(); // Sync top badging bubble numbers counters
+    updateCartUI(); // Re-render instantly
+}
+function updateCustomPreview() {
     const baseSelect = document.getElementById('custom-base');
     const metalSelect = document.getElementById('custom-metal');
     const stoneSelect = document.getElementById('custom-stone');
@@ -1488,7 +1549,8 @@
     const sizeContainer = document.getElementById('size-selection-container');
     const sizeSelect = document.getElementById('custom-size');
 
-    // 1. Calculate pricing securely based on data elements
+    if (!baseSelect || !metalSelect || !stoneSelect || !engravingInput) return;
+
     const basePrice = parseInt(baseSelect.options[baseSelect.selectedIndex].getAttribute('data-price')) || 0;
     const metalAdd = parseInt(metalSelect.options[metalSelect.selectedIndex].getAttribute('data-add')) || 0;
     const stoneAdd = parseInt(stoneSelect.options[stoneSelect.selectedIndex].getAttribute('data-add')) || 0;
@@ -1496,45 +1558,42 @@
     const eng = engravingInput.value.trim();
     const engravingAdd = eng.length > 0 ? 200 : 0;
 
-    // The manual 9950 cap line has been removed to display actual premium calculation totals
     let totalPrice = basePrice + metalAdd + stoneAdd + engravingAdd;
 
-    // 2. Safely output to the studio front-end preview layout panels
-    if (document.getElementById('preview-price-text')) {
-        document.getElementById('preview-price-text').innerText = `₹${totalPrice.toLocaleString('en-IN')}`;
-    }
-    if (document.getElementById('preview-title-text')) {
-        document.getElementById('preview-title-text').innerText = `Custom ${baseSelect.options[baseSelect.selectedIndex].text.split('(')[0].trim()}`;
-    }
-    if (document.getElementById('preview-metal-text')) {
-        document.getElementById('preview-metal-text').innerText = `${metalSelect.options[metalSelect.selectedIndex].text.split('(')[0].trim()} • ${stoneSelect.options[stoneSelect.selectedIndex].text.split('(')[0].trim()}`;
-    }
-    if (document.getElementById('preview-engraving-text')) {
-        document.getElementById('preview-engraving-text').innerText = eng ? `Engraving: "${eng}" (+₹200)` : '';
+    // Push calculation values directly to the studio layout cards text panes
+    const priceTxt = document.getElementById('preview-price-text');
+    if (priceTxt) priceTxt.innerText = `₹${totalPrice.toLocaleString('en-IN')}`;
+
+    const titleTxt = document.getElementById('preview-title-text');
+    if (titleTxt) titleTxt.innerText = `Custom ${baseSelect.options[baseSelect.selectedIndex].text.split('(')[0].trim()}`;
+
+    const specTxt = document.getElementById('preview-metal-text');
+    if (specTxt) {
+        specTxt.innerText = `${metalSelect.options[metalSelect.selectedIndex].text.split('(')[0].trim()} • ${stoneSelect.options[stoneSelect.selectedIndex].text.split('(')[0].trim()}`;
     }
 
-    // 3. Dynamic Size selector framework manager
+    const engTxt = document.getElementById('preview-engraving-text');
+    if (engTxt) engTxt.innerText = eng ? `Engraving: "${eng}" (+₹200)` : '';
+
+    // Dynamic Sizing mapping keys checker visibility toggle script
     const baseType = baseSelect.value;
-    if (sizeGuides[baseType]) {
-        sizeContainer.classList.remove('hidden');
-        sizeSelect.innerHTML = sizeGuides[baseType].map(sz => `<option value="${sz}">${sz}</option>`).join('');
-    } else {
-        sizeContainer.classList.add('hidden');
-        sizeSelect.innerHTML = '';
+    if (sizeContainer && sizeSelect) {
+        if (sizeGuides[baseType]) {
+            sizeContainer.classList.remove('hidden');
+            sizeSelect.innerHTML = sizeGuides[baseType].map(sz => `<option value="${sz}">${sz}</option>`).join('');
+        } else {
+            sizeContainer.classList.add('hidden');
+            sizeSelect.innerHTML = '';
+        }
     }
 }
 
-       function handleCustomAddToCart() {
-    // Fictional Account system integration prompt verification step
+function handleCustomAddToCart() {
+    // ACCOUNT SECURE BLOCK INTERCEPTOR: Guard execution line. Push user to login screen if empty profile
     if (!currentUser) {
-        let fakeName = prompt("✨ Welcome to Striva Atelier. Please input your Full Name to instantly build your complimentary collector profile account for saving configurations:", "");
-        if (fakeName && fakeName.trim().length > 0) {
-            currentUser = fakeName.trim();
-            updateAuthHeaderUI();
-        } else {
-            alert("🔒 Account profile sync required to process workshop configurations.");
-            return;
-        }
+        alert("🔒 Account sign-in profile validation required to unlock workshop bags.");
+        switchTab('auth'); // Slides open your login tab layout immediately
+        return;
     }
     
     const baseSelect = document.getElementById('custom-base');
@@ -1550,22 +1609,21 @@
     const engravingAdd = eng.length > 0 ? 200 : 0;
 
     let finalCalculatedPrice = basePrice + metalAdd + stoneAdd + engravingAdd;
-    let selectedSize = sizeGuides[baseSelect.value] ? sizeSelect.value : "Standard Size";
+    let selectedItemSize = sizeGuides[baseSelect.value] ? sizeSelect.value : "Standard Size";
 
-    const customItem = {
+    const customPieceObject = {
         id: "custom-" + Date.now(),
         title: `Custom ${baseSelect.options[baseSelect.selectedIndex].text.split('(')[0].trim()}`,
         specs: `${metalSelect.options[metalSelect.selectedIndex].text.split('(')[0].trim()} | ${stoneSelect.options[stoneSelect.selectedIndex].text.split('(')[0].trim()}`,
         engraving: eng ? eng : "None",
-        size: selectedSize,
+        size: selectedItemSize,
         price: finalCalculatedPrice
     };
 
-    shoppingCart.push(customItem);
-    updateCartUI();
-    alert(`✨ ${customItem.title} successfully added to your shopping bag!`);
-}
-
+    cart.push(customPieceObject);
+    if (typeof updateBadges === 'function') updateBadges();
+    updateCartUI(); 
+    alert(`✨ ${customPieceObject.title} successfully added to your shopping bag!`);
 
         // Cart & Wishlist Management
         function addToCart(id) {
@@ -1595,6 +1653,68 @@
             updateBadges();
             renderCart();
         }
+   function handleProfileAccountSignIn(event) {
+    if (event) event.preventDefault(); 
+    
+    const textFields = document.querySelectorAll('input[type="text"]');
+    
+    let extractedName = "Valued Collector";
+    if (textFields && textFields.length > 0) {
+        // Safe check to find the user's name from your form's first text input box
+        extractedName = textFields[0].value.trim() || "Guest Collector";
+    }
+
+    currentUser = extractedName;
+    updateAuthHeaderLayoutUI(); 
+    
+    switchTab('home'); 
+    alert(`✨ Welcome back to Striva Atelier, ${currentUser}! Checkout terminal active.`);
+}
+
+function updateAuthHeaderLayoutUI() {
+    const originalLoginLink = document.getElementById('auth-nav-link') || 
+                              Array.from(document.querySelectorAll('a, button')).find(el => el.textContent.includes('Sign In') || el.textContent.includes('Register'));
+    
+    if (originalLoginLink && currentUser) {
+        originalLoginLink.innerHTML = `<span class="text-brand-dark bg-brand-sand/40 border border-brand-sand/80 font-bold px-3 py-1.5 text-xs rounded tracking-widest uppercase cursor-pointer">✨ HI, ${currentUser.split(' ')[0]}</span>`;
+        originalLoginLink.setAttribute('onclick', "handleProceedToCheckout()");
+    }
+}
+    
+        // ========================================================
+function handleProceedToCheckout() {
+    if (cart.length === 0) {
+        alert("Your shopping bag layout is empty! Collect items before entering the checkout queue.");
+        return;
+    }
+    
+    let sumTotalAccumulator = 0;
+    cart.forEach(item => {
+        sumTotalAccumulator += item.price;
+    });
+    
+    // Reveal hidden layout elements matching Part 2 HTML code block elements
+    const gateContainerModal = document.getElementById('checkout-gateway-modal');
+    if (gateContainerModal) {
+        gateContainerModal.classList.remove('hidden');
+        document.getElementById('gateway-payment-view').classList.remove('hidden');
+        document.getElementById('gateway-tracking-view').classList.add('hidden');
+        document.getElementById('modal-payment-total').innerText = `₹${sumTotalAccumulator.toLocaleString('en-IN')}`;
+
+        // NPCI merchant protocol string configuration parameters encoder link (&am=) locks price
+        const upiHandleMock = "striva.luxury@icici";
+        const merchantString = "Striva Luxury Atelier";
+        const npcPayloadPayload = `upi://pay?pa=${upiHandleMock}&pn=${encodeURIComponent(merchantString)}&am=${sumTotalAccumulator}&cu=INR&tn=StrivaAtelierOrder`;
+        
+        const dynamicQRImageNode = document.getElementById('sandbox-dynamic-qr-img');
+        if (dynamicQRImageNode) {
+            dynamicQRImageNode.src = `https://qrserver.com{encodeURIComponent(npcPayloadPayload)}`;
+        }
+    } else {
+        console.warn("Layout missing element: ensure #checkout-gateway-modal block is pasted outside script tags.");
+    }
+}
+
         function toggleWishlist(id) {
             const p = products.find(x => x.id === id);
             if(!p) return;
@@ -1832,10 +1952,8 @@
             document.getElementById('quiz-results').classList.add('hidden');
             nextQuizStep(1);
         }
-     
-     // ==========================================
-// NEW FUNCTION: SANDBOX CHECKOUT GATEWAY WITH EXACT QR TOTAL
-// ==========================================
+
+    
 function handleProceedToCheckout() {
     // 1. Safety Guard Check: If there are no items in the cart array, stop here.
     if (shoppingCart.length === 0) {
