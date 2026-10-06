@@ -1832,11 +1832,76 @@
             document.getElementById('quiz-results').classList.add('hidden');
             nextQuizStep(1);
         }
-        <!-- CONSTANT FLOATING HELP HUB WIDGET -->
-<div class="fixed bottom-6 right-6 z-50 font-sans">
-    <!-- The Floating Button that stays constant on screen -->
+     
+     // ==========================================
+// NEW FUNCTION: SANDBOX CHECKOUT GATEWAY WITH EXACT QR TOTAL
+// ==========================================
+function handleProceedToCheckout() {
+    // 1. Safety Guard Check: If there are no items in the cart array, stop here.
+    if (shoppingCart.length === 0) {
+        alert("Your shopping bag is empty! Add custom items to your bag before checking out.");
+        return;
+    }
+    
+    // 2. Exact Math Calculation: Calculate the absolute live total of all items in the array
+    let subCalculatedValue = 0;
+    shoppingCart.forEach(item => {
+        subCalculatedValue += item.price;
+    });
+    
+    // 3. UI State Toggle: Reveal your modal elements and hide the tracking portal for now
+    document.getElementById('checkout-gateway-modal').classList.remove('hidden');
+    document.getElementById('gateway-payment-view').classList.remove('hidden');
+    document.getElementById('gateway-tracking-view').classList.add('hidden');
+    
+    // 4. Set Label Price: Update the textual confirmation total element
+    document.getElementById('modal-payment-total').innerText = `₹${subCalculatedValue.toLocaleString('en-IN')}`;
+
+    // 5. Dynamic Scannable QR Generation:
+    const mockVpa = "striva.luxury@icici"; // Fictional brand UPI handle string
+    const merchantName = "Striva Luxury Atelier";
+    
+    // Formulate official UPI payload structure with absolute price parameter mapping (&am=)
+    // This locks the EXACT price into the visual QR matrix so the user cannot alter it!
+    const upiPayloadString = `upi://pay?pa=${mockVpa}&pn=${encodeURIComponent(merchantName)}&am=${subCalculatedValue}&cu=INR&tn=StrivaAtelierOrder`;
+    
+    // Request a live image from the API using our custom exact payment string link
+    const qrImageTarget = document.getElementById('sandbox-dynamic-qr-img');
+    if (qrImageTarget) {
+        qrImageTarget.src = `https://qrserver.com{encodeURIComponent(upiPayloadString)}`;
+    }
+}
+     function toggleFloatingHelpHub() {
+            const helpPanel = document.getElementById('floating-help-panel');
+            if (helpPanel) {
+                if (helpPanel.classList.contains('hidden')) {
+                    helpPanel.classList.remove('hidden');
+                } else {
+                    helpPanel.classList.add('hidden');
+                }
+            }
+        }
+
+        function toggleHelpAccordion(id) {
+            const contentBlock = document.getElementById(`${id}-content`);
+            const iconLabel = document.getElementById(`${id}-icon`);
+            
+            if (contentBlock) {
+                if (contentBlock.classList.contains('hidden')) {
+                    contentBlock.classList.remove('hidden');
+                    if (iconLabel) iconLabel.innerText = "✕";
+                } else {
+                    contentBlock.classList.add('hidden');
+                    if (iconLabel) iconLabel.innerText = "＋";
+                }
+            }
+        }
+
+    </script>
+           <!-- CONSTANT FLOATING HELP HUB WIDGET -->
+     <div class="fixed bottom-6 right-6 z-50 font-sans">
     <button onclick="toggleFloatingHelpHub()" class="bg-brand-dark text-white shadow-xl px-5 py-3 rounded-full text-xs font-bold uppercase tracking-wider flex items-center space-x-2 border border-brand-sand hover:bg-amber-900 transition-all">
-        <span>✨</span> <span>Atelier Help Hub</span>
+        <span>✨</span> <span>Striva Help Hub</span>
     </button>
 
     <!-- The Slide-Up Accordion Panel Content Box -->
@@ -1918,70 +1983,5 @@
         </div>
     </div>
 </div>
-     // ==========================================
-// NEW FUNCTION: SANDBOX CHECKOUT GATEWAY WITH EXACT QR TOTAL
-// ==========================================
-function handleProceedToCheckout() {
-    // 1. Safety Guard Check: If there are no items in the cart array, stop here.
-    if (shoppingCart.length === 0) {
-        alert("Your shopping bag is empty! Add custom items to your bag before checking out.");
-        return;
-    }
-    
-    // 2. Exact Math Calculation: Calculate the absolute live total of all items in the array
-    let subCalculatedValue = 0;
-    shoppingCart.forEach(item => {
-        subCalculatedValue += item.price;
-    });
-    
-    // 3. UI State Toggle: Reveal your modal elements and hide the tracking portal for now
-    document.getElementById('checkout-gateway-modal').classList.remove('hidden');
-    document.getElementById('gateway-payment-view').classList.remove('hidden');
-    document.getElementById('gateway-tracking-view').classList.add('hidden');
-    
-    // 4. Set Label Price: Update the textual confirmation total element
-    document.getElementById('modal-payment-total').innerText = `₹${subCalculatedValue.toLocaleString('en-IN')}`;
-
-    // 5. Dynamic Scannable QR Generation:
-    const mockVpa = "striva.luxury@icici"; // Fictional brand UPI handle string
-    const merchantName = "Striva Luxury Atelier";
-    
-    // Formulate official UPI payload structure with absolute price parameter mapping (&am=)
-    // This locks the EXACT price into the visual QR matrix so the user cannot alter it!
-    const upiPayloadString = `upi://pay?pa=${mockVpa}&pn=${encodeURIComponent(merchantName)}&am=${subCalculatedValue}&cu=INR&tn=StrivaAtelierOrder`;
-    
-    // Request a live image from the API using our custom exact payment string link
-    const qrImageTarget = document.getElementById('sandbox-dynamic-qr-img');
-    if (qrImageTarget) {
-        qrImageTarget.src = `https://qrserver.com{encodeURIComponent(upiPayloadString)}`;
-    }
-}
-     function toggleFloatingHelpHub() {
-            const helpPanel = document.getElementById('floating-help-panel');
-            if (helpPanel) {
-                if (helpPanel.classList.contains('hidden')) {
-                    helpPanel.classList.remove('hidden');
-                } else {
-                    helpPanel.classList.add('hidden');
-                }
-            }
-        }
-
-        function toggleHelpAccordion(id) {
-            const contentBlock = document.getElementById(`${id}-content`);
-            const iconLabel = document.getElementById(`${id}-icon`);
-            
-            if (contentBlock) {
-                if (contentBlock.classList.contains('hidden')) {
-                    contentBlock.classList.remove('hidden');
-                    if (iconLabel) iconLabel.innerText = "✕";
-                } else {
-                    contentBlock.classList.add('hidden');
-                    if (iconLabel) iconLabel.innerText = "＋";
-                }
-            }
-        }
-
-    </script>
     </body>
 </html>
