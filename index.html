@@ -545,37 +545,68 @@
     </div>
 
     <!-- ==================== AUTH MODAL ==================== -->
+    <!-- ==================== AUTH MODAL ==================== -->
     <div id="auth-modal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden flex items-center justify-center p-4">
         <div class="bg-white max-w-md w-full p-8 relative border border-brand-sand shadow-2xl">
             <button onclick="toggleAuthModal()" class="absolute top-4 right-4 text-brand-dark hover:text-amber-700 text-xl">
                 <i class="fa-solid fa-xmark"></i>
             </button>
-            <div class="text-center mb-6">
-                <h3 id="auth-title" class="font-serif text-2xl font-bold">Sign In to Striva</h3>
-                <p id="auth-subtitle" class="text-xs text-brand-muted mt-1">Access custom studio, tracking, and exclusive perks.</p>
-            </div>
-            <form onsubmit="handleProfileAccountSignIn(event)" class="space-y-4">
-                <div id="auth-name-field" class="hidden">
-                    <label class="block text-xs font-bold uppercase tracking-wider text-brand-dark mb-1">Full Name</label>
-                    <input type="text" id="auth-name-input" placeholder="Aarav Sharma" class="w-full bg-brand-sand/40 border border-brand-sand px-4 py-2.5 text-sm focus:outline-none focus:border-amber-700">
+            
+            <!-- Standard Login / Signup View -->
+            <div id="auth-main-view">
+                <div class="text-center mb-6">
+                    <h3 id="auth-title" class="font-serif text-2xl font-bold">Sign In to Striva</h3>
+                    <p id="auth-subtitle" class="text-xs text-brand-muted mt-1">Access custom studio, tracking, and secure checkout.</p>
                 </div>
-                <div>
-                    <label class="block text-xs font-bold uppercase tracking-wider text-brand-dark mb-1">Email Address</label>
-                    <input type="email" id="auth-email-input" placeholder="you@example.com" class="w-full bg-brand-sand/40 border border-brand-sand px-4 py-2.5 text-sm focus:outline-none focus:border-amber-700">
-                </div>
-                <div>
-                    <label class="block text-xs font-bold uppercase tracking-wider text-brand-dark mb-1">Password</label>
-                    <input type="password" id="auth-pass-input" placeholder="••••••••" class="w-full bg-brand-sand/40 border border-brand-sand px-4 py-2.5 text-sm focus:outline-none focus:border-amber-700">
-                </div>
-                <button type="submit" id="auth-submit-btn" class="w-full bg-brand-dark text-white py-3 text-xs uppercase tracking-widest hover:bg-amber-800 transition-colors font-medium">
-                    Sign In
-                </button>
-                <div class="text-center pt-2">
-                    <button type="button" onclick="toggleAuthMode()" id="auth-switch-btn" class="text-xs text-brand-muted hover:text-brand-dark underline">
-                        Don't have an account? Create one
+                <form onsubmit="handleProfileAccountSignIn(event)" class="space-y-4">
+                    <div id="auth-name-field" class="hidden">
+                        <label class="block text-xs font-bold uppercase tracking-wider text-brand-dark mb-1">Full Name</label>
+                        <input type="text" id="auth-name-input" placeholder="Aarav Sharma" class="w-full bg-brand-sand/40 border border-brand-sand px-4 py-2.5 text-sm focus:outline-none focus:border-amber-700">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-brand-dark mb-1">Email Address</label>
+                        <input type="email" id="auth-email-input" required placeholder="you@example.com" class="w-full bg-brand-sand/40 border border-brand-sand px-4 py-2.5 text-sm focus:outline-none focus:border-amber-700">
+                    </div>
+                    <div>
+                        <div class="flex justify-between items-center mb-1">
+                            <label class="block text-xs font-bold uppercase tracking-wider text-brand-dark">Password</label>
+                            <button type="button" id="auth-forgot-link" onclick="showForgotPasswordView()" class="text-[11px] text-amber-800 hover:underline">Forgot password?</button>
+                        </div>
+                        <input type="password" id="auth-pass-input" required placeholder="••••••••" class="w-full bg-brand-sand/40 border border-brand-sand px-4 py-2.5 text-sm focus:outline-none focus:border-amber-700">
+                    </div>
+                    <button type="submit" id="auth-submit-btn" class="w-full bg-brand-dark text-white py-3 text-xs uppercase tracking-widest hover:bg-amber-800 transition-colors font-medium">
+                        Sign In
                     </button>
+                    <div class="text-center pt-2">
+                        <button type="button" onclick="toggleAuthMode()" id="auth-switch-btn" class="text-xs text-brand-muted hover:text-brand-dark underline">
+                            Don't have an account? Create one
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Forgot Password View -->
+            <div id="auth-forgot-view" class="hidden">
+                <div class="text-center mb-6">
+                    <h3 class="font-serif text-2xl font-bold">Reset Your Password</h3>
+                    <p class="text-xs text-brand-muted mt-1">Enter your registered email address and we'll send you a password reset link.</p>
                 </div>
-            </form>
+                <form onsubmit="handleForgotPasswordSubmit(event)" class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-brand-dark mb-1">Email Address</label>
+                        <input type="email" id="reset-email-input" required placeholder="you@example.com" class="w-full bg-brand-sand/40 border border-brand-sand px-4 py-2.5 text-sm focus:outline-none focus:border-amber-700">
+                    </div>
+                    <button type="submit" class="w-full bg-brand-dark text-white py-3 text-xs uppercase tracking-widest hover:bg-amber-800 transition-colors font-medium">
+                        Send Reset Link
+                    </button>
+                    <div class="text-center pt-2">
+                        <button type="button" onclick="hideForgotPasswordView()" class="text-xs text-brand-muted hover:text-brand-dark underline">
+                            ← Back to Sign In
+                        </button>
+                    </div>
+                </form>
+            </div>
+
         </div>
     </div>
 
@@ -1677,33 +1708,39 @@
         }
             
         function handleProceedToCheckout() {
-            if (cart.length === 0) {
-                alert("Your shopping bag is empty!");
-                return;
-            }
-            
-            let sumTotalAccumulator = 0;
-            cart.forEach(item => {
-                sumTotalAccumulator += item.price * (item.quantity || 1);
-            });
-            
-            const gateContainerModal = document.getElementById('checkout-gateway-modal');
-            if (gateContainerModal) {
-                gateContainerModal.classList.remove('hidden');
-                document.getElementById('gateway-payment-view').classList.remove('hidden');
-                document.getElementById('gateway-tracking-view').classList.add('hidden');
-                document.getElementById('modal-payment-total').innerText = `₹${sumTotalAccumulator.toLocaleString('en-IN')}`;
+    // Secondary safety guard check
+    if (!currentUser) {
+        toggleAuthModal();
+        return;
+    }
 
-                const upiHandleMock = "striva.luxury@icici";
-                const merchantString = "Striva Luxury Atelier";
-                const npcPayloadPayload = `upi://pay?pa=${upiHandleMock}&pn=${encodeURIComponent(merchantString)}&am=${sumTotalAccumulator}&cu=INR&tn=StrivaAtelierOrder`;
-                
-                const dynamicQRImageNode = document.getElementById('sandbox-dynamic-qr-img');
-                if (dynamicQRImageNode) {
-                    dynamicQRImageNode.src = `https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${encodeURIComponent(npcPayloadPayload)}`;
-                }
-            }
+    if (cart.length === 0) {
+        alert("Your shopping bag is empty!");
+        return;
+    }
+    
+    let sumTotalAccumulator = 0;
+    cart.forEach(item => {
+        sumTotalAccumulator += item.price * (item.quantity || 1);
+    });
+    
+    const gateContainerModal = document.getElementById('checkout-gateway-modal');
+    if (gateContainerModal) {
+        gateContainerModal.classList.remove('hidden');
+        document.getElementById('gateway-payment-view').classList.remove('hidden');
+        document.getElementById('gateway-tracking-view').classList.add('hidden');
+        document.getElementById('modal-payment-total').innerText = `₹${sumTotalAccumulator.toLocaleString('en-IN')}`;
+
+        const upiHandleMock = "striva.luxury@icici";
+        const merchantString = "Striva Luxury Atelier";
+        const npcPayloadPayload = `upi://pay?pa=${upiHandleMock}&pn=${encodeURIComponent(merchantString)}&am=${sumTotalAccumulator}&cu=INR&tn=StrivaAtelierOrder`;
+        
+        const dynamicQRImageNode = document.getElementById('sandbox-dynamic-qr-img');
+        if (dynamicQRImageNode) {
+            dynamicQRImageNode.src = `https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${encodeURIComponent(npcPayloadPayload)}`;
         }
+    }
+}
 
         function simulateOrderSuccess() {
             document.getElementById('gateway-payment-view').classList.add('hidden');
@@ -1785,12 +1822,21 @@
         }
 
         function checkoutCart() {
-            if(cart.length === 0) {
-                alert("Your bag is empty.");
-                return;
-            }
-            handleProceedToCheckout();
-        }
+    if(cart.length === 0) {
+        alert("Your shopping bag is empty.");
+        return;
+    }
+
+    // MANDATORY SIGN-IN CHECK
+    if (!currentUser) {
+        alert("🔒 Please sign in or create an account to proceed to checkout.");
+        toggleCartDrawer(); // Close cart drawer
+        toggleAuthModal(); // Open login modal
+        return;
+    }
+
+    handleProceedToCheckout();
+}
 
         function renderTrackingUI() {
             const step1 = document.getElementById('track-step-1');
@@ -1838,13 +1884,42 @@
             if (modal) modal.classList.toggle('hidden');
         }
 
-        function toggleAuthMode() {
-            isSignUpMode = !isSignUpMode;
-            document.getElementById('auth-name-field').classList.toggle('hidden');
-            document.getElementById('auth-title').innerText = isSignUpMode ? "Create Striva Account" : "Sign In to Striva";
-            document.getElementById('auth-submit-btn').innerText = isSignUpMode ? "Create Account & Continue" : "Sign In";
-            document.getElementById('auth-switch-btn').innerText = isSignUpMode ? "Already have an account? Sign In" : "Don't have an account? Create one";
-        }
+        function showForgotPasswordView() {
+    document.getElementById('auth-main-view').classList.add('hidden');
+    document.getElementById('auth-forgot-view').classList.remove('hidden');
+}
+
+function hideForgotPasswordView() {
+    document.getElementById('auth-forgot-view').classList.add('hidden');
+    document.getElementById('auth-main-view').classList.remove('hidden');
+}
+
+function handleForgotPasswordSubmit(event) {
+    event.preventDefault();
+    const email = document.getElementById('reset-email-input').value.trim();
+    if (!email) return;
+
+    alert(`📩 A password reset link has been sent to ${email}. Please check your inbox.`);
+    hideForgotPasswordView();
+}
+
+function toggleAuthMode() {
+    isSignUpMode = !isSignUpMode;
+    const nameField = document.getElementById('auth-name-field');
+    const forgotLink = document.getElementById('auth-forgot-link');
+    
+    if (isSignUpMode) {
+        nameField.classList.remove('hidden');
+        if (forgotLink) forgotLink.classList.add('hidden'); // Hide forgot password link when creating account
+    } else {
+        nameField.classList.add('hidden');
+        if (forgotLink) forgotLink.classList.remove('hidden');
+    }
+
+    document.getElementById('auth-title').innerText = isSignUpMode ? "Create Striva Account" : "Sign In to Striva";
+    document.getElementById('auth-submit-btn').innerText = isSignUpMode ? "Create Account & Continue" : "Sign In";
+    document.getElementById('auth-switch-btn').innerText = isSignUpMode ? "Already have an account? Sign In" : "Don't have an account? Create one";
+}
 
         function submitAuth() {
             const email = document.getElementById('auth-email-input').value.trim();
