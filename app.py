@@ -718,6 +718,48 @@ def get_products():
 def handle_500(e):
     return jsonify({"status": "error", "message": "Internal Server Error", "details": str(e)}), 500
 
+        # Place the new authentication routes HERE (Above errorhandlers and main block)
+
+@app.route('/api/auth/login', methods=['POST'])
+def api_login():
+    data = request.get_json() or {}
+    email = data.get('email')
+    password = data.get('password')
+    if not email or not password:
+        return jsonify({"status": "error", "message": "Email and password are required"}), 400
+    
+    return jsonify({
+        "status": "success",
+        "user": {
+            "name": email.split('@')[0].capitalize(),
+            "email": email
+        }
+    })
+
+@app.route('/api/auth/forgot-password', methods=['POST'])
+def api_forgot_password():
+    data = request.get_json() or {}
+    email = data.get('email')
+    if not email:
+        return jsonify({"status": "error", "message": "Email is required"}), 400
+    
+    return jsonify({
+        "status": "success",
+        "message": f"Password reset instructions sent to {email}"
+    })
+
+
+# ----------------------------------------------------
+# EXISTING BOTTOM LINES IN YOUR app.py FILE:
+# ----------------------------------------------------
+@app.errorhandler(500)
+def handle_500(e):
+    return jsonify({"status": "error", "message": "Internal Server Error", "details": str(e)}), 500
+
+if __name__ == '__main__':
+    port = int(os.environ.get('PORT', 5000))
+    app.run(host='0.0.0.0', port=port, debug=True)
+
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
     app.run(host='0.0.0.0', port=port, debug=True)
