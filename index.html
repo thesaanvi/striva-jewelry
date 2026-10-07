@@ -276,7 +276,7 @@
                      <button onclick="filterCategory('anklets')" id="btn-cat-anklets" class="cat-filter-btn px-3 py-1.5 text-xs font-medium bg-white text-brand-dark border border-brand-sand hover:border-brand-dark transition-colors">Anklets</button>
                 </div>
             </div>
-0
+
             <!-- Product Grid -->
             <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
                 <!-- Dynamically populated via JavaScript -->
@@ -318,70 +318,70 @@
 
                 <!-- Customization Controls -->
                <div class="space-y-6">
-    <!-- 1. Select Base Piece Dropdown -->
-    <div>
-        <label class="block text-xs uppercase tracking-wider font-bold text-brand-dark mb-2">1. Select Base Piece</label>
-        <select id="custom-base" onchange="updateCustomPreview()" class="w-full bg-brand-sand/40 border border-brand-sand px-4 py-3 text-sm focus:outline-none focus:border-amber-700">
-            <option value="ring" data-price="6500">Classic Solitaire Ring (₹6,500)</option>
-            <option value="band" data-price="5500">Minimalist Couple Wedding Band (₹5,500)</option>
-            <option value="necklace" data-price="8500">Delicate Pendant Necklace (₹8,500)</option>
-            <option value="bracelet" data-price="7800">Curb Chain Bracelet (₹7,800)</option>
-            <option value="layered-necklace" data-price="7800">Layered Necklace (₹7,800)</option>
-            <option value="tennis-bracelet" data-price="8000">Tennis Bracelet (₹8,000)</option>
-            <option value="earrings" data-price="5100">Huggie Hoop Earrings (₹5,100)</option>
-            <option value="mangalsutra" data-price="9500">Delicate Solitaire Mangalsutra (₹9,500)</option>
-            <option value="anklets" data-price="5000">Minimalist Anklets (₹5,000)</option>
-        </select>
-    </div>
+                    <!-- 1. Select Base Piece Dropdown -->
+                    <div>
+                        <label class="block text-xs uppercase tracking-wider font-bold text-brand-dark mb-2">1. Select Base Piece</label>
+                        <select id="custom-base" onchange="updateCustomPreview()" class="w-full bg-brand-sand/40 border border-brand-sand px-4 py-3 text-sm focus:outline-none focus:border-amber-700">
+                            <option value="ring" data-price="6500">Classic Solitaire Ring (₹6,500)</option>
+                            <option value="band" data-price="5500">Minimalist Couple Wedding Band (₹5,500)</option>
+                            <option value="necklace" data-price="8500">Delicate Pendant Necklace (₹8,500)</option>
+                            <option value="bracelet" data-price="7800">Curb Chain Bracelet (₹7,800)</option>
+                            <option value="layered-necklace" data-price="7800">Layered Necklace (₹7,800)</option>
+                            <option value="tennis-bracelet" data-price="8000">Tennis Bracelet (₹8,000)</option>
+                            <option value="earrings" data-price="5100">Huggie Hoop Earrings (₹5,100)</option>
+                            <option value="mangalsutra" data-price="9500">Delicate Solitaire Mangalsutra (₹9,500)</option>
+                            <option value="anklets" data-price="5000">Minimalist Anklets (₹5,000)</option>
+                        </select>
+                    </div>
 
-    <!-- 2. Metal Finish -->
-    <div>
-        <label class="block text-xs uppercase tracking-wider font-bold text-brand-dark mb-2">2. Metal Finish</label>
-        <select id="custom-metal" onchange="updateCustomPreview()" class="w-full bg-brand-sand/40 border border-brand-sand px-4 py-3 text-sm focus:outline-none focus:border-amber-700">
-            <option value="yellow" data-add="0">18k Yellow Gold Vermeil (Included)</option>
-            <option value="rose" data-add="200">18k Rose Gold Vermeil (+₹200)</option>
-            <option value="white" data-add="300">Platinum Plated Sterling Silver (+₹300)</option>
-        </select>
-    </div>
+                    <!-- 2. Metal Finish -->
+                    <div>
+                        <label class="block text-xs uppercase tracking-wider font-bold text-brand-dark mb-2">2. Metal Finish</label>
+                        <select id="custom-metal" onchange="updateCustomPreview()" class="w-full bg-brand-sand/40 border border-brand-sand px-4 py-3 text-sm focus:outline-none focus:border-amber-700">
+                            <option value="yellow" data-add="0">18k Yellow Gold Vermeil (Included)</option>
+                            <option value="rose" data-add="200">18k Rose Gold Vermeil (+₹200)</option>
+                            <option value="white" data-add="300">Platinum Plated Sterling Silver (+₹300)</option>
+                        </select>
+                    </div>
 
-    <!-- 3. Gemstone Accent -->
-    <div>
-        <label class="block text-xs uppercase tracking-wider font-bold text-brand-dark mb-2">3. Gemstone Accent</label>
-        <select id="custom-stone" onchange="updateCustomPreview()" class="w-full bg-brand-sand/40 border border-brand-sand px-4 py-3 text-sm focus:outline-none focus:border-amber-700">
-            <option value="diamond" data-add="900">Lab-Grown Diamond Solitaire (+₹900)</option>
-            <option value="emerald" data-add="1000">Emerald Green Spinel (+₹1000)</option>
-            <option value="sapphire" data-add="1200">Royal Sapphire (+₹1200)</option>
-            <option value="none" data-add="0">Plain Metal (No Stone) (0)</option>
-        </select>
-    </div>
+                    <!-- 3. Gemstone Accent -->
+                    <div>
+                        <label class="block text-xs uppercase tracking-wider font-bold text-brand-dark mb-2">3. Gemstone Accent</label>
+                        <select id="custom-stone" onchange="updateCustomPreview()" class="w-full bg-brand-sand/40 border border-brand-sand px-4 py-3 text-sm focus:outline-none focus:border-amber-700">
+                            <option value="diamond" data-add="900">Lab-Grown Diamond Solitaire (+₹900)</option>
+                            <option value="emerald" data-add="1000">Emerald Green Spinel (+₹1000)</option>
+                            <option value="sapphire" data-add="1200">Royal Sapphire (+₹1200)</option>
+                            <option value="none" data-add="0">Plain Metal (No Stone) (0)</option>
+                        </select>
+                    </div>
 
-    <!-- 4. Laser Engraving Field Configuration -->
-    <div>
-        <label class="block text-xs uppercase tracking-wider font-bold text-brand-dark mb-2">4. Custom Laser Engraving (+₹200) (Max 15 chars)</label>
-        <input type="text" id="custom-engraving" maxlength="15" oninput="updateCustomPreview()" placeholder="e.g. Forever Yours" class="w-full bg-brand-sand/40 border border-brand-sand px-4 py-3 text-sm focus:outline-none focus:border-amber-700">
-    </div>
+                    <!-- 4. Laser Engraving Field Configuration -->
+                    <div>
+                        <label class="block text-xs uppercase tracking-wider font-bold text-brand-dark mb-2">4. Custom Laser Engraving (+₹200) (Max 15 chars)</label>
+                        <input type="text" id="custom-engraving" maxlength="15" oninput="updateCustomPreview()" placeholder="e.g. Forever Yours" class="w-full bg-brand-sand/40 border border-brand-sand px-4 py-3 text-sm focus:outline-none focus:border-amber-700">
+                    </div>
 
-    <!-- 5. Dynamic Sizing Target Container Node -->
-    <div id="size-selection-container" class="hidden">
-        <label class="block text-xs uppercase tracking-wider font-bold text-brand-dark mb-2">5. Select Size</label>
-        <select id="custom-size" class="w-full bg-brand-sand/40 border border-brand-sand px-4 py-3 text-sm focus:outline-none focus:border-amber-700">
-            <!-- Driven via JavaScript dynamic array loop injections -->
-        </select>
-    </div>
+                    <!-- 5. Dynamic Sizing Target Container Node -->
+                    <div id="size-selection-container" class="hidden">
+                        <label class="block text-xs uppercase tracking-wider font-bold text-brand-dark mb-2">5. Select Size</label>
+                        <select id="custom-size" class="w-full bg-brand-sand/40 border border-brand-sand px-4 py-3 text-sm focus:outline-none focus:border-amber-700">
+                            <!-- Driven via JavaScript dynamic array loop injections -->
+                        </select>
+                    </div>
 
-    <!-- Special Fictional Customization Support Note Callout -->
-    <div class="bg-brand-sand/20 border-l-2 border-amber-700 p-4 my-4">
-        <p class="text-xs font-bold text-brand-dark uppercase tracking-wider mb-1">✨ Looking for completely bespoke design?</p>
-        <p class="text-xs text-neutral-600 leading-relaxed">
-            If you're looking for a bespoke design or specific modifications to any particular item, we would love to bring your vision to life! Please contact our design studio directly using the information below. 
-            <a href="javascript:void(0)" onclick="openMockStudioSupport()" class="text-amber-700 underline font-semibold hover:text-amber-950">Contact our design team</a>.
-        </p>
-    </div>
+                    <!-- Special Fictional Customization Support Note Callout -->
+                    <div class="bg-brand-sand/20 border-l-2 border-amber-700 p-4 my-4">
+                        <p class="text-xs font-bold text-brand-dark uppercase tracking-wider mb-1">✨ Looking for completely bespoke design?</p>
+                        <p class="text-xs text-neutral-600 leading-relaxed">
+                            If you're looking for a bespoke design or specific modifications to any particular item, we would love to bring your vision to life! Please contact our design studio directly using the information below. 
+                            <a href="javascript:void(0)" onclick="openMockStudioSupport()" class="text-amber-700 underline font-semibold hover:text-amber-950">Contact our design team</a>.
+                        </p>
+                    </div>
 
-    <button onclick="handleCustomAddToCart()" class="w-full bg-brand-dark text-white font-medium py-4 text-xs uppercase tracking-widest hover:bg-amber-800 transition-colors">
-        Add Custom Creation to Bag
-    </button>
-</div>
+                    <button onclick="handleCustomAddToCart()" class="w-full bg-brand-dark text-white font-medium py-4 text-xs uppercase tracking-widest hover:bg-amber-800 transition-colors">
+                        Add Custom Creation to Bag
+                    </button>
+                </div>
 
             </div>
         </div>
@@ -460,7 +460,7 @@
                             <span class="text-sm font-medium">Earrings, Hoops & Studs</span>
                         </label>
                         <label class="flex items-center p-4 border border-brand-sand hover:border-brand-dark cursor-pointer transition-colors">
-                            <input type="radio" name="q3" value="anklets,piercing" class="accent-brand-dark mr-3" checked>
+                            <input type="radio" name="q3" value="anklets,piercing" class="accent-brand-dark mr-3">
                             <span class="text-sm font-medium">Minimalist Anklets and Piercings</span>
                         </label>
                     </div>
@@ -567,15 +567,15 @@
                     <label class="block text-xs font-bold uppercase tracking-wider text-brand-dark mb-1">Password</label>
                     <input type="password" id="auth-pass-input" placeholder="••••••••" class="w-full bg-brand-sand/40 border border-brand-sand px-4 py-2.5 text-sm focus:outline-none focus:border-amber-700">
                 </div>
-                <button onclick="submitAuth()" id="auth-submit-btn" class="w-full bg-brand-dark text-white py-3 text-xs uppercase tracking-widest hover:bg-amber-800 transition-colors font-medium">
+                <button type="submit" id="auth-submit-btn" class="w-full bg-brand-dark text-white py-3 text-xs uppercase tracking-widest hover:bg-amber-800 transition-colors font-medium">
                     Sign In
                 </button>
                 <div class="text-center pt-2">
-                    <button onclick="toggleAuthMode()" id="auth-switch-btn" class="text-xs text-brand-muted hover:text-brand-dark underline">
+                    <button type="button" onclick="toggleAuthMode()" id="auth-switch-btn" class="text-xs text-brand-muted hover:text-brand-dark underline">
                         Don't have an account? Create one
                     </button>
                 </div>
-            </div>
+            </form>
         </div>
     </div>
 
@@ -625,8 +625,6 @@
             </button>
         </div>
     </div>
-    <!-- Put this inside your product card or product modal HTML -->
-
 
     <!-- Footer -->
     <footer class="bg-brand-dark text-brand-lightgold pt-16 pb-12">
@@ -680,10 +678,6 @@
 
     <!-- JavaScript Application Logic -->
     <script>
-        // 56+ Products Database adhering strictly to rules:
-        // - Minimal collection items strictly <= ₹7,000
-        // - All other collections & wedding & custom capped <= ₹10,000 (max ₹9,950)
-     
         const products = [
             // --- WOMEN COLLECTION (15 items) ---
             {
@@ -1318,8 +1312,9 @@
         let currentCollectionFilter = 'all';
         let currentCategoryFilter = 'all';
         let currentQuizStep = 1;
+        let trackingStep = 1;
 
-            const sizeGuides = {
+        const sizeGuides = {
             ring: ["Size 6 (16.5mm)", "Size 7 (17.3mm)", "Size 8 (18.1mm)", "Size 9 (18.9mm)", "Size 10 (19.8mm)"],
             band: ["Size 7 (17.3mm)", "Size 8 (18.1mm)", "Size 9 (18.9mm)", "Size 11 (20.6mm)", "Size 12 (21.4mm)"],
             bracelet: ["6.0 Inches (Petite)", "6.5 Inches (Small)", "7.0 Inches (Standard)", "7.5 Inches (Large)"],
@@ -1327,10 +1322,10 @@
         };
         
         // Initialization
-               document.addEventListener('DOMContentLoaded', () => {
+        document.addEventListener('DOMContentLoaded', () => {
             if (typeof renderProducts === 'function') renderProducts(products);
             if (typeof updateBadges === 'function') updateBadges();
-            updateCustomPreview(); // This can now run error-free because sizeGuides is initialized above it!
+            updateCustomPreview();
         });
 
         // Tab Navigation Menu System
@@ -1487,160 +1482,142 @@
             document.getElementById('product-modal').classList.add('hidden');
         }
         
+        function updateCartUI() {
+            let cartContainer = document.getElementById('cart-items');
+            if (!cartContainer) return;
 
-       function updateCartUI() {
-    // Locate where products should render inside your slider layout panel drawer
-    let cartContainer = document.getElementById('shopping-bag-items-list');
-    if (!cartContainer) {
-        // Safe selector fallback looking for space container rows
-        cartContainer = document.querySelector('.shopping-bag-items-container-selector') || document.querySelector('[class*="space-y-4"]');
-    }
+            if (cart.length === 0) {
+                cartContainer.innerHTML = `<p class="text-sm text-brand-muted text-center py-12">Your shopping bag is currently empty.</p>`;
+                const subtotalTextNode = document.getElementById('cart-subtotal');
+                if (subtotalTextNode) subtotalTextNode.innerText = "₹0";
+                return;
+            }
 
-    if (!cartContainer) return;
+            let absoluteBagSum = 0;
+            cartContainer.innerHTML = cart.map((item, index) => {
+                const itemPrice = item.price * (item.quantity || 1);
+                absoluteBagSum += itemPrice;
+                return `
+                    <div class="flex gap-4 items-center pb-4 border-b border-brand-sand">
+                        <img src="${item.image || 'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&q=80&w=200'}" alt="${item.name || item.title}" class="w-16 h-20 object-cover bg-brand-sand">
+                        <div class="flex-1">
+                            <h4 class="font-serif text-sm font-bold text-brand-dark">${item.name || item.title}</h4>
+                            ${item.size ? `<p class="text-[11px] text-brand-dark font-medium mt-0.5">Size: ${item.size}</p>` : ''}
+                            ${item.specs ? `<p class="text-[10px] text-brand-muted">${item.specs}</p>` : ''}
+                            ${item.engraving && item.engraving !== 'None' ? `<p class="text-[10px] text-amber-800 italic">Engraving: "${item.engraving}"</p>` : ''}
+                            <p class="text-xs text-brand-muted mt-1">₹${item.price.toLocaleString('en-IN')} × ${item.quantity || 1}</p>
+                        </div>
+                        <button onclick="removeFromCartByIndex(${index})" class="text-brand-muted hover:text-red-600 text-sm p-2"><i class="fa-solid fa-trash"></i></button>
+                    </div>
+                `;
+            }).join('');
 
-    // Reset placeholder if cart length drops to zero
-    if (cart.length === 0) {
-        cartContainer.innerHTML = `
-            <div class="text-center py-12 px-4 text-neutral-400">
-                <p class="text-xs uppercase tracking-widest font-bold">Your Bag is Empty</p>
-                <p class="text-[10px] mt-1">Select fine pieces to build your signature stack.</p>
-            </div>`;
-        const subtotalTextNode = document.getElementById('bag-subtotal-display') || document.getElementById('cart-subtotal');
-        if (subtotalTextNode) subtotalTextNode.innerText = "₹0";
-        return;
-    }
-
-    // Map each item in the database directly into scannable high-contrast layout rows
-    let absoluteBagSum = 0;
-    cartContainer.innerHTML = cart.map((item, index) => {
-        absoluteBagSum += item.price;
-        return `
-            <div class="flex items-start justify-between border-b border-white/10 pb-4 pt-2 text-left font-sans text-white">
-                <div class="space-y-0.5">
-                    <h4 class="text-xs font-bold uppercase tracking-wider text-brand-sand">${item.title}</h4>
-                    <p class="text-[10px] text-neutral-400">${item.specs} • <span class="text-white font-semibold">${item.size}</span></p>
-                    ${item.engraving !== "None" ? `<p class="text-[9px] text-amber-400 italic">Engraving: "\${item.engraving}"</p>` : ''}
-                    <span class="text-xs font-bold text-white block mt-1">₹${item.price.toLocaleString('en-IN')}</span>
-                </div>
-                <!-- DYNAMIC DELETION ATTACHMENT HUB BUTTON LINK -->
-                <button onclick="removeFromCart(${index})" class="text-[10px] uppercase font-bold tracking-widest text-neutral-400 hover:text-red-400 transition-colors bg-transparent border-0 cursor-pointer p-1 focus:outline-none">
-                    ✕ Remove
-                </button>
-            </div>
-        `;
-    }).join('');
-
-    const subtotalTextNode = document.getElementById('bag-subtotal-display') || document.getElementById('cart-subtotal');
-    if (subtotalTextNode) {
-        subtotalTextNode.innerText = `₹${absoluteBagSum.toLocaleString('en-IN')}`;
-    }
-}
-
-        function removeFromCart(index) {
-    cart.splice(index, 1);
-    if (typeof updateBadges === 'function') updateBadges(); // Sync top badging bubble numbers counters
-    updateCartUI(); // Re-render instantly
-}
-function updateCustomPreview() {
-    const baseSelect = document.getElementById('custom-base');
-    const metalSelect = document.getElementById('custom-metal');
-    const stoneSelect = document.getElementById('custom-stone');
-    const engravingInput = document.getElementById('custom-engraving');
-    const sizeContainer = document.getElementById('size-selection-container');
-    const sizeSelect = document.getElementById('custom-size');
-
-    if (!baseSelect || !metalSelect || !stoneSelect || !engravingInput) return;
-
-    const basePrice = parseInt(baseSelect.options[baseSelect.selectedIndex].getAttribute('data-price')) || 0;
-    const metalAdd = parseInt(metalSelect.options[metalSelect.selectedIndex].getAttribute('data-add')) || 0;
-    const stoneAdd = parseInt(stoneSelect.options[stoneSelect.selectedIndex].getAttribute('data-add')) || 0;
-    
-    const eng = engravingInput.value.trim();
-    const engravingAdd = eng.length > 0 ? 200 : 0;
-
-    let totalPrice = basePrice + metalAdd + stoneAdd + engravingAdd;
-
-    // Push calculation values directly to the studio layout cards text panes
-    const priceTxt = document.getElementById('preview-price-text');
-    if (priceTxt) priceTxt.innerText = `₹${totalPrice.toLocaleString('en-IN')}`;
-
-    const titleTxt = document.getElementById('preview-title-text');
-    if (titleTxt) titleTxt.innerText = `Custom ${baseSelect.options[baseSelect.selectedIndex].text.split('(')[0].trim()}`;
-
-    const specTxt = document.getElementById('preview-metal-text');
-    if (specTxt) {
-        specTxt.innerText = `${metalSelect.options[metalSelect.selectedIndex].text.split('(')[0].trim()} • ${stoneSelect.options[stoneSelect.selectedIndex].text.split('(')[0].trim()}`;
-    }
-
-    const engTxt = document.getElementById('preview-engraving-text');
-    if (engTxt) engTxt.innerText = eng ? `Engraving: "${eng}" (+₹200)` : '';
-
-    // Dynamic Sizing mapping keys checker visibility toggle script
-    const baseType = baseSelect.value;
-    if (sizeContainer && sizeSelect) {
-        if (sizeGuides[baseType]) {
-            sizeContainer.classList.remove('hidden');
-            sizeSelect.innerHTML = sizeGuides[baseType].map(sz => `<option value="${sz}">${sz}</option>`).join('');
-        } else {
-            sizeContainer.classList.add('hidden');
-            sizeSelect.innerHTML = '';
+            const subtotalTextNode = document.getElementById('cart-subtotal');
+            if (subtotalTextNode) {
+                subtotalTextNode.innerText = `₹${absoluteBagSum.toLocaleString('en-IN')}`;
+            }
         }
-    }
-}
 
-function handleCustomAddToCart() {
-    // ACCOUNT SECURE BLOCK INTERCEPTOR: Guard execution line. Push user to login screen if empty profile
-    if (!currentUser) {
-        alert("🔒 Account sign-in profile validation required to unlock workshop bags.");
-        switchTab('auth'); // Slides open your login tab layout immediately
-        return;
-    }
-    
-    const baseSelect = document.getElementById('custom-base');
-    const metalSelect = document.getElementById('custom-metal');
-    const stoneSelect = document.getElementById('custom-stone');
-    const engravingInput = document.getElementById('custom-engraving');
-    const sizeSelect = document.getElementById('custom-size');
+        function removeFromCartByIndex(index) {
+            cart.splice(index, 1);
+            updateBadges();
+            updateCartUI();
+        }
 
-    const basePrice = parseInt(baseSelect.options[baseSelect.selectedIndex].getAttribute('data-price')) || 0;
-    const metalAdd = parseInt(metalSelect.options[metalSelect.selectedIndex].getAttribute('data-add')) || 0;
-    const stoneAdd = parseInt(stoneSelect.options[stoneSelect.selectedIndex].getAttribute('data-add')) || 0;
-    const eng = engravingInput.value.trim();
-    const engravingAdd = eng.length > 0 ? 200 : 0;
+        function updateCustomPreview() {
+            const baseSelect = document.getElementById('custom-base');
+            const metalSelect = document.getElementById('custom-metal');
+            const stoneSelect = document.getElementById('custom-stone');
+            const engravingInput = document.getElementById('custom-engraving');
+            const sizeContainer = document.getElementById('size-selection-container');
+            const sizeSelect = document.getElementById('custom-size');
 
-    let finalCalculatedPrice = basePrice + metalAdd + stoneAdd + engravingAdd;
-    let selectedItemSize = sizeGuides[baseSelect.value] ? sizeSelect.value : "Standard Size";
+            if (!baseSelect || !metalSelect || !stoneSelect || !engravingInput) return;
 
-    const customPieceObject = {
-        id: "custom-" + Date.now(),
-        title: `Custom ${baseSelect.options[baseSelect.selectedIndex].text.split('(')[0].trim()}`,
-        specs: `${metalSelect.options[metalSelect.selectedIndex].text.split('(')[0].trim()} | ${stoneSelect.options[stoneSelect.selectedIndex].text.split('(')[0].trim()}`,
-        engraving: eng ? eng : "None",
-        size: selectedItemSize,
-        price: finalCalculatedPrice
-    };
+            const basePrice = parseInt(baseSelect.options[baseSelect.selectedIndex].getAttribute('data-price')) || 0;
+            const metalAdd = parseInt(metalSelect.options[metalSelect.selectedIndex].getAttribute('data-add')) || 0;
+            const stoneAdd = parseInt(stoneSelect.options[stoneSelect.selectedIndex].getAttribute('data-add')) || 0;
+            
+            const eng = engravingInput.value.trim();
+            const engravingAdd = eng.length > 0 ? 200 : 0;
 
-    cart.push(customPieceObject);
-    if (typeof updateBadges === 'function') updateBadges();
-    updateCartUI(); 
-    alert(`✨ ${customPieceObject.title} successfully added to your shopping bag!`);
+            let totalPrice = basePrice + metalAdd + stoneAdd + engravingAdd;
 
-        // Cart & Wishlist Management
+            const priceTxt = document.getElementById('preview-price-text');
+            if (priceTxt) priceTxt.innerText = `₹${totalPrice.toLocaleString('en-IN')}`;
+
+            const titleTxt = document.getElementById('preview-title-text');
+            if (titleTxt) titleTxt.innerText = `Custom ${baseSelect.options[baseSelect.selectedIndex].text.split('(')[0].trim()}`;
+
+            const specTxt = document.getElementById('preview-metal-text');
+            if (specTxt) {
+                specTxt.innerText = `${metalSelect.options[metalSelect.selectedIndex].text.split('(')[0].trim()} • ${stoneSelect.options[stoneSelect.selectedIndex].text.split('(')[0].trim()}`;
+            }
+
+            const engTxt = document.getElementById('preview-engraving-text');
+            if (engTxt) engTxt.innerText = eng ? `Engraving: "${eng}" (+₹200)` : '';
+
+            const baseType = baseSelect.value;
+            if (sizeContainer && sizeSelect) {
+                if (sizeGuides[baseType]) {
+                    sizeContainer.classList.remove('hidden');
+                    sizeSelect.innerHTML = sizeGuides[baseType].map(sz => `<option value="${sz}">${sz}</option>`).join('');
+                } else {
+                    sizeContainer.classList.add('hidden');
+                    sizeSelect.innerHTML = '';
+                }
+            }
+        }
+
+        function handleCustomAddToCart() {
+            if (!currentUser) {
+                alert("🔒 Account sign-in required to add custom items to your bag.");
+                toggleAuthModal();
+                return;
+            }
+            
+            const baseSelect = document.getElementById('custom-base');
+            const metalSelect = document.getElementById('custom-metal');
+            const stoneSelect = document.getElementById('custom-stone');
+            const engravingInput = document.getElementById('custom-engraving');
+            const sizeSelect = document.getElementById('custom-size');
+
+            const basePrice = parseInt(baseSelect.options[baseSelect.selectedIndex].getAttribute('data-price')) || 0;
+            const metalAdd = parseInt(metalSelect.options[metalSelect.selectedIndex].getAttribute('data-add')) || 0;
+            const stoneAdd = parseInt(stoneSelect.options[stoneSelect.selectedIndex].getAttribute('data-add')) || 0;
+            const eng = engravingInput.value.trim();
+            const engravingAdd = eng.length > 0 ? 200 : 0;
+
+            let finalCalculatedPrice = basePrice + metalAdd + stoneAdd + engravingAdd;
+            let selectedItemSize = sizeGuides[baseSelect.value] ? sizeSelect.value : "Standard Size";
+
+            const customPieceObject = {
+                id: "custom-" + Date.now(),
+                name: `Custom ${baseSelect.options[baseSelect.selectedIndex].text.split('(')[0].trim()}`,
+                title: `Custom ${baseSelect.options[baseSelect.selectedIndex].text.split('(')[0].trim()}`,
+                specs: `${metalSelect.options[metalSelect.selectedIndex].text.split('(')[0].trim()} | ${stoneSelect.options[stoneSelect.selectedIndex].text.split('(')[0].trim()}`,
+                engraving: eng ? eng : "None",
+                size: selectedItemSize,
+                price: finalCalculatedPrice,
+                quantity: 1
+            };
+
+            cart.push(customPieceObject);
+            updateBadges();
+            updateCartUI(); 
+            alert(`✨ ${customPieceObject.title} successfully added to your shopping bag!`);
+        }
+
         function addToCart(id) {
             const p = products.find(x => x.id === id);
             if(!p) return;
 
-            // Grab the ring size if the size select dropdown exists on the page
-            const sizeSelect = document.getElementById('ring-size');
-            const selectedSize = (p.category === 'rings' || p.name.toLowerCase().includes('ring')) && sizeSelect ? sizeSelect.value : null;
-
-            // Find existing item matching both ID and selected size
-            const existing = cart.find(x => x.id === id && x.size === selectedSize);
+            const existing = cart.find(x => x.id === id);
             
             if(existing) {
-                existing.quantity += 1;
+                existing.quantity = (existing.quantity || 1) + 1;
             } else {
-                cart.push({ ...p, quantity: 1, size: selectedSize });
+                cart.push({ ...p, quantity: 1 });
             }
             updateBadges();
             renderCart();
@@ -1648,85 +1625,73 @@ function handleCustomAddToCart() {
         }
 
         function removeFromCart(id, size = null) {
-            // Removes only the item matching both the ID and the specific ring size
             cart = cart.filter(x => !(x.id === id && x.size === size));
             updateBadges();
             renderCart();
         }
-   function handleProfileAccountSignIn(event) {
-    if (event) event.preventDefault(); 
-    
-    const textFields = document.querySelectorAll('input[type="text"]');
-    
-    let extractedName = "Valued Collector";
-    if (textFields && textFields.length > 0) {
-        // Safe check to find the user's name from your form's first text input box
-        extractedName = textFields[0].value.trim() || "Guest Collector";
-    }
 
-    currentUser = extractedName;
-    updateAuthHeaderLayoutUI(); 
-    
-    switchTab('home'); 
-    alert(`✨ Welcome back to Striva Atelier, ${currentUser}! Checkout terminal active.`);
-}
+        function handleProfileAccountSignIn(event) {
+            if (event) event.preventDefault(); 
+            
+            const emailInput = document.getElementById('auth-email-input').value.trim();
+            const nameInput = document.getElementById('auth-name-input').value.trim();
+            
+            let extractedName = nameInput || emailInput.split('@')[0] || "Valued Collector";
 
-function updateAuthHeaderLayoutUI() {
-    const originalLoginLink = document.getElementById('auth-nav-link') || 
-                              Array.from(document.querySelectorAll('a, button')).find(el => el.textContent.includes('Sign In') || el.textContent.includes('Register'));
-    
-    if (originalLoginLink && currentUser) {
-        originalLoginLink.innerHTML = `<span class="text-brand-dark bg-brand-sand/40 border border-brand-sand/80 font-bold px-3 py-1.5 text-xs rounded tracking-widest uppercase cursor-pointer">✨ HI, ${currentUser.split(' ')[0]}</span>`;
-        originalLoginLink.setAttribute('onclick', "handleProceedToCheckout()");
-    }
-}
-    
-       
-function handleProceedToCheckout() {
-    if (cart.length === 0) {
-        alert("Your shopping bag layout is empty! Collect items before entering the checkout queue.");
-        return;
-    }
-    
-    let sumTotalAccumulator = 0;
-    cart.forEach(item => {
-        sumTotalAccumulator += item.price;
-    });
-    
-    // Reveal hidden layout elements matching Part 2 HTML code block elements
-    const gateContainerModal = document.getElementById('checkout-gateway-modal');
-    if (gateContainerModal) {
-        gateContainerModal.classList.remove('hidden');
-        document.getElementById('gateway-payment-view').classList.remove('hidden');
-        document.getElementById('gateway-tracking-view').classList.add('hidden');
-        document.getElementById('modal-payment-total').innerText = `₹${sumTotalAccumulator.toLocaleString('en-IN')}`;
-
-        // NPCI merchant protocol string configuration parameters encoder link (&am=) locks price
-        const upiHandleMock = "striva.luxury@icici";
-        const merchantString = "Striva Luxury Atelier";
-        const npcPayloadPayload = `upi://pay?pa=${upiHandleMock}&pn=${encodeURIComponent(merchantString)}&am=${sumTotalAccumulator}&cu=INR&tn=StrivaAtelierOrder`;
-        
-        const dynamicQRImageNode = document.getElementById('sandbox-dynamic-qr-img');
-        if (dynamicQRImageNode) {
-            dynamicQRImageNode.src = `https://qrserver.com{encodeURIComponent(npcPayloadPayload)}`;
+            currentUser = { name: extractedName, email: emailInput };
+            updateAuthHeaderLayoutUI(); 
+            toggleAuthModal();
+            alert(`✨ Welcome back to Striva Atelier, ${currentUser.name}!`);
         }
-    } else {
-        console.warn("Layout missing element: ensure #checkout-gateway-modal block is pasted outside script tags.");
-    }
-}
+
+        function updateAuthHeaderLayoutUI() {
+            const mobileAuthText = document.getElementById('mobile-auth-text');
+            if (mobileAuthText && currentUser) {
+                mobileAuthText.innerText = `Hi, ${currentUser.name}`;
+            }
+        }
+            
+        function handleProceedToCheckout() {
+            if (cart.length === 0) {
+                alert("Your shopping bag is empty!");
+                return;
+            }
+            
+            let sumTotalAccumulator = 0;
+            cart.forEach(item => {
+                sumTotalAccumulator += item.price * (item.quantity || 1);
+            });
+            
+            const gateContainerModal = document.getElementById('checkout-gateway-modal');
+            if (gateContainerModal) {
+                gateContainerModal.classList.remove('hidden');
+                document.getElementById('gateway-payment-view').classList.remove('hidden');
+                document.getElementById('gateway-tracking-view').classList.add('hidden');
+                document.getElementById('modal-payment-total').innerText = `₹${sumTotalAccumulator.toLocaleString('en-IN')}`;
+
+                const upiHandleMock = "striva.luxury@icici";
+                const merchantString = "Striva Luxury Atelier";
+                const npcPayloadPayload = `upi://pay?pa=${upiHandleMock}&pn=${encodeURIComponent(merchantString)}&am=${sumTotalAccumulator}&cu=INR&tn=StrivaAtelierOrder`;
+                
+                const dynamicQRImageNode = document.getElementById('sandbox-dynamic-qr-img');
+                if (dynamicQRImageNode) {
+                    dynamicQRImageNode.src = `https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${encodeURIComponent(npcPayloadPayload)}`;
+                }
+            }
+        }
 
         function simulateOrderSuccess() {
-    document.getElementById('gateway-payment-view').classList.add('hidden');
-    document.getElementById('gateway-tracking-view').classList.remove('hidden');
-    document.getElementById('mock-order-id-label').innerText = `Order Reference ID: #SRV-${Math.floor(100000 + Math.random() * 900000)}`;
-    
-    cart = []; // Empty global bag array data matrix variables safely
-    if (typeof updateBadges === 'function') updateBadges();
-    updateCartUI(); // Reset list UI elements to empty states placeholder card frames
-    
-    trackingStep = 1;
-    renderTrackingUI();
-}
+            document.getElementById('gateway-payment-view').classList.add('hidden');
+            document.getElementById('gateway-tracking-view').classList.remove('hidden');
+            document.getElementById('mock-order-id-label').innerText = `Order Reference ID: #SRV-${Math.floor(100000 + Math.random() * 900000)}`;
+            
+            cart = []; 
+            updateBadges();
+            updateCartUI(); 
+            
+            trackingStep = 1;
+            renderTrackingUI();
+        }
 
         function toggleWishlist(id) {
             const p = products.find(x => x.id === id);
@@ -1743,54 +1708,24 @@ function handleProceedToCheckout() {
         }
 
         function updateBadges() {
-            document.getElementById('cart-badge').innerText = cart.reduce((acc, item) => acc + item.quantity, 0);
-            document.getElementById('wishlist-badge').innerText = wishlist.length;
+            const cartBadge = document.getElementById('cart-badge');
+            const wishlistBadge = document.getElementById('wishlist-badge');
+            if (cartBadge) cartBadge.innerText = cart.reduce((acc, item) => acc + (item.quantity || 1), 0);
+            if (wishlistBadge) wishlistBadge.innerText = wishlist.length;
             renderCart();
             renderWishlist();
         }
 
-      function renderCart() {
-            const container = document.getElementById('cart-items');
-            document.getElementById('cart-count').innerText = cart.reduce((acc, item) => acc + item.quantity, 0);
-            
-            if(cart.length === 0) {
-                container.innerHTML = `<p class="text-sm text-brand-muted text-center py-12">Your shopping bag is currently empty.</p>`;
-                document.getElementById('cart-subtotal').innerText = "₹0";
-                return;
-            }
-
-            container.innerHTML = '';
-            let subtotal = 0;
-
-            cart.forEach(item => {
-                subtotal += item.price * (item.quantity || 1);
-                const div = document.createElement('div');
-                div.className = "flex gap-4 items-center pb-4 border-b border-brand-sand";
-                
-                // Format size display if item.size exists
-                const sizeDisplay = item.size ? `<p class="text-[11px] text-brand-dark font-medium mt-0.5">Size: ${item.size}</p>` : '';
-                // Format size parameter safely for the onclick string
-                const sizeArg = item.size ? `'${item.size}'` : 'null';
-
-                div.innerHTML = `
-                    <img src="${item.image}" alt="${item.name}" class="w-16 h-20 object-cover bg-brand-sand">
-                    <div class="flex-1">
-                        <h4 class="font-serif text-sm font-bold text-brand-dark">${item.name}</h4>
-                        ${sizeDisplay}
-                        ${item.details ? `<p class="text-[11px] text-amber-800">${item.details}</p>` : ''}
-                        <p class="text-xs text-brand-muted mt-1">₹${item.price.toLocaleString('en-IN')} × ${item.quantity || 1}</p>
-                    </div>
-                    <button onclick="removeFromCart('${item.id}', ${sizeArg})" class="text-brand-muted hover:text-red-600 text-sm p-2"><i class="fa-solid fa-trash"></i></button>
-                `;
-                container.appendChild(div);
-            });
-
-            document.getElementById('cart-subtotal').innerText = `₹${subtotal.toLocaleString('en-IN')}`;
+        function renderCart() {
+            updateCartUI();
         }
 
         function renderWishlist() {
             const container = document.getElementById('wishlist-items');
-            document.getElementById('wishlist-count').innerText = wishlist.length;
+            const countEl = document.getElementById('wishlist-count');
+            if (countEl) countEl.innerText = wishlist.length;
+
+            if(!container) return;
 
             if(wishlist.length === 0) {
                 container.innerHTML = `<p class="text-sm text-brand-muted text-center py-12">Your wishlist is currently empty.</p>`;
@@ -1816,12 +1751,12 @@ function handleProceedToCheckout() {
 
         function toggleCartDrawer() {
             const drawer = document.getElementById('cart-drawer');
-            drawer.classList.toggle('translate-x-full');
+            if (drawer) drawer.classList.toggle('translate-x-full');
         }
 
         function toggleWishlistDrawer() {
             const drawer = document.getElementById('wishlist-drawer');
-            drawer.classList.toggle('translate-x-full');
+            if (drawer) drawer.classList.toggle('translate-x-full');
         }
 
         function checkoutCart() {
@@ -1829,27 +1764,36 @@ function handleProceedToCheckout() {
                 alert("Your bag is empty.");
                 return;
             }
-            alert("Redirecting to secure encrypted payment gateway (UPI, Cards, NetBanking)...");
+            handleProceedToCheckout();
         }
 
         function renderTrackingUI() {
-    document.getElementById('track-step-1').className = trackingStep >= 1 ? "flex items-center space-x-3 text-green-600 font-bold text-xs uppercase tracking-wider" : "flex items-center space-x-3 text-neutral-400 text-xs uppercase tracking-wider";
-    document.getElementById('track-step-2').className = trackingStep >= 2 ? "flex items-center space-x-3 text-green-600 font-bold text-xs uppercase tracking-wider" : "flex items-center space-x-3 text-neutral-400 text-xs uppercase tracking-wider";
-    document.getElementById('track-step-3').className = trackingStep >= 3 ? "flex items-center space-x-3 text-green-600 font-bold text-xs uppercase tracking-wider" : "flex items-center space-x-3 text-neutral-400 text-xs uppercase tracking-wider";
-}
+            const step1 = document.getElementById('track-step-1');
+            const step2 = document.getElementById('track-step-2');
+            const step3 = document.getElementById('track-step-3');
 
-             function advanceMockTracking() {
-    if (trackingStep < 3) {
-        trackingStep++;
-        renderTrackingUI();
-    } else {
-        alert("Delivery pipeline complete. Striva insured shipment arrived successfully at target collector residence hub!");
-    }
-}
+            if (step1) step1.className = trackingStep >= 1 ? "flex items-center space-x-3 text-green-600 font-bold text-xs uppercase tracking-wider" : "flex items-center space-x-3 text-neutral-400 text-xs uppercase tracking-wider";
+            if (step2) step2.className = trackingStep >= 2 ? "flex items-center space-x-3 text-green-600 font-bold text-xs uppercase tracking-wider" : "flex items-center space-x-3 text-neutral-400 text-xs uppercase tracking-wider";
+            if (step3) step3.className = trackingStep >= 3 ? "flex items-center space-x-3 text-green-600 font-bold text-xs uppercase tracking-wider" : "flex items-center space-x-3 text-neutral-400 text-xs uppercase tracking-wider";
+        }
 
-function closeCheckoutModal() {
-    document.getElementById('checkout-gateway-modal').classList.add('hidden');
-}
+        function advanceMockTracking() {
+            if (trackingStep < 3) {
+                trackingStep++;
+                renderTrackingUI();
+            } else {
+                alert("Delivery pipeline complete. Striva insured shipment arrived successfully!");
+            }
+        }
+
+        function closeCheckoutModal() {
+            const checkoutModal = document.getElementById('checkout-gateway-modal');
+            if (checkoutModal) checkoutModal.classList.add('hidden');
+        }
+
+        function openMockStudioSupport() {
+            alert("📞 Connecting with Striva Bespoke Studio: Please email support@striva.in or call +91 (800) 555-STRIVA.");
+        }
 
         // Authentication Handling
         function handleAccountClick() {
@@ -1865,7 +1809,8 @@ function closeCheckoutModal() {
         }
 
         function toggleAuthModal() {
-            document.getElementById('auth-modal').classList.toggle('hidden');
+            const modal = document.getElementById('auth-modal');
+            if (modal) modal.classList.toggle('hidden');
         }
 
         function toggleAuthMode() {
@@ -1894,8 +1839,13 @@ function closeCheckoutModal() {
 
         // Global Search Modal
         function toggleSearchModal() {
-            document.getElementById('search-modal').classList.toggle('hidden');
-            document.getElementById('global-search-input').focus();
+            const searchModal = document.getElementById('search-modal');
+            if (searchModal) {
+                searchModal.classList.toggle('hidden');
+                if (!searchModal.classList.contains('hidden')) {
+                    document.getElementById('global-search-input').focus();
+                }
+            }
         }
 
         function handleGlobalSearch() {
@@ -1930,16 +1880,18 @@ function closeCheckoutModal() {
             });
         }
 
-        // 5-Step Style Quiz Logic (Guaranteed 2-3 pieces per result)
+        // 5-Step Style Quiz Logic
         function nextQuizStep(step) {
             document.querySelectorAll('.quiz-step').forEach(el => el.classList.add('hidden'));
-            document.querySelector(`.quiz-step[data-step="${step}"]`).classList.remove('hidden');
+            const target = document.querySelector(`.quiz-step[data-step="${step}"]`);
+            if (target) target.classList.remove('hidden');
             currentQuizStep = step;
         }
 
         function prevQuizStep(step) {
             document.querySelectorAll('.quiz-step').forEach(el => el.classList.add('hidden'));
-            document.querySelector(`.quiz-step[data-step="${step}"]`).classList.remove('hidden');
+            const target = document.querySelector(`.quiz-step[data-step="${step}"]`);
+            if (target) target.classList.remove('hidden');
             currentQuizStep = step;
         }
 
@@ -1948,22 +1900,23 @@ function closeCheckoutModal() {
             const resultsDiv = document.getElementById('quiz-results');
             resultsDiv.classList.remove('hidden');
 
-            // Pick 3 curated products based on selections or general top matches
-            const q1 = document.querySelector('input[name="q1"]:checked').value;
+            const q1Checked = document.querySelector('input[name="q1"]:checked');
+            const q1 = q1Checked ? q1Checked.value : 'minimal';
             let recommended = [];
 
             if (q1 === 'traditional' || q1 === 'wedding') {
-                recommended = [products[29], products[32], products[35]]; // Polki mala, Mangalsutra, Couple bands
+                recommended = [products[29], products[32], products[35]];
             } else if (q1 === 'statement') {
-                recommended = [products[3], products[12], products[16]]; // Tennis bracelet, Emerald ring, Onyx signet
+                recommended = [products[3], products[12], products[16]];
             } else {
-                recommended = [products[0], products[2], products[47]]; // Solitaire, Huggie, Micro solitaire necklace
+                recommended = [products[0], products[2], products[47]];
             }
 
             const grid = document.getElementById('quiz-recommended-grid');
             grid.innerHTML = '';
 
             recommended.forEach(p => {
+                if(!p) return;
                 const card = document.createElement('div');
                 card.className = "bg-brand-sand/40 border border-brand-sand p-4 flex flex-col justify-between space-y-3";
                 card.innerHTML = `
@@ -1985,15 +1938,10 @@ function closeCheckoutModal() {
             nextQuizStep(1);
         }
 
-
-     function toggleFloatingHelpHub() {
+        function toggleFloatingHelpHub() {
             const helpPanel = document.getElementById('floating-help-panel');
             if (helpPanel) {
-                if (helpPanel.classList.contains('hidden')) {
-                    helpPanel.classList.remove('hidden');
-                } else {
-                    helpPanel.classList.add('hidden');
-                }
+                helpPanel.classList.toggle('hidden');
             }
         }
 
@@ -2010,92 +1958,89 @@ function closeCheckoutModal() {
                     if (iconLabel) iconLabel.innerText = "＋";
                 }
             }
-        
+        }
     </script>
-           <!-- CONSTANT FLOATING HELP HUB WIDGET -->
-     <div class="fixed bottom-6 right-6 z-50 font-sans">
-    <button onclick="toggleFloatingHelpHub()" class="bg-brand-dark text-white shadow-xl px-5 py-3 rounded-full text-xs font-bold uppercase tracking-wider flex items-center space-x-2 border border-brand-sand hover:bg-amber-900 transition-all">
-        <span>✨</span> <span>Striva Help Hub</span>
-    </button>
 
-    <!-- The Slide-Up Accordion Panel Content Box -->
-    <div id="floating-help-panel" class="absolute bottom-16 right-0 w-80 sm:w-96 bg-white border border-brand-sand rounded shadow-2xl p-5 hidden transition-all max-h-[400px] overflow-y-auto">
-        <div class="flex justify-between items-center border-b border-brand-sand/50 pb-3 mb-4">
-            <h4 class="text-xs uppercase font-bold tracking-widest text-brand-dark">Studio Guide & Support</h4>
-            <button onclick="toggleFloatingHelpHub()" class="text-neutral-400 hover:text-black font-bold text-xs">✕</button>
-        </div>
+    <!-- CONSTANT FLOATING HELP HUB WIDGET -->
+    <div class="fixed bottom-6 right-6 z-50 font-sans">
+        <button onclick="toggleFloatingHelpHub()" class="bg-brand-dark text-white shadow-xl px-5 py-3 rounded-full text-xs font-bold uppercase tracking-wider flex items-center space-x-2 border border-brand-sand hover:bg-amber-900 transition-all">
+            <span>✨</span> <span>Striva Help Hub</span>
+        </button>
 
-        <!-- Inner Accordion Items -->
-        <div class="space-y-3">
-            <!-- Item 1 -->
-            <div class="border border-brand-sand/60 p-3 bg-brand-sand/10 rounded cursor-pointer" onclick="toggleHelpAccordion('help-1')">
-                <h5 class="text-xs font-bold tracking-wider text-brand-dark flex justify-between items-center">
-                    How do I find my ring/band size? <span id="help-1-icon">＋</span>
-                </h5>
-                <p id="help-1-content" class="text-[11px] text-neutral-600 mt-2 leading-relaxed hidden">
-                    We follow standard Indian ring dimensions. Loop a non-elastic string tightly around your base knuckle layout frame, mark the precise overlap parameter metric, and cross-reference its millimeter distance output against our dynamic select parameters.
-                </p>
+        <!-- The Slide-Up Accordion Panel Content Box -->
+        <div id="floating-help-panel" class="absolute bottom-16 right-0 w-80 sm:w-96 bg-white border border-brand-sand rounded shadow-2xl p-5 hidden transition-all max-h-[400px] overflow-y-auto">
+            <div class="flex justify-between items-center border-b border-brand-sand/50 pb-3 mb-4">
+                <h4 class="text-xs uppercase font-bold tracking-widest text-brand-dark">Studio Guide & Support</h4>
+                <button onclick="toggleFloatingHelpHub()" class="text-neutral-400 hover:text-black font-bold text-xs">✕</button>
+            </div>
+
+            <!-- Inner Accordion Items -->
+            <div class="space-y-3">
+                <div class="border border-brand-sand/60 p-3 bg-brand-sand/10 rounded cursor-pointer" onclick="toggleHelpAccordion('help-1')">
+                    <h5 class="text-xs font-bold tracking-wider text-brand-dark flex justify-between items-center">
+                        How do I find my ring/band size? <span id="help-1-icon">＋</span>
+                    </h5>
+                    <p id="help-1-content" class="text-[11px] text-neutral-600 mt-2 leading-relaxed hidden">
+                        We follow standard Indian ring dimensions. Loop a non-elastic string tightly around your base knuckle, mark the overlap, and measure the length in millimeters.
+                    </p>
+                </div>
+                
+                <div class="border border-brand-sand/60 p-3 bg-brand-sand/10 rounded cursor-pointer" onclick="toggleHelpAccordion('help-2')">
+                    <h5 class="text-xs font-bold tracking-wider text-brand-dark flex justify-between items-center">
+                        What is your gold plating guarantee? <span id="help-2-icon">＋</span>
+                    </h5>
+                    <p id="help-2-content" class="text-[11px] text-neutral-600 mt-2 leading-relaxed hidden">
+                        Striva custom items carry a strict lifetime warranty backing the 18k Vermeil thickness integrity. If structural discoloration occurs, our production team handles re-plating free of charge.
+                    </p>
+                </div>
             </div>
             
-            <!-- Item 2 -->
-            <div class="border border-brand-sand/60 p-3 bg-brand-sand/10 rounded cursor-pointer" onclick="toggleHelpAccordion('help-2')">
-                <h5 class="text-xs font-bold tracking-wider text-brand-dark flex justify-between items-center">
-                    What is your gold plating guarantee? <span id="help-2-icon">＋</span>
-                </h5>
-                <p id="help-2-content" class="text-[11px] text-neutral-600 mt-2 leading-relaxed hidden">
-                    Striva custom items carry a strict lifetime warranty backing the 18k Vermeil thickness integrity. If structural discoloration metrics breach standard thresholds, our production team handles complete laboratory re-plating configurations free of charge.
-                </p>
+            <div class="mt-4 pt-3 border-t border-brand-sand/50 text-center">
+                <a href="javascript:void(0)" onclick="openMockStudioSupport()" class="text-[11px] uppercase tracking-wider text-amber-700 font-bold underline hover:text-amber-900 block">
+                    📞 Speak to our Artisan Team
+                </a>
             </div>
         </div>
-        
-        <!-- Quick Call Fallback -->
-        <div class="mt-4 pt-3 border-t border-brand-sand/50 text-center">
-            <a href="javascript:void(0)" onclick="openMockStudioSupport()" class="text-[11px] uppercase tracking-wider text-amber-700 font-bold underline hover:text-amber-900 block">
-                📞 Speak to our Artisan Team
-            </a>
-        </div>
     </div>
-</div>
 
     <!-- Fictional Sandbox Payment Gateway & Order Tracker -->
-<div id="checkout-gateway-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-    <div class="bg-white max-w-md w-full p-6 border border-brand-sand rounded shadow-2xl relative">
-        <button onclick="closeCheckoutModal()" class="absolute top-4 right-4 text-neutral-400 hover:text-black text-sm">✕</button>
-        
-        <!-- View Pane A: Fictional QR Code Window Layout -->
-        <div id="gateway-payment-view">
-            <h3 class="text-xs font-bold uppercase tracking-widest text-brand-dark mb-2 text-center">🔐 Razorpay Sandbox Secure Checkout</h3>
-            <p class="text-[10px] text-neutral-500 text-center mb-4">College Evaluation Mode: Amount is securely locked inside this transaction vector grid.</p>
+    <div id="checkout-gateway-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white max-w-md w-full p-6 border border-brand-sand rounded shadow-2xl relative">
+            <button onclick="closeCheckoutModal()" class="absolute top-4 right-4 text-neutral-400 hover:text-black text-sm">✕</button>
             
-            <!-- Real Dynamic Scannable Matrix Output target element -->
-            <div class="w-48 h-48 bg-white mx-auto border-2 border-brand-dark flex flex-col items-center justify-center p-2 my-4 shadow-sm">
-                <img id="sandbox-dynamic-qr-img" src="" alt="Dynamic Secure Transaction QR Grid Matrix" class="w-full h-full object-contain">
+            <!-- View Pane A: QR Code Window Layout -->
+            <div id="gateway-payment-view">
+                <h3 class="text-xs font-bold uppercase tracking-widest text-brand-dark mb-2 text-center">🔐 Razorpay Sandbox Secure Checkout</h3>
+                <p class="text-[10px] text-neutral-500 text-center mb-4">College Evaluation Mode: Amount is securely locked inside this transaction vector grid.</p>
+                
+                <div class="w-48 h-48 bg-white mx-auto border-2 border-brand-dark flex flex-col items-center justify-center p-2 my-4 shadow-sm">
+                    <img id="sandbox-dynamic-qr-img" src="" alt="Dynamic Secure Transaction QR Grid Matrix" class="w-full h-full object-contain">
+                </div>
+                
+                <p class="text-center font-bold text-sm text-brand-dark my-3">Exact Total Due: <span id="modal-payment-total" class="text-amber-700 font-mono">₹0</span></p>
+                <p class="text-[9px] text-center text-neutral-400 max-w-xs mx-auto mb-2">💡 Scanning this sample visual grid via PhonePe/GPay initializes a mock sequence pre-filled with this exact balance metric. Do not complete processing transactions inside third-party apps.</p>
+                
+                <button onclick="simulateOrderSuccess()" class="w-full bg-brand-dark text-white font-medium py-3 text-xs uppercase tracking-widest hover:bg-amber-800 transition-colors mt-2">
+                    Simulate Payment Success ✔
+                </button>
             </div>
-            
-            <p class="text-center font-bold text-sm text-brand-dark my-3">Exact Total Due: <span id="modal-payment-total" class="text-amber-700 font-mono">₹0</span></p>
-            <p class="text-[9px] text-center text-neutral-400 max-w-xs mx-auto mb-2">💡 Scanning this sample visual grid via PhonePe/GPay initializes a mock sequence pre-filled with this exact balance metric. Do not complete processing transactions inside third-party apps.</p>
-            
-            <button onclick="simulateOrderSuccess()" class="w-full bg-brand-dark text-white font-medium py-3 text-xs uppercase tracking-widest hover:bg-amber-800 transition-colors mt-2">
-                Simulate Payment Success ✔
-            </button>
-        </div>
 
-        <!-- View Pane B: Live Shipment Tracking View Dashboard Terminal -->
-        <div id="gateway-tracking-view" class="hidden">
-            <h3 class="text-xs font-bold uppercase tracking-widest text-brand-dark mb-1 text-center">📦 Order Tracking Portal</h3>
-            <p class="text-[9px] font-mono text-neutral-400 text-center mb-6" id="mock-order-id-label">Order Reference ID: #SRV-104921</p>
-            
-            <div class="space-y-4 my-6 pl-4 border-l-2 border-brand-sand">
-                <div id="track-step-1" class="flex items-center space-x-3 text-neutral-400 transition-all"><span class="text-xs">⚪</span> <p class="text-xs font-medium">Order Confirmed & Atelier Assigned</p></div>
-                <div id="track-step-2" class="flex items-center space-x-3 text-neutral-400 transition-all"><span class="text-xs">⚪</span> <p class="text-xs font-medium">Handcrafted & Polished in Gold Vermeil</p></div>
-                <div id="track-step-3" class="flex items-center space-x-3 text-neutral-400 transition-all"><span class="text-xs">⚪</span> <p class="text-xs font-medium">Handed over to BlueDart Insured Delivery</p></div>
+            <!-- View Pane B: Live Shipment Tracking Dashboard -->
+            <div id="gateway-tracking-view" class="hidden">
+                <h3 class="text-xs font-bold uppercase tracking-widest text-brand-dark mb-1 text-center">📦 Order Tracking Portal</h3>
+                <p class="text-[9px] font-mono text-neutral-400 text-center mb-6" id="mock-order-id-label">Order Reference ID: #SRV-104921</p>
+                
+                <div class="space-y-4 my-6 pl-4 border-l-2 border-brand-sand">
+                    <div id="track-step-1" class="flex items-center space-x-3 text-neutral-400 transition-all"><span class="text-xs">⚪</span> <p class="text-xs font-medium">Order Confirmed & Atelier Assigned</p></div>
+                    <div id="track-step-2" class="flex items-center space-x-3 text-neutral-400 transition-all"><span class="text-xs">⚪</span> <p class="text-xs font-medium">Handcrafted & Polished in Gold Vermeil</p></div>
+                    <div id="track-step-3" class="flex items-center space-x-3 text-neutral-400 transition-all"><span class="text-xs">⚪</span> <p class="text-xs font-medium">Handed over to BlueDart Insured Delivery</p></div>
+                </div>
+                
+                <button onclick="advanceMockTracking()" class="w-full bg-amber-700 text-white font-medium py-2 text-xs uppercase tracking-wider hover:bg-amber-800 mt-4">
+                    Advance Tracking 
+                </button>
             </div>
-            
-            <button onclick="advanceMockTracking()" class="w-full bg-amber-700 text-white font-medium py-2 text-xs uppercase tracking-wider hover:bg-amber-800 mt-4">
-                Advance Tracking 
-            </button>
         </div>
     </div>
-</div>
-    </body>
+</body>
 </html>
