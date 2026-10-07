@@ -1681,7 +1681,7 @@ function updateAuthHeaderLayoutUI() {
     }
 }
     
-        // ========================================================
+       
 function handleProceedToCheckout() {
     if (cart.length === 0) {
         alert("Your shopping bag layout is empty! Collect items before entering the checkout queue.");
@@ -1713,6 +1713,19 @@ function handleProceedToCheckout() {
     } else {
         console.warn("Layout missing element: ensure #checkout-gateway-modal block is pasted outside script tags.");
     }
+}
+
+        function simulateOrderSuccess() {
+    document.getElementById('gateway-payment-view').classList.add('hidden');
+    document.getElementById('gateway-tracking-view').classList.remove('hidden');
+    document.getElementById('mock-order-id-label').innerText = `Order Reference ID: #SRV-${Math.floor(100000 + Math.random() * 900000)}`;
+    
+    cart = []; // Empty global bag array data matrix variables safely
+    if (typeof updateBadges === 'function') updateBadges();
+    updateCartUI(); // Reset list UI elements to empty states placeholder card frames
+    
+    trackingStep = 1;
+    renderTrackingUI();
 }
 
         function toggleWishlist(id) {
@@ -1818,6 +1831,25 @@ function handleProceedToCheckout() {
             }
             alert("Redirecting to secure encrypted payment gateway (UPI, Cards, NetBanking)...");
         }
+
+        function renderTrackingUI() {
+    document.getElementById('track-step-1').className = trackingStep >= 1 ? "flex items-center space-x-3 text-green-600 font-bold text-xs uppercase tracking-wider" : "flex items-center space-x-3 text-neutral-400 text-xs uppercase tracking-wider";
+    document.getElementById('track-step-2').className = trackingStep >= 2 ? "flex items-center space-x-3 text-green-600 font-bold text-xs uppercase tracking-wider" : "flex items-center space-x-3 text-neutral-400 text-xs uppercase tracking-wider";
+    document.getElementById('track-step-3').className = trackingStep >= 3 ? "flex items-center space-x-3 text-green-600 font-bold text-xs uppercase tracking-wider" : "flex items-center space-x-3 text-neutral-400 text-xs uppercase tracking-wider";
+}
+
+             function advanceMockTracking() {
+    if (trackingStep < 3) {
+        trackingStep++;
+        renderTrackingUI();
+    } else {
+        alert("Delivery pipeline complete. Striva insured shipment arrived successfully at target collector residence hub!");
+    }
+}
+
+function closeCheckoutModal() {
+    document.getElementById('checkout-gateway-modal').classList.add('hidden');
+}
 
         // Authentication Handling
         function handleAccountClick() {
@@ -1953,42 +1985,7 @@ function handleProceedToCheckout() {
             nextQuizStep(1);
         }
 
-    
-function handleProceedToCheckout() {
-    // 1. Safety Guard Check: If there are no items in the cart array, stop here.
-    if (shoppingCart.length === 0) {
-        alert("Your shopping bag is empty! Add custom items to your bag before checking out.");
-        return;
-    }
-    
-    // 2. Exact Math Calculation: Calculate the absolute live total of all items in the array
-    let subCalculatedValue = 0;
-    shoppingCart.forEach(item => {
-        subCalculatedValue += item.price;
-    });
-    
-    // 3. UI State Toggle: Reveal your modal elements and hide the tracking portal for now
-    document.getElementById('checkout-gateway-modal').classList.remove('hidden');
-    document.getElementById('gateway-payment-view').classList.remove('hidden');
-    document.getElementById('gateway-tracking-view').classList.add('hidden');
-    
-    // 4. Set Label Price: Update the textual confirmation total element
-    document.getElementById('modal-payment-total').innerText = `₹${subCalculatedValue.toLocaleString('en-IN')}`;
 
-    // 5. Dynamic Scannable QR Generation:
-    const mockVpa = "striva.luxury@icici"; // Fictional brand UPI handle string
-    const merchantName = "Striva Luxury Atelier";
-    
-    // Formulate official UPI payload structure with absolute price parameter mapping (&am=)
-    // This locks the EXACT price into the visual QR matrix so the user cannot alter it!
-    const upiPayloadString = `upi://pay?pa=${mockVpa}&pn=${encodeURIComponent(merchantName)}&am=${subCalculatedValue}&cu=INR&tn=StrivaAtelierOrder`;
-    
-    // Request a live image from the API using our custom exact payment string link
-    const qrImageTarget = document.getElementById('sandbox-dynamic-qr-img');
-    if (qrImageTarget) {
-        qrImageTarget.src = `https://qrserver.com{encodeURIComponent(upiPayloadString)}`;
-    }
-}
      function toggleFloatingHelpHub() {
             const helpPanel = document.getElementById('floating-help-panel');
             if (helpPanel) {
@@ -2014,7 +2011,6 @@ function handleProceedToCheckout() {
                 }
             }
         }
-
     </script>
            <!-- CONSTANT FLOATING HELP HUB WIDGET -->
      <div class="fixed bottom-6 right-6 z-50 font-sans">
