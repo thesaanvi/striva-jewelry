@@ -719,7 +719,7 @@
                 metal: "yellow",
                 styleTier: ["minimal", "statement"], 
                 gemType: "diamond", 
-                occasion: ["everyday", "wedding"]
+                occasion: ["everyday", "wedding"],
                 price: 5400,
                 rating: 4.9,
                 reviews: 42,
@@ -1678,11 +1678,13 @@
             filterProducts();
         }
 
-        function filterProducts() {
+       function filterProducts() {
             const query = document.getElementById('product-search').value.toLowerCase();
             const filtered = products.filter(p => {
                 const matchesCol = currentCollectionFilter === 'all' || p.collection === currentCollectionFilter;
-                const matchesCat = currentCategoryFilter === 'all' || p.category === currentCategoryFilter;
+                const matchesCat = currentCategoryFilter === 'all' 
+                    || p.category === currentCategoryFilter 
+                    || (currentCategoryFilter === 'piercing' && p.category === 'anklets');
                 const matchesSearch = p.name.toLowerCase().includes(query) || p.desc.toLowerCase().includes(query) || p.category.toLowerCase().includes(query);
                 return matchesCol && matchesCat && matchesSearch;
             });
@@ -1698,60 +1700,114 @@
         }
 
         // Product Modal Details
-            function openProductModal(id) {
-    const p = products.find(x => x.id === id);
-    if(!p) return;
-    const modal = document.getElementById('product-modal');
-    const content = document.getElementById('modal-content');
-    
-    // Check if the item is a ring or belongs to the ring category
-    const isRing = p.category === 'ring' || p.name.toLowerCase().includes('ring');
-    
-    // Size dropdown options
-    const ringSizeHTML = isRing ? `
-        <div>
-            <label class="block text-xs font-bold uppercase tracking-wider text-brand-dark mb-2">Select Ring Size (Indian Standard)</label>
-            <select id="modal-ring-size" class="w-full bg-brand-sand/40 border border-brand-sand px-4 py-2.5 text-xs focus:outline-none focus:border-amber-700">
-                <option value="Size 6 (16.5mm)">Size 6 (16.5mm)</option>
-                <option value="Size 7 (17.3mm)">Size 7 (17.3mm)</option>
-                <option value="Size 8 (18.1mm)" selected>Size 8 (18.1mm)</option>
-                <option value="Size 9 (18.9mm)">Size 9 (18.9mm)</option>
-                <option value="Size 10 (19.8mm)">Size 10 (19.8mm)</option>
-            </select>
-        </div>
-    ` : '';
-
-    content.innerHTML = `
-        <div class="aspect-[4/5] bg-brand-sand overflow-hidden">
-            <img src="${p.image}" alt="${p.name}" class="w-full h-full object-cover">
-        </div>
-        <div class="space-y-6">
-            <div>
-                <span class="text-xs uppercase tracking-widest text-amber-800 font-bold">${p.collection} collection</span>
-                <h2 class="font-serif text-3xl font-bold text-brand-dark mt-1">${p.name}</h2>
-                <div class="flex items-center text-amber-600 text-xs mt-2 space-x-1">
-                    <i class="fa-solid fa-star"></i>
-                    <span class="font-bold">${p.rating}</span>
-                    <span class="text-brand-muted">(${p.reviews} customer reviews)</span>
-                </div>
-            </div>
-            <p class="text-sm text-brand-muted leading-relaxed">${p.desc}</p>
-            <div class="text-2xl font-serif font-bold text-brand-dark">₹${p.price.toLocaleString('en-IN')}</div>
+            // Product Modal Details (with Ring Band Size selector for rings)
+        function openProductModal(id) {
+            const p = products.find(x => x.id === id);
+            if(!p) return;
+            const modal = document.getElementById('product-modal');
+            const content = document.getElementById('modal-content');
             
-            ${ringSizeHTML}
+            const ringSizeSelector = p.category === 'ring' ? `
+                <div>
+                    <label for="ring-size" class="block text-xs font-bold uppercase tracking-wider text-brand-dark mb-1.5">Select Ring Band Size</label>
+                    <select id="ring-size" class="w-full bg-brand-sand/40 border border-brand-sand px-3 py-2.5 text-sm focus:outline-none focus:border-amber-700">
+                        <option value="5">Size 5 (US)</option>
+                        <option value="6" selected>Size 6 (US)</option>
+                        <option value="7">Size 7 (US)</option>
+                        <option value="8">Size 8 (US)</option>
+                        <option value="9">Size 9 (US)</option>
+                    </select>
+                </div>
+            ` : '';
 
-            <div class="space-y-3 pt-2">
-                <button onclick="addToCart(${p.id}); closeProductModal();" class="w-full bg-brand-dark text-white py-3.5 text-xs uppercase tracking-widest hover:bg-amber-800 transition-colors">
-                    Add to Shopping Bag
-                </button>
-                <button onclick="toggleWishlist(${p.id})" class="w-full border border-brand-dark text-brand-dark py-3.5 text-xs uppercase tracking-widest hover:bg-brand-sand transition-colors">
-                    Add to Wishlist
-                </button>
-            </div>
-        </div>
-    `;
-    modal.classList.remove('hidden');
-}
+            content.innerHTML = `
+                <div class="aspect-[4/5] bg-brand-sand overflow-hidden">
+                    <img src="${p.image}" alt="${p.name}" class="w-full h-full object-cover">
+                </div>
+                <div class="space-y-6">
+                    <div>
+                        <span class="text-xs uppercase tracking-widest text-amber-800 font-bold">${p.collection} collection</span>
+                        <h2 class="font-serif text-3xl font-bold text-brand-dark mt-1">${p.name}</h2>
+                        <div class="flex items-center text-amber-600 text-xs mt-2 space-x-1">
+                            <i class="fa-solid fa-star"></i>
+                            <span class="font-bold">${p.rating}</span>
+                            <span class="text-brand-muted">(${p.reviews} customer reviews)</span>
+                        </div>
+                    </div>
+                    <p class="text-sm text-brand-muted leading-relaxed">${p.desc}</p>
+                    <div class="text-2xl font-serif font-bold text-brand-dark">₹${p.price.toLocaleString('en-IN')}</div>
+                    ${ringSizeSelector}
+                    <div class="space-y-3 pt-2">
+                        <button onclick="addToCart(${p.id}); closeProductModal();" class="w-full bg-brand-dark text-white py-3.5 text-xs uppercase tracking-widest hover:bg-amber-800 transition-colors">
+                            Add to Shopping Bag
+                        </button>
+                        <button onclick="toggleWishlist(${p.id})" class="w-full border border-brand-dark text-brand-dark py-3.5 text-xs uppercase tracking-widest hover:bg-brand-sand transition-colors">
+                            Add to Wishlist
+                        </button>
+                    </div>
+                </div>
+            `;
+            modal.classList.remove('hidden');
+        }
+
+        function addToCart(id) {
+            const p = products.find(x => x.id === id);
+            if(!p) return;
+
+            const sizeSelect = document.getElementById('ring-size');
+            const selectedSize = p.category === 'ring' ? (sizeSelect ? sizeSelect.value : '6') : null;
+
+            const existing = cart.find(x => x.id === id && (x.size || null) === selectedSize);
+            if(existing) {
+                existing.quantity += 1;
+            } else {
+                cart.push({ ...p, quantity: 1, size: selectedSize });
+            }
+            updateBadges();
+            toggleCartDrawer();
+        }
+
+        function removeFromCart(id, size = null) {
+            cart = cart.filter(x => !(String(x.id) === String(id) && (x.size || null) === size));
+            updateBadges();
+            renderCart();
+        }
+
+       function renderCart() {
+            const container = document.getElementById('cart-items');
+            document.getElementById('cart-count').innerText = cart.reduce((acc, item) => acc + item.quantity, 0);
+            
+            if(cart.length === 0) {
+                container.innerHTML = `<p class="text-sm text-brand-muted text-center py-12">Your shopping bag is currently empty.</p>`;
+                document.getElementById('cart-subtotal').innerText = "₹0";
+                return;
+            }
+
+            container.innerHTML = '';
+            let subtotal = 0;
+
+            cart.forEach(item => {
+                subtotal += item.price * (item.quantity || 1);
+                const div = document.createElement('div');
+                div.className = "flex gap-4 items-center pb-4 border-b border-brand-sand";
+                const sizeDisplay = item.size ? `<p class="text-[11px] text-brand-dark font-medium mt-0.5">Band Size: ${item.size}</p>` : '';
+                const sizeArg = item.size ? `'${item.size}'` : 'null';
+
+                div.innerHTML = `
+                    <img src="${item.image}" alt="${item.name}" class="w-16 h-20 object-cover bg-brand-sand">
+                    <div class="flex-1">
+                        <h4 class="font-serif text-sm font-bold text-brand-dark">${item.name}</h4>
+                        ${sizeDisplay}
+                        ${item.details ? `<p class="text-[11px] text-amber-800">${item.details}</p>` : ''}
+                        <p class="text-xs text-brand-muted mt-1">₹${item.price.toLocaleString('en-IN')} × ${item.quantity || 1}</p>
+                    </div>
+                    <button onclick="removeFromCart('${item.id}', ${sizeArg})" class="text-brand-muted hover:text-red-600 text-sm p-2"><i class="fa-solid fa-trash"></i></button>
+                `;
+                container.appendChild(div);
+            });
+
+            document.getElementById('cart-subtotal').innerText = `₹${subtotal.toLocaleString('en-IN')}`;
+        }
         function closeProductModal() {
             document.getElementById('product-modal').classList.add('hidden');
         }
@@ -1883,26 +1939,21 @@
         }
 
         function addToCart(id) {
-    const p = products.find(x => x.id === id);
-    if(!p) return;
+            const p = products.find(x => x.id === id);
+            if(!p) return;
 
-    // Check if the ring size selector exists on the active modal/page
-    const sizeSelect = document.getElementById('modal-ring-size');
-    const selectedSize = (p.category === 'ring' || p.name.toLowerCase().includes('ring')) && sizeSelect ? sizeSelect.value : (p.category === 'ring' ? "Size 8 (18.1mm)" : null);
+            const sizeSelect = document.getElementById('ring-size');
+            const selectedSize = p.category === 'ring' ? (sizeSelect ? sizeSelect.value : '6') : null;
 
-    // Look for an existing item in the cart matching BOTH ID and Size
-    const existing = cart.find(x => x.id === id && x.size === selectedSize);
-    
-    if(existing) {
-        existing.quantity = (existing.quantity || 1) + 1;
-    } else {
-        cart.push({ ...p, quantity: 1, size: selectedSize });
-    }
-    
-    updateBadges();
-    renderCart();
-    toggleCartDrawer();
-}
+            const existing = cart.find(x => x.id === id && (x.size || null) === selectedSize);
+            if(existing) {
+                existing.quantity += 1;
+            } else {
+                cart.push({ ...p, quantity: 1, size: selectedSize });
+            }
+            updateBadges();
+            toggleCartDrawer();
+        }
 
         function removeFromCart(id, size = null) {
             cart = cart.filter(x => !(x.id === id && x.size === size));
@@ -2224,34 +2275,71 @@ function toggleAuthMode() {
             const resultsDiv = document.getElementById('quiz-results');
             resultsDiv.classList.remove('hidden');
 
-            const q1Checked = document.querySelector('input[name="q1"]:checked');
-            const q1 = q1Checked ? q1Checked.value : 'minimal';
-            let recommended = [];
+            const q1 = document.querySelector('input[name="q1"]:checked').value; // styleTier: minimal | statement | traditional
+            const q2 = document.querySelector('input[name="q2"]:checked').value; // metal: yellow | rose | silver
+            const q3 = document.querySelector('input[name="q3"]:checked').value; // category: ring | necklace | earring
+            const q4 = document.querySelector('input[name="q4"]:checked').value; // gemType: diamond | colored | pure
+            const q5 = document.querySelector('input[name="q5"]:checked').value; // occasion: everyday | wedding
 
-            if (q1 === 'traditional' || q1 === 'wedding') {
-                recommended = [products[29], products[32], products[35]];
-            } else if (q1 === 'statement') {
-                recommended = [products[3], products[12], products[16]];
-            } else {
-                recommended = [products[0], products[2], products[47]];
+            const toArr = val => Array.isArray(val) ? val : (val ? [val] : []);
+
+            const scored = products.map(p => {
+                let score = 0;
+                const metals = toArr(p.metal);
+                const styles = toArr(p.styleTier);
+                const gems = toArr(p.gemType);
+                const occasions = toArr(p.occasion);
+
+                if (metals.includes(q2)) score += 6;     // Metal preference (Silver / Rose / Yellow Gold)
+                if (p.category === q3) score += 4;       // Piece category (Ring / Necklace / Earring)
+                if (styles.includes(q1)) score += 3;     // Aesthetic (Minimal / Statement / Traditional)
+                if (gems.includes(q4)) score += 3;       // Gemstone / pure metal finish
+                if (occasions.includes(q5)) score += 3;  // Occasion (Everyday / Wedding)
+
+                return { product: p, score };
+            });
+
+            // Sort by highest combined score, then by rating
+            scored.sort((a, b) => b.score - a.score || b.product.rating - a.product.rating);
+
+            // Pick top 3 matches
+            const recommended = scored.slice(0, 3).map(entry => entry.product);
+
+            const metalLabels = { yellow: '18k Yellow Gold', rose: 'Rose Gold', silver: 'Sterling Silver' };
+            const subtitleEl = resultsDiv.querySelector('p');
+            if (subtitleEl) {
+                subtitleEl.textContent = `Curated for ${metalLabels[q2] || q2} • ${q1.charAt(0).toUpperCase() + q1.slice(1)} • ${q5 === 'wedding' ? 'Wedding & Celebrations' : 'Everyday Wear'}`;
             }
 
             const grid = document.getElementById('quiz-recommended-grid');
             grid.innerHTML = '';
 
             recommended.forEach(p => {
-                if(!p) return;
+                const displayMetals = toArr(p.metal).map(m => metalLabels[m] || m).join(' / ');
                 const card = document.createElement('div');
                 card.className = "bg-brand-sand/40 border border-brand-sand p-4 flex flex-col justify-between space-y-3";
                 card.innerHTML = `
-                    <div class="aspect-[4/5] overflow-hidden bg-white">
-                        <img src="${p.image}" class="w-full h-full object-cover">
+                    <div class="aspect-[4/5] overflow-hidden bg-white cursor-pointer relative group" onclick="openProductModal(${p.id})">
+                        <img src="${p.image}" alt="${p.name}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors flex items-center justify-center">
+                            <span class="opacity-0 group-hover:opacity-100 bg-white text-brand-dark text-[10px] uppercase tracking-wider font-bold px-3 py-1.5 shadow transition-opacity">
+                                Preview Details
+                            </span>
+                        </div>
                     </div>
                     <div>
-                        <h4 class="font-serif font-bold text-brand-dark text-sm">${p.name}</h4>
+                        <span class="text-[10px] uppercase tracking-wider text-amber-800 font-semibold">${displayMetals} • ${p.category}</span>
+                        <h4 onclick="openProductModal(${p.id})" class="font-serif font-bold text-brand-dark text-sm mt-0.5 cursor-pointer hover:text-amber-700">${p.name}</h4>
                         <p class="text-xs font-semibold text-brand-dark mt-1">₹${p.price.toLocaleString('en-IN')}</p>
                     </div>
-                    <button onclick="addToCart(${p.id})" class="w-full bg-brand-dark text-white py-2 text-[10px] uppercase tracking-wider hover:bg-amber-800">Add to Bag</button>
+                    <div class="flex gap-2">
+                        <button onclick="openProductModal(${p.id})" class="flex-1 border border-brand-dark text-brand-dark py-2 text-[10px] uppercase tracking-wider hover:bg-brand-sand transition-colors">
+                            Preview
+                        </button>
+                        <button onclick="addToCart(${p.id})" class="flex-1 bg-brand-dark text-white py-2 text-[10px] uppercase tracking-wider hover:bg-amber-800 transition-colors">
+                            Add to Bag
+                        </button>
+                    </div>
                 `;
                 grid.appendChild(card);
             });
