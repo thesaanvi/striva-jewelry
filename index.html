@@ -1699,73 +1699,124 @@
             filterCategory('all');
         }
 
-        // Product Modal Details
-            // Product Modal Details (with Ring Band Size selector for rings)
+        
         function openProductModal(id) {
-            const p = products.find(x => x.id === id);
-            if(!p) return;
-            const modal = document.getElementById('product-modal');
-            const content = document.getElementById('modal-content');
-            
-            const ringSizeSelector = p.category === 'ring' ? `
-                <div>
-                    <label for="ring-size" class="block text-xs font-bold uppercase tracking-wider text-brand-dark mb-1.5">Select Ring Band Size</label>
-                    <select id="ring-size" class="w-full bg-brand-sand/40 border border-brand-sand px-3 py-2.5 text-sm focus:outline-none focus:border-amber-700">
-                        <option value="5">Size 5 (US)</option>
-                        <option value="6" selected>Size 6 (US)</option>
-                        <option value="7">Size 7 (US)</option>
-                        <option value="8">Size 8 (US)</option>
-                        <option value="9">Size 9 (US)</option>
-                    </select>
-                </div>
-            ` : '';
+    const p = products.find(x => x.id === id);
+    if (!p) return;
+    const modal = document.getElementById('product-modal');
+    const content = document.getElementById('modal-content');
 
-            content.innerHTML = `
-                <div class="aspect-[4/5] bg-brand-sand overflow-hidden">
-                    <img src="${p.image}" alt="${p.name}" class="w-full h-full object-cover">
-                </div>
-                <div class="space-y-6">
-                    <div>
-                        <span class="text-xs uppercase tracking-widest text-amber-800 font-bold">${p.collection} collection</span>
-                        <h2 class="font-serif text-3xl font-bold text-brand-dark mt-1">${p.name}</h2>
-                        <div class="flex items-center text-amber-600 text-xs mt-2 space-x-1">
-                            <i class="fa-solid fa-star"></i>
-                            <span class="font-bold">${p.rating}</span>
-                            <span class="text-brand-muted">(${p.reviews} customer reviews)</span>
-                        </div>
-                    </div>
-                    <p class="text-sm text-brand-muted leading-relaxed">${p.desc}</p>
-                    <div class="text-2xl font-serif font-bold text-brand-dark">₹${p.price.toLocaleString('en-IN')}</div>
-                    ${ringSizeSelector}
-                    <div class="space-y-3 pt-2">
-                        <button onclick="addToCart(${p.id}); closeProductModal();" class="w-full bg-brand-dark text-white py-3.5 text-xs uppercase tracking-widest hover:bg-amber-800 transition-colors">
-                            Add to Shopping Bag
-                        </button>
-                        <button onclick="toggleWishlist(${p.id})" class="w-full border border-brand-dark text-brand-dark py-3.5 text-xs uppercase tracking-widest hover:bg-brand-sand transition-colors">
-                            Add to Wishlist
-                        </button>
-                    </div>
-                </div>
-            `;
-            modal.classList.remove('hidden');
-        }
+    const indianRingSizes = [
+        { size: '8',  diaMm: '15.3 mm', cirMm: '48.0 mm', cirCm: '4.80 cm' },
+        { size: '10', diaMm: '15.9 mm', cirMm: '50.0 mm', cirCm: '5.00 cm' },
+        { size: '12', diaMm: '16.6 mm', cirMm: '52.0 mm', cirCm: '5.20 cm' },
+        { size: '14', diaMm: '17.2 mm', cirMm: '54.0 mm', cirCm: '5.40 cm' },
+        { size: '16', diaMm: '17.8 mm', cirMm: '56.0 mm', cirCm: '5.60 cm' },
+        { size: '18', diaMm: '18.5 mm', cirMm: '58.0 mm', cirCm: '5.80 cm' },
+        { size: '20', diaMm: '19.1 mm', cirMm: '60.0 mm', cirCm: '6.00 cm' },
+        { size: '22', diaMm: '19.7 mm', cirMm: '62.0 mm', cirCm: '6.20 cm' }
+    ];
 
+    const braceletSizes = [
+        { label: 'Small (S) — 16.5 cm (165 mm)',   value: 'S • 16.5 cm (165 mm)' },
+        { label: 'Medium (M) — 18.0 cm (180 mm)',  value: 'M • 18.0 cm (180 mm)' },
+        { label: 'Large (L) — 19.5 cm (195 mm)',   value: 'L • 19.5 cm (195 mm)' },
+        { label: 'XL — 21.0 cm (210 mm)',          value: 'XL • 21.0 cm (210 mm)' }
+    ];
+
+    let sizeSelectorHtml = '';
+
+    if (p.category === 'ring') {
+        const defaultSize = p.collection === 'men' ? '18' : '12';
+        sizeSelectorHtml = `
+            <div>
+                <label for="ring-size" class="block text-xs font-bold uppercase tracking-wider text-brand-dark mb-1.5">
+                    Select Indian Ring Size (Inner Ø / Circumference)
+                </label>
+                <select id="ring-size" class="w-full bg-brand-sand/40 border border-brand-sand px-3 py-2.5 text-sm focus:outline-none focus:border-amber-700">
+                    ${indianRingSizes.map(r => `
+                        <option value="IND ${r.size} (${r.diaMm} / ${r.cirCm})" ${r.size === defaultSize ? 'selected' : ''}>
+                            Indian Size ${r.size} — Ø ${r.diaMm} | Cir ${r.cirMm} (${r.cirCm})
+                        </option>
+                    `).join('')}
+                </select>
+                <p class="text-[11px] text-brand-muted mt-1">
+                    Tip: Indian Size ≈ Inner Circumference (mm) − 40. Measure late in the day for best fit.
+                </p>
+            </div>
+        `;
+    } else if (p.category === 'bracelet') {
+        const defaultBracelet = p.collection === 'men' ? braceletSizes[2].value : braceletSizes[1].value;
+        sizeSelectorHtml = `
+            <div>
+                <label for="bracelet-size" class="block text-xs font-bold uppercase tracking-wider text-brand-dark mb-1.5">
+                    Select Bracelet Length (cm / mm)
+                </label>
+                <select id="bracelet-size" class="w-full bg-brand-sand/40 border border-brand-sand px-3 py-2.5 text-sm focus:outline-none focus:border-amber-700">
+                    ${braceletSizes.map(b => `
+                        <option value="${b.value}" ${b.value === defaultBracelet ? 'selected' : ''}>
+                            ${b.label}
+                        </option>
+                    `).join('')}
+                </select>
+                <p class="text-[11px] text-brand-muted mt-1">
+                    Tip: Add ~1.5–2.0 cm (15–20 mm) to your wrist measurement for a comfortable drape.
+                </p>
+            </div>
+        `;
+    }
+
+    content.innerHTML = `
+        <div class="aspect-[4/5] bg-brand-sand overflow-hidden">
+            <img src="${p.image}" alt="${p.name}" class="w-full h-full object-cover">
+        </div>
+        <div class="space-y-6">
+            <div>
+                <span class="text-xs uppercase tracking-widest text-amber-800 font-bold">${p.collection} collection</span>
+                <h2 class="font-serif text-3xl font-bold text-brand-dark mt-1">${p.name}</h2>
+                <div class="flex items-center text-amber-600 text-xs mt-2 space-x-1">
+                    <i class="fa-solid fa-star"></i>
+                    <span class="font-bold">${p.rating}</span>
+                    <span class="text-brand-muted">(${p.reviews} customer reviews)</span>
+                </div>
+            </div>
+            <p class="text-sm text-brand-muted leading-relaxed">${p.desc}</p>
+            <div class="text-2xl font-serif font-bold text-brand-dark">₹${p.price.toLocaleString('en-IN')}</div>
+            ${sizeSelectorHtml}
+            <div class="space-y-3 pt-2">
+                <button onclick="addToCart(${p.id}); closeProductModal();" class="w-full bg-brand-dark text-white py-3.5 text-xs uppercase tracking-widest hover:bg-amber-800 transition-colors">
+                    Add to Shopping Bag
+                </button>
+                <button onclick="toggleWishlist(${p.id})" class="w-full border border-brand-dark text-brand-dark py-3.5 text-xs uppercase tracking-widest hover:bg-brand-sand transition-colors">
+                    Add to Wishlist
+                </button>
+            </div>
+        </div>
+    `;
+    modal.classList.remove('hidden');
+}
         function addToCart(id) {
-            const p = products.find(x => x.id === id);
-            if(!p) return;
+    const p = products.find(x => x.id === id);
+    if (!p) return;
 
-            const sizeSelect = document.getElementById('ring-size');
-            const selectedSize = p.category === 'ring' ? (sizeSelect ? sizeSelect.value : '6') : null;
+    let selectedSize = null;
+    if (p.category === 'ring') {
+        const ringSelect = document.getElementById('ring-size');
+        selectedSize = ringSelect ? ringSelect.value : (p.collection === 'men' ? 'IND 18 (18.5 mm / 5.80 cm)' : 'IND 12 (16.6 mm / 5.20 cm)');
+    } else if (p.category === 'bracelet') {
+        const braceletSelect = document.getElementById('bracelet-size');
+        selectedSize = braceletSelect ? braceletSelect.value : (p.collection === 'men' ? 'L • 19.5 cm (195 mm)' : 'M • 18.0 cm (180 mm)');
+    }
 
-            const existing = cart.find(x => x.id === id && (x.size || null) === selectedSize);
-            if(existing) {
-                existing.quantity += 1;
-            } else {
-                cart.push({ ...p, quantity: 1, size: selectedSize });
-            }
-            updateBadges();
-            toggleCartDrawer();
-        }
+    const existing = cart.find(x => x.id === id && (x.size || null) === selectedSize);
+    if (existing) {
+        existing.quantity += 1;
+    } else {
+        cart.push({ ...p, quantity: 1, size: selectedSize });
+    }
+    updateBadges();
+    toggleCartDrawer();
+}
 
         function removeFromCart(id, size = null) {
             cart = cart.filter(x => !(String(x.id) === String(id) && (x.size || null) === size));
@@ -1790,8 +1841,9 @@
                 subtotal += item.price * (item.quantity || 1);
                 const div = document.createElement('div');
                 div.className = "flex gap-4 items-center pb-4 border-b border-brand-sand";
-                const sizeDisplay = item.size ? `<p class="text-[11px] text-brand-dark font-medium mt-0.5">Band Size: ${item.size}</p>` : '';
-                const sizeArg = item.size ? `'${item.size}'` : 'null';
+                const sizeLabel = item.category === 'bracelet' ? 'Length' : 'Size';
+                const sizeDisplay = item.size ? `<p class="text-[11px] text-brand-dark font-medium mt-0.5">${sizeLabel}: ${item.size}</p>` : '';
+                const sizeArg = item.size ? `'${item.size.replace(/'/g, "\\'")}'` : 'null';
 
                 div.innerHTML = `
                     <img src="${item.image}" alt="${item.name}" class="w-16 h-20 object-cover bg-brand-sand">
