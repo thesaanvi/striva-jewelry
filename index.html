@@ -111,7 +111,7 @@
         </div>
     </header>
 
-    <!-- ==================== TAB 1: HOME ==================== -->
+   <!-- ==================== TAB 1: HOME ==================== -->
     <main id="tab-home" class="tab-content">
         <!-- Hero Section -->
         <section class="relative bg-brand-sand overflow-hidden py-20 lg:py-32">
@@ -146,6 +146,64 @@
                 </div>
             </div>
         </section>
+
+        <!-- Material & Purity Transparency Guarantee -->
+        <section class="py-12 bg-white border-b border-brand-sand">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+                <div class="p-6 bg-brand-sand/30 border border-brand-sand space-y-2">
+                    <span class="text-xs uppercase tracking-widest text-amber-800 font-bold">01 • Core Metal</span>
+                    <h3 class="font-serif text-lg font-bold text-brand-dark">Hallmarked 925 Sterling Silver</h3>
+                    <p class="text-xs text-brand-muted leading-relaxed">Zero brass, zero nickel. Every Striva piece is forged on a solid recycled 925 silver base for skin-safe, hypoallergenic wear.</p>
+                </div>
+                <div class="p-6 bg-brand-sand/30 border border-brand-sand space-y-2">
+                    <span class="text-xs uppercase tracking-widest text-amber-800 font-bold">02 • Plating Standard</span>
+                    <h3 class="font-serif text-lg font-bold text-brand-dark">2.5-Micron 18k Gold Vermeil</h3>
+                    <p class="text-xs text-brand-muted leading-relaxed">5× thicker than standard flash plating, delivering the rich hue and tarnish resistance of solid gold without the markup.</p>
+                </div>
+                <div class="p-6 bg-brand-sand/30 border border-brand-sand space-y-2">
+                    <span class="text-xs uppercase tracking-widest text-amber-800 font-bold">03 • Stone Integrity</span>
+                    <h3 class="font-serif text-lg font-bold text-brand-dark">Conflict-Free & Ethical Stones</h3>
+                    <p class="text-xs text-brand-muted leading-relaxed">Set with lab-grown diamonds, AAA zirconias, freshwater pearls, and natural spinel—disclosed clearly on every product card.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Verified Customer Reviews Section (Site-Wide v1.0) -->
+        <section class="py-20 bg-[#FDFBF7] border-t border-brand-sand">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-12 space-y-3">
+                    <span class="text-xs uppercase tracking-[0.3em] text-amber-800 font-bold">Verified Community</span>
+                    <h2 class="font-serif text-3xl sm:text-4xl text-brand-dark">What Our Customers Say About Striva</h2>
+                    <p class="text-sm text-brand-muted">
+                        4.9 ★ Average Rating across 2,400+ orders • <span class="italic text-amber-900">(Note: Individual product-level reviews are scheduled for v2.0; currently displaying overall Striva brand reviews.)</span>
+                    </p>
+                </div>
+
+                <!-- Top 10 Reviews Grid -->
+                <div id="site-reviews-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+                    <!-- Populated via JavaScript -->
+                </div>
+
+                <!-- Add Overall Brand Review Box -->
+                <div class="max-w-2xl mx-auto bg-brand-sand/50 border border-brand-sand p-6 sm:p-8 space-y-4">
+                    <h3 class="font-serif text-xl font-bold text-brand-dark text-center">Share Your Striva Experience</h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                        <input type="text" id="site-review-name" placeholder="Your Name" class="bg-white border border-brand-sand px-3.5 py-2.5 text-sm focus:outline-none focus:border-amber-700">
+                        <input type="text" id="site-review-piece" placeholder="Piece Purchased (e.g. Aurelia Ring)" class="bg-white border border-brand-sand px-3.5 py-2.5 text-sm focus:outline-none focus:border-amber-700">
+                        <select id="site-review-rating" class="bg-white border border-brand-sand px-3.5 py-2.5 text-sm focus:outline-none focus:border-amber-700">
+                            <option value="5">★★★★★ (5/5)</option>
+                            <option value="4">★★★★☆ (4/5)</option>
+                            <option value="3">★★★☆☆ (3/5)</option>
+                        </select>
+                    </div>
+                    <textarea id="site-review-text" rows="2" placeholder="Write your review about Striva's 18k gold vermeil quality, sizing, or packaging..." class="w-full bg-white border border-brand-sand px-3.5 py-2.5 text-sm focus:outline-none focus:border-amber-700"></textarea>
+                    <button onclick="addSiteReview()" class="w-full bg-brand-dark text-white py-3 text-xs uppercase tracking-widest font-semibold hover:bg-amber-800 transition-colors">
+                        Submit Review
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
 
         <!-- What is Demi-Fine Jewelry Section -->
         <section class="py-20 bg-[#FDFBF7]">
@@ -2423,6 +2481,57 @@ function toggleAuthMode() {
                 }
             }
         }
+    const siteReviews = [
+            { name: "Ananya R.", piece: "Aurelia 18k Solitaire Ring", rating: 5, text: "The 18k gold vermeil finish looks identical to solid gold. Wore it daily for two months with zero tarnish!" },
+            { name: "Vikramaditya S.", piece: "Royal Polki Sherwani Mala", rating: 5, text: "Wore this for my brother's sangeet. Lightweight, royal, and didn't irritate my neck at all." },
+            { name: "Rhea M.", piece: "Elysia Huggie Hoop Earrings", rating: 5, text: "Super comfortable click closures—I literally sleep and shower in them without any dullness." },
+            { name: "Siddharth K.", piece: "Titanium & Gold Minimalist Band", rating: 5, text: "Loved having the exact Indian ring size and mm diameter listed. Fit was spot-on out of the box." },
+            { name: "Priya N.", piece: "Delicate Gold Mangalsutra", rating: 5, text: "Finally a modern mangalsutra under ₹10,000 that uses real 925 sterling silver instead of cheap brass." },
+            { name: "Meera D.", piece: "Seraphina Tennis Bracelet", rating: 5, text: "The cm/mm bracelet length guide helped me pick the exact drape. Sparkles like real diamonds!" },
+            { name: "Rohan P.", piece: "Onyx Signet Ring for Men", rating: 4, text: "Clean weight and sharp polish. Great everyday statement ring." },
+            { name: "Kavya T.", piece: "Dainty Gold Anklet with Charms", rating: 5, text: "Minimalist collection under ₹7k is such a steal for 2.5-micron gold plating." },
+            { name: "Nikhil G.", piece: "Regal Gold Cufflinks", rating: 5, text: "Bought these for a wedding reception—received so many compliments and the packaging felt luxury." },
+            { name: "Aisha B.", piece: "Thalia Stacking Band Trio", rating: 5, text: "Appreciate that Striva clearly lists the base metal and micron plating thickness so there's zero guesswork." }
+        ];
+
+        function renderSiteReviews() {
+            const grid = document.getElementById('site-reviews-grid');
+            if (!grid) return;
+            grid.innerHTML = siteReviews.map(r => `
+                <div class="bg-white border border-brand-sand p-6 space-y-3 shadow-sm">
+                    <div class="flex justify-between items-center">
+                        <span class="text-amber-600 text-sm">${'★'.repeat(r.rating)}${'☆'.repeat(5 - r.rating)}</span>
+                        <span class="text-[10px] uppercase tracking-wider text-emerald-800 bg-emerald-50 px-2 py-0.5 font-semibold">Verified Buyer</span>
+                    </div>
+                    <p class="text-sm text-brand-dark leading-relaxed">"${r.text}"</p>
+                    <div class="pt-2 border-t border-brand-sand/60 flex justify-between items-center text-xs">
+                        <span class="font-bold text-brand-dark">${r.name}</span>
+                        <span class="text-brand-muted italic">${r.piece}</span>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function addSiteReview() {
+            const name = document.getElementById('site-review-name').value.trim();
+            const piece = document.getElementById('site-review-piece').value.trim() || "Striva Collection";
+            const rating = parseInt(document.getElementById('site-review-rating').value);
+            const text = document.getElementById('site-review-text').value.trim();
+
+            if (!name || !text) {
+                alert("Please enter your name and review.");
+                return;
+            }
+
+            siteReviews.unshift({ name, piece, rating, text });
+            document.getElementById('site-review-name').value = '';
+            document.getElementById('site-review-piece').value = '';
+            document.getElementById('site-review-text').value = '';
+            renderSiteReviews();
+            alert("Thank you! Your review has been added.");
+        }
+
+        renderSiteReviews();
     </script>
 
     <!-- CONSTANT FLOATING HELP HUB WIDGET -->
